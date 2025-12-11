@@ -1,0 +1,161 @@
+import Hero from "@/components/hero"
+import CTA from "@/components/cta"
+import Link from "next/link"
+import { Lock, Shield, Zap, Users, Globe, Leaf, User, Code2, Server } from "lucide-react"
+
+const principles = [
+  {
+    icon: Lock,
+    title: "Private by Default",
+    description: "No metadata, no traceability, no optional privacy settings. Your transactions are always private.",
+    href: "/privacy",
+  },
+  {
+    icon: Shield,
+    title: "Quantum-Safe by Design",
+    description: "Protected against current and future decryption technologies with NIST-approved algorithms.",
+    href: "/quantum-safe",
+  },
+  {
+    icon: Zap,
+    title: "Scalable for the Real World",
+    description: "Thousands of transactions per second through advanced DAG-based parallel validation.",
+    href: "/scalability",
+  },
+  {
+    icon: Users,
+    title: "Community-Governed",
+    description: "Every rule change or upgrade decided collectively by token holders through the XXX DAO.",
+    href: "/governance",
+  },
+  {
+    icon: Globe,
+    title: "Decentralized Network",
+    description: "No privileged nodes or central operators. Anyone can become a validator.",
+    href: "/network",
+  },
+  {
+    icon: Leaf,
+    title: "Sustainable",
+    description: "No energy-wasting mining, no staking farms, no inflation, and near-zero environmental impact.",
+    href: "/sustainability",
+  },
+  {
+    icon: User,
+    title: "Member",
+    description: "Join our community to stay updated, participate in discussions, and support the Xcoin ecosystem.",
+    href: "/member",
+  },
+  {
+    icon: Code2,
+    title: "Contributor",
+    description: "Help build the future by contributing code, documentation, or other valuable resources to the project.",
+    href: "/contributor",
+  },
+  {
+    icon: Server,
+    title: "Validator",
+    description: "Run a validator node to secure the network, earn transaction fees, and support decentralization.",
+    href: "/validator",
+  },
+]
+
+export default function HomePage() {
+  return (
+    <>
+      <Hero />
+
+      {/* Principles Section */}
+      <section className="py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold tracking-tight lg:text-4xl">
+              Five Guiding Principles
+            </h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Built on a foundation of privacy, security, and community ownership.
+            </p>
+          </div>
+
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {principles.map((principle) => (
+              <Link
+                key={principle.title}
+                href={principle.href}
+                className="group rounded-2xl border border-border bg-card p-8 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 hover:-translate-y-1"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 transition-all group-hover:bg-accent/20 group-hover:scale-110">
+                  <principle.icon className="h-6 w-6 text-accent transition-transform group-hover:scale-110" />
+                </div>
+                <h3 className="mt-6 font-[family-name:var(--font-heading)] text-xl font-semibold transition-colors group-hover:text-accent">
+                  {principle.title}
+                </h3>
+                <p className="mt-3 text-muted-foreground">{principle.description}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold tracking-tight lg:text-4xl">
+              How the Network Works
+            </h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Two connected layers working in harmony for privacy and governance.
+            </p>
+          </div>
+
+          <div className="mt-16 grid gap-8 lg:grid-cols-2">
+            <div className="rounded-2xl border border-border bg-background p-8">
+              <div className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
+                Payment Layer
+              </div>
+              <h3 className="mt-6 font-[family-name:var(--font-heading)] text-2xl font-bold">XXX DAG Network</h3>
+              <p className="mt-4 text-muted-foreground">
+                Replaces traditional blockchain with a Directed Acyclic Graph. Transactions confirm each other directly
+                and continuously, enabling instant confirmations, massive throughput, and true scalability.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {["Instant confirmations", "Parallel validation", "No mining or staking", "Energy efficient"].map(
+                  (item) => (
+                    <li key={item} className="flex items-center gap-3 text-muted-foreground">
+                      <div className="h-2 w-2 rounded-full bg-accent" />
+                      {item}
+                    </li>
+                  ),
+                )}
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border border-border bg-background p-8">
+              <div className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
+                Governance Layer
+              </div>
+              <h3 className="mt-6 font-[family-name:var(--font-heading)] text-2xl font-bold">XXX DAO</h3>
+              <p className="mt-4 text-muted-foreground">
+                The democratic part of the ecosystem. Allows the community to propose and vote on future developments,
+                funding, or rules. Decisions are made collectively rather than by a company.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {["Community proposals", "Democratic voting", "Treasury management", "Protocol upgrades"].map(
+                  (item) => (
+                    <li key={item} className="flex items-center gap-3 text-muted-foreground">
+                      <div className="h-2 w-2 rounded-full bg-accent" />
+                      {item}
+                    </li>
+                  ),
+                )}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <CTA />
+    </>
+  )
+}
