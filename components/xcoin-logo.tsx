@@ -6,5 +6,13 @@ interface XcoinLogoProps {
 }
 
 export default function XcoinLogo({ className, size = 36 }: XcoinLogoProps) {
-  return <Image src="/xcoin-logo.png" alt="Xcoin Logo" width={size} height={size} className={className} />
+  return (
+    <Image 
+      src="/xcoin-logo.png" 
+      alt="Xcoin Logo" 
+      width={size} 
+      height={size} 
+      className={`${className} animate-spin-slow`}
+    />
+  )
 }

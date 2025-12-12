@@ -99,6 +99,37 @@ export default function HomePage() {
       />
       <Hero />
 
+      {/* Why Xcoin Matters Section */}
+      <section className="py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
+              Why Xcoin Matters
+            </h2>
+            
+            <div className="mt-12 grid gap-8 md:grid-cols-2 md:text-left">
+              <p className="text-lg text-muted-foreground">
+                Xcoin was built with one purpose: real, unstoppable privacy. While others follow trends, we built technology that anticipates a world where surveillance is the norm, not the exception.
+              </p>
+              <p className="text-lg text-muted-foreground">
+                Whether you're protecting your personal freedom, operating in high-risk environments, or simply tired of being watched, Xcoin gives you silence in a world of noise.
+              </p>
+            </div>
+
+            <div className="mt-12 rounded-2xl border border-border bg-card overflow-hidden">
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                className="w-full h-auto"
+              >
+                <source src="/xcoin-vid-compressed.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Principles Section */}
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
