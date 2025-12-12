@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { MessageCircle, Twitter, Send, Github, Users, Globe } from "lucide-react"
 import XcoinLogo from "@/components/xcoin-logo"
 
@@ -159,10 +160,14 @@ export default function CommunityPage() {
                 Read Validator Guide
               </Link>
             </div>
-            <div className="flex items-center justify-center bg-accent/5 p-6 sm:p-8 lg:p-12">
-              <div className="flex h-24 w-24 sm:h-32 sm:w-32 items-center justify-center rounded-full bg-accent/10">
-                <Globe className="h-12 w-12 sm:h-16 sm:w-16 text-accent" />
-              </div>
+            <div className="relative bg-accent/5 overflow-hidden min-h-[400px]">
+              <Image 
+                src="/Validator.png" 
+                alt="Xcoin Validator" 
+                width={800}
+                height={600}
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
