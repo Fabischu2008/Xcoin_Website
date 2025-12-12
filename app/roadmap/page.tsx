@@ -10,6 +10,7 @@ export default function RoadmapPage() {
           loop
           muted
           playsInline
+          preload="metadata"
           className="h-full w-full object-cover"
         >
           <source src="/1214-compressed.mp4" type="video/mp4" />

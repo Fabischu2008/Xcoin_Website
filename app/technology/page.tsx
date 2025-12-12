@@ -72,6 +72,7 @@ export default function TechnologyPage() {
           loop
           muted
           playsInline
+          preload="metadata"
           className="h-full w-full object-cover"
         >
           <source src="/1210-compressed.mp4" type="video/mp4" />

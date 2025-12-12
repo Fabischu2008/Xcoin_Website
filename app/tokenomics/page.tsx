@@ -56,6 +56,7 @@ export default function TokenomicsPage() {
           loop
           muted
           playsInline
+          preload="metadata"
           className="h-full w-full object-cover scale-150 origin-center"
         >
           <source src="/1216-compressed.mp4" type="video/mp4" />

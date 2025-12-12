@@ -59,6 +59,7 @@ export default function FAQPage() {
           loop
           muted
           playsInline
+          preload="metadata"
           className="h-full w-full object-cover"
         >
           <source src="/1215-compressed.mp4" type="video/mp4" />

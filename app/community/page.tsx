@@ -53,6 +53,7 @@ export default function CommunityPage() {
             loop
             muted
             playsInline
+            preload="metadata"
             className="h-full w-full object-cover"
           >
             <source src="/1211-compressed.mp4" type="video/mp4" />

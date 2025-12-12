@@ -60,6 +60,7 @@ export default function DocsPage() {
           loop
           muted
           playsInline
+          preload="metadata"
           className="h-full w-full object-cover"
         >
           <source src="/1212-compressed.mp4" type="video/mp4" />
