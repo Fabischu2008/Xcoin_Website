@@ -1,5 +1,5 @@
 import TokenomicsChart from "@/components/tokenomics-chart"
-import { Coins, TrendingUp, Lock, Users } from "lucide-react"
+import { Coins, TrendingUp, Lock, Users, ArrowRight } from "lucide-react"
 
 const tokenDetails = [
   {
@@ -93,6 +93,25 @@ export default function TokenomicsPage() {
                 protocol changes, and shape the future of the network.
               </p>
             </div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="mt-16 sm:mt-20 lg:mt-24">
+          <div className="rounded-2xl border border-border bg-card p-8 sm:p-12 text-center">
+            <h2 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold">
+              Ready to Buy Xcoin?
+            </h2>
+            <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+              Get your XXX Tokens now and secure your position in the future of private finance.
+            </p>
+            <a
+              href="#waitlist"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3.5 font-semibold text-accent-foreground transition-all hover:bg-accent/90"
+            >
+              BuyXcoin
+              <ArrowRight className="h-5 w-5" />
+            </a>
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@ export default function CTA() {
           <div className="rounded-3xl border border-border bg-card p-8 lg:p-12">
             <div className="mb-6">
               <h2 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
-                €100 / XXX Token
+                €10 / XXX Token
               </h2>
               <p className="mt-2 text-xs uppercase tracking-wider text-muted-foreground">
                 FIXED MINIMUM PRICE AT LAUNCH, GUARANTEED
@@ -22,22 +22,22 @@ export default function CTA() {
             </div>
 
             <p className="mb-8 text-muted-foreground">
-              The protocol is offering a one-time release of XXX Tokens. 1 XXX Token = 10 Xcoins. In addition every XXX Token grants you exclusive access to the DAO, including governance rights, voting power, proposal access, and participation in key community decisions.
+              The protocol is offering a one-time release of XXX Tokens. 1 XXX Token = 1 Xcoin. In addition every XXX Token grants you exclusive access to the DAO, including governance rights, voting power, proposal access, and participation in key community decisions.
             </p>
 
             <div className="space-y-6">
               <div className="flex items-start gap-4">
                 <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-accent" />
                 <div>
-                  <div className="font-semibold">Costs €100 per XXX Token</div>
-                  <div className="mt-1 text-sm text-muted-foreground">One-time investment for 10 Xcoins</div>
+                  <div className="font-semibold">Costs €10 per XXX Token</div>
+                  <div className="mt-1 text-sm text-muted-foreground">One-time investment for 1 Xcoin</div>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
                 <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-accent" />
                 <div>
-                  <div className="font-semibold">Redeemable for 10 Xcoins at launch</div>
+                  <div className="font-semibold">Redeemable for 1 Xcoin at launch</div>
                   <div className="mt-1 text-sm text-muted-foreground">Fixed exchange rate guaranteed</div>
                 </div>
               </div>
@@ -82,7 +82,7 @@ export default function CTA() {
                 </div>
                 <div>
                   <div className="font-semibold">Choose your investment amount</div>
-                  <div className="mt-1 text-sm text-muted-foreground">(starting at €100 for 10 Xcoins)</div>
+                  <div className="mt-1 text-sm text-muted-foreground">(starting at €10 for 1 Xcoin)</div>
                 </div>
               </div>
 

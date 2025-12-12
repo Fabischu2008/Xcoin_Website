@@ -19,8 +19,9 @@ export const metadata: Metadata = {
   generator: "v0.app",
   keywords: ["cryptocurrency", "privacy", "quantum-secure", "DAG", "blockchain", "decentralized"],
   icons: {
-    icon: "/favicon.gif",
-    apple: "/apple-icon.png",
+    icon: "/xcoin-logo.png",
+    apple: "/xcoin-logo.png",
+    shortcut: "/xcoin-logo.png",
   },
 }
 

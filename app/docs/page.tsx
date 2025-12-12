@@ -35,7 +35,7 @@ const resources = [
 
 export default function DocsPage() {
   return (
-    <div className="relative overflow-hidden pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-24">
+    <div className="relative overflow-hidden pt-32 pb-12 sm:pb-16 md:pb-24">
       {/* Video Background */}
       <div className="absolute inset-0 -z-20">
         <video
