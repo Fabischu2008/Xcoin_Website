@@ -30,8 +30,23 @@ const tokenDetails = [
 
 export default function TokenomicsPage() {
   return (
-    <div className="pt-32 pb-24 overflow-x-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Video Background */}
+      <div className="absolute inset-0 -z-20 overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="h-full w-full object-cover scale-150 origin-center"
+        >
+          <source src="/1216-compressed.mp4" type="video/mp4" />
+        </video>
+        {/* Overlay für bessere Textlesbarkeit */}
+        <div className="absolute inset-0 bg-background/40" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
