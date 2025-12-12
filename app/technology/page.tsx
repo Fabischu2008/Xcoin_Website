@@ -1,4 +1,21 @@
+import type { Metadata } from "next"
 import { Lock, Shield, Zap, Server, Network, Eye } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "Technology",
+  description:
+    "Discover the advanced technology behind Xcoin: DAG architecture, zk-STARKs, post-quantum cryptography, and stealth addresses for complete privacy and security.",
+  openGraph: {
+    title: "Technology | Xcoin",
+    description: "Advanced DAG architecture, quantum-safe cryptography, and zero-knowledge privacy technology.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Technology | Xcoin",
+    description: "Quantum-safe, private, and scalable cryptocurrency technology.",
+  },
+}
 
 const technologies = [
   {

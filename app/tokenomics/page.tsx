@@ -1,5 +1,23 @@
+import type { Metadata } from "next"
 import TokenomicsChart from "@/components/tokenomics-chart"
 import { Coins, TrendingUp, Lock, Users, ArrowRight } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "Tokenomics",
+  description:
+    "A simple and immutable monetary model designed for long-term stability and fair distribution. Fixed supply of 21 million XXX tokens. Zero inflation. Fair launch with no pre-mine.",
+  openGraph: {
+    title: "Tokenomics | Xcoin",
+    description:
+      "A simple and immutable monetary model designed for long-term stability and fair distribution. Fixed supply of 21 million XXX tokens.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tokenomics | Xcoin",
+    description: "Fixed supply of 21 million. Zero inflation. Fair launch with no pre-mine.",
+  },
+}
 
 const tokenDetails = [
   {

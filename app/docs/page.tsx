@@ -1,6 +1,23 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { FileText, Book, Code, Download, ExternalLink } from "lucide-react"
 import XcoinLogo from "@/components/xcoin-logo"
+
+export const metadata: Metadata = {
+  title: "Documentation",
+  description:
+    "Everything you need to understand, build on, and participate in the Xcoin network. Complete technical documentation, validator guides, and developer resources.",
+  openGraph: {
+    title: "Documentation | Xcoin",
+    description: "Complete technical documentation covering the Xcoin protocol, architecture, and vision.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Documentation | Xcoin",
+    description: "Complete technical documentation and developer resources for the Xcoin network.",
+  },
+}
 
 const documents = [
   {

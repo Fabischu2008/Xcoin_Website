@@ -61,8 +61,42 @@ const principles = [
 ]
 
 export default function HomePage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Xcoin",
+    description:
+      "A truly private, quantum-secure, and community-governed cryptocurrency. Fixed supply of 21 million. Zero inflation. Zero-knowledge privacy by default.",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://xcoin-website.vercel.app",
+    logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://xcoin-website.vercel.app"}/xcoin-logo.png`,
+    sameAs: [
+      // Add your social media links here when available
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "Customer Service",
+    },
+  }
+
+  const websiteStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Xcoin",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://xcoin-website.vercel.app",
+    description:
+      "A truly private, quantum-secure, and community-governed cryptocurrency. Fixed supply of 21 million. Zero inflation. Zero-knowledge privacy by default.",
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
+      />
       <Hero />
 
       {/* Principles Section */}
