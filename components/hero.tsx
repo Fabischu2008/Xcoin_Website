@@ -13,9 +13,8 @@ export default function Hero() {
           playsInline
           className="h-full w-full object-cover"
         >
+          <source src="/1208-compressed.mp4" type="video/mp4" />
           <source src="/1208_Chrome.webm" type="video/webm" />
-          <source src="/1208.mov" type="video/quicktime" />
-          <source src="/1208.mov" type="video/mp4" />
         </video>
         {/* Overlay für bessere Textlesbarkeit */}
         <div className="absolute inset-0 bg-background/60" />
