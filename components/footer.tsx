@@ -1,5 +1,5 @@
 import Link from "next/link"
-import XcoinLogo from "@/components/xcoin-logo"
+import Image from "next/image"
 
 const footerLinks = {
   Product: [
@@ -26,7 +26,13 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-3">
-              <XcoinLogo size={48} />
+              <Image 
+                src="/logo2.png" 
+                alt="Xcoin Logo" 
+                width={48} 
+                height={48} 
+                className="h-12 w-12"
+              />
               <span className="text-3xl font-bold tracking-tight">Xcoin</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">The future of private, quantum-secure finance.</p>
@@ -50,11 +56,21 @@ export default function Footer() {
             </div>
           ))}
         </div>
+      </div>
 
-        <div className="mt-12 border-t border-border pt-8">
-          <p className="text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Xcoin. All rights reserved. "Xcoin" is a temporary placeholder name.
-          </p>
+      {/* Large Logo and Text at the bottom */}
+      <div className="border-t border-border py-16">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex items-center justify-center gap-6">
+            <Image 
+              src="/logo2.png" 
+              alt="Xcoin Logo" 
+              width={200} 
+              height={200} 
+              className="h-auto w-auto"
+            />
+            <span className="text-7xl font-bold tracking-tight">XCoin</span>
+          </div>
         </div>
       </div>
     </footer>

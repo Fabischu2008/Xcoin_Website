@@ -120,7 +120,7 @@ export default function HomePage() {
               <video
                 controls
                 playsInline
-                preload="metadata"
+                preload="none"
                 className="w-full h-auto"
               >
                 <source src="/xcoin-vid-compressed.mp4" type="video/mp4" />

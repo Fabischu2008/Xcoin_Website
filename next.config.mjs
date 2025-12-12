@@ -4,7 +4,8 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    // Next.js Image Optimization aktiviert
+    // Automatische WebP/AVIF-Generierung, responsive images, lazy loading
   },
 }
 

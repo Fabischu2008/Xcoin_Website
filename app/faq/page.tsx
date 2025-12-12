@@ -80,12 +80,21 @@ export default function FAQPage() {
         </div>
 
         {/* FAQ Accordion */}
-        <div className="mx-auto mt-16 max-w-3xl space-y-4">
+        <div className="mx-auto mt-16 max-w-3xl space-y-4" role="list">
           {faqs.map((faq, index) => (
-            <div key={faq.question} className="rounded-2xl border border-border bg-card transition-all hover:border-accent/50">
+            <div key={faq.question} className="rounded-2xl border border-border bg-card transition-all hover:border-accent/50" role="listitem">
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="flex w-full items-center justify-between p-6 text-left"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault()
+                    setOpenIndex(openIndex === index ? null : index)
+                  }
+                }}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
+                id={`faq-question-${index}`}
+                className="flex w-full items-center justify-between p-6 text-left focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-2xl"
               >
                 <span className="font-[family-name:var(--font-heading)] text-lg font-semibold">{faq.question}</span>
                 <ChevronDown
@@ -93,10 +102,16 @@ export default function FAQPage() {
                     "h-5 w-5 shrink-0 text-muted-foreground transition-transform",
                     openIndex === index && "rotate-180",
                   )}
+                  aria-hidden="true"
                 />
               </button>
               {openIndex === index && (
-                <div className="border-t border-border px-6 py-4">
+                <div 
+                  id={`faq-answer-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-question-${index}`}
+                  className="border-t border-border px-6 py-4"
+                >
                   <p className="text-muted-foreground">{faq.answer}</p>
                 </div>
               )}
@@ -112,7 +127,7 @@ export default function FAQPage() {
           </p>
           <a
             href="/community"
-            className="mt-8 inline-flex rounded-full bg-accent px-8 py-3.5 font-semibold text-accent-foreground transition-all hover:bg-accent/90"
+            className="mt-8 inline-flex rounded-full bg-accent px-8 py-3.5 font-semibold text-accent-foreground transition-all hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
           >
             Join Community
           </a>

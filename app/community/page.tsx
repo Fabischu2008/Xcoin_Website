@@ -1,7 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import { MessageCircle, Twitter, Send, Github, Users, Globe } from "lucide-react"
-import XcoinLogo from "@/components/xcoin-logo"
 
 const channels = [
   {
@@ -71,7 +70,13 @@ export default function CommunityPage() {
           <div className="mx-auto max-w-3xl text-center">
             {/* Logo */}
             <div className="mb-6 sm:mb-8 flex justify-center">
-              <XcoinLogo size={48} className="w-12 h-12 sm:w-16 sm:h-16" />
+              <Image 
+                src="/logo2.png" 
+                alt="Xcoin Logo" 
+                width={64} 
+                height={64} 
+                className="w-12 h-12 sm:w-16 sm:h-16"
+              />
             </div>
 
             {/* Headline */}
