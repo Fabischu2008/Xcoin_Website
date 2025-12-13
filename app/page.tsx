@@ -121,6 +121,7 @@ export default function HomePage() {
                 controls
                 playsInline
                 preload="none"
+                poster="/xcoin-vid-poster.jpg"
                 className="w-full h-auto"
               >
                 <source src="/xcoin-vid-compressed.mp4" type="video/mp4" />
