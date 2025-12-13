@@ -152,7 +152,7 @@ export default function DocsPage() {
             <div className="order-1 lg:order-2 mt-0 lg:mt-0 rounded-xl border border-border bg-background p-3 sm:p-4 md:p-6 overflow-hidden">
               <div className="overflow-x-auto -mx-3 sm:-mx-4 md:-mx-6 px-3 sm:px-4 md:px-6">
                 <pre className="text-[10px] xs:text-xs sm:text-sm text-muted-foreground whitespace-pre font-mono leading-relaxed">
-                  <code>{`# Install Xcoin Validator
+                <code>{`# Install Xcoin Validator
 $ curl -sSL https://install.xcoin.network | sh
 
 # Initialize node
@@ -160,7 +160,7 @@ $ xcoin init --network mainnet
 
 # Start validator
 $ xcoin start`}</code>
-                </pre>
+              </pre>
               </div>
             </div>
           </div>

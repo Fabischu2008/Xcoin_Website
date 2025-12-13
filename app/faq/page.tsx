@@ -82,7 +82,7 @@ export default function FAQPage() {
         {/* FAQ Accordion */}
         <div className="mx-auto mt-16 max-w-3xl space-y-4" role="list">
           {faqs.map((faq, index) => (
-            <div key={faq.question} className="rounded-2xl bg-card transition-all" role="listitem">
+            <div key={faq.question} className="rounded-2xl border border-border bg-card transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 hover:-translate-y-1" role="listitem">
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 onKeyDown={(e) => {

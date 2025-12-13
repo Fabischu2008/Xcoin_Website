@@ -56,7 +56,7 @@ export default function Footer() {
             </div>
           ))}
         </div>
-      </div>
+        </div>
 
       {/* Large Logo and Text at the bottom - Desktop only */}
       <div className="hidden lg:block border-t border-border py-12 lg:py-16">

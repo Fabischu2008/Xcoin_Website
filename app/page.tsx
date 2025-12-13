@@ -7,55 +7,55 @@ const principles = [
   {
     icon: Lock,
     title: "Private by Default",
-    description: "No metadata, no traceability, no optional privacy settings. Your transactions are always private.",
+    description: "Complete transaction privacy protects user data and enables use cases in high-risk environments. A fundamental competitive advantage.",
     href: "/privacy",
   },
   {
     icon: Shield,
     title: "Quantum-Safe by Design",
-    description: "Protected against current and future decryption technologies with NIST-approved algorithms.",
+    description: "Future-proof security with NIST-approved algorithms. Protects long-term value against emerging threats.",
     href: "/quantum-safe",
   },
   {
     icon: Zap,
-    title: "Scalable for the Real World",
-    description: "Thousands of transactions per second through advanced DAG-based parallel validation.",
+    title: "Scalable Infrastructure",
+    description: "DAG-based architecture enables thousands of transactions per second. Built for global adoption and real-world usage.",
     href: "/scalability",
   },
   {
     icon: Users,
     title: "Community-Governed",
-    description: "Every rule change or upgrade decided collectively by token holders through the XXX DAO.",
+    description: "XXX DAO ensures decentralized decision-making. Token holders control protocol evolution and treasury allocation.",
     href: "/governance",
   },
   {
     icon: Globe,
     title: "Decentralized Network",
-    description: "No privileged nodes or central operators. Anyone can become a validator.",
+    description: "Open validator participation with no privileged nodes. True decentralization reduces systemic risks and censorship.",
     href: "/network",
   },
   {
     icon: Leaf,
-    title: "Sustainable",
-    description: "No energy-wasting mining, no staking farms, no inflation, and near-zero environmental impact.",
+    title: "Sustainable Economics",
+    description: "No inflation, no mining waste, minimal energy costs. Fixed 21M supply creates long-term value preservation.",
     href: "/sustainability",
   },
   {
     icon: User,
-    title: "Member",
-    description: "Join our community to stay updated, participate in discussions, and support the Xcoin ecosystem.",
+    title: "Fair Distribution",
+    description: "No pre-mine, no private sale advantages. All 21M coins created in Genesis Block ensure equal opportunity.",
     href: "/member",
   },
   {
     icon: Code2,
-    title: "Contributor",
-    description: "Help build the future by contributing code, documentation, or other valuable resources to the project.",
+    title: "Build-First Approach",
+    description: "Technology-focused development before marketing. Substance over speculation creates sustainable value.",
     href: "/contributor",
   },
   {
     icon: Server,
-    title: "Validator",
-    description: "Run a validator node to secure the network, earn transaction fees, and support decentralization.",
+    title: "Validator Economics",
+    description: "Earn transaction fees by running nodes. Sustainable revenue model without inflation or token dilution.",
     href: "/validator",
   },
 ]
@@ -136,10 +136,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold tracking-tight lg:text-4xl">
-              Five Guiding Principles
+              Why Invest in Xcoin
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Built on a foundation of privacy, security, and community ownership.
+              A long-term infrastructure project built on sustainable economics, future-proof technology, and community governance.
             </p>
           </div>
 
