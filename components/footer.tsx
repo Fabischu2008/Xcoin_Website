@@ -67,9 +67,9 @@ export default function Footer() {
               alt="Xcoin Logo" 
               width={200} 
               height={200} 
-              className="h-auto w-auto"
+              className="h-[200px] w-[200px]"
             />
-            <span className="text-7xl font-bold tracking-tight">XCoin</span>
+            <span className="h-[200px] text-[200px] font-bold tracking-tight leading-none flex items-center">XCoin</span>
           </div>
         </div>
       </div>
