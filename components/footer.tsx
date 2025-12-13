@@ -59,19 +59,19 @@ export default function Footer() {
       </div>
 
       {/* Large Logo and Text at the bottom */}
-      <div className="border-t border-border py-8 sm:py-12 lg:py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-row items-center justify-center gap-2 sm:gap-4 md:gap-6 w-full overflow-hidden">
+      <div className="border-t border-border py-8 sm:py-12 lg:py-16 overflow-hidden">
+        <div className="mx-auto max-w-7xl px-3 sm:px-4 md:px-6 lg:px-8">
+          <div className="flex flex-row items-center justify-center gap-2 sm:gap-4 md:gap-6 w-full max-w-full">
             <Image 
               src="/logo2.png" 
               alt="Xcoin Logo" 
               width={200} 
               height={200} 
-              sizes="(max-width: 640px) 60px, (max-width: 768px) 100px, (max-width: 1024px) 150px, 200px"
-              className="h-[60px] w-[60px] sm:h-[100px] sm:w-[100px] md:h-[150px] md:w-[150px] lg:h-[200px] lg:w-[200px] object-contain flex-shrink-0"
+              sizes="(max-width: 640px) 50px, (max-width: 768px) 80px, (max-width: 1024px) 120px, 200px"
+              className="h-[50px] w-[50px] sm:h-[80px] sm:w-[80px] md:h-[120px] md:w-[120px] lg:h-[200px] lg:w-[200px] object-contain flex-shrink-0"
               priority
             />
-            <span className="h-[60px] text-[60px] sm:h-[100px] sm:text-[100px] md:h-[150px] md:text-[150px] lg:h-[200px] lg:text-[200px] font-bold tracking-tight leading-none flex items-center">XCoin</span>
+            <span className="h-[50px] text-[50px] sm:h-[80px] sm:text-[80px] md:h-[120px] md:text-[120px] lg:h-[200px] lg:text-[200px] font-bold tracking-tight leading-none flex items-center min-w-0 overflow-hidden">XCoin</span>
           </div>
         </div>
       </div>
