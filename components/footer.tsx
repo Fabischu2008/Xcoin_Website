@@ -57,24 +57,6 @@ export default function Footer() {
           ))}
         </div>
       </div>
-
-      {/* Large Logo and Text at the bottom - Desktop only */}
-      <div className="hidden lg:block border-t border-border py-12 lg:py-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex flex-row items-center justify-center gap-6 w-full">
-            <Image 
-              src="/logo2.png" 
-              alt="Xcoin Logo" 
-              width={200} 
-              height={200} 
-              sizes="150px, 200px"
-              className="h-[150px] w-[150px] lg:h-[200px] lg:w-[200px] object-contain flex-shrink-0"
-              priority
-            />
-            <span className="h-[150px] text-[150px] lg:h-[200px] lg:text-[200px] font-bold tracking-tight leading-none flex items-center">XCoin</span>
-          </div>
-        </div>
-      </div>
     </footer>
   )
 }
