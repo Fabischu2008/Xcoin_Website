@@ -1,12 +1,7 @@
-"use client"
-
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { Home, ArrowLeft } from "lucide-react"
 
 export default function NotFound() {
-  const router = useRouter()
-
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-6 py-24">
       <div className="mx-auto max-w-2xl text-center">

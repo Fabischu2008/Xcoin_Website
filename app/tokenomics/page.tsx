@@ -94,11 +94,7 @@ export default function TokenomicsPage() {
 
         {/* Distribution Chart */}
         <div className="mt-16 sm:mt-20 lg:mt-24">
-          <h2 className="text-center font-[family-name:var(--font-heading)] text-2xl font-bold sm:text-3xl">Token Distribution</h2>
-          <p className="mx-auto mt-4 max-w-xl text-center text-sm sm:text-base text-muted-foreground px-4">
-            Transparent allocation ensuring long-term sustainability and community ownership.
-          </p>
-          <div className="mt-8 sm:mt-12 rounded-2xl border border-border bg-card p-4 sm:p-6 lg:p-8 xl:p-12 overflow-visible">
+          <div className="rounded-2xl border border-border bg-card p-4 sm:p-6 lg:p-8 xl:p-12 overflow-visible">
             <TokenomicsChart />
           </div>
         </div>

@@ -59,17 +59,19 @@ export default function Footer() {
       </div>
 
       {/* Large Logo and Text at the bottom */}
-      <div className="border-t border-border py-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex items-center justify-center gap-6">
+      <div className="border-t border-border py-8 sm:py-12 lg:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-row items-center justify-center gap-2 sm:gap-4 md:gap-6 w-full overflow-hidden">
             <Image 
               src="/logo2.png" 
               alt="Xcoin Logo" 
               width={200} 
               height={200} 
-              className="h-[200px] w-[200px]"
+              sizes="(max-width: 640px) 60px, (max-width: 768px) 100px, (max-width: 1024px) 150px, 200px"
+              className="h-[60px] w-[60px] sm:h-[100px] sm:w-[100px] md:h-[150px] md:w-[150px] lg:h-[200px] lg:w-[200px] object-contain flex-shrink-0"
+              priority
             />
-            <span className="h-[200px] text-[200px] font-bold tracking-tight leading-none flex items-center">XCoin</span>
+            <span className="h-[60px] text-[60px] sm:h-[100px] sm:text-[100px] md:h-[150px] md:text-[150px] lg:h-[200px] lg:text-[200px] font-bold tracking-tight leading-none flex items-center">XCoin</span>
           </div>
         </div>
       </div>

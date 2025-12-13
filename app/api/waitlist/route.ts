@@ -64,11 +64,9 @@ export async function POST(request: Request) {
     // 2. Send a confirmation email
     // 3. Add to your email marketing service
 
-    console.log(`New waitlist signup: ${trimmedEmail}`)
-
     return NextResponse.json({ message: "Successfully joined the waitlist!" }, { status: 200 })
   } catch (error) {
-    console.error("Waitlist API error:", error)
+    // Log error in production logging service (e.g., Sentry, LogRocket)
     return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 })
   }
 }

@@ -17,8 +17,50 @@ export default function TokenomicsChart() {
 
   return (
     <div className="space-y-6 sm:space-y-8">
-      {/* Chart */}
-      <div className="relative mx-auto w-full max-w-[min(100%,450px)] overflow-visible px-4 py-10 sm:py-12 md:py-16">
+      {/* Header */}
+      <div className="text-center">
+        <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold sm:text-3xl">Token Distribution</h2>
+        <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-muted-foreground px-4">
+          Transparent allocation ensuring long-term sustainability and community ownership.
+        </p>
+      </div>
+
+      {/* Chart and Legend */}
+      <div className="flex flex-col lg:flex-row items-center lg:items-center gap-6 lg:gap-8">
+      {/* Left Column - First 3 allocations */}
+      <div className="flex-1 space-y-4 order-2 lg:order-1 w-full lg:w-auto">
+        {allocations.slice(0, 3).map((allocation) => {
+          const isHovered = hoveredSegment === allocation.name
+          return (
+            <div
+              key={allocation.name}
+              className={`flex items-center gap-3 rounded-xl border border-accent/30 bg-card p-4 transition-all duration-300 cursor-pointer hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 hover:-translate-y-1 ${
+                isHovered ? "border-accent/50 bg-accent/5 scale-105" : ""
+              }`}
+              onMouseEnter={() => setHoveredSegment(allocation.name)}
+              onMouseLeave={() => setHoveredSegment(null)}
+            >
+              <div
+                className="h-4 w-4 rounded-full transition-transform duration-300 flex-shrink-0"
+                style={{
+                  backgroundColor: allocation.color,
+                  transform: isHovered ? "scale(1.5)" : "scale(1)",
+                }}
+              />
+              <div className="flex-1 min-w-0">
+                <div className="font-medium">{allocation.name}</div>
+                <div className="text-sm text-muted-foreground">
+                  {((allocation.percentage / 100) * totalSupply).toLocaleString()} XXX
+                </div>
+              </div>
+              <div className="text-lg font-semibold text-accent flex-shrink-0">{allocation.percentage}%</div>
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Center - Chart */}
+      <div className="relative w-full max-w-[min(100%,450px)] overflow-visible px-4 py-10 sm:py-12 md:py-16 order-1 lg:order-2">
         <div className="relative mx-auto aspect-square w-full max-w-[85%] sm:max-w-[80%] md:max-w-[75%]">
           <svg viewBox="-5 -5 110 110" className="h-full w-full -rotate-90">
             {allocations.map((allocation) => {
@@ -63,36 +105,37 @@ export default function TokenomicsChart() {
         </div>
       </div>
 
-      {/* Legend */}
-      <div className="grid gap-4 sm:grid-cols-2">
-        {allocations.map((allocation) => {
+      {/* Right Column - Last 2 allocations */}
+      <div className="flex-1 space-y-4 order-3 w-full lg:w-auto">
+        {allocations.slice(3).map((allocation) => {
           const isHovered = hoveredSegment === allocation.name
           return (
             <div
               key={allocation.name}
-              className={`flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-all duration-300 cursor-pointer ${
-                isHovered ? "border-accent/50 bg-accent/5 sm:scale-105" : ""
+              className={`flex items-center gap-3 rounded-xl border border-accent/30 bg-card p-4 transition-all duration-300 cursor-pointer hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 hover:-translate-y-1 ${
+                isHovered ? "border-accent/50 bg-accent/5 scale-105" : ""
               }`}
               onMouseEnter={() => setHoveredSegment(allocation.name)}
               onMouseLeave={() => setHoveredSegment(null)}
             >
               <div
-                className="h-4 w-4 rounded-full transition-transform duration-300"
+                className="h-4 w-4 rounded-full transition-transform duration-300 flex-shrink-0"
                 style={{
                   backgroundColor: allocation.color,
                   transform: isHovered ? "scale(1.5)" : "scale(1)",
                 }}
               />
-              <div className="flex-1">
+              <div className="flex-1 min-w-0">
                 <div className="font-medium">{allocation.name}</div>
                 <div className="text-sm text-muted-foreground">
                   {((allocation.percentage / 100) * totalSupply).toLocaleString()} XXX
                 </div>
               </div>
-              <div className="text-lg font-semibold text-accent">{allocation.percentage}%</div>
+              <div className="text-lg font-semibold text-accent flex-shrink-0">{allocation.percentage}%</div>
             </div>
           )
         })}
+      </div>
       </div>
     </div>
   )
