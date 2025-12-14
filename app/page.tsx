@@ -1,65 +1,6 @@
 import Hero from "@/components/hero"
 import CTA from "@/components/cta"
 import DashboardSection from "@/components/dashboard-section"
-import Link from "next/link"
-import { Lock, Shield, Zap, Users, Globe, Leaf, User, Code2, Server } from "lucide-react"
-
-const principles = [
-  {
-    icon: Lock,
-    title: "Private by Default",
-    description: "Complete transaction privacy protects user data and enables use cases in high-risk environments. A fundamental competitive advantage.",
-    href: "/privacy",
-  },
-  {
-    icon: Shield,
-    title: "Quantum-Safe by Design",
-    description: "Future-proof security with NIST-approved algorithms. Protects long-term value against emerging threats.",
-    href: "/quantum-safe",
-  },
-  {
-    icon: Zap,
-    title: "Scalable Infrastructure",
-    description: "DAG-based architecture enables thousands of transactions per second. Built for global adoption and real-world usage.",
-    href: "/scalability",
-  },
-  {
-    icon: Users,
-    title: "Community-Governed",
-    description: "XXX DAO ensures decentralized decision-making. Token holders control protocol evolution and treasury allocation.",
-    href: "/governance",
-  },
-  {
-    icon: Globe,
-    title: "Decentralized Network",
-    description: "Open validator participation with no privileged nodes. True decentralization reduces systemic risks and censorship.",
-    href: "/network",
-  },
-  {
-    icon: Leaf,
-    title: "Sustainable Economics",
-    description: "No inflation, no mining waste, minimal energy costs. Fixed 21M supply creates long-term value preservation.",
-    href: "/sustainability",
-  },
-  {
-    icon: User,
-    title: "Fair Distribution",
-    description: "No pre-mine, no private sale advantages. All 21M coins created in Genesis Block ensure equal opportunity.",
-    href: "/member",
-  },
-  {
-    icon: Code2,
-    title: "Build-First Approach",
-    description: "Technology-focused development before marketing. Substance over speculation creates sustainable value.",
-    href: "/contributor",
-  },
-  {
-    icon: Server,
-    title: "Validator Economics",
-    description: "Earn transaction fees by running nodes. Sustainable revenue model without inflation or token dilution.",
-    href: "/validator",
-  },
-]
 
 export default function HomePage() {
   const structuredData = {
@@ -166,46 +107,6 @@ export default function HomePage() {
 
       {/* Dashboard Section */}
       <DashboardSection />
-
-      {/* Principles Section */}
-      <section className="py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold tracking-tight lg:text-4xl">
-              Why Invest in Xcoin
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              A long-term infrastructure project built on sustainable economics, future-proof technology, and community governance.
-            </p>
-          </div>
-
-          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {principles.map((principle) => (
-              <Link
-                key={principle.title}
-                href={principle.href}
-                className="group rounded-2xl border border-border bg-card p-8 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 hover:-translate-y-1 flex flex-col"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 transition-all group-hover:bg-accent/20 group-hover:scale-110">
-                  <principle.icon className="h-6 w-6 text-accent transition-transform group-hover:scale-110" />
-                </div>
-                <h3 className="mt-6 font-[family-name:var(--font-heading)] text-xl font-semibold transition-colors group-hover:text-accent">
-                  {principle.title}
-                </h3>
-                <p className="mt-3 text-muted-foreground flex-1">{principle.description}</p>
-                <div className="mt-6">
-                  <span className="inline-flex items-center gap-2 text-sm font-medium text-accent group-hover:gap-3 transition-all">
-                    Click here
-                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* How It Works */}
       <section className="py-24">
