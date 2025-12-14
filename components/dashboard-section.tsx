@@ -76,7 +76,7 @@ const dashboardItems: DashboardItem[] = [
     id: 9,
     category: "xcoin",
     title: "Get XXX Tokens",
-    image: "/xcoin_grid/get_xxx .jpg",
+    image: "/xcoin_grid/get_xxx.jpeg",
     href: "/tokenomics",
   },
   // Members category - 9 items
@@ -446,7 +446,7 @@ export default function DashboardSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative mt-32 overflow-x-hidden pb-24">
+    <section ref={sectionRef} className="relative mt-32 pb-24">
       <style jsx>{`
         .db-nav__item:hover {
           background-color: #1f1f1f !important;
@@ -695,8 +695,8 @@ export default function DashboardSection() {
       `}</style>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-x-hidden">
-          {/* Privacy is Power Button - Right Aligned, Blue, Square, Closer to Cards */}
+        <div className="relative">
+          {/* Privacy is Power Banner - Right Aligned, Blue, Square, Closer to Cards */}
           <div
             className="mb-4 flex justify-end scroll-animated sm:mb-6"
             style={{
@@ -704,28 +704,24 @@ export default function DashboardSection() {
               transform: `translateX(${(1 - scrollProgress) * (isMobile ? 0 : 150)}px) translateY(${(1 - scrollProgress) * (isMobile ? 10 : 20)}px) scale(${0.8 + scrollProgress * 0.2})`,
             }}
           >
-            <Link
-              href="/community"
-              className="privacy-button group relative inline-flex items-center gap-2 border-2 border-accent bg-accent px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-semibold text-accent-foreground transition-all hover:bg-accent/90 whitespace-nowrap"
-            >
+            <div className="privacy-button relative inline-flex items-center gap-2 border-2 border-accent bg-accent px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-semibold text-accent-foreground whitespace-nowrap">
               <span className="relative z-10">Privacy is Power</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            </Link>
+            </div>
           </div>
 
           <div className="flex flex-row gap-2 sm:gap-4 lg:gap-8">
             {/* Sidebar Navigation - Slides in from left (Desktop & Mobile) */}
-            <aside
-              className="w-16 sm:w-20 flex-shrink-0 scroll-animated lg:w-64"
-              style={{
-                opacity: scrollProgress,
-                transform: `translateX(${(1 - scrollProgress) * (isMobile ? 0 : -150)}px) translateY(${(1 - scrollProgress) * (isMobile ? 15 : 30)}px) scale(${0.9 + scrollProgress * 0.1})`,
-              }}
-            >
+            <aside className="w-16 sm:w-20 flex-shrink-0 lg:w-64">
               <div className="sticky top-24 lg:top-32">
                 {/* Mobile: Current Category Indicator */}
                 <div className="mb-4 lg:hidden">
-                  <div className="rounded-lg border border-accent/30 bg-accent/10 px-3 py-2 text-center">
+                  <div 
+                    className="rounded-lg border border-accent/30 bg-accent/10 px-3 py-2 text-center scroll-animated"
+                    style={{
+                      opacity: scrollProgress,
+                      transform: `translateX(${(1 - scrollProgress) * (isMobile ? 0 : -150)}px) translateY(${(1 - scrollProgress) * (isMobile ? 15 : 30)}px) scale(${0.9 + scrollProgress * 0.1})`,
+                    }}
+                  >
                     <p className="text-xs font-semibold text-accent capitalize">
                       {navItems.find((item) => item.id === activeFilter)?.label || "Xcoin"}
                     </p>
@@ -734,7 +730,12 @@ export default function DashboardSection() {
                 
                 <nav className="space-y-3 lg:space-y-1">
                   {navItems.map((item, index) => {
-                    const itemProgress = Math.max(0, Math.min(1, (scrollProgress - index * 0.1) / 0.3))
+                    // Anpassung: Animation startet früher und endet früher, damit alle Items rechtzeitig fertig sind
+                    const delay = index * 0.12
+                    const duration = 0.4
+                    const itemProgress = Math.max(0, Math.min(1, (scrollProgress - delay) / duration))
+                    const translateX = (1 - itemProgress) * -150
+                    const scale = 0.7 + itemProgress * 0.3
                     return (
                       <button
                         key={item.id}
@@ -746,7 +747,7 @@ export default function DashboardSection() {
                         }`}
                         style={{
                           opacity: itemProgress,
-                          transform: `translateX(${(1 - itemProgress) * -50}px)`,
+                          transform: `translateX(${translateX}px) scale(${scale})`,
                         }}
                         title={item.label}
                       >
@@ -823,11 +824,7 @@ export default function DashboardSection() {
                                   className="object-cover max-w-full"
                                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                   unoptimized={true}
-                                  onError={(e) => {
-                                    console.error('Image failed to load:', item.image)
-                                    // Fallback to placeholder
-                                    e.currentTarget.style.display = 'none'
-                                  }}
+                                  priority={index < 3}
                                 />
                               ) : (
                                 <div className="text-center">

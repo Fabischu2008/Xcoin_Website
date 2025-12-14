@@ -132,6 +132,38 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Quote Section */}
+      <section className="relative py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center">
+            <blockquote className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+              <p className="text-foreground">
+                A privacy coin that finally gets it right.
+              </p>
+              <p className="mt-4">
+                <span className="text-foreground">Technically </span>
+                <span className="relative inline-block">
+                  <span className="bg-gradient-to-r from-accent via-cyan-400 to-accent bg-clip-text text-transparent">
+                    elegant.
+                  </span>
+                  <span className="absolute -inset-1 bg-accent/20 blur-xl -z-10 rounded-lg" />
+                </span>
+                <span className="text-foreground"> </span>
+                <span className="relative inline-block">
+                  <span className="bg-gradient-to-r from-accent via-cyan-400 to-accent bg-clip-text text-transparent">
+                    Practically invisible.
+                  </span>
+                  <span className="absolute -inset-1 bg-accent/20 blur-xl -z-10 rounded-lg" />
+                </span>
+              </p>
+            </blockquote>
+            <p className="mt-8 text-base sm:text-lg text-muted-foreground italic">
+              — Independent Crypto Auditor
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Dashboard Section */}
       <DashboardSection />
 
