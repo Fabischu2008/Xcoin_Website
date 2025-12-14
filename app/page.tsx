@@ -79,10 +79,8 @@ export default function HomePage() {
           <div className="mx-auto max-w-4xl text-center">
             <blockquote className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
               <p className="text-foreground">
-                A privacy coin that finally gets it right.
-              </p>
-              <p className="mt-4">
-                <span className="text-foreground">Technically </span>
+                A privacy coin that finally<br />
+                gets it right. Technically<br />
                 <span className="relative inline-block">
                   <span className="bg-gradient-to-r from-accent via-cyan-400 to-accent bg-clip-text text-transparent">
                     elegant.
