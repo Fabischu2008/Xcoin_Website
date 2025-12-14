@@ -773,8 +773,8 @@ export default function DashboardSection() {
             </aside>
 
             {/* Content Grid - Cards stacked vertically on mobile, 3x3 grid on desktop */}
-            <div className="flex-1 min-w-0 overflow-x-hidden">
-              <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-6 w-full">
+            <div className="flex-1 min-w-0">
+              <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-6 w-full overflow-visible">
                 {displayItems.length === 0 && filteredItems.length > 0
                   ? filteredItems.map((item, index) => (
                       <div
