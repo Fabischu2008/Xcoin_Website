@@ -133,7 +133,7 @@ export default function HomePage() {
       </section>
 
       {/* Quote Section */}
-      <section className="relative py-24">
+      <section className="relative pt-24 pb-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
             <blockquote className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">

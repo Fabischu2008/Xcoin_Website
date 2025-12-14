@@ -446,7 +446,7 @@ export default function DashboardSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative mt-32 pb-24">
+    <section ref={sectionRef} className="relative mt-12 pb-24">
       <style jsx>{`
         .db-nav__item:hover {
           background-color: #1f1f1f !important;
