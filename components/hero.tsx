@@ -15,7 +15,6 @@ export default function Hero() {
           className="h-full w-full object-cover"
         >
           <source src="/1208-compressed.mp4" type="video/mp4" />
-          <source src="/1208_Chrome.webm" type="video/webm" />
         </video>
         {/* Overlay für bessere Textlesbarkeit */}
         <div className="absolute inset-0 bg-background/60" />

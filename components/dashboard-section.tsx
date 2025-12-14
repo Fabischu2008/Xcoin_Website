@@ -354,7 +354,7 @@ export default function DashboardSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
 
   const filteredItems = dashboardItems.filter((item) => item.category === activeFilter).slice(0, 9)
-  const [displayItems, setDisplayItems] = useState<DashboardItem[]>(filteredItems)
+  const [displayItems, setDisplayItems] = useState<DashboardItem[]>([])
 
   // Detect mobile screen size
   useEffect(() => {
@@ -367,11 +367,18 @@ export default function DashboardSection() {
     return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
+  // Initialize displayItems on mount
+  useEffect(() => {
+    if (displayItems.length === 0 && filteredItems.length > 0) {
+      setDisplayItems(filteredItems)
+      setPrevFilter(activeFilter)
+    }
+  }, [filteredItems, displayItems.length, activeFilter])
+
   // Handle filter change with exit/enter animations
   useEffect(() => {
     if (prevFilter === null) {
-      // Initial load
-      setPrevFilter(activeFilter)
+      // Initial load - skip animation
       return
     }
 
@@ -439,7 +446,7 @@ export default function DashboardSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative mt-32 overflow-visible pb-24">
+    <section ref={sectionRef} className="relative mt-32 overflow-x-hidden pb-24">
       <style jsx>{`
         .db-nav__item:hover {
           background-color: #1f1f1f !important;
@@ -687,32 +694,32 @@ export default function DashboardSection() {
         }
       `}</style>
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="relative">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative overflow-x-hidden">
           {/* Privacy is Power Button - Right Aligned, Blue, Square, Closer to Cards */}
           <div
             className="mb-4 flex justify-end scroll-animated sm:mb-6"
             style={{
               opacity: scrollProgress,
-              transform: `translateX(${(1 - scrollProgress) * (isMobile ? 80 : 150)}px) translateY(${(1 - scrollProgress) * (isMobile ? 10 : 20)}px) scale(${0.8 + scrollProgress * 0.2})`,
+              transform: `translateX(${(1 - scrollProgress) * (isMobile ? 0 : 150)}px) translateY(${(1 - scrollProgress) * (isMobile ? 10 : 20)}px) scale(${0.8 + scrollProgress * 0.2})`,
             }}
           >
             <Link
               href="/community"
-              className="privacy-button group relative inline-flex items-center gap-2 border-2 border-accent bg-accent px-6 py-3 font-semibold text-accent-foreground transition-all hover:bg-accent/90"
+              className="privacy-button group relative inline-flex items-center gap-2 border-2 border-accent bg-accent px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-semibold text-accent-foreground transition-all hover:bg-accent/90 whitespace-nowrap"
             >
               <span className="relative z-10">Privacy is Power</span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             </Link>
           </div>
 
-          <div className="flex flex-row gap-4 lg:gap-8">
+          <div className="flex flex-row gap-2 sm:gap-4 lg:gap-8">
             {/* Sidebar Navigation - Slides in from left (Desktop & Mobile) */}
             <aside
-              className="w-20 flex-shrink-0 scroll-animated sm:w-24 lg:w-64"
+              className="w-16 sm:w-20 flex-shrink-0 scroll-animated lg:w-64"
               style={{
                 opacity: scrollProgress,
-                transform: `translateX(${(1 - scrollProgress) * (isMobile ? -80 : -150)}px) translateY(${(1 - scrollProgress) * (isMobile ? 15 : 30)}px) scale(${0.9 + scrollProgress * 0.1})`,
+                transform: `translateX(${(1 - scrollProgress) * (isMobile ? 0 : -150)}px) translateY(${(1 - scrollProgress) * (isMobile ? 15 : 30)}px) scale(${0.9 + scrollProgress * 0.1})`,
               }}
             >
               <div className="sticky top-24 lg:top-32">
@@ -765,8 +772,8 @@ export default function DashboardSection() {
             </aside>
 
             {/* Content Grid - Cards stacked vertically on mobile, 3x3 grid on desktop */}
-            <div className="flex-1 min-w-0">
-              <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-6">
+            <div className="flex-1 min-w-0 overflow-x-hidden">
+              <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-6 w-full">
                 {displayItems.length === 0 && filteredItems.length > 0
                   ? filteredItems.map((item, index) => (
                       <div
@@ -804,17 +811,18 @@ export default function DashboardSection() {
                           pointerEvents: easedProgress > 0.3 ? 'auto' : 'none', // Enable clicks when visible
                         }}
                       >
-                        <Link href={item.href} className="block h-full w-full">
-                          <div className="db-card__visual relative w-full overflow-hidden rounded-xl border border-border bg-card">
+                        <Link href={item.href} className="block h-full w-full max-w-full">
+                          <div className="db-card__visual relative w-full max-w-full overflow-hidden rounded-xl border border-border bg-card">
                             <div className="dash-res-card__visual-before absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
-                            <div className="relative aspect-video w-full flex items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background">
+                            <div className="relative aspect-video w-full max-w-full flex items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background">
                               {item.image ? (
                                 <Image
                                   src={item.image}
                                   alt={item.title}
                                   fill
-                                  className="object-cover"
+                                  className="object-cover max-w-full"
                                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                  unoptimized={true}
                                   onError={(e) => {
                                     console.error('Image failed to load:', item.image)
                                     // Fallback to placeholder

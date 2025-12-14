@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { MessageCircle, Twitter, Send, Github, Users, Globe } from "lucide-react"
+import { MessageCircle, Twitter, Send, Github, Users } from "lucide-react"
 
 const channels = [
   {
