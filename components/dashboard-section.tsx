@@ -716,13 +716,13 @@ export default function DashboardSection() {
                 {/* Mobile: Current Category Indicator */}
                 <div className="mb-4 lg:hidden">
                   <div 
-                    className="rounded-lg border border-accent/30 bg-accent/10 px-3 py-2 text-center scroll-animated"
+                    className="rounded-lg border border-accent/30 bg-accent/10 px-2.5 py-1.5 text-center scroll-animated"
                     style={{
                       opacity: scrollProgress,
                       transform: `translateX(${(1 - scrollProgress) * (isMobile ? 0 : -150)}px) translateY(${(1 - scrollProgress) * (isMobile ? 15 : 30)}px) scale(${0.9 + scrollProgress * 0.1})`,
                     }}
                   >
-                    <p className="text-xs font-semibold text-accent capitalize">
+                    <p className="text-[10px] font-semibold text-accent capitalize leading-tight">
                       {navItems.find((item) => item.id === activeFilter)?.label || "Xcoin"}
                     </p>
                   </div>
