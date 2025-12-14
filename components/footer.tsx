@@ -8,6 +8,7 @@ const footerLinks = {
     { name: "Tokenomics", href: "/tokenomics" },
   ],
   Resources: [
+    { name: "Learning Center", href: "/learning" },
     { name: "Documentation", href: "/docs" },
     { name: "FAQ", href: "/faq" },
     { name: "Community", href: "/community" },

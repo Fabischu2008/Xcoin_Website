@@ -42,8 +42,23 @@ Nothing on this website should be construed as an offer to sell or a solicitatio
 
 export default function LegalPage() {
   return (
-    <div className="pt-32 pb-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Video Background */}
+      <div className="absolute inset-0 -z-20">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          className="h-full w-full object-cover"
+        >
+          <source src="/1212-compressed.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-background/60" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">

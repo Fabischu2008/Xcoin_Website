@@ -1,5 +1,6 @@
 import Hero from "@/components/hero"
 import CTA from "@/components/cta"
+import DashboardSection from "@/components/dashboard-section"
 import Link from "next/link"
 import { Lock, Shield, Zap, Users, Globe, Leaf, User, Code2, Server } from "lucide-react"
 
@@ -131,6 +132,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Dashboard Section */}
+      <DashboardSection />
+
       {/* Principles Section */}
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -148,7 +152,7 @@ export default function HomePage() {
               <Link
                 key={principle.title}
                 href={principle.href}
-                className="group rounded-2xl border border-border bg-card p-8 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 hover:-translate-y-1"
+                className="group rounded-2xl border border-border bg-card p-8 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 hover:-translate-y-1 flex flex-col"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 transition-all group-hover:bg-accent/20 group-hover:scale-110">
                   <principle.icon className="h-6 w-6 text-accent transition-transform group-hover:scale-110" />
@@ -156,7 +160,15 @@ export default function HomePage() {
                 <h3 className="mt-6 font-[family-name:var(--font-heading)] text-xl font-semibold transition-colors group-hover:text-accent">
                   {principle.title}
                 </h3>
-                <p className="mt-3 text-muted-foreground">{principle.description}</p>
+                <p className="mt-3 text-muted-foreground flex-1">{principle.description}</p>
+                <div className="mt-6">
+                  <span className="inline-flex items-center gap-2 text-sm font-medium text-accent group-hover:gap-3 transition-all">
+                    Click here
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </div>
               </Link>
             ))}
           </div>

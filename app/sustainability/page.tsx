@@ -1,9 +1,25 @@
 import { Leaf, Zap, Droplets, CheckCircle2 } from "lucide-react"
+import Link from "next/link"
 
 export default function SustainabilityPage() {
   return (
-    <div className="pt-32 pb-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Video Background */}
+      <div className="absolute inset-0 -z-20">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          className="h-full w-full object-cover"
+        >
+          <source src="/1212-compressed.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-background/60" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
           <div className="mb-6 flex justify-center">
@@ -78,6 +94,20 @@ export default function SustainabilityPage() {
               <p className="mt-1 text-sm text-muted-foreground">No inflation, sustainable economics</p>
             </div>
           </div>
+        </div>
+
+        {/* Learn More CTA */}
+        <div className="mt-16 rounded-2xl border border-border bg-card p-8 lg:p-12 text-center">
+          <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold">Learn More</h2>
+          <p className="mt-4 text-muted-foreground">
+            Explore our comprehensive Learning Center to dive deeper into sustainability, zero inflation, and related concepts.
+          </p>
+          <Link
+            href="/learning"
+            className="mt-8 inline-flex rounded-full bg-accent px-8 py-3.5 font-semibold text-accent-foreground transition-all hover:bg-accent/90"
+          >
+            Visit Learning Center
+          </Link>
         </div>
       </div>
     </div>

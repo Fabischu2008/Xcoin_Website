@@ -50,22 +50,22 @@ export default function TokenomicsPage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
       {/* Video Background */}
-      <div className="absolute inset-0 -z-20 overflow-hidden">
+      <div className="absolute inset-0 -z-20">
         <video
           autoPlay
           loop
           muted
           playsInline
           preload="metadata"
-          className="h-full w-full object-cover scale-150 origin-center"
+          className="h-full w-full object-cover"
         >
-          <source src="/1216-compressed.mp4" type="video/mp4" />
+          <source src="/1212-compressed.mp4" type="video/mp4" />
         </video>
         {/* Overlay für bessere Textlesbarkeit */}
-        <div className="absolute inset-0 bg-background/40" />
+        <div className="absolute inset-0 bg-background/60" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">

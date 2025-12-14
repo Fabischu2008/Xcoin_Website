@@ -9,6 +9,7 @@ const navigation = [
   { name: "Technology", href: "/technology" },
   { name: "Roadmap", href: "/roadmap" },
   { name: "Tokenomics", href: "/tokenomics" },
+  { name: "Learning", href: "/learning" },
   { name: "Docs", href: "/docs" },
   { name: "FAQ", href: "/faq" },
   { name: "Community", href: "/community" },
