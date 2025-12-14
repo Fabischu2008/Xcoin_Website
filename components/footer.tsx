@@ -23,19 +23,19 @@ const footerLinks = {
 export default function Footer() {
   return (
     <footer className="border-t border-border bg-card relative overflow-hidden">
-      {/* Background Image - Desktop only */}
-      <div className="hidden lg:block absolute inset-0 opacity-15 pointer-events-none py-4">
-        <Image 
-          src="/Xcoin_footer.png" 
-          alt="Xcoin Footer Background" 
-          fill
-          className="object-contain object-center scale-110"
+      <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
+        {/* Background Image - Desktop only */}
+        <img 
+          src="/Xcoin_footer.svg" 
+          alt="" 
+          loading="lazy" 
+          decoding="async" 
+          aria-hidden="true" 
+          role="presentation" 
+          className="hidden lg:block h-auto w-full absolute top-12 right-0 bottom-0 left-0 object-contain opacity-10 pointer-events-none"
           style={{ filter: 'grayscale(100%)' }}
         />
-      </div>
-
-      <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
-        <div className="grid grid-cols-2 gap-12 md:grid-cols-4">
+        <div className="relative grid grid-cols-2 gap-12 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-4">
               <Image 
