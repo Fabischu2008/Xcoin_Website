@@ -31,7 +31,7 @@ export default function PhilosophyBehindAnonymousFinancePage() {
     <div className="relative overflow-hidden pt-32 pb-24">
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Back Button */}
-        <BackButton fallbackHref="/" />
+        <BackButton fallbackHref="/overview" position="top" />
 
         {/* Header */}
         <div className="mx-auto max-w-4xl">
@@ -149,11 +149,9 @@ export default function PhilosophyBehindAnonymousFinancePage() {
           </div>
         </div>
 
-        {/* Placeholder for Image */}
-        <div className="mt-16 mx-auto max-w-4xl">
-          <div className="rounded-2xl border border-border bg-muted/20 aspect-video flex items-center justify-center">
-            <p className="text-muted-foreground">Image placeholder</p>
-          </div>
+        {/* Back Button - Bottom */}
+        <div className="mt-16">
+          <BackButton fallbackHref="/overview" position="bottom" />
         </div>
       </div>
     </div>

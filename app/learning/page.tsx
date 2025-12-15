@@ -352,6 +352,15 @@ const glossaryTerms = [
   
   // Privacy Terms
   {
+    id: "privacy-by-default",
+    category: "Privacy",
+    title: "Privacy by Default",
+    description: "Every Xcoin transaction is private by default — no settings, no opt-ins. Full anonymity is automatic, with sender, receiver, amounts, and metadata all hidden on-chain.",
+    icon: Lock,
+    related: ["Zero-Knowledge Privacy", "Transaction Privacy", "Privacy"],
+    learnMoreLink: "/what-is-privacy-by-default",
+  },
+  {
     id: "zero-knowledge-privacy",
     category: "Privacy",
     title: "Zero-Knowledge Privacy",

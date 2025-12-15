@@ -153,7 +153,7 @@ export default function OverviewPage() {
         <div className="mx-auto max-w-4xl mb-20">
           <div className="text-center mb-12">
             <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl mb-6">
-              Welcome to the Xcoin Learning Center
+              Welcome to the Xcoin Overview
             </h1>
             <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
               Xcoin is more than just a cryptocurrency. It's a fully private, quantum-secure financial protocol designed for a post-surveillance world. This page introduces you to the key concepts, technologies, and principles that make Xcoin unique — and shows you where to learn more. Below you'll find all learning resources grouped into logical categories.
