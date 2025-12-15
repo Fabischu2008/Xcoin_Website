@@ -55,8 +55,8 @@ export default function HomePage() {
               </p>
               <p className="text-lg text-muted-foreground">
                 Whether you're protecting your personal freedom, operating in high-risk environments, or simply tired of being watched, Xcoin gives you silence in a world of noise.
-              </p>
-            </div>
+            </p>
+          </div>
 
             <div className="mt-12 rounded-2xl border border-border bg-card overflow-hidden">
               <video
@@ -70,7 +70,7 @@ export default function HomePage() {
               </video>
             </div>
           </div>
-        </div>
+                </div>
       </section>
 
       {/* Quote Section */}

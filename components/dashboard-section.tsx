@@ -717,11 +717,11 @@ export default function DashboardSection() {
                 <div className="mb-4 lg:hidden">
                   <div 
                     className="rounded-lg border border-accent/30 bg-accent/10 px-2.5 py-1.5 text-center scroll-animated"
-                    style={{
-                      opacity: scrollProgress,
+              style={{
+                opacity: scrollProgress,
                       transform: `translateX(${(1 - scrollProgress) * (isMobile ? 0 : -150)}px) translateY(${(1 - scrollProgress) * (isMobile ? 15 : 30)}px) scale(${0.9 + scrollProgress * 0.1})`,
-                    }}
-                  >
+              }}
+            >
                     <p className="text-[10px] font-semibold text-accent capitalize leading-tight">
                       {navItems.find((item) => item.id === activeFilter)?.label || "Xcoin"}
                     </p>
