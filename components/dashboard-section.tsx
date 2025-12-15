@@ -21,7 +21,7 @@ const dashboardItems: DashboardItem[] = [
     category: "xcoin",
     title: "Xcoin Will Replace Bitcoin",
     image: "/xcoin_grid/xcoin_will_replace_bitcoin.jpeg",
-    href: "/technology",
+    href: "/why-xcoin-replaces-bitcoin",
   },
   {
     id: 2,
