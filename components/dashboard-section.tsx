@@ -319,7 +319,7 @@ const dashboardItems: DashboardItem[] = [
     category: "learning",
     title: "Fixed Supply Economics",
     image: "/learning_center_grid/use_cases_benefits.jpg",
-    href: "/learning/fixed-supply",
+    href: "/what-is-fixed-supply",
   },
   {
     id: 44,

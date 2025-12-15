@@ -3,11 +3,23 @@
 import { useRouter } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
 
-export default function BackButton({ fallbackHref }: { fallbackHref?: string }) {
+interface BackButtonProps {
+  fallbackHref?: string
+  className?: string
+  variant?: "default" | "outline" | "ghost" | "prominent"
+  position?: "top" | "bottom"
+}
+
+export default function BackButton({ 
+  fallbackHref, 
+  className = "",
+  variant,
+  position = "top"
+}: BackButtonProps) {
   const router = useRouter()
 
   const handleBack = () => {
-    if (window.history.length > 1) {
+    if (typeof window !== "undefined" && window.history.length > 1) {
       router.back()
     } else if (fallbackHref) {
       router.push(fallbackHref)
@@ -16,12 +28,32 @@ export default function BackButton({ fallbackHref }: { fallbackHref?: string }) 
     }
   }
 
+  // Wenn keine Variante angegeben, verwende automatisch basierend auf Position
+  const effectiveVariant = variant || (position === "bottom" ? "prominent" : "ghost")
+
+  const baseStyles = "inline-flex items-center gap-2 font-medium transition-all duration-200"
+  
+  const positionStyles = {
+    top: "mb-8",
+    bottom: "mt-8"
+  }
+  
+  const variantStyles = {
+    ghost: "text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg px-4 py-2",
+    default: "rounded-full bg-accent px-6 py-3 text-accent-foreground hover:bg-accent/90 shadow-lg hover:shadow-xl",
+    outline: "rounded-full border-2 border-accent bg-transparent px-6 py-3 text-accent hover:bg-accent hover:text-accent-foreground",
+    prominent: "rounded-full bg-accent px-6 py-3 text-accent-foreground hover:bg-accent/90 shadow-lg hover:shadow-xl"
+  }
+
+  const iconSize = effectiveVariant === "prominent" || effectiveVariant === "default" ? "h-5 w-5" : "h-4 w-4"
+
   return (
     <button
       onClick={handleBack}
-      className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
+      className={`${baseStyles} ${variantStyles[effectiveVariant]} ${positionStyles[position]} ${className}`}
+      aria-label="Go back"
     >
-      <ArrowLeft className="h-4 w-4" />
+      <ArrowLeft className={iconSize} />
       <span>Back</span>
     </button>
   )

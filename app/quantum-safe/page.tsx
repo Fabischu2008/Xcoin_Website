@@ -104,7 +104,7 @@ export default function QuantumSafePage() {
     <div className="relative overflow-hidden pt-32 pb-24">
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Back Button */}
-        <BackButton fallbackHref="/" />
+        <BackButton fallbackHref="/" position="top" />
 
         {/* Header */}
         <div className="mx-auto max-w-4xl">
@@ -211,6 +211,13 @@ export default function QuantumSafePage() {
             <p className="text-3xl font-[family-name:var(--font-heading)] font-bold text-foreground">
               Quantum safety isn't a future feature — it's the foundation.
             </p>
+          </div>
+        </div>
+
+        {/* Back Button at Bottom */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="pt-8 border-t border-border">
+            <BackButton fallbackHref="/" position="bottom" />
           </div>
         </div>
       </div>
