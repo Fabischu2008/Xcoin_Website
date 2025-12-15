@@ -1,25 +1,13 @@
 import { Lock, Eye, Shield, CheckCircle2 } from "lucide-react"
 import Link from "next/link"
+import BackButton from "@/components/back-button"
 
 export default function PrivacyPage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
-      {/* Video Background */}
-      <div className="absolute inset-0 -z-20">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className="h-full w-full object-cover"
-        >
-          <source src="/1212-compressed.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-background/60" />
-      </div>
-
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Back Button */}
+        <BackButton fallbackHref="/" />
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
           <div className="mb-6 flex justify-center">

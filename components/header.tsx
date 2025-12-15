@@ -6,9 +6,9 @@ import { Menu, X } from "lucide-react"
 import XcoinLogo from "./xcoin-logo"
 
 const navigation = [
-  { name: "Technology", href: "/technology" },
-  { name: "Roadmap", href: "/roadmap" },
-  { name: "Tokenomics", href: "/tokenomics" },
+  { name: "Overview", href: "/overview" },
+  { name: "Develop", href: "/develop" },
+  { name: "Fund", href: "/fund" },
   { name: "Learning", href: "/learning" },
   { name: "Docs", href: "/docs" },
   { name: "FAQ", href: "/faq" },

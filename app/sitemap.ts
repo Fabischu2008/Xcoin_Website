@@ -5,9 +5,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     "",
-    "/technology",
-    "/roadmap",
-    "/tokenomics",
+    "/overview",
+    "/develop",
+    "/fund",
     "/docs",
     "/faq",
     "/community",
@@ -21,6 +21,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contributor",
     "/validator",
     "/legal",
+    "/what-is-wots-plus",
+    "/what-is-sphincs-plus",
+    "/what-is-zk-starks",
+    "/what-are-view-keys",
+    "/what-is-aes-512",
+    "/what-is-stealth-addresses",
+    "/what-is-xxx-dao",
+    "/what-is-dag-plus",
+    "/what-is-zk-rollups",
+    "/how-xcoin-handles-10000-tps",
+    "/what-is-halo-2",
+    "/what-is-poseidon-hash",
+    "/what-is-ring-signature",
+    "/what-is-sep",
+    "/what-is-genesis-block",
+    "/what-are-xxx-tokens",
+    "/what-is-fixed-supply",
+    "/validator-application",
+    "/learning",
   ]
 
   return routes.map((route) => ({

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { ChevronDown } from "lucide-react"
 import clsx from "clsx"
 
@@ -24,6 +25,7 @@ const faqs = [
     question: "What makes Xcoin quantum-secure?",
     answer:
       "Xcoin uses SPHINCS+ and WOTS+ signature schemes—post-quantum algorithms approved by the National Institute of Standards and Technology (NIST). These protect against attacks from future quantum computers that could break current elliptic-curve cryptography.",
+    answerWithLinks: true,
   },
   {
     question: "How can I become a validator?",
@@ -112,7 +114,21 @@ export default function FAQPage() {
                   aria-labelledby={`faq-question-${index}`}
                   className="px-6 pb-6"
                 >
-                  <p className="text-muted-foreground">{faq.answer}</p>
+                  {faq.answerWithLinks ? (
+                    <p className="text-muted-foreground">
+                      Xcoin uses{" "}
+                      <Link href="/what-is-sphincs-plus" className="text-accent hover:text-accent/80 underline">
+                        SPHINCS+
+                      </Link>{" "}
+                      and{" "}
+                      <Link href="/what-is-wots-plus" className="text-accent hover:text-accent/80 underline">
+                        WOTS+
+                      </Link>{" "}
+                      signature schemes—post-quantum algorithms approved by the National Institute of Standards and Technology (NIST). These protect against attacks from future quantum computers that could break current elliptic-curve cryptography.
+                    </p>
+                  ) : (
+                    <p className="text-muted-foreground">{faq.answer}</p>
+                  )}
                 </div>
               )}
             </div>

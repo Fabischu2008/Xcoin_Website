@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { BookOpen, Search, Network, Coins, Users, Globe, Lock, Zap, Hash } from "lucide-react"
+import Link from "next/link"
+import { BookOpen, Search, Network, Coins, Users, Globe, Lock, Zap, Hash, ArrowRight } from "lucide-react"
 
 const glossaryTerms = [
   // Technology Terms
@@ -12,6 +13,7 @@ const glossaryTerms = [
     description: "A data structure where transactions reference and validate two previous transactions, enabling parallel processing instead of sequential blocks.",
     icon: Network,
     related: ["Parallel Validation", "Scalability", "Transaction Layer"],
+    learnMoreLink: "/what-is-dag-plus",
   },
   {
     id: "zk-starks",
@@ -20,6 +22,7 @@ const glossaryTerms = [
     description: "Zero-Knowledge Scalable Transparent Arguments of Knowledge. Cryptographic proofs that verify transaction correctness without revealing sender, receiver, or amounts.",
     icon: Lock,
     related: ["Zero-Knowledge Proofs", "Privacy Layer", "zk-Rollups"],
+    learnMoreLink: "/what-is-zk-starks",
   },
   {
     id: "zk-rollups",
@@ -28,6 +31,7 @@ const glossaryTerms = [
     description: "A scaling solution that bundles thousands of transactions into a single cryptographic proof, reducing on-chain data while maintaining privacy.",
     icon: Lock,
     related: ["zk-STARKs", "Scalability", "Privacy"],
+    learnMoreLink: "/what-is-zk-rollups",
   },
   {
     id: "zero-knowledge-proofs",
@@ -36,6 +40,15 @@ const glossaryTerms = [
     description: "Cryptographic methods that allow one party to prove to another that a statement is true without revealing any information beyond the validity of the statement itself.",
     icon: Lock,
     related: ["zk-STARKs", "Privacy", "Cryptography"],
+  },
+  {
+    id: "aes-512",
+    category: "Technology",
+    title: "AES-512",
+    description: "A proprietary 512-bit version of the Advanced Encryption Standard, designed to deliver an extreme level of cryptographic security—far beyond what's used in any systems today.",
+    icon: Lock,
+    related: ["Post-Quantum Cryptography", "Quantum Resistance", "Encryption"],
+    learnMoreLink: "/what-is-aes-512",
   },
   {
     id: "post-quantum-cryptography",
@@ -52,6 +65,7 @@ const glossaryTerms = [
     description: "A stateless hash-based signature scheme approved by NIST for post-quantum security. Provides long-term security against quantum computer attacks.",
     icon: Lock,
     related: ["Post-Quantum Cryptography", "WOTS+", "NIST"],
+    learnMoreLink: "/what-is-sphincs-plus",
   },
   {
     id: "wots-plus",
@@ -60,6 +74,7 @@ const glossaryTerms = [
     description: "Winternitz One-Time Signature Plus. A hash-based signature scheme used in post-quantum cryptography for quantum-resistant security.",
     icon: Lock,
     related: ["SPHINCS+", "Post-Quantum Cryptography", "Hash-based Signatures"],
+    learnMoreLink: "/what-is-wots-plus",
   },
   {
     id: "nist",
@@ -76,6 +91,16 @@ const glossaryTerms = [
     description: "One-time addresses generated for each transaction, making it impossible to link payments to your identity or wallet. Ensures complete unlinkability.",
     icon: Lock,
     related: ["Privacy", "Zero-Knowledge Privacy", "Transaction Privacy"],
+    learnMoreLink: "/what-is-stealth-addresses",
+  },
+  {
+    id: "ring-signature",
+    category: "Technology",
+    title: "Ring Signature",
+    description: "A cryptographic method that lets a user sign a transaction anonymously within a group—so that no one can tell who actually signed it.",
+    icon: Lock,
+    related: ["Privacy", "Stealth Addresses", "Zero-Knowledge Privacy"],
+    learnMoreLink: "/what-is-ring-signature",
   },
   {
     id: "halo-2",
@@ -84,6 +109,7 @@ const glossaryTerms = [
     description: "An advanced cryptographic protocol used in Xcoin for efficient zero-knowledge proof generation and verification.",
     icon: Lock,
     related: ["Zero-Knowledge Proofs", "zk-STARKs", "Cryptography"],
+    learnMoreLink: "/what-is-halo-2",
   },
   {
     id: "validator-network",
@@ -92,6 +118,7 @@ const glossaryTerms = [
     description: "A distributed network of independent servers that verify cryptographic integrity of transactions without seeing transaction contents.",
     icon: Network,
     related: ["Validator", "Validator Node", "Decentralization"],
+    learnMoreLink: "/validator",
   },
   {
     id: "sep-network",
@@ -100,6 +127,7 @@ const glossaryTerms = [
     description: "Provides encrypted multi-hop routing. Validators also function as SEP nodes, creating comprehensive privacy infrastructure.",
     icon: Network,
     related: ["Validator Network", "Privacy", "Encrypted Routing"],
+    learnMoreLink: "/what-is-sep",
   },
   {
     id: "parallel-validation",
@@ -116,6 +144,7 @@ const glossaryTerms = [
     description: "The first block in a blockchain or DAG network. In Xcoin, all 21 million coins are created in the Genesis Block with no pre-mine.",
     icon: Hash,
     related: ["Fair Launch", "Fixed Supply", "Pre-mine"],
+    learnMoreLink: "/what-is-genesis-block",
   },
   {
     id: "mainnet",
@@ -131,9 +160,10 @@ const glossaryTerms = [
     id: "xxx-token",
     category: "Tokenomics",
     title: "XXX Token",
-    description: "The token that entitles holders to receive one Xcoin from the Genesis supply at mainnet launch, and grants full voting power in the XXX DAO.",
+    description: "The token that entitles holders to receive one Xcoin from the Genesis supply at mainnet launch, and grants full voting power in the XXX DAO. XXX Tokens have a fixed supply with no inflation or dilution.",
     icon: Coins,
-    related: ["Xcoin", "Redemption Right", "Governance Right"],
+    related: ["Xcoin", "Fixed Supply", "Redemption Right", "Governance Right"],
+    learnMoreLink: "/what-are-xxx-tokens",
   },
   {
     id: "xcoin",
@@ -147,9 +177,10 @@ const glossaryTerms = [
     id: "fixed-supply",
     category: "Tokenomics",
     title: "Fixed Supply",
-    description: "A total supply of 21,000,000 coins that will never increase. No inflation, no new coin generation, ensuring long-term value preservation.",
+    learnMoreLink: "/what-is-fixed-supply",
+    description: "All 21 million Xcoins are minted in the Genesis Block—with no mining, no inflation, and no future coin creation. The DAO controls how coins are used, distributed, or reserved—with no central authority, no founders holding the keys, and no corporate manipulation.",
     icon: Coins,
-    related: ["Zero Inflation", "21 Million", "Tokenomics"],
+    related: ["Genesis Block", "XXX DAO", "Zero Inflation", "21 Million"],
   },
   {
     id: "zero-inflation",
@@ -208,6 +239,7 @@ const glossaryTerms = [
     description: "Decentralized Autonomous Organization. The governance layer where token holders propose and vote on protocol changes, funding, and ecosystem decisions.",
     icon: Users,
     related: ["Governance", "Voting Power", "Decentralized Autonomous Organization"],
+    learnMoreLink: "/what-is-xxx-dao",
   },
   {
     id: "decentralized-autonomous-organization",
@@ -266,6 +298,7 @@ const glossaryTerms = [
     description: "A node operator who verifies transactions and maintains network security. Anyone meeting hardware requirements can become a validator and earn transaction fees.",
     icon: Network,
     related: ["Validator Node", "Validator Network", "Open Participation"],
+    learnMoreLink: "/validator",
   },
   {
     id: "validator-node",
@@ -274,6 +307,7 @@ const glossaryTerms = [
     description: "A server running validator software that participates in transaction verification and network consensus. Requires standard hardware, no mining equipment needed.",
     icon: Network,
     related: ["Validator", "Hardware Requirements", "Rewards"],
+    learnMoreLink: "/validator",
   },
   {
     id: "decentralization",
@@ -381,6 +415,15 @@ const glossaryTerms = [
     icon: Globe,
     related: ["Financial Freedom", "Censorship Resistant", "Privacy"],
   },
+  {
+    id: "view-keys",
+    category: "Privacy",
+    title: "View Keys",
+    description: "Secure, read-only access keys that allow you to share specific data without giving anyone your login, password, or control over anything. Designed for situations where you need to prove, not expose.",
+    icon: Lock,
+    related: ["Privacy", "Optional Compliance", "Transaction Privacy"],
+    learnMoreLink: "/what-are-view-keys",
+  },
   
   // Sustainability Terms
   {
@@ -432,6 +475,7 @@ const glossaryTerms = [
     description: "The number of transactions the network can process per second. Xcoin's DAG architecture enables 10,000+ TPS capacity.",
     icon: Zap,
     related: ["Scalability", "Throughput", "High Throughput"],
+    learnMoreLink: "/how-xcoin-handles-10000-tps",
   },
   {
     id: "confirmation-time",
@@ -700,6 +744,18 @@ export default function LearningPage() {
                 <p className="text-base lg:text-lg text-muted-foreground mb-8 leading-relaxed">
                   {selectedTermData.description}
                 </p>
+
+                {(selectedTermData as any).learnMoreLink && (
+                  <div className="mb-8">
+                    <Link
+                      href={selectedTermData.id === "fixed-supply" ? "/what-is-fixed-supply" : (selectedTermData as any).learnMoreLink}
+                      className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-accent-foreground transition-all hover:bg-accent/90"
+                    >
+                      LEARN MORE
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+                )}
 
                 {selectedTermData.related && selectedTermData.related.length > 0 && (
                   <div className="mt-8 pt-8 border-t border-border">

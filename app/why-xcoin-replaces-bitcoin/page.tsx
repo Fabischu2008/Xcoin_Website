@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Check, X, ArrowLeft } from "lucide-react"
+import { Check, X } from "lucide-react"
+import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
   title: "Why Xcoin Will Replace Bitcoin",
@@ -37,9 +38,9 @@ const comparisonFeatures = [
     bitcoin: "No",
     xcoin: "Yes—SPHINCS+, WOTS+, zk-STARKs",
     xcoinLinks: {
-      "SPHINCS+": "/learning/post-quantum-cryptography",
-      "WOTS+": "/learning/post-quantum-cryptography",
-      "zk-STARKs": "/learning/zk-starks",
+      "SPHINCS+": "/what-is-sphincs-plus",
+      "WOTS+": "/what-is-wots-plus",
+      "zk-STARKs": "/what-is-zk-starks",
     },
   },
   {
@@ -47,8 +48,8 @@ const comparisonFeatures = [
     bitcoin: "~7 TPS",
     xcoin: "10,000+ TPS via zk-Rollups + DAG",
     xcoinLinks: {
-      "zk-Rollups": "/learning/zero-knowledge-privacy",
-      "DAG": "/learning/dag",
+      "zk-Rollups": "/what-is-zk-rollups",
+      "DAG": "/what-is-dag-plus",
     },
   },
   {
@@ -61,7 +62,7 @@ const comparisonFeatures = [
     bitcoin: "Controlled by devs and miners",
     xcoin: "DAO-based — 1 vote per holder",
     xcoinLinks: {
-      "DAO-based": "/learning/xxx-dao",
+      "DAO-based": "/what-is-xxx-dao",
     },
   },
   {
@@ -69,7 +70,7 @@ const comparisonFeatures = [
     bitcoin: "None",
     xcoin: "Optional View Keys for audits/compliance",
     xcoinLinks: {
-      "View Keys": "/privacy",
+      "View Keys": "/what-are-view-keys",
     },
   },
   {
@@ -144,13 +145,7 @@ export default function WhyXcoinReplacesBitcoinPage() {
     <div className="relative overflow-hidden pt-32 pb-24">
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Back Button */}
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          <span>Back</span>
-        </Link>
+        <BackButton fallbackHref="/" />
 
         {/* Header */}
         <div className="mx-auto max-w-4xl">
@@ -296,4 +291,6 @@ export default function WhyXcoinReplacesBitcoinPage() {
     </div>
   )
 }
+
+
 

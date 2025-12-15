@@ -1,5 +1,6 @@
 import { Leaf, Zap, Droplets, CheckCircle2 } from "lucide-react"
 import Link from "next/link"
+import BackButton from "@/components/back-button"
 
 export default function SustainabilityPage() {
   return (
@@ -20,6 +21,8 @@ export default function SustainabilityPage() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Back Button */}
+        <BackButton fallbackHref="/" />
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
           <div className="mb-6 flex justify-center">
