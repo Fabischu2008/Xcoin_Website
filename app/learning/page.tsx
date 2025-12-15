@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { BookOpen, Search, Network, Coins, Users, Globe, Lock, Zap, Hash, ArrowRight } from "lucide-react"
+import { BookOpen, Search, Network, Coins, Users, Globe, Lock, Zap, Hash, ArrowRight, X } from "lucide-react"
 
 const glossaryTerms = [
   // Technology Terms
@@ -601,6 +601,17 @@ export default function LearningPage() {
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedTerm, setSelectedTerm] = useState<string | null>(null)
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  // Check if we're on desktop
+  useEffect(() => {
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024) // lg breakpoint
+    }
+    checkDesktop()
+    window.addEventListener("resize", checkDesktop)
+    return () => window.removeEventListener("resize", checkDesktop)
+  }, [])
 
   const filteredTerms = glossaryTerms.filter((term) => {
     const matchesCategory = selectedCategory === "All" || term.category === selectedCategory
@@ -610,19 +621,33 @@ export default function LearningPage() {
     return matchesCategory && matchesSearch
   })
 
-  // Auto-select first term when category or search changes
+  // Auto-select first term when category or search changes (Desktop only)
   useEffect(() => {
-    if (filteredTerms.length > 0) {
+    if (isDesktop && filteredTerms.length > 0) {
       const currentTermExists = selectedTerm && filteredTerms.find(t => t.id === selectedTerm)
       if (!currentTermExists) {
         setSelectedTerm(filteredTerms[0].id)
       }
+    } else if (!isDesktop) {
+      // On mobile, clear selection when category/search changes
+      setSelectedTerm(null)
     }
-  }, [selectedCategory, searchTerm, filteredTerms, selectedTerm])
+  }, [selectedCategory, searchTerm, isDesktop])
+
+  // Update selected term if it's no longer in filtered results
+  useEffect(() => {
+    if (selectedTerm && !filteredTerms.find(t => t.id === selectedTerm)) {
+      if (isDesktop && filteredTerms.length > 0) {
+        setSelectedTerm(filteredTerms[0].id)
+      } else {
+        setSelectedTerm(null)
+      }
+    }
+  }, [filteredTerms, selectedTerm, isDesktop])
 
   const selectedTermData = selectedTerm
     ? glossaryTerms.find((term) => term.id === selectedTerm)
-    : filteredTerms.length > 0 ? filteredTerms[0] : null
+    : isDesktop && filteredTerms.length > 0 ? filteredTerms[0] : null
 
   return (
     <div className="relative overflow-hidden pt-32 pb-24 min-h-screen">
@@ -643,17 +668,19 @@ export default function LearningPage() {
       </div>
 
       <div className="relative mx-auto max-w-[1600px] px-6 lg:px-8">
-        {/* Header */}
-        <div className="mx-auto max-w-3xl text-center mb-12">
-          <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
-            Learning Center
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground">
-            Comprehensive glossary of all Xcoin terms and concepts. Learn everything from basics to advanced topics.
-          </p>
-        </div>
+        {/* Desktop Layout */}
+        <div className="hidden lg:block">
+          {/* Header */}
+          <div className="mx-auto max-w-3xl text-center mb-12">
+            <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
+              Learning Center
+            </h1>
+            <p className="mt-6 text-lg text-muted-foreground">
+              Comprehensive glossary of all Xcoin terms and concepts. Learn everything from basics to advanced topics.
+            </p>
+          </div>
 
-        <div className="flex gap-6 h-[calc(100vh-12rem)]">
+          <div className="flex gap-6 h-[calc(100vh-12rem)]">
           {/* Categories Sidebar - Left */}
           <aside className="hidden lg:block w-64 flex-shrink-0">
             <div className="rounded-2xl border border-border bg-card p-4 h-full overflow-y-auto">
@@ -790,8 +817,104 @@ export default function LearningPage() {
               </div>
             )}
 
-            {/* Mobile: Show all terms in grid */}
-            <div className="lg:hidden mt-8">
+          </div>
+        </div>
+        </div>
+
+        {/* Mobile Layout */}
+        <div className="lg:hidden">
+          {selectedTerm ? (
+            // Mobile: Show selected term details (full screen overlay style)
+            <div className="fixed inset-0 z-50 bg-background overflow-y-auto">
+              <div className="max-w-2xl mx-auto px-6 py-6">
+                {/* Back Button */}
+                <button
+                  onClick={() => setSelectedTerm(null)}
+                  className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6"
+                >
+                  <ArrowRight className="h-4 w-4 rotate-180" />
+                  <span>Back to Terms</span>
+                </button>
+
+                {/* Term Details */}
+                {selectedTermData && (
+                  <div className="rounded-2xl border border-border bg-card p-6">
+                    <div className="flex items-start gap-4 mb-6">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 flex-shrink-0">
+                        <selectedTermData.icon className="h-6 w-6 text-accent" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground">
+                            {selectedTermData.category}
+                          </span>
+                        </div>
+                        <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold">
+                          {selectedTermData.title}
+                        </h2>
+                      </div>
+                    </div>
+
+                    <p className="text-base text-muted-foreground mb-6 leading-relaxed">
+                      {selectedTermData.description}
+                    </p>
+
+                    {(selectedTermData as any).learnMoreLink && (
+                      <div className="mb-6">
+                        <Link
+                          href={selectedTermData.id === "fixed-supply" ? "/what-is-fixed-supply" : (selectedTermData as any).learnMoreLink}
+                          className="inline-flex items-center justify-center gap-2 w-full rounded-full bg-accent px-6 py-3 font-semibold text-accent-foreground transition-all hover:bg-accent/90"
+                        >
+                          LEARN MORE
+                          <ArrowRight className="h-4 w-4" />
+                        </Link>
+                      </div>
+                    )}
+
+                    {selectedTermData.related && selectedTermData.related.length > 0 && (
+                      <div className="mt-6 pt-6 border-t border-border">
+                        <h3 className="font-[family-name:var(--font-heading)] text-lg font-semibold mb-4">
+                          Related Terms
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedTermData.related.map((related) => {
+                            const relatedTerm = glossaryTerms.find(
+                              (t) => t.title === related || t.id === related.toLowerCase().replace(/\s+/g, "-")
+                            )
+                            if (relatedTerm) {
+                              return (
+                                <button
+                                  key={related}
+                                  onClick={() => setSelectedTerm(relatedTerm.id)}
+                                  className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
+                                >
+                                  {related}
+                                </button>
+                              )
+                            }
+                            return null
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            // Mobile: Show terms list (default view)
+            <>
+              {/* Header */}
+              <div className="mx-auto max-w-3xl text-center mb-8">
+                <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight">
+                  Learning Center
+                </h1>
+                <p className="mt-4 text-base text-muted-foreground">
+                  Comprehensive glossary of all Xcoin terms and concepts.
+                </p>
+              </div>
+
+              {/* Search */}
               <div className="mb-6">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -800,50 +923,66 @@ export default function LearningPage() {
                     placeholder="Search terms..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-accent"
                   />
                 </div>
               </div>
 
-              <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
-                {categories.map((category) => (
-                  <button
-                    key={category.name}
-                    onClick={() => setSelectedCategory(category.name)}
-                    className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors ${
-                      selectedCategory === category.name
-                        ? "bg-accent text-accent-foreground font-medium"
-                        : "bg-secondary text-muted-foreground"
-                    }`}
-                  >
-                    {category.name}
-                  </button>
-                ))}
+              {/* Categories */}
+              <div className="mb-6">
+                <h3 className="text-sm font-semibold mb-3 text-muted-foreground uppercase tracking-wide">
+                  Categories
+                </h3>
+                <div className="flex gap-2 overflow-x-auto pb-2">
+                  {categories.map((category) => (
+                    <button
+                      key={category.name}
+                      onClick={() => setSelectedCategory(category.name)}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors ${
+                        selectedCategory === category.name
+                          ? "bg-accent text-accent-foreground font-medium"
+                          : "bg-secondary text-muted-foreground"
+                      }`}
+                    >
+                      <category.icon className="h-4 w-4" />
+                      {category.name}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                {filteredTerms.map((term) => (
-                  <button
-                    key={term.id}
-                    onClick={() => setSelectedTerm(term.id)}
-                    className="rounded-xl border border-border bg-card p-4 text-left transition-all hover:border-accent/50"
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10 flex-shrink-0">
-                        <term.icon className="h-4 w-4 text-accent" />
+              {/* Terms Grid */}
+              <div className="mb-8">
+                <h3 className="text-sm font-semibold mb-4 text-muted-foreground uppercase tracking-wide">
+                  Terms ({filteredTerms.length})
+                </h3>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {filteredTerms.map((term) => (
+                    <button
+                      key={term.id}
+                      onClick={() => setSelectedTerm(term.id)}
+                      className="rounded-xl border border-border bg-card p-4 text-left transition-all hover:border-accent/50 hover:shadow-lg"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 flex-shrink-0">
+                          <term.icon className="h-5 w-5 text-accent" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <span className="text-xs text-muted-foreground">{term.category}</span>
+                          <h3 className="font-[family-name:var(--font-heading)] text-sm font-semibold mt-1 line-clamp-2">
+                            {term.title}
+                          </h3>
+                          <p className="text-xs text-muted-foreground mt-2 line-clamp-2">
+                            {term.description}
+                          </p>
+                        </div>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <span className="text-xs text-muted-foreground">{term.category}</span>
-                        <h3 className="font-[family-name:var(--font-heading)] text-sm font-semibold mt-1">
-                          {term.title}
-                        </h3>
-                      </div>
-                    </div>
-                  </button>
-                ))}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
-          </div>
+            </>
+          )}
         </div>
       </div>
     </div>
