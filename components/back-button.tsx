@@ -36,9 +36,10 @@ export default function BackButton({
   
   // Absolute Positionierung - außen, nimmt keinen Platz ein
   // Auf mobilen Geräten weiter oben, damit er nicht mitten im Bild ist
+  // Bottom Button: Auf mobilen Geräten am Ende des Containers positioniert
   const positionStyles = {
     top: "absolute left-4 sm:left-6 lg:left-8 top-20 sm:top-24 lg:top-32",
-    bottom: "absolute left-4 sm:left-6 lg:left-8 bottom-20 sm:bottom-24"
+    bottom: "absolute left-4 sm:left-6 lg:left-8 bottom-4 sm:bottom-20 lg:bottom-24"
   }
   
   const variantStyles = {

@@ -64,6 +64,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/the-power-of-xxx-dao-members",
     "/power-in-the-hands-of-the-community",
     "/see-whats-coming",
+    "/cryptographic-building-blocks",
   ]
 
   return routes.map((route) => ({
