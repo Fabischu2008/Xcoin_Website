@@ -142,11 +142,10 @@ export default function WhatIsXXXBlockchainPage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Back Button */}
-        <BackButton fallbackHref="/" />
-
         {/* Header */}
         <div className="mx-auto max-w-4xl">
+          {/* Back Button */}
+          <BackButton fallbackHref="/overview" position="top" />
           <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
             What is the XXX Blockchain?
           </h1>
@@ -226,11 +225,9 @@ export default function WhatIsXXXBlockchainPage() {
           </div>
         </div>
 
-        {/* Placeholder for Image */}
+        {/* Back Button - Bottom */}
         <div className="mt-16 mx-auto max-w-4xl">
-          <div className="rounded-2xl border border-border bg-muted/20 aspect-video flex items-center justify-center">
-            <p className="text-muted-foreground">Image placeholder</p>
-          </div>
+          <BackButton fallbackHref="/overview" position="bottom" />
         </div>
       </div>
     </div>
