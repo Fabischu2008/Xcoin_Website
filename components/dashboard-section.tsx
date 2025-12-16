@@ -79,7 +79,7 @@ const dashboardItems: DashboardItem[] = [
     image: "/xcoin_grid/get_xxx.jpeg",
     href: "/what-are-xxx-tokens",
   },
-  // Members category - 9 items
+  // Members category - 3 items
   {
     id: 10,
     category: "members",
@@ -101,47 +101,7 @@ const dashboardItems: DashboardItem[] = [
     image: "/members_grid/the_power_of_xxx_dao_members.jpg",
     href: "/the-power-of-xxx-dao-members",
   },
-  {
-    id: 13,
-    category: "members",
-    title: "Join the Revolution",
-    href: "/member",
-  },
-  {
-    id: 14,
-    category: "members",
-    title: "Community Governance",
-    href: "/governance",
-  },
-  {
-    id: 15,
-    category: "members",
-    title: "Early Access Benefits",
-    image: "/members_grid/empty_tile.jpg",
-    href: "/member",
-  },
-  {
-    id: 16,
-    category: "members",
-    title: "DAO Participation",
-    image: "/members_grid/empty_tile.jpg",
-    href: "/governance",
-  },
-  {
-    id: 17,
-    category: "members",
-    title: "Exclusive Updates",
-    image: "/members_grid/empty_tile.jpg",
-    href: "/member",
-  },
-  {
-    id: 18,
-    category: "members",
-    title: "Community Events",
-    image: "/members_grid/empty_tile.jpg",
-    href: "/community",
-  },
-  // Validators category - 9 items
+  // Validators category - 3 items
   {
     id: 19,
     category: "validators",
@@ -163,49 +123,7 @@ const dashboardItems: DashboardItem[] = [
     image: "/validators_grid/the_rise_of_the_validators.jpg",
     href: "/the-rise-of-validators",
   },
-  {
-    id: 22,
-    category: "validators",
-    title: "Validator Setup Guide",
-    image: "/validators_grid/empty_tile.jpg",
-    href: "/validator",
-  },
-  {
-    id: 23,
-    category: "validators",
-    title: "Transaction Fee Rewards",
-    image: "/validators_grid/empty_tile.jpg",
-    href: "/validator",
-  },
-  {
-    id: 24,
-    category: "validators",
-    title: "Network Security",
-    image: "/validators_grid/empty_tile.jpg",
-    href: "/network",
-  },
-  {
-    id: 25,
-    category: "validators",
-    title: "Hardware Requirements",
-    image: "/validators_grid/empty_tile.jpg",
-    href: "/validator",
-  },
-  {
-    id: 26,
-    category: "validators",
-    title: "Validator Economics",
-    image: "/validators_grid/empty_tile.jpg",
-    href: "/validator",
-  },
-  {
-    id: 27,
-    category: "validators",
-    title: "Decentralized Validation",
-    image: "/validators_grid/empty_tile.jpg",
-    href: "/network",
-  },
-  // Whitepapers category - 9 items
+  // Whitepapers category - 3 items
   {
     id: 28,
     category: "whitepapers",
@@ -226,48 +144,6 @@ const dashboardItems: DashboardItem[] = [
     title: "XXX DAO Governance Protocol",
     image: "/whitepapers_grid/xxx_dao_governance_protocol.jpg",
     href: "/governance",
-  },
-  {
-    id: 31,
-    category: "whitepapers",
-    title: "DAG Architecture Deep Dive",
-    image: "/whitepapers_grid/pdf.png",
-    href: "/technology",
-  },
-  {
-    id: 32,
-    category: "whitepapers",
-    title: "Privacy by Design",
-    image: "/whitepapers_grid/pdf.png",
-    href: "/privacy",
-  },
-  {
-    id: 33,
-    category: "whitepapers",
-    title: "Tokenomics Explained",
-    image: "/whitepapers_grid/pdf.png",
-    href: "/fund",
-  },
-  {
-    id: 34,
-    category: "whitepapers",
-    title: "Network Security Model",
-    image: "/whitepapers_grid/world.png",
-    href: "/network",
-  },
-  {
-    id: 35,
-    category: "whitepapers",
-    title: "Scalability Solutions",
-    image: "/whitepapers_grid/pdf.png",
-    href: "/scalability",
-  },
-  {
-    id: 36,
-    category: "whitepapers",
-    title: "Quantum Resistance",
-    image: "/whitepapers_grid/pdf.png",
-    href: "/quantum-safe",
   },
   // Learning category - 6 items
   {

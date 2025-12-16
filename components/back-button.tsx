@@ -35,9 +35,10 @@ export default function BackButton({
   const baseStyles = "inline-flex items-center gap-2 font-medium transition-all duration-200 z-10"
   
   // Absolute Positionierung - außen, nimmt keinen Platz ein
+  // Auf mobilen Geräten weiter oben, damit er nicht mitten im Bild ist
   const positionStyles = {
-    top: "absolute left-6 lg:left-8 top-32",
-    bottom: "absolute left-6 lg:left-8 bottom-24"
+    top: "absolute left-4 sm:left-6 lg:left-8 top-20 sm:top-24 lg:top-32",
+    bottom: "absolute left-4 sm:left-6 lg:left-8 bottom-20 sm:bottom-24"
   }
   
   const variantStyles = {
