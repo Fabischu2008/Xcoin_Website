@@ -105,15 +105,19 @@ export default function PowerInTheHandsOfTheCommunityPage() {
                 <h1 className="font-[family-name:var(--font-heading)] text-4xl lg:text-6xl font-bold tracking-tight text-white mb-6">
                   Power in the Hands of the Community
                 </h1>
-                <p className="text-xl lg:text-2xl text-white/90 mb-4">
-                  The XXX DAO is run by its members, people like you. Every member has a voice, and every voice counts. Through on-chain voting, the community decides how the project evolves, how funds are used, and what our priorities should be.
-                </p>
-                <p className="text-lg lg:text-xl text-white font-semibold">
-                  Membership in the XXX DAO means more than just holding tokens, it means having a real impact on the direction of the project.
-                </p>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Header */}
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="mt-6 text-lg text-muted-foreground">
+            The XXX DAO is run by its members, people like you. Every member has a voice, and every voice counts. Through on-chain voting, the community decides how the project evolves, how funds are used, and what our priorities should be.
+          </p>
+          <p className="mt-4 text-lg font-semibold text-foreground">
+            Membership in the XXX DAO means more than just holding tokens, it means having a real impact on the direction of the project.
+          </p>
         </div>
 
         {/* What Members Can Do */}

@@ -119,12 +119,16 @@ export default function CrowdfundingPage() {
                 <h1 className="font-[family-name:var(--font-heading)] text-4xl lg:text-6xl font-bold tracking-tight text-white mb-6">
                   Crowdfunding
                 </h1>
-                <p className="text-xl lg:text-2xl text-white/90">
-                  All funds raised go directly to the <strong className="text-white">XXX DAO</strong> treasury — not to a company, not to a founder, and not to a VC. The DAO controls all funds, and every major decision is made through on-chain governance. This is true decentralized funding — transparent, democratic, and community-led.
-                </p>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Header */}
+        <div className="mx-auto max-w-4xl">
+          <p className="mt-6 text-lg text-muted-foreground">
+            All funds raised go directly to the <strong className="text-foreground">XXX DAO</strong> treasury — not to a company, not to a founder, and not to a VC. The DAO controls all funds, and every major decision is made through on-chain governance. This is true decentralized funding — transparent, democratic, and community-led.
+          </p>
         </div>
 
         {/* Funding Goal */}
