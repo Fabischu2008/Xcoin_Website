@@ -51,9 +51,11 @@ const improvements = [
 export default function WhatIsPoseidonHashPage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Back Buttons - Absolute positioned, no space taken */}
+      <BackButton fallbackHref="/learning" position="top" />
+      <BackButton fallbackHref="/learning" position="bottom" />
+
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Back Button */}
-        <BackButton fallbackHref="/learning" position="top" />
 
         {/* Header */}
         <div className="mx-auto max-w-4xl">
@@ -148,10 +150,6 @@ export default function WhatIsPoseidonHashPage() {
           </div>
         </div>
 
-        {/* Back Button - Bottom */}
-        <div className="mt-16">
-          <BackButton fallbackHref="/learning" position="bottom" />
-        </div>
       </div>
     </div>
   )

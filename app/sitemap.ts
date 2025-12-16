@@ -65,6 +65,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/power-in-the-hands-of-the-community",
     "/see-whats-coming",
     "/cryptographic-building-blocks",
+    "/what-is-no-trusted-setup",
   ]
 
   return routes.map((route) => ({

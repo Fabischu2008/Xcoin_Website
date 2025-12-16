@@ -102,9 +102,11 @@ function renderTextWithLinks(text: string, links?: Record<string, string>) {
 export default function QuantumSafePage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Back Buttons - Absolute positioned, no space taken */}
+      <BackButton fallbackHref="/overview" position="top" />
+      <BackButton fallbackHref="/overview" position="bottom" />
+
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Back Button */}
-        <BackButton fallbackHref="/" position="top" />
 
         {/* Header */}
         <div className="mx-auto max-w-4xl">
@@ -214,12 +216,6 @@ export default function QuantumSafePage() {
           </div>
         </div>
 
-        {/* Back Button at Bottom */}
-        <div className="mt-16 mx-auto max-w-4xl">
-          <div className="pt-8 border-t border-border">
-            <BackButton fallbackHref="/" position="bottom" />
-          </div>
-        </div>
       </div>
     </div>
   )

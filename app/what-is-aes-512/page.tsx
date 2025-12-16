@@ -1,23 +1,9 @@
-import type { Metadata } from "next"
+"use client"
+
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Lock, Shield, Zap, Key, CheckCircle2, FileText, Server, HardDrive } from "lucide-react"
 import BackButton from "@/components/back-button"
-
-export const metadata: Metadata = {
-  title: "What is AES-512?",
-  description:
-    "AES-512 is a proprietary 512-bit version of the Advanced Encryption Standard, designed to deliver an extreme level of cryptographic security—far beyond what's used in any systems today.",
-  openGraph: {
-    title: "What is AES-512?",
-    description: "Military-grade encryption with 512-bit key length. Quantum-resistant and non-exportable.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "What is AES-512?",
-    description: "Sovereign-grade encryption standard. Future-proof protection for critical infrastructure.",
-  },
-}
 
 const keyFeatures = [
   {
@@ -75,12 +61,61 @@ const useCases = [
   },
 ]
 
+const NUMBER = "13407807929942597099574024998205846127479365820592393377723561443721764030073546976801874298166903427690031858186486050853753882811946569946433649006084096"
+
+function AnimatedNumber() {
+  const [showEllipsis, setShowEllipsis] = useState(false)
+
+  useEffect(() => {
+    // Nach 7 Sekunden (wenn die Zahl sichtbar ist) die Ellipsis anzeigen
+    const ellipsisTimer = setTimeout(() => {
+      setShowEllipsis(true)
+    }, 7000)
+
+    return () => clearTimeout(ellipsisTimer)
+  }, [])
+
+  return (
+    <div className="mt-6 p-4 rounded-lg bg-muted/50 border border-border overflow-hidden">
+      <div className="relative w-full">
+        <p className="text-sm font-mono text-muted-foreground break-all whitespace-nowrap">
+          <span className="inline-block animate-slide-in-and-out-loop">
+            {NUMBER}
+            {showEllipsis && "..."}
+          </span>
+        </p>
+      </div>
+      <style jsx global>{`
+        @keyframes slide-in-and-out-loop {
+          0% {
+            transform: translateX(100%);
+          }
+          40% {
+            transform: translateX(0);
+          }
+          60% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-100%);
+          }
+        }
+        .animate-slide-in-and-out-loop {
+          animation: slide-in-and-out-loop 18s linear infinite;
+        }
+      `}</style>
+    </div>
+  )
+}
+
 export default function WhatIsAES512Page() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Back Buttons - Absolute positioned, no space taken */}
+      <BackButton fallbackHref="/learning" position="top" />
+      <BackButton fallbackHref="/learning" position="bottom" />
+
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Back Button */}
-        <BackButton fallbackHref="/learning" position="top" />
 
         {/* Header */}
         <div className="mx-auto max-w-4xl">
@@ -88,40 +123,74 @@ export default function WhatIsAES512Page() {
             What is AES-512?
           </h1>
           <p className="mt-6 text-lg text-muted-foreground">
-            <strong className="text-foreground">AES-512</strong> is a proprietary 512-bit version of the Advanced Encryption Standard, designed to deliver an extreme level of cryptographic security—far beyond what's used in any systems today.
+            <strong className="text-foreground">CRΞØ's AES-512</strong> is a proprietary 512-bit variant of the Advanced Encryption (AES) Standard, engineered to provide an exceptionally high level of cryptographic security, far beyond the standards used in modern systems today.
           </p>
           <p className="mt-4 text-lg text-muted-foreground">
-            While traditional applications like banking apps or secure messengers use 256-bit AES (already considered secure), AES-512 doubles the key length. In fact, AES-512 offers 2<sup>512</sup> possible combinations. That's not just twice as strong—AES-512 offers 2<sup>512</sup> possible keys, which equals approximately:
+            While conventional applications such as banking platforms or secure messaging apps typically rely on 256-bit AES encryption (already considered highly secure), AES-512 doubles the key length. This dramatically increases security. In fact, AES-512 supports 2<sup>512</sup> possible key combinations. That is not just twice the strength, but exponentially more: 2<sup>512</sup> =
           </p>
-          <div className="mt-6 p-4 rounded-lg bg-muted/50 border border-border">
-            <p className="text-sm font-mono text-muted-foreground break-all">
-              13407807929942597099574024998205846127479365820592393377723561443721764030073546976801874298166903427690031858186486050853753882811946569946433649006084096...
-            </p>
-          </div>
-          <p className="mt-4 text-lg text-muted-foreground">
-            — an unimaginably large keyspace that makes brute-force attacks infeasible forever.
+          <AnimatedNumber />
+          <p className="mt-4 text-lg font-semibold text-foreground">
+            This unimaginably vast keyspace makes brute-force attacks permanently infeasible, even with future advances in computing power.
           </p>
         </div>
 
-        {/* Proprietary Design */}
+        {/* Beyond Public Standards */}
         <div className="mt-16 mx-auto max-w-4xl">
           <div className="rounded-2xl border border-border bg-card p-8 lg:p-12">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6">
-              Proprietary Design
+              Beyond Public Standards
             </h2>
             <p className="text-muted-foreground mb-4">
-              AES-512 is not part of the public AES specification maintained by NIST. Instead, it is a real, custom-designed encryption system with:
+              The standardized AES family includes only AES-128, AES-192 and AES-256. By contrast, the AES-512 system used within CRΞØ is a custom-developed encryption primitive with:
             </p>
             <ul className="list-disc list-inside space-y-2 text-muted-foreground mb-6">
-              <li>True 512-bit key sizes</li>
-              <li>A proprietary cipher structure</li>
-              <li>Live, operational deployment inside the XXX blockchain, CREO platform, and Lotus Wallet</li>
+              <li>true 512-bit key sizes</li>
+              <li>a proprietary cipher structure</li>
+              <li>active deployment inside the CRΞØ platform and the SEP Network</li>
             </ul>
+            <p className="text-muted-foreground">
+              Unlike public cryptographic protocols, CRΞØ's AES-512 implementation is fully private and non-exportable. This prevents third parties from building tools to audit, reverse-engineer, or fingerprint the cipher. Its closed design avoids code-level vulnerabilities or protocol-based exploits that typically arise when algorithms are widely exposed and reused.
+            </p>
+          </div>
+        </div>
+
+        {/* Technical Architecture */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8 lg:p-12">
+            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6">
+              Technical Architecture
+            </h2>
             <p className="text-muted-foreground mb-4">
-              Unlike public cryptographic standards, the AES-512 implementation used in Xcoin is private and non-exportable—meaning no third-party tools can be built to reverse-engineer or audit it. This makes it immune to code-level exploits or protocol fingerprinting.
+              CRΞØ's AES-512 is not part of the official AES standard defined by the National Institute of Standards and Technology (NIST). In CRΞØ, "AES-512" refers to a custom symmetric blockcipher design based on an extended <strong className="text-foreground">Rijndael-512</strong> configuration, which supports 512-bit blocks and keys. This construction is entirely proprietary and separate from the standardized AES versions.
+            </p>
+            <p className="text-muted-foreground mb-4">
+              The term "cascade" reflects the cryptographic structure: multiple Rijndael-512 layers applied sequentially, each layer using independently derived keys and initialization vectors generated from <Link href="/what-is-keccak-512" className="text-accent hover:text-accent/80 underline">Keccak-512</Link> entropy. Even if a theoretical weakness were discovered in one layer, the remaining layers maintain confidentiality and integrity.
             </p>
             <p className="text-muted-foreground">
-              Its internal structure includes additional transformation rounds, larger block sizes, and dynamic key schedules that reduce predictability and eliminate cryptanalytic weak points. It is specifically built to withstand even future quantum computing attacks.
+              By extending the original Rijndael architecture to 512-bit parameters and combining it with a multi-layer cascade, CRΞØ achieves a significantly enlarged post-quantum security margin. The name "AES-512" is therefore used as a shorthand label for this Rijndael-512-based cascade, not as a reference to any NIST-approved AES variant.
+            </p>
+          </div>
+        </div>
+
+        {/* Quantum Secure */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-border bg-card p-8 lg:p-12">
+            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6">
+              Quantum Secure
+            </h2>
+            <p className="text-lg font-semibold text-foreground mb-4">
+              Designed for Future-Proof Security
+            </p>
+            <p className="text-muted-foreground mb-4">
+              Its internal design includes:
+            </p>
+            <ul className="list-disc list-inside space-y-2 text-muted-foreground mb-6">
+              <li>Additional transformation rounds</li>
+              <li>Enlarged block sizes</li>
+              <li>Dynamic key scheduling</li>
+            </ul>
+            <p className="text-muted-foreground">
+              These enhancements further reduce predictability and eliminate known cryptanalytic weaknesses. AES-512 is explicitly engineered to withstand even the threat of future quantum computing attacks.
             </p>
           </div>
         </div>
@@ -168,35 +237,20 @@ export default function WhatIsAES512Page() {
           </div>
         </div>
 
-        {/* Integration */}
+        {/* AES-512 Foundation in CRΞØ */}
         <div className="mt-20 mx-auto max-w-4xl">
           <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8 lg:p-12">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6">
-              Deep Integration
+              AES-512 Foundation in CRΞØ
             </h2>
-            <p className="text-lg text-muted-foreground mb-4">
-              AES-512 serves as the cryptographic backbone for Xcoin's most sensitive operations—from encrypted storage and wallet protection to validator authentication and governance logic. It enables military-grade encryption without performance compromise.
+            <p className="text-lg font-semibold text-foreground mb-4">
+              The Backbone of CRΞØ
             </p>
             <p className="text-lg text-muted-foreground mb-4">
-              By embedding AES-512 deeply into its infrastructure, Xcoin ensures that encryption is not an add-on, but a foundational layer. Whether applied to user-level wallets or protocol-level logic, AES-512 delivers consistent, tamper-proof protection across the ecosystem.
+              Within the CRΞØ ecosystem, AES-512 is not a feature, it's a foundational layer. It forms the cryptographic backbone for the platform's most sensitive operations: communication, encrypted storage, authentication, governance logic, and more. This deep integration makes security tamper-proof across all layers of the system.
             </p>
             <p className="text-lg font-semibold text-foreground">
-              Its integration into Xcoin, CREO, and Lotus Wallet provides a unified, sovereign-grade standard that goes beyond compliance—it's designed for environments where failure is not an option.
-            </p>
-          </div>
-        </div>
-
-        {/* Why it Matters */}
-        <div className="mt-20 mx-auto max-w-4xl">
-          <div className="rounded-2xl border border-border bg-card p-8 lg:p-12">
-            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6">
-              Why it Matters
-            </h2>
-            <p className="text-lg text-muted-foreground mb-4">
-              AES-512 represents a new tier of cryptographic strength. In a world where encryption is increasingly targeted by state actors, AI, and emerging quantum machines, 256-bit security may soon no longer be enough. AES-512 is designed to future-proof the most critical aspects of blockchain infrastructure—from privacy to control, from governance to storage.
-            </p>
-            <p className="text-lg font-semibold text-foreground">
-              Xcoin's adoption of AES-512 makes it the only blockchain in the world to implement this proprietary encryption standard. By going beyond known cryptographic standards and into sovereign-grade design, AES-512 ensures that your assets, messages, and identity remain fully protected—permanently.
+              Ultimately, AES-512 establishes a unified, sovereign-grade encryption standard within CRΞØ. One that goes beyond traditional compliance and is purpose-built for environments where failure is simply not an option.
             </p>
           </div>
         </div>
@@ -236,12 +290,9 @@ export default function WhatIsAES512Page() {
           </div>
         </div>
 
-        {/* Back Button - Bottom */}
-        <div className="mt-16">
-          <BackButton fallbackHref="/learning" position="bottom" />
-        </div>
       </div>
     </div>
   )
 }
+
 

@@ -141,11 +141,13 @@ function renderTextWithLinks(text: string, links?: Record<string, string>) {
 export default function WhatIsXXXBlockchainPage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Back Buttons - Absolute positioned, no space taken */}
+      <BackButton fallbackHref="/overview" position="top" />
+      <BackButton fallbackHref="/overview" position="bottom" />
+
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto max-w-4xl">
-          {/* Back Button */}
-          <BackButton fallbackHref="/overview" position="top" />
           <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
             What is the XXX Blockchain?
           </h1>
@@ -223,11 +225,6 @@ export default function WhatIsXXXBlockchainPage() {
               It's here to replace it.
             </p>
           </div>
-        </div>
-
-        {/* Back Button - Bottom */}
-        <div className="mt-16 mx-auto max-w-4xl">
-          <BackButton fallbackHref="/overview" position="bottom" />
         </div>
       </div>
     </div>

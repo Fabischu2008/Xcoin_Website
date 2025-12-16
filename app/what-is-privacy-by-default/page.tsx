@@ -11,8 +11,11 @@ export const metadata: Metadata = {
 export default function WhatIsPrivacyByDefaultPage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Back Buttons - Absolute positioned, no space taken */}
+      <BackButton fallbackHref="/overview" position="top" />
+      <BackButton fallbackHref="/overview" position="bottom" />
+
       <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
-        <BackButton fallbackHref="/overview" position="top" />
 
         <div className="mx-auto max-w-3xl">
           <div className="mb-8 flex justify-center">
@@ -177,11 +180,6 @@ export default function WhatIsPrivacyByDefaultPage() {
                   AES-512 Cascade Encryption
                 </Link>
               </div>
-            </div>
-
-            {/* Back Button at Bottom */}
-            <div className="mt-12 pt-8 border-t border-border">
-              <BackButton fallbackHref="/overview" position="bottom" />
             </div>
           </div>
         </div>
