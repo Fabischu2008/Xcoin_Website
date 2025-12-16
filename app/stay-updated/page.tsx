@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import BackButton from "@/components/back-button"
-import { Bell } from "lucide-react"
+import { Bell, ArrowRight } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Stay Updated",
@@ -11,8 +11,11 @@ export const metadata: Metadata = {
 export default function StayUpdatedPage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Back Buttons - Absolute positioned, no space taken */}
+      <BackButton fallbackHref="/overview" position="top" />
+      <BackButton fallbackHref="/overview" position="bottom" />
+      
       <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
-        <BackButton fallbackHref="/overview" position="top" />
 
         <div className="mx-auto max-w-3xl">
           <div className="mb-8 flex justify-center">
@@ -136,10 +139,25 @@ export default function StayUpdatedPage() {
               </div>
             </div>
 
-            {/* Back Button at Bottom */}
-            <div className="mt-12 pt-8 border-t border-border">
-              <BackButton fallbackHref="/overview" position="bottom" />
+            {/* CTA to Community */}
+            <div className="mt-16 mx-auto max-w-4xl text-center">
+              <div className="rounded-2xl border border-accent/30 bg-accent/5 p-12">
+                <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-4">
+                  Join the Community
+                </h2>
+                <p className="text-lg text-muted-foreground mb-8">
+                  Connect with other Xcoin supporters, share ideas, and be part of the future of private finance.
+                </p>
+                <Link
+                  href="/community"
+                  className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 text-lg"
+                >
+                  Visit Community
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
+              </div>
             </div>
+
           </div>
         </div>
       </div>

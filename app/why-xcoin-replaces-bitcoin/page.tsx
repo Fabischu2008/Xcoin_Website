@@ -143,11 +143,13 @@ function renderTextWithLinks(text: string, links?: Record<string, string>) {
 export default function WhyXcoinReplacesBitcoinPage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Back Buttons - Absolute positioned, no space taken */}
+      <BackButton fallbackHref="/overview" position="top" />
+      <BackButton fallbackHref="/overview" position="bottom" />
+      
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto max-w-4xl">
-          {/* Back Button */}
-          <BackButton fallbackHref="/overview" position="top" />
           <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
             Why Xcoin Will Replace Bitcoin
           </h1>
@@ -280,10 +282,6 @@ export default function WhyXcoinReplacesBitcoinPage() {
           </p>
         </div>
 
-        {/* Back Button - Bottom */}
-        <div className="mt-16 mx-auto max-w-4xl">
-          <BackButton fallbackHref="/overview" position="bottom" />
-        </div>
       </div>
     </div>
   )

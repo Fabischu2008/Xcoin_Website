@@ -40,10 +40,18 @@ const steps = [
 export default function ThePowerOfXXXDAOMembersPage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Back Buttons - Absolute positioned, no space taken */}
+      <BackButton fallbackHref="/overview" position="top" />
+      <BackButton fallbackHref="/overview" position="bottom" />
+      
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        <BackButton fallbackHref="/" />
         {/* Header */}
         <div className="mx-auto max-w-4xl text-center">
+          <div className="mb-8 flex justify-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10">
+              <Users className="h-8 w-8 text-accent" />
+            </div>
+          </div>
           <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
             The Power of XXX DAO Members
           </h1>

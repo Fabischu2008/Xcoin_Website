@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Coins, Vote, Shield, CheckCircle2, Lock, Zap, ArrowLeft } from "lucide-react"
+import { Coins, Vote, Shield, CheckCircle2, Lock, Zap, ArrowLeft, ArrowRight, Check, Clock, Gift } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     "A token is a cryptographic proof of ownership. XXX Tokens prove that you own a real stake in the Xcoin ecosystem — with both financial value and governance rights.",
   openGraph: {
     title: "What are XXX Tokens?",
-    description: "Value today, and power tomorrow. Each XXX Token gives you the right to redeem 10 Xcoins at mainnet launch and governance rights.",
+    description: "Value today, and power tomorrow. Each XXX Token gives you the right to redeem 1Xcoin at mainnet launch and governance rights.",
     type: "website",
   },
   twitter: {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 const tokenRights = [
   {
     icon: Coins,
-    title: "The right to redeem 10 Xcoins at mainnet launch",
+    title: "The right to redeem 1Xcoin at mainnet launch",
   },
   {
     icon: Vote,
@@ -45,10 +45,11 @@ const governanceDecisions = [
 export default function WhatAreXXXTokensPage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Back Buttons - Absolute positioned, no space taken */}
+      <BackButton fallbackHref="/learning" position="top" />
+      <BackButton fallbackHref="/learning" position="bottom" />
+      
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Back Button */}
-        <BackButton fallbackHref="/learning" position="top" />
-
         {/* Header */}
         <div className="mx-auto max-w-4xl">
           <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
@@ -81,24 +82,213 @@ export default function WhatAreXXXTokensPage() {
           </div>
         </div>
 
-        {/* Value Proposition */}
+        {/* Early Access Opportunity */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8 lg:p-12 text-center">
+            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-4">
+              This is your early access opportunity.
+            </h2>
+            <p className="text-lg text-muted-foreground mb-4">
+              This is not a promo. This is not a presale for whales. This is your direct path to owning a part of the next-generation financial platform, before it launches to the world.
+            </p>
+          </div>
+        </div>
+
+        {/* Token Pricing */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-border bg-card p-8 lg:p-12">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 mb-4">
+                <div className="text-4xl font-bold text-foreground">€10</div>
+                <div className="text-2xl text-muted-foreground">/</div>
+                <div className="text-4xl font-bold text-foreground">XXX Token</div>
+              </div>
+              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-6">
+                Fixed minimum price at launch, guaranteed
+              </p>
+              <p className="text-lg text-muted-foreground">
+                The protocol is offering a one-time release of XXX Tokens. 1 XXX Token = 1 Xcoin. In addition every XXX Token grants you exclusive access to the DAO, including governance rights, voting power, proposal access, and participation in key community decisions.
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-3 mt-8">
+              <div className="rounded-xl border border-border bg-card p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <Coins className="h-5 w-5 text-accent" />
+                  <h3 className="font-semibold text-foreground">Costs €10 per XXX Token</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">one-time investment for 1 Xcoin</p>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <Gift className="h-5 w-5 text-accent" />
+                  <h3 className="font-semibold text-foreground">Redeemable for 1 Xcoin at launch</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">fixed exchange rate guaranteed</p>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <Shield className="h-5 w-5 text-accent" />
+                  <h3 className="font-semibold text-foreground">Guaranteed entry price of €10 per Xcoin</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">no price volatility risk before launch</p>
+              </div>
+            </div>
+
+            <div className="mt-8 p-6 rounded-xl border border-accent/30 bg-accent/5">
+              <div className="flex items-center gap-3 mb-3">
+                <Zap className="h-5 w-5 text-accent" />
+                <h3 className="font-semibold text-foreground">Delivered instantly to your wallet</h3>
+              </div>
+              <p className="text-sm text-muted-foreground">automatic and secure token transfer</p>
+            </div>
+          </div>
+        </div>
+
+        {/* How It Works */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-border bg-card p-8 lg:p-12">
+            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6 text-center">
+              Start Now. It's This Simple:
+            </h2>
+            <div className="space-y-6 mt-8">
+              <div className="flex items-start gap-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 text-accent font-bold flex-shrink-0">
+                  1
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg text-foreground mb-2">Choose your investment amount</h3>
+                  <p className="text-muted-foreground">(starting at €10 for 1 Xcoin)</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 text-accent font-bold flex-shrink-0">
+                  2
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg text-foreground mb-2">Send crypto to the indicated wallet address</h3>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 text-accent font-bold flex-shrink-0">
+                  3
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg text-foreground mb-2">Receive XXX Tokens to your wallet</h3>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 text-accent font-bold flex-shrink-0">
+                  4
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg text-foreground mb-2">Done. You're in.</h3>
+                </div>
+              </div>
+            </div>
+            <div className="mt-8 p-6 rounded-xl border border-accent/30 bg-accent/5 text-center">
+              <p className="text-lg font-semibold text-foreground">
+                No KYC. No account. No name needed.
+              </p>
+              <p className="text-muted-foreground mt-2">
+                Just you, your wallet, and your stake in the future of private finance
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Why You'll Want to Be First */}
         <div className="mt-16 mx-auto max-w-4xl">
           <div className="rounded-2xl border border-border bg-card p-8 lg:p-12">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6">
-              Value Today, Power Tomorrow
+              Why You'll Want to Be First.
             </h2>
             <p className="text-lg text-muted-foreground mb-4">
-              At launch, 1 Xcoin will be worth €10.
-            </p>
-            <p className="text-lg font-semibold text-foreground mb-4">
-              That means each XXX Token gives you €100 in immediate redeemable value — guaranteed.
+              After launch, there will be no fixed prices, no guarantees — only raw market forces. The XXX Tokens sale ends. The €10 price tag disappears. Global demand begins.
             </p>
             <p className="text-lg text-muted-foreground mb-4">
-              Once Xcoin hits the open market, prices may rise fast. Early token holders lock in the best rate.
+              Just look at history: Bitcoin launched under €1. Ethereum at a few euros. Today? Tens of thousands. Do you really think a quantum-secure, private-by-default upgrade to Bitcoin will still go for €10 once the world catches on? Probably not. And by then, your chance will be long gone.
             </p>
-            <p className="text-lg font-semibold text-foreground">
-              XXX Tokens are limited, on-chain, and private. They give you something very few assets can offer: value today, and power tomorrow.
-            </p>
+          </div>
+        </div>
+
+        {/* Benefits */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8 lg:p-12">
+            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-8 text-center">
+              Benefits
+            </h2>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-foreground">Guaranteed launch price: €10 per Xcoin</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-foreground">1 XXX Token = 1 Xcoin at mainnet launch</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-foreground">Full DAO access: voting rights, proposals, treasury decisions</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-foreground">Freedom: hold, sell, or redeem at your own pace</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Example Conversion */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-border bg-card p-8 lg:p-12">
+            <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold mb-6 text-center">
+              Example Conversion
+            </h2>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left py-4 px-4 font-semibold text-foreground">Investment</th>
+                    <th className="text-left py-4 px-4 font-semibold text-foreground">XXX Tokens</th>
+                    <th className="text-left py-4 px-4 font-semibold text-foreground">Xcoins</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-border">
+                    <td className="py-4 px-4 text-foreground font-semibold">€10</td>
+                    <td className="py-4 px-4 text-foreground">1 XXX</td>
+                    <td className="py-4 px-4 text-foreground">1 Xcoin</td>
+                  </tr>
+                  <tr className="border-b border-border">
+                    <td className="py-4 px-4 text-foreground font-semibold">€50</td>
+                    <td className="py-4 px-4 text-foreground">5 XXX</td>
+                    <td className="py-4 px-4 text-foreground">5 Xcoins</td>
+                  </tr>
+                  <tr>
+                    <td className="py-4 px-4 text-foreground font-semibold">€100</td>
+                    <td className="py-4 px-4 text-foreground">10 XXX</td>
+                    <td className="py-4 px-4 text-foreground">10 Xcoins</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-8 p-6 rounded-xl border border-accent/30 bg-accent/5">
+              <p className="text-lg font-semibold text-foreground text-center">
+                And the best part?
+              </p>
+              <p className="text-muted-foreground mt-2 text-center">
+                After you redeem your XXX Tokens for Xcoins, you don't lose your governance rights. Your XXX tokens retain full voting power, proposal access, and community rights. Your XXX Tokens will be your key to XXX DAO, forever.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -258,30 +448,28 @@ export default function WhatAreXXXTokensPage() {
           </div>
         </div>
 
-        {/* Closing Statement */}
-        <div className="mt-16 mx-auto max-w-4xl text-center">
-          <div className="rounded-2xl border border-accent/30 bg-accent/5 p-12">
-            <p className="text-xl font-[family-name:var(--font-heading)] font-bold text-foreground">
-              If you believe in private, unstoppable digital money — this is your chance to get in at the start. With value. With rights. With a say in what comes next.
-            </p>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div className="mt-16 mx-auto max-w-4xl text-center">
-          <div className="rounded-2xl border border-accent/30 bg-accent/5 p-12">
+        {/* Ready to Act */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8 lg:p-12 text-center">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-4">
-              Ready to Get XXX Tokens?
+              Ready to Act?
             </h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Join the crowdfunding campaign and secure your stake in the future of private finance.
+            <p className="text-lg text-muted-foreground mb-6">
+              This sale only exists for one reason: to give you a fair shot at something most people will only hear about when it's too late. First-come, first-served. When it's gone — it's gone. When Xcoin hits exchanges, you'll either be watching… or already holding. The choice is yours.
+            </p>
+            <div className="mt-8 flex items-center justify-center gap-2 text-muted-foreground">
+              <Clock className="h-5 w-5" />
+              <p className="text-sm">Available from XXXXXXX XX, 2025</p>
+            </div>
+            <p className="text-sm text-muted-foreground mt-4">
+              This is the only round. No KYC. No second chances.
             </p>
             <Link
               href="/fund"
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 text-lg"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 text-lg"
             >
-              Get XXX Tokens
-              <ArrowLeft className="h-5 w-5 rotate-180" />
+              Get XXX Tokens now
+              <ArrowRight className="h-5 w-5" />
             </Link>
           </div>
         </div>
@@ -307,11 +495,6 @@ export default function WhatAreXXXTokensPage() {
               </Link>
             </div>
           </div>
-        </div>
-
-        {/* Back Button - Bottom */}
-        <div className="mt-16">
-          <BackButton fallbackHref="/learning" position="bottom" />
         </div>
       </div>
     </div>

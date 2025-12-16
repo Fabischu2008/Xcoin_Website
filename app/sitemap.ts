@@ -63,6 +63,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/philosophy-behind-anonymous-finance",
     "/the-power-of-xxx-dao-members",
     "/power-in-the-hands-of-the-community",
+    "/see-whats-coming",
   ]
 
   return routes.map((route) => ({

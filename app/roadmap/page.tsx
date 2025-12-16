@@ -1,8 +1,13 @@
 import RoadmapTimeline from "@/components/roadmap-timeline"
+import BackButton from "@/components/back-button"
 
 export default function RoadmapPage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Back Buttons - Absolute positioned, no space taken */}
+      <BackButton fallbackHref="/overview" position="top" />
+      <BackButton fallbackHref="/overview" position="bottom" />
+      
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
@@ -46,6 +51,7 @@ export default function RoadmapPage() {
             </div>
           </div>
         </div>
+
       </div>
     </div>
   )

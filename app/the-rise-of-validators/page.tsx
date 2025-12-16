@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Server, Zap, Users, Shield, X, Check, Network, Coins, ArrowLeft } from "lucide-react"
+import { Zap, Shield, X, Check, Network, ArrowRight } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
@@ -49,12 +49,18 @@ const decentralizationFeatures = [
 export default function TheRiseOfValidatorsPage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Back Buttons - Absolute positioned, no space taken */}
+      <BackButton fallbackHref="/overview" position="top" />
+      <BackButton fallbackHref="/overview" position="bottom" />
+      
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Back Button */}
-        <BackButton fallbackHref="/" />
-
         {/* Header */}
         <div className="mx-auto max-w-4xl text-center">
+          <div className="mb-8 flex justify-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10">
+              <Network className="h-8 w-8 text-accent" />
+            </div>
+          </div>
           <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
             The Rise of the Validators
           </h1>
@@ -168,9 +174,44 @@ export default function TheRiseOfValidatorsPage() {
               href="/validator-application"
               className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 text-lg"
             >
-              Apply to Run a SEP Node
-              <ArrowLeft className="h-5 w-5 rotate-180" />
+              Join
+              <ArrowRight className="h-5 w-5" />
             </Link>
+          </div>
+        </div>
+
+        {/* Related Topics */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-border bg-card p-8">
+            <h3 className="font-[family-name:var(--font-heading)] text-xl font-semibold mb-4">
+              Related Topics
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/validator"
+                className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
+              >
+                Earn Xcoin Effortlessly
+              </Link>
+              <Link
+                href="/what-is-sep"
+                className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
+              >
+                What is SEP?
+              </Link>
+              <Link
+                href="/how-xcoin-handles-10000-tps"
+                className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
+              >
+                10,000+ TPS
+              </Link>
+              <Link
+                href="/validator-application"
+                className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
+              >
+                Apply Now
+              </Link>
+            </div>
           </div>
         </div>
       </div>

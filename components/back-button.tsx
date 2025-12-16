@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
+import clsx from "clsx"
 
 interface BackButtonProps {
   fallbackHref?: string
@@ -31,18 +32,19 @@ export default function BackButton({
   // Wenn keine Variante angegeben, verwende automatisch basierend auf Position
   const effectiveVariant = variant || (position === "bottom" ? "prominent" : "ghost")
 
-  const baseStyles = "inline-flex items-center gap-2 font-medium transition-all duration-200"
+  const baseStyles = "inline-flex items-center gap-2 font-medium transition-all duration-200 z-10"
   
+  // Absolute Positionierung - außen, nimmt keinen Platz ein
   const positionStyles = {
-    top: "mb-8",
-    bottom: "mt-8"
+    top: "absolute left-6 lg:left-8 top-32",
+    bottom: "absolute left-6 lg:left-8 bottom-24"
   }
   
   const variantStyles = {
     ghost: "text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg px-4 py-2",
     default: "rounded-full bg-accent px-6 py-3 text-accent-foreground hover:bg-accent/90 shadow-lg hover:shadow-xl",
     outline: "rounded-full border-2 border-accent bg-transparent px-6 py-3 text-accent hover:bg-accent hover:text-accent-foreground",
-    prominent: "rounded-full bg-accent px-6 py-3 text-accent-foreground hover:bg-accent/90 shadow-lg hover:shadow-xl"
+    prominent: "rounded-full bg-accent px-8 py-3.5 text-base font-semibold text-accent-foreground shadow-lg hover:bg-accent/90 hover:shadow-xl"
   }
 
   const iconSize = effectiveVariant === "prominent" || effectiveVariant === "default" ? "h-5 w-5" : "h-4 w-4"
@@ -50,7 +52,7 @@ export default function BackButton({
   return (
     <button
       onClick={handleBack}
-      className={`${baseStyles} ${variantStyles[effectiveVariant]} ${positionStyles[position]} ${className}`}
+      className={clsx(baseStyles, variantStyles[effectiveVariant], positionStyles[position], className)}
       aria-label="Go back"
     >
       <ArrowLeft className={iconSize} />

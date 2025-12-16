@@ -1,199 +1,193 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Server, Zap, Check, Shield, Network, Coins, TrendingUp, Globe, ArrowLeft } from "lucide-react"
+import { Coins, ArrowRight, Gift } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What Is a Validator?",
+  title: "Earn Xcoin. Effortlessly.",
   description:
-    "A validator is someone who runs a node that validates Xcoin transactions. Such a node is called a SEP Node. Learn how to become a validator and earn Xcoin.",
+    "Validators are the backbone of the XXX network. By running a SEP Node, you secure the network, support privacy, and keep the system quantum-proof.",
   openGraph: {
-    title: "What Is a Validator?",
-    description: "By operating a SEP Node, validators keep the Xcoin network running: fast, invisible, and quantum-secure.",
+    title: "Earn Xcoin. Effortlessly.",
+    description: "Run a SEP Node 24/7 and get paid in Xcoin. No complicated tasks, no daily check-ins. Just keep your node online.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What Is a Validator?",
-    description: "Being a validator isn't just about protecting privacy—it's also profitable.",
+    title: "Earn Xcoin. Effortlessly.",
+    description: "SEP Node licenses are completely free until mainnet launch. Get in now and you're set for life.",
   },
 }
 
-const validatorTasks = [
+const earningMethods = [
   {
-    icon: Check,
-    title: "Verify Transactions",
-    description: "SEP Nodes validate each transaction using cutting-edge zero-knowledge cryptography that proves a transaction is valid without knowing anything about the sender, receiver, or amount.",
+    title: "Base Fee",
+    description: "Dynamic, auto-scaled per zk-Rollup bundle.",
   },
   {
-    icon: Network,
-    title: "Maintain Network Consensus",
-    description: "Validators uphold consensus across Xcoin's hybrid architecture — enabling true parallel processing with 10,000+ transactions per second, no bottlenecks, and instant settlement.",
+    title: "Volume Bonus",
+    description: "The top 20% of validators by traffic share in an extra rewards pool.",
   },
   {
-    icon: Shield,
-    title: "Preserve Privacy",
-    description: "Every SEP Node ensures total anonymity by privately handling all transactions, storing no user data, and using quantum-resistant encryption to keep the network secure — now and in the future.",
-  },
-]
-
-const earningBenefits = [
-  {
-    icon: Coins,
-    title: "Earn Transaction Fees",
-    description: "Validators receive fees every time your node processes a transaction. The more transactions are processed by your node, the more you earn.",
+    title: "SEP Integration Rewards",
+    description: "Extra Xcoins for validators that support SEP-based communications.",
   },
   {
-    icon: TrendingUp,
-    title: "Get Volume Bonuses",
-    description: "High-performing nodes earn additional rewards based on transaction volume — no inflation, just real utility-based income.",
+    title: "Proposal Execution Fees",
+    description: "Earn rewards for executing governance actions via the DAO.",
   },
-  {
-    icon: Network,
-    title: "Support the SEP Network",
-    description: "Validators also contribute to the wider post-quantum ecosystem, earning potential rewards from multiple privacy platforms, such as CREO.",
-  },
-]
-
-const requirements = [
-  "A VPS or dedicated server",
-  "A reliable internet connection",
-  "A static IP address",
-  "A validator license",
 ]
 
 export default function ValidatorPage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Back Buttons - Absolute positioned, no space taken */}
+      <BackButton fallbackHref="/overview" position="top" />
+      <BackButton fallbackHref="/overview" position="bottom" />
+      
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Back Button */}
-        <BackButton fallbackHref="/" />
-
         {/* Header */}
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-4xl text-center">
+          <div className="mb-8 flex justify-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10">
+              <Coins className="h-8 w-8 text-accent" />
+            </div>
+          </div>
           <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
-            What Is a Validator?
+            Earn Xcoin. Effortlessly.
           </h1>
           <p className="mt-6 text-lg text-muted-foreground">
-            A validator is someone who runs a node that validates Xcoin transactions. Such a node is called a <strong className="text-foreground">SEP Node</strong>.
-          </p>
-          <p className="mt-4 text-lg text-muted-foreground">
-            SEP Nodes are part of the <strong className="text-foreground">SEP Network</strong> — a uniquely developed encryption framework that powers Xcoin's unmatched privacy and security.
-          </p>
-          <p className="mt-4 text-lg text-muted-foreground">
-            In traditional blockchains like Bitcoin, miners confirm transactions by solving complex mathematical puzzles. This process consumes large amounts of energy and takes considerable time. In contrast, SEP Nodes use advanced cryptography — not electricity — to confirm transactions: faster, more efficiently, and with full anonymity.
-          </p>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Validators don't mine coins. They don't monitor users. They don't waste time or energy. They simply verify transactions — without ever knowing who sent what to whom.
-          </p>
-          <p className="mt-4 text-lg font-semibold text-foreground">
-            By operating a SEP Node, validators keep the Xcoin network running: fast, invisible, and quantum-secure.
+            Validators are the backbone of the XXX network. By running a SEP Node, you secure the network, support privacy, and keep the system quantum-proof.
           </p>
         </div>
 
-        {/* What Does a Validator Do? */}
-        <div className="mt-20 mx-auto max-w-4xl">
-          <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6">
-            What Does a Validator Do?
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Actually, validators simply keep their nodes online. That's it. Easy? Yes.
-          </p>
-          <p className="text-lg text-muted-foreground mb-8">
-            And while hosting a SEP Node is simple, it performs three essential tasks that keep the network private, fast, and secure:
-          </p>
-          <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-3">
-            {validatorTasks.map((task) => (
-              <div
-                key={task.title}
-                className="rounded-2xl border border-border bg-card p-6 hover:border-accent/50 transition-colors"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10">
-                  <task.icon className="h-6 w-6 text-accent" />
-                </div>
-                <h3 className="mt-4 font-semibold text-lg text-foreground">{task.title}</h3>
-                <p className="mt-3 text-sm text-muted-foreground">{task.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Become a Validator */}
-        <div className="mt-20 mx-auto max-w-4xl">
+        {/* How It Works */}
+        <div className="mt-16 mx-auto max-w-4xl">
           <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8 lg:p-12">
-            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6">
-              Become a Validator
-            </h2>
-            <p className="text-lg font-semibold text-foreground mb-8">
-              Being a validator isn't just about protecting privacy — it's also profitable.
-            </p>
-            <div className="space-y-6">
-              {earningBenefits.map((benefit) => (
-                <div key={benefit.title} className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 flex-shrink-0">
-                    <benefit.icon className="h-6 w-6 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg text-foreground mb-2">{benefit.title}</h3>
-                    <p className="text-muted-foreground">{benefit.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <p className="mt-8 text-lg font-semibold text-foreground">
-              All rewards are paid in Xcoin. No staking. No mining. No dilution. Just clean, transparent income for supporting privacy.
-            </p>
-          </div>
-        </div>
-
-        {/* Who Can Become a Validator? */}
-        <div className="mt-20 mx-auto max-w-4xl">
-          <div className="rounded-2xl border border-border bg-card p-8 lg:p-12">
-            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6">
-              Who Can Become a Validator?
+            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6 text-center">
+              How It Works
             </h2>
             <p className="text-lg text-muted-foreground mb-4">
-              Anyone with basic technical knowledge and a desire to support financial privacy can become a validator — no matter who you are or where you're from. Whether you're in a small town or a major city, in Europe, Asia, Africa, or the Americas — you're welcome. <Link href="/what-is-xxx-dao" className="text-accent hover:text-accent/80 underline">XXX DAO</Link> invites everyone, everywhere to take part.
+              Your SEP Node works for you 24/7, verifying and securing transactions in the background. You only have to keep it online.
             </p>
-            <h3 className="mt-8 font-[family-name:var(--font-heading)] text-2xl font-semibold mb-4">
-              What do you need?
-            </h3>
-            <p className="text-muted-foreground mb-4">
-              You don't need expensive hardware. You just need the following:
+            <p className="text-lg text-muted-foreground mb-4">
+              And the best part? You get paid in Xcoin. Every month, your rewards are automatically sent to the wallet you choose. No complicated tasks, no daily check-ins. Just keep your SEP Node online, maybe install an update once in a while, and watch your Xcoin balance grow.
             </p>
-            <div className="space-y-3 mt-6">
-              {requirements.map((requirement, index) => (
-                <div key={index} className="flex items-start gap-3">
-                  <Check className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                  <p className="text-muted-foreground">{requirement}</p>
+          </div>
+        </div>
+
+        {/* How you earn */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-border bg-card p-8 lg:p-12">
+            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6">
+              How you earn
+            </h2>
+            <div className="space-y-6">
+              {earningMethods.map((method, index) => (
+                <div key={index} className="flex items-start gap-4">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-accent/10 flex-shrink-0 mt-1">
+                    <div className="h-2 w-2 rounded-full bg-accent" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg text-foreground mb-1">{method.title}:</h3>
+                    <p className="text-muted-foreground">{method.description}</p>
+                  </div>
                 </div>
               ))}
             </div>
-            <p className="mt-8 text-muted-foreground">
-              You can apply for a validator license at any time — even after the Mainnet launches. But right now, during the pre-launch phase, applying is 100% free. Once the Testnet goes live, you'll receive your SEP Node install package, full documentation, and personal support from the DAO to help you set up your node.
+          </div>
+        </div>
+
+        {/* Nice? Here's the best part */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8 lg:p-12">
+            <div className="flex items-center gap-3 mb-6">
+              <Gift className="h-8 w-8 text-accent" />
+              <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold">
+                Nice? Here's the best part
+              </h2>
+            </div>
+            <p className="text-lg text-muted-foreground mb-4">
+              SEP Node licenses are completely free until mainnet launch. After that, new licenses will likely require a one-time setup fee. <strong className="text-foreground">Get in now and you're set for life. No costs. No missed opportunities.</strong>
+            </p>
+            <p className="text-lg font-semibold text-foreground mb-4">
+              Once the mainnet goes live, demand will explode and those who waited will regret it.
+            </p>
+            <p className="text-lg text-muted-foreground">
+              This is your chance to be part of a network designed for the future of finance: ultra-secure, lightning-fast, privacy-first, and ready for the post-quantum era. The SEP network is built to handle more than <Link href="/how-xcoin-handles-10000-tps" className="text-accent hover:text-accent/80 underline">10,000 transactions per second</Link> while protecting every user from surveillance and future quantum threats.
+            </p>
+          </div>
+        </div>
+
+        {/* Why it matters */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-border bg-card p-8 lg:p-12">
+            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6">
+              Why it matters
+            </h2>
+            <p className="text-lg text-muted-foreground mb-4">
+              The SEP network is the future of secure, private, quantum-proof transactions. No mining. No energy waste. Just pure efficiency and direct rewards. The validator software runs on a standard Linux server you control, no special hardware required.
+            </p>
+            <p className="text-lg font-semibold text-foreground mb-4">
+              In a world where other networks will become vulnerable, Xcoin is ready to dominate. Once quantum computers break legacy crypto, it will be too late to join the winning side.
+            </p>
+            <p className="text-lg text-muted-foreground">
+              Sign up and secure your license now.
             </p>
           </div>
         </div>
 
         {/* CTA */}
-        <div className="mt-20 mx-auto max-w-4xl text-center">
+        <div className="mt-16 mx-auto max-w-4xl text-center">
           <div className="rounded-2xl border border-accent/30 bg-accent/5 p-12">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-4">
-              Ready to Join the Front Line of Financial Freedom?
+              Ready to Earn Xcoin Effortlessly?
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Apply now and receive your SEP Node install package when the Testnet goes live.
-            </p>
-            <p className="text-lg text-muted-foreground mb-8">
-              Being a validator is one of the easiest jobs in the world. So why not become one? Right now...
+              Get your free SEP Node license now and be ready when the network launches.
             </p>
             <Link
               href="/validator-application"
               className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 text-lg"
             >
               Apply to Run a SEP Node
-              <ArrowLeft className="h-5 w-5 rotate-180" />
+              <ArrowRight className="h-5 w-5" />
             </Link>
+          </div>
+        </div>
+
+        {/* Related Topics */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-border bg-card p-8">
+            <h3 className="font-[family-name:var(--font-heading)] text-xl font-semibold mb-4">
+              Related Topics
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/what-is-sep"
+                className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
+              >
+                What is SEP?
+              </Link>
+              <Link
+                href="/how-xcoin-handles-10000-tps"
+                className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
+              >
+                10,000+ TPS
+              </Link>
+              <Link
+                href="/quantum-safe"
+                className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
+              >
+                Quantum-Safe
+              </Link>
+              <Link
+                href="/validator-application"
+                className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
+              >
+                Apply Now
+              </Link>
+            </div>
           </div>
         </div>
       </div>
