@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import { Shield, X, AlertTriangle, Check, Lock, Zap } from "lucide-react"
 import BackButton from "@/components/back-button"
 
@@ -107,12 +108,29 @@ export default function QuantumSafePage() {
       <BackButton fallbackHref="/overview" position="bottom" />
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Hero Image with Content Overlay */}
+        <div className="mx-auto max-w-6xl mb-12">
+          <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden">
+            <Image
+              src="/xcoin_grid/quantum_safe.jpg"
+              alt="Why Quantum-Safe Cryptography Matters"
+              fill
+              className="object-cover"
+              priority
+            />
+            {/* Content Overlay */}
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-8 lg:p-12">
+              <div className="text-center max-w-4xl">
+                <h1 className="font-[family-name:var(--font-heading)] text-4xl lg:text-6xl font-bold tracking-tight text-white mb-6">
+                  Why Quantum-Safe Cryptography Matters
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Header */}
         <div className="mx-auto max-w-4xl">
-          <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
-            Why Quantum-Safe Cryptography Matters
-          </h1>
           <p className="mt-6 text-lg text-muted-foreground">
             Encryption is what protects your wallet, your transactions, and all private communication. But the cryptographic systems we rely on today — such as RSA, elliptic curves, and EdDSA — were never designed with quantum computing in mind.
           </p>

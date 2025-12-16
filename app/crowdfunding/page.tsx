@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import { Check, Zap, Shield, Rocket, Users, Coins, ArrowLeft } from "lucide-react"
 import BackButton from "@/components/back-button"
 
@@ -98,18 +99,32 @@ function renderTextWithLinks(text: string, links?: Record<string, string>) {
 export default function CrowdfundingPage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Back Button */}
-        <BackButton fallbackHref="/" />
+      {/* Back Button - Absolute positioned, no space taken */}
+      <BackButton fallbackHref="/overview" position="top" />
 
-        {/* Header */}
-        <div className="mx-auto max-w-4xl">
-          <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
-            Crowdfunding
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground">
-            All funds raised go directly to the <strong>XXX DAO</strong> treasury — not to a company, not to a founder, and not to a VC. The DAO controls all funds, and every major decision is made through on-chain governance. This is true decentralized funding — transparent, democratic, and community-led.
-          </p>
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Hero Image with Content Overlay */}
+        <div className="mx-auto max-w-6xl mb-12">
+          <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden">
+            <Image
+              src="/xcoin_grid/crowdfunding.jpg"
+              alt="Crowdfunding"
+              fill
+              className="object-cover"
+              priority
+            />
+            {/* Content Overlay */}
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-8 lg:p-12">
+              <div className="text-center max-w-4xl">
+                <h1 className="font-[family-name:var(--font-heading)] text-4xl lg:text-6xl font-bold tracking-tight text-white mb-6">
+                  Crowdfunding
+                </h1>
+                <p className="text-xl lg:text-2xl text-white/90">
+                  All funds raised go directly to the <strong className="text-white">XXX DAO</strong> treasury — not to a company, not to a founder, and not to a VC. The DAO controls all funds, and every major decision is made through on-chain governance. This is true decentralized funding — transparent, democratic, and community-led.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Funding Goal */}
@@ -497,12 +512,11 @@ export default function CrowdfundingPage() {
           </div>
         </div>
 
-        {/* Placeholder for Image */}
-        <div className="mt-16 mx-auto max-w-4xl">
-          <div className="rounded-2xl border border-border bg-muted/20 aspect-video flex items-center justify-center">
-            <p className="text-muted-foreground">Image placeholder</p>
-          </div>
-        </div>
+      </div>
+
+      {/* Back Button - Bottom */}
+      <div className="w-full px-6 lg:px-8 pb-8">
+        <BackButton fallbackHref="/overview" position="bottom" />
       </div>
     </div>
   )

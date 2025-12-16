@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { Server, FileText, Coins, Gift, Zap, ArrowRight } from "lucide-react"
 import BackButton from "@/components/back-button"
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight, Users, Vote, Coins, Settings, Award, Lightbulb, Handshake, Zap, Calendar } from "lucide-react"
 import BackButton from "@/components/back-button"
 
@@ -83,19 +84,36 @@ const proposalExamples = [
 export default function PowerInTheHandsOfTheCommunityPage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
+      {/* Back Buttons - Absolute positioned, no space taken */}
+      <BackButton fallbackHref="/overview" position="top" />
+      <BackButton fallbackHref="/overview" position="bottom" />
+
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        <BackButton fallbackHref="/" />
-        {/* Header */}
-        <div className="mx-auto max-w-4xl text-center">
-          <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
-            Power in the Hands of the Community
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground">
-            The XXX DAO is run by its members, people like you. Every member has a voice, and every voice counts. Through on-chain voting, the community decides how the project evolves, how funds are used, and what our priorities should be.
-          </p>
-          <p className="mt-4 text-lg font-semibold text-foreground">
-            Membership in the XXX DAO means more than just holding tokens, it means having a real impact on the direction of the project.
-          </p>
+        {/* Hero Image with Content Overlay */}
+        <div className="mx-auto max-w-6xl mb-12">
+          <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden">
+            <Image
+              src="/members_grid/power_in_the_hands_of_the_community.jpg"
+              alt="Power in the Hands of the Community"
+              fill
+              className="object-cover"
+              priority
+            />
+            {/* Content Overlay */}
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-8 lg:p-12">
+              <div className="text-center max-w-4xl">
+                <h1 className="font-[family-name:var(--font-heading)] text-4xl lg:text-6xl font-bold tracking-tight text-white mb-6">
+                  Power in the Hands of the Community
+                </h1>
+                <p className="text-xl lg:text-2xl text-white/90 mb-4">
+                  The XXX DAO is run by its members, people like you. Every member has a voice, and every voice counts. Through on-chain voting, the community decides how the project evolves, how funds are used, and what our priorities should be.
+                </p>
+                <p className="text-lg lg:text-xl text-white font-semibold">
+                  Membership in the XXX DAO means more than just holding tokens, it means having a real impact on the direction of the project.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* What Members Can Do */}

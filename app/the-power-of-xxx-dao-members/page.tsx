@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight, Users, Share2, Gift, CheckCircle2, Sparkles } from "lucide-react"
 import BackButton from "@/components/back-button"
 
@@ -45,19 +46,28 @@ export default function ThePowerOfXXXDAOMembersPage() {
       <BackButton fallbackHref="/overview" position="bottom" />
       
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Header */}
-        <div className="mx-auto max-w-4xl text-center">
-          <div className="mb-8 flex justify-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10">
-              <Users className="h-8 w-8 text-accent" />
+        {/* Hero Image with Content Overlay */}
+        <div className="mx-auto max-w-6xl mb-12">
+          <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden">
+            <Image
+              src="/members_grid/the_power_of_xxx_dao_members.jpg"
+              alt="The Power of XXX DAO Members"
+              fill
+              className="object-cover"
+              priority
+            />
+            {/* Content Overlay */}
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-8 lg:p-12">
+              <div className="text-center max-w-4xl">
+                <h1 className="font-[family-name:var(--font-heading)] text-4xl lg:text-6xl font-bold tracking-tight text-white mb-6">
+                  The Power of XXX DAO Members
+                </h1>
+                <p className="text-xl lg:text-2xl text-white/90">
+                  As a XXX DAO member, you already hold a position of influence and opportunity. But there is more: Every member can get a personal referral code.
+                </p>
+              </div>
             </div>
           </div>
-          <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
-            The Power of XXX DAO Members
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground">
-            As a XXX DAO member, you already hold a position of influence and opportunity. But there is more: Every member can get a personal referral code.
-          </p>
         </div>
 
         {/* Your Referral Code Section */}

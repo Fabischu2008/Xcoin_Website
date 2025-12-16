@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import { Coins, Vote, Shield, CheckCircle2, Lock, Zap, ArrowLeft, ArrowRight, Check, Clock, Gift } from "lucide-react"
 import BackButton from "@/components/back-button"
 
@@ -50,11 +51,29 @@ export default function WhatAreXXXTokensPage() {
       <BackButton fallbackHref="/learning" position="bottom" />
       
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Hero Image with Content Overlay */}
+        <div className="mx-auto max-w-6xl mb-12">
+          <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden">
+            <Image
+              src="/xcoin_grid/get_xxx.jpeg"
+              alt="What are XXX Tokens?"
+              fill
+              className="object-cover"
+              priority
+            />
+            {/* Content Overlay */}
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-8 lg:p-12">
+              <div className="text-center max-w-4xl">
+                <h1 className="font-[family-name:var(--font-heading)] text-4xl lg:text-6xl font-bold tracking-tight text-white mb-6">
+                  What are XXX Tokens?
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Header */}
         <div className="mx-auto max-w-4xl">
-          <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
-            What are XXX Tokens?
-          </h1>
           <p className="mt-6 text-lg text-muted-foreground">
             A token is a cryptographic proof of ownership. It cannot be faked, duplicated, or forged. <strong className="text-foreground">XXX Tokens</strong> prove that you own a real stake in the Xcoin ecosystem — with both financial value and governance rights. They are issued by <Link href="/what-is-xxx-dao" className="text-accent hover:text-accent/80 underline">XXX DAO</Link>, verifiable on-chain, and fully under your control.
           </p>
