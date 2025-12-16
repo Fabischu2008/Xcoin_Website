@@ -4,17 +4,17 @@ import { Lock, Shield, Zap, CheckCircle2, Eye } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What is zk-STARK? | Xcoin",
+  title: "What is zk-STARK?",
   description:
     "zk-STARK stands for Zero-Knowledge Scalable Transparent Argument of Knowledge. A next-generation cryptographic technology that lets you prove something is true—without revealing any details.",
   openGraph: {
-    title: "What is zk-STARK? | Xcoin",
+    title: "What is zk-STARK?",
     description: "Zero-knowledge proofs that enable private, anonymous payments without revealing transaction details.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What is zk-STARK? | Xcoin",
+    title: "What is zk-STARK?",
     description: "Untraceable, unstoppable, and future-proof privacy technology.",
   },
 }

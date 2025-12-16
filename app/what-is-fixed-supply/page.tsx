@@ -4,17 +4,17 @@ import { Coins, Users, Vote, FileText, Shield, CheckCircle2 } from "lucide-react
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What is Fixed Supply? | Xcoin",
+  title: "What is Fixed Supply?",
   description:
     "All 21 million Xcoins are minted in the Genesis Block—with no mining, no inflation, and no future coin creation. The DAO controls how coins are used, distributed, or reserved.",
   openGraph: {
-    title: "What is Fixed Supply? | Xcoin",
+    title: "What is Fixed Supply?",
     description: "The 21 million coins don't belong to founders or funds. They belong to the community—and the DAO makes that real.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What is Fixed Supply? | Xcoin",
+    title: "What is Fixed Supply?",
     description: "No central authority. No founders holding the keys. No corporate manipulation.",
   },
 }

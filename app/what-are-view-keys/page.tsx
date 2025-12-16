@@ -4,17 +4,17 @@ import { Lock, Eye, Shield, Clock, CheckCircle2, FileText, Scale, Heart, Briefca
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What are View Keys? | Xcoin",
+  title: "What are View Keys?",
   description:
     "View Keys are secure, read-only access keys that allow you to share specific data without giving anyone your login, password, or control over anything.",
   openGraph: {
-    title: "What are View Keys? | Xcoin",
+    title: "What are View Keys?",
     description: "Selective transparency—only when you choose. Share data securely without exposing your full account.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What are View Keys? | Xcoin",
+    title: "What are View Keys?",
     description: "Open the door just enough—never more than necessary.",
   },
 }

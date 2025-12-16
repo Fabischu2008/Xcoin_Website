@@ -4,17 +4,17 @@ import { Lock, Shield, Zap, Network, Eye, X, Check, ArrowLeft } from "lucide-rea
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "Why Xcoin Is Better Than Monero, Zcash, or Bitcoin | Xcoin",
+  title: "Why Xcoin Is Better Than Monero, Zcash, or Bitcoin",
   description:
     "Privacy coins promised financial freedom, but each fell short. Bitcoin exposes everything. Monero slows everything down. Zcash hides only when asked. Xcoin was built to fix these flaws once and for all.",
   openGraph: {
-    title: "Why Xcoin Is Better Than Monero, Zcash, or Bitcoin | Xcoin",
+    title: "Why Xcoin Is Better Than Monero, Zcash, or Bitcoin",
     description: "Xcoin eliminates the tradeoffs. You get privacy, performance, decentralization, and speed—all in one.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Why Xcoin Is Better Than Monero, Zcash, or Bitcoin | Xcoin",
+    title: "Why Xcoin Is Better Than Monero, Zcash, or Bitcoin",
     description: "Not just a replacement for Monero, Zcash, or Bitcoin, but for all cryptocurrencies.",
   },
 }

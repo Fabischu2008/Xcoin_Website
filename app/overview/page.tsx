@@ -3,17 +3,17 @@ import Link from "next/link"
 import { Check, X, Lock, Shield, Zap, Server, Network, Eye, ArrowRight } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Overview | Xcoin",
+  title: "Overview",
   description:
     "The future standard for anonymous value transfer. Compare Xcoin with Bitcoin, Monero, Zcash, Ethereum, and USDT.",
   openGraph: {
-    title: "Overview | Xcoin",
+    title: "Overview",
     description: "Built to withstand supercomputers, regulations, and time.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Overview | Xcoin",
+    title: "Overview",
     description: "Privacy is always on — no settings to switch, no compromises.",
   },
 }

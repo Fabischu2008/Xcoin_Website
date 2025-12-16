@@ -4,17 +4,17 @@ import { Network, Shield, Zap, Lock, CheckCircle2, Server } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What is SEP? | Xcoin",
+  title: "What is SEP?",
   description:
     "SEP stands for Secure Encryption Protocol — the decentralized network architecture behind CREO that replaces traditional servers with a peer-to-peer system built for maximum privacy, reliability, and independence.",
   openGraph: {
-    title: "What is SEP? | Xcoin",
+    title: "What is SEP?",
     description: "No central servers. Peer-to-peer & distributed. End-to-end + network-level security.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What is SEP? | Xcoin",
+    title: "What is SEP?",
     description: "SEP is not just a network. It's a secure, invisible layer of digital freedom.",
   },
 }

@@ -4,17 +4,17 @@ import { ArrowRight, Users, Share2, Gift, CheckCircle2, Sparkles } from "lucide-
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "The Power of XXX DAO Members | Xcoin",
+  title: "The Power of XXX DAO Members",
   description:
     "As a XXX DAO member, you can get a personal referral code. Share it and receive 1 Xcoin for free at launch for every XXX Token bought through your code.",
   openGraph: {
-    title: "The Power of XXX DAO Members | Xcoin",
+    title: "The Power of XXX DAO Members",
     description: "Get your referral code and earn Xcoins for helping grow the DAO.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Power of XXX DAO Members | Xcoin",
+    title: "The Power of XXX DAO Members",
     description: "Your code. Your money. Your future.",
   },
 }

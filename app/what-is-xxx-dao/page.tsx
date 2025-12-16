@@ -4,17 +4,17 @@ import { Users, Vote, Coins, Settings, Shield, Code, Zap, CheckCircle2 } from "l
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What is XXX DAO? | Xcoin",
+  title: "What is XXX DAO?",
   description:
     "A DAO is a Decentralized Autonomous Organization. No company, no CEO, no boardroom—just rules written in code, enforced by token holders.",
   openGraph: {
-    title: "What is XXX DAO? | Xcoin",
+    title: "What is XXX DAO?",
     description: "Decentralized, on-chain governance. Decisions made transparently, by vote, executed by smart contracts.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What is XXX DAO? | Xcoin",
+    title: "What is XXX DAO?",
     description: "Code > People. Real decentralization—not just marketing claims.",
   },
 }

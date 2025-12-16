@@ -4,17 +4,17 @@ import { Lock, Shield, Zap, Key, CheckCircle2, FileText, Server, HardDrive } fro
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What is AES-512? | Xcoin",
+  title: "What is AES-512?",
   description:
     "AES-512 is a proprietary 512-bit version of the Advanced Encryption Standard, designed to deliver an extreme level of cryptographic security—far beyond what's used in any systems today.",
   openGraph: {
-    title: "What is AES-512? | Xcoin",
+    title: "What is AES-512?",
     description: "Military-grade encryption with 512-bit key length. Quantum-resistant and non-exportable.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What is AES-512? | Xcoin",
+    title: "What is AES-512?",
     description: "Sovereign-grade encryption standard. Future-proof protection for critical infrastructure.",
   },
 }

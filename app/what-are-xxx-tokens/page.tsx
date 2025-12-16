@@ -4,17 +4,17 @@ import { Coins, Vote, Shield, CheckCircle2, Lock, Zap, ArrowLeft } from "lucide-
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What are XXX Tokens? | Xcoin",
+  title: "What are XXX Tokens?",
   description:
     "A token is a cryptographic proof of ownership. XXX Tokens prove that you own a real stake in the Xcoin ecosystem — with both financial value and governance rights.",
   openGraph: {
-    title: "What are XXX Tokens? | Xcoin",
+    title: "What are XXX Tokens?",
     description: "Value today, and power tomorrow. Each XXX Token gives you the right to redeem 10 Xcoins at mainnet launch and governance rights.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What are XXX Tokens? | Xcoin",
+    title: "What are XXX Tokens?",
     description: "XXX Tokens are limited, on-chain, and private. They give you something very few assets can offer.",
   },
 }

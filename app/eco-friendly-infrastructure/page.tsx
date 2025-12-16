@@ -1,156 +1,234 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { Zap, Leaf, CheckCircle2, AlertTriangle, ArrowRight } from "lucide-react"
 import BackButton from "@/components/back-button"
-import { Leaf } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Eco-Friendly Infrastructure and Near-Zero Energy Use | Xcoin",
-  description: "Xcoin consumes minimal energy, using no mining or proof-of-work.",
+  title: "Eco-Friendly Infrastructure and Near‑Zero Energy Use",
+  description:
+    "Xcoin takes a radically different approach. There's no mining. No block production. No global race to burn energy. Transactions operate in the milliwatt range — about the same as loading an email.",
+  openGraph: {
+    title: "Eco-Friendly Infrastructure and Near‑Zero Energy Use",
+    description: "If Bitcoin is a coal plant, Xcoin is a solar-powered calculator.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Eco-Friendly Infrastructure and Near‑Zero Energy Use",
+    description: "Privacy and performance don't have to cost the planet.",
+  },
 }
+
+const xcoinAdvantages = [
+  {
+    icon: Zap,
+    title: "No miners to reward",
+    description: "No waste to justify",
+  },
+  {
+    icon: Leaf,
+    title: "No power struggle",
+    description: "No power struggle to maintain",
+  },
+  {
+    icon: CheckCircle2,
+    title: "Fast, secure, private",
+    description: "Uses thousands of times less energy than Bitcoin, Ethereum, or even Monero",
+  },
+]
+
+const energyComparison = [
+  {
+    title: "Bitcoin",
+    energy: "1,000 kWh per transaction",
+    description: "Roughly the same as powering a European household for a month",
+    icon: AlertTriangle,
+    color: "destructive",
+  },
+  {
+    title: "Xcoin",
+    energy: "Milliwatt range",
+    description: "About the same as loading an email",
+    icon: CheckCircle2,
+    color: "accent",
+  },
+]
 
 export default function EcoFriendlyInfrastructurePage() {
   return (
     <div className="relative overflow-hidden pt-32 pb-24">
-      <div className="relative mx-auto max-w-4xl px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Back Button */}
         <BackButton fallbackHref="/overview" position="top" />
 
-        <div className="mx-auto max-w-3xl">
-          <div className="mb-8 flex justify-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10">
-              <Leaf className="h-8 w-8 text-accent" />
-            </div>
-          </div>
-
-          <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl mb-6">
-            Eco-Friendly Infrastructure and Near-Zero Energy Use
+        {/* Header */}
+        <div className="mx-auto max-w-4xl">
+          <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
+            Eco-Friendly Infrastructure and Near‑Zero Energy Use
           </h1>
+          <p className="mt-6 text-lg text-muted-foreground">
+            You've heard the headlines: Bitcoin uses more electricity than Argentina. Every second, miners across the world burn energy solving pointless puzzles — just to keep the network alive. That's proof-of-work. And it works. But at a cost.
+          </p>
+        </div>
 
-          <div className="prose prose-lg dark:prose-invert max-w-none">
-            <p className="text-xl text-muted-foreground mb-8">
-              Xcoin consumes minimal energy, using no mining or proof-of-work.
+        {/* Bitcoin Energy Consumption */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-8 lg:p-12">
+            <p className="text-lg text-muted-foreground mb-4">
+              Every single Bitcoin transaction consumes approximately <strong className="text-foreground">1,000 kWh of electricity</strong> — roughly the same as powering a European household for a month. Now imagine scaling that up to millions of daily transactions. That's not just expensive. <strong className="text-foreground">It's unsustainable.</strong>
             </p>
+          </div>
+        </div>
 
-            <div className="space-y-6 text-muted-foreground">
-              <p>
-                Traditional cryptocurrencies like Bitcoin consume enormous amounts of energy. The Bitcoin network uses more electricity than entire countries, contributing to climate change and environmental degradation. This is a direct result of proof-of-work mining, where powerful computers compete to solve cryptographic puzzles.
-              </p>
-
-              <p>
-                Xcoin eliminates this entirely. By removing mining and proof-of-work, Xcoin achieves near-zero energy consumption while maintaining security and decentralization.
-              </p>
-
-              <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-foreground mt-8 mb-4">
-                No Mining, No Waste
-              </h2>
-
-              <p>
-                Xcoin doesn't use proof-of-work mining, which means:
-              </p>
-
-              <ul className="list-disc pl-6 space-y-2">
-                <li><strong className="text-foreground">No Energy-Intensive Computation</strong> — Validators verify proofs, not solve puzzles</li>
-                <li><strong className="text-foreground">No Specialized Hardware</strong> — Standard servers are sufficient</li>
-                <li><strong className="text-foreground">No Mining Farms</strong> — No need for massive data centers</li>
-                <li><strong className="text-foreground">No Carbon Footprint</strong> — Minimal energy consumption</li>
-              </ul>
-
-              <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-foreground mt-8 mb-4">
-                Efficient Validation
-              </h2>
-
-              <p>
-                Instead of mining, Xcoin uses <Link href="/validator" className="text-accent hover:text-accent/80 underline">validators</Link> that:
-              </p>
-
-              <ul className="list-disc pl-6 space-y-2">
-                <li>Verify cryptographic proofs (not compute them)</li>
-                <li>Run on standard server hardware</li>
-                <li>Consume minimal electricity</li>
-                <li>Scale efficiently with network growth</li>
-              </ul>
-
-              <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-foreground mt-8 mb-4">
-                DAG Architecture Efficiency
-              </h2>
-
-              <p>
-                Xcoin's <Link href="/what-is-dag-plus" className="text-accent hover:text-accent/80 underline">DAG+ architecture</Link> is inherently more efficient than blockchains:
-              </p>
-
-              <ul className="list-disc pl-6 space-y-2">
-                <li>No block mining required</li>
-                <li>Parallel transaction processing</li>
-                <li>Minimal computational overhead</li>
-                <li>Scales without increasing energy consumption</li>
-              </ul>
-
-              <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-foreground mt-8 mb-4">
-                Environmental Impact
-              </h2>
-
-              <p>
-                Compared to Bitcoin, Xcoin:
-              </p>
-
-              <ul className="list-disc pl-6 space-y-2">
-                <li><strong className="text-foreground">Uses 99.9% Less Energy</strong> — No proof-of-work means minimal consumption</li>
-                <li><strong className="text-foreground">No Carbon Emissions</strong> — Can run entirely on renewable energy</li>
-                <li><strong className="text-foreground">Sustainable Long-Term</strong> — Energy use doesn't increase with adoption</li>
-                <li><strong className="text-foreground">Future-Proof</strong> — Designed for a sustainable financial system</li>
-              </ul>
-
-              <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-foreground mt-8 mb-4">
-                Why This Matters
-              </h2>
-
-              <p>
-                As cryptocurrency adoption grows, the environmental impact of proof-of-work becomes increasingly problematic. Xcoin proves that you can have:
-              </p>
-
-              <ul className="list-disc pl-6 space-y-2">
-                <li>Complete privacy and security</li>
-                <li>High transaction throughput</li>
-                <li>True decentralization</li>
-                <li>Near-zero environmental impact</li>
-              </ul>
-
-              <p>
-                All without sacrificing any of the benefits that make cryptocurrency valuable. Xcoin is built for a sustainable future — one where financial privacy and environmental responsibility go hand in hand.
-              </p>
-            </div>
-
-            <div className="mt-12 pt-8 border-t border-border">
-              <h3 className="font-[family-name:var(--font-heading)] text-lg font-semibold mb-4">Related Topics</h3>
-              <div className="flex flex-wrap gap-2">
-                <Link
-                  href="/how-xcoin-scales-without-mining"
-                  className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
-                >
-                  How Xcoin Scales Without Mining
-                </Link>
-                <Link
-                  href="/why-xcoin-uses-no-mining"
-                  className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
-                >
-                  Why Xcoin Uses No Mining
-                </Link>
-                <Link
-                  href="/validator"
-                  className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
-                >
-                  Validators
-                </Link>
+        {/* Xcoin's Approach */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8 lg:p-12">
+            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6">
+              Xcoin takes a radically different approach.
+            </h2>
+            <p className="text-lg text-muted-foreground mb-4">
+              There's no mining. No block production. No global race to burn energy. Instead, Xcoin runs on a lightweight <Link href="/what-is-dag-plus" className="text-accent hover:text-accent/80 underline">DAG-based protocol</Link>, maintained by efficient nodes and verified through <Link href="/what-is-zk-starks" className="text-accent hover:text-accent/80 underline">zero-knowledge cryptography</Link> — not raw computing power.
+            </p>
+            <div className="mt-6 space-y-3">
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                <p className="text-muted-foreground">Transactions settle in seconds.</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                <p className="text-muted-foreground">Validation takes milliseconds.</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                <p className="text-muted-foreground">And the energy usage? With Xcoin, a transaction operates in the milliwatt range — about the same as loading an email.</p>
               </div>
             </div>
+            <p className="mt-8 text-xl font-[family-name:var(--font-heading)] font-bold text-foreground text-center">
+              If Bitcoin is a coal plant, Xcoin is a solar-powered calculator.
+            </p>
+          </div>
+        </div>
 
-            {/* Back Button at Bottom */}
-            <div className="mt-12 pt-8 border-t border-border">
-              <BackButton fallbackHref="/overview" position="bottom" />
+        {/* Energy Comparison */}
+        <div className="mt-16 mx-auto max-w-7xl">
+          <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-12 text-center">
+            Energy Comparison
+          </h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            {energyComparison.map((comparison) => (
+              <div
+                key={comparison.title}
+                className={`rounded-2xl border p-8 ${
+                  comparison.color === "destructive"
+                    ? "border-destructive/20 bg-destructive/5"
+                    : "border-accent/30 bg-accent/5"
+                }`}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${
+                    comparison.color === "destructive"
+                      ? "bg-destructive/10"
+                      : "bg-accent/10"
+                  }`}>
+                    <comparison.icon className={`h-6 w-6 ${
+                      comparison.color === "destructive"
+                        ? "text-destructive"
+                        : "text-accent"
+                    }`} />
+                  </div>
+                  <h3 className="font-[family-name:var(--font-heading)] text-2xl font-bold">{comparison.title}</h3>
+                </div>
+                <p className="text-lg font-semibold text-foreground mb-2">{comparison.energy}</p>
+                <p className="text-muted-foreground">{comparison.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Why it matters */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-8">
+            Why it matters
+          </h2>
+          <div className="rounded-2xl border border-border bg-card p-8 lg:p-12">
+            <p className="text-lg text-muted-foreground mb-6">
+              In a world facing energy shortages, rising carbon emissions, and exploding demand for sustainable infrastructure, crypto can no longer afford to ignore its footprint.
+            </p>
+            <p className="text-lg font-semibold text-foreground mb-6">
+              Xcoin was designed with this in mind — not as a compromise, but as an upgrade:
+            </p>
+            <div className="grid gap-6 md:grid-cols-3 mt-8">
+              {xcoinAdvantages.map((advantage) => (
+                <div
+                  key={advantage.title}
+                  className="rounded-xl border border-border bg-card p-4"
+                >
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 mb-3">
+                    <advantage.icon className="h-5 w-5 text-accent" />
+                  </div>
+                  <h4 className="font-semibold text-foreground mb-1">{advantage.title}</h4>
+                  <p className="text-sm text-muted-foreground">{advantage.description}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-8 text-lg font-semibold text-foreground">
+              Just a fast, secure, private network — that uses thousands of times less energy than Bitcoin, Ethereum, or even Monero.
+            </p>
+          </div>
+        </div>
+
+        {/* Closing Statement */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8 lg:p-12 text-center">
+            <p className="text-lg text-muted-foreground mb-4">
+              Privacy and performance don't have to cost the planet.
+            </p>
+            <p className="text-xl font-semibold text-foreground">
+              With Xcoin, you get both — and you can feel good about using it.
+            </p>
+          </div>
+        </div>
+
+        {/* Related Topics */}
+        <div className="mt-16 mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-border bg-card p-8">
+            <h3 className="font-[family-name:var(--font-heading)] text-xl font-semibold mb-4">
+              Related Topics
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/how-xcoin-scales-without-mining"
+                className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
+              >
+                How Xcoin Scales Without Mining
+              </Link>
+              <Link
+                href="/why-xcoin-uses-no-mining"
+                className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
+              >
+                Why Xcoin Uses No Mining
+              </Link>
+              <Link
+                href="/what-is-dag-plus"
+                className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
+              >
+                DAG+
+              </Link>
+              <Link
+                href="/validator"
+                className="rounded-full border border-border bg-background px-4 py-2 text-sm text-muted-foreground hover:border-accent/50 hover:text-accent transition-colors"
+              >
+                Validators
+              </Link>
             </div>
           </div>
+        </div>
+
+        {/* Back Button - Bottom */}
+        <div className="mt-16">
+          <BackButton fallbackHref="/overview" position="bottom" />
         </div>
       </div>
     </div>
   )
 }
-

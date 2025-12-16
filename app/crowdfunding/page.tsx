@@ -4,17 +4,17 @@ import { Check, Zap, Shield, Rocket, Users, Coins, ArrowLeft } from "lucide-reac
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "Crowdfunding | Xcoin",
+  title: "Crowdfunding",
   description:
     "Join the XXX DAO crowdfunding campaign. All funds go directly to the DAO treasury. Invest in the world's first privacy-by-default, quantum-secure, validator-powered financial layer.",
   openGraph: {
-    title: "Crowdfunding | Xcoin",
+    title: "Crowdfunding",
     description: "True decentralized funding — transparent, democratic, and community-led.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Crowdfunding | Xcoin",
+    title: "Crowdfunding",
     description: "Join the revolution. Invest in XXX Tokens and shape the future of finance.",
   },
 }

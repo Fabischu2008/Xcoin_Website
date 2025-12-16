@@ -3,17 +3,17 @@ import Link from "next/link"
 import { ArrowLeft, Network, Users, Server, Coins, Wallet, CreditCard, ArrowLeftRight, Zap, Shield, Lock } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Development | Xcoin",
+  title: "Development",
   description:
     "The development of Xcoin and its supporting infrastructure is underway. Building an entirely new, privacy-first, censorship-resistant, quantum-proof financial ecosystem.",
   openGraph: {
-    title: "Development | Xcoin",
+    title: "Development",
     description: "Building the future standard for anonymous value transfer.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Development | Xcoin",
+    title: "Development",
     description: "Pioneering work on a privacy-first, quantum-proof financial ecosystem.",
   },
 }

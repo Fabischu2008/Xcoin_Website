@@ -4,7 +4,7 @@ import BackButton from "@/components/back-button"
 import { Users } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Participate in Governance | Xcoin",
+  title: "Participate in Governance",
   description: "Vote on proposals and shape the protocol's future.",
 }
 

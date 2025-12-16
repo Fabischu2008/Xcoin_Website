@@ -4,18 +4,18 @@ import { Coins, TrendingUp, Lock, Users, ArrowRight, Check, Zap, Shield, Network
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Fund | Xcoin",
+  title: "Fund",
   description:
     "Your early access window to Xcoin. Fixed supply of 21 million XXX tokens. Zero inflation. Fair launch with no pre-mine. Get XXX Tokens now before launch.",
   openGraph: {
-    title: "Fund | Xcoin",
+    title: "Fund",
     description:
       "Your direct path to owning the next-generation financial protocol — before it launches to the world.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fund | Xcoin",
+    title: "Fund",
     description: "Fixed supply of 21 million. Zero inflation. Fair launch. Get XXX Tokens now.",
   },
 }

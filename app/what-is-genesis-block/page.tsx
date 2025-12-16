@@ -4,17 +4,17 @@ import { Coins, Shield, Zap, CheckCircle2, Leaf } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What is a Genesis Block? | Xcoin",
+  title: "What is a Genesis Block?",
   description:
     "The Genesis Block is the very first block in a blockchain. Xcoin mines 100% of its supply—21 million coins—at launch, in the Genesis Block.",
   openGraph: {
-    title: "What is a Genesis Block? | Xcoin",
+    title: "What is a Genesis Block?",
     description: "No inflation. No tricks. Just a clean, honest launch.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What is a Genesis Block? | Xcoin",
+    title: "What is a Genesis Block?",
     description: "The Genesis Block is where Xcoin begins—and where all 21 million coins are born.",
   },
 }

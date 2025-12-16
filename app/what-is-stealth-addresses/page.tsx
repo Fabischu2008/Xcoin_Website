@@ -4,17 +4,17 @@ import { Eye, Lock, Shield, Zap, Key, CheckCircle2 } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What is a Stealth Address? | Xcoin",
+  title: "What is a Stealth Address?",
   description:
     "A Stealth Address is a one-time-use, invisible blockchain address that hides the receiver's identity in every transaction.",
   openGraph: {
-    title: "What is a Stealth Address? | Xcoin",
+    title: "What is a Stealth Address?",
     description: "One-time-use addresses that hide the receiver's identity. Total receiver anonymity—built in, always on.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What is a Stealth Address? | Xcoin",
+    title: "What is a Stealth Address?",
     description: "Every transaction uses Stealth Addresses by default. No visible link between sender and receiver.",
   },
 }

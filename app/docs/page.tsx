@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   description:
     "Everything you need to understand, build on, and participate in the Xcoin network. Complete technical documentation, validator guides, and developer resources.",
   openGraph: {
-    title: "Documentation | Xcoin",
+    title: "Documentation",
     description: "Complete technical documentation covering the Xcoin protocol, architecture, and vision.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Documentation | Xcoin",
+    title: "Documentation",
     description: "Complete technical documentation and developer resources for the Xcoin network.",
   },
 }

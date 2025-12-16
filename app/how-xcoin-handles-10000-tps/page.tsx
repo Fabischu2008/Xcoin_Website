@@ -4,17 +4,17 @@ import { Zap, Network, Lock, CheckCircle2, ArrowRight } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "How Xcoin Handles 10000+ Transactions Per Second | Xcoin",
+  title: "How Xcoin Handles 10000+ Transactions Per Second",
   description:
     "Most blockchains buckle under pressure. Xcoin breaks that pattern. It's not a queue. It's a web. And it moves differently.",
   openGraph: {
-    title: "How Xcoin Handles 10000+ Transactions Per Second | Xcoin",
+    title: "How Xcoin Handles 10000+ Transactions Per Second",
     description: "A network that grows in every direction. Parallelism + Proof = Performance.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "How Xcoin Handles 10000+ Transactions Per Second | Xcoin",
+    title: "How Xcoin Handles 10000+ Transactions Per Second",
     description: "It's not magic. It's math—applied differently.",
   },
 }

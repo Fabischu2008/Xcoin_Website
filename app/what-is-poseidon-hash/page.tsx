@@ -4,17 +4,17 @@ import { Zap, Shield, Lock, Settings, CheckCircle2 } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What is Poseidon Hash? | Xcoin",
+  title: "What is Poseidon Hash?",
   description:
     "Poseidon is a modern hash function designed specifically for use in zero-knowledge proof systems like zk-Rollups and zk-STARKs.",
   openGraph: {
-    title: "What is Poseidon Hash? | Xcoin",
+    title: "What is Poseidon Hash?",
     description: "ZK-friendly design. Fast in proofs, slow to break. Post-quantum ready.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What is Poseidon Hash? | Xcoin",
+    title: "What is Poseidon Hash?",
     description: "Ensuring that every private transaction is lightweight, fast, and quantum-secure.",
   },
 }

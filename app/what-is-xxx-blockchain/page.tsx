@@ -4,17 +4,17 @@ import { Lock, Shield, Zap, Network, Eye, Users, Check, ArrowLeft } from "lucide
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What is the XXX Blockchain? | Xcoin",
+  title: "What is the XXX Blockchain?",
   description:
     "The XXX Blockchain is a fully private, quantum-secure, and scalable blockchain designed to replace Bitcoin. Built on DAG architecture with zero-knowledge proofs and post-quantum cryptography.",
   openGraph: {
-    title: "What is the XXX Blockchain? | Xcoin",
+    title: "What is the XXX Blockchain?",
     description: "A fully private, quantum-secure, and scalable blockchain designed to replace Bitcoin.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What is the XXX Blockchain? | Xcoin",
+    title: "What is the XXX Blockchain?",
     description: "The architecture digital finance has been waiting for.",
   },
 }

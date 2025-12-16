@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   description:
     "Bitcoin started the revolution—but Xcoin is built to finish it. Discover why Xcoin is the upgrade Bitcoin never had: private, scalable, efficient, and governed by the people.",
   openGraph: {
-    title: "Why Xcoin Will Replace Bitcoin | Xcoin",
+    title: "Why Xcoin Will Replace Bitcoin",
     description: "Bitcoin started the revolution—but Xcoin is built to finish it.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Why Xcoin Will Replace Bitcoin | Xcoin",
+    title: "Why Xcoin Will Replace Bitcoin",
     description: "The upgrade Bitcoin never had: private, scalable, efficient, and governed by the people.",
   },
 }

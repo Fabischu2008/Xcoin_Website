@@ -4,17 +4,17 @@ import { Shield, Lock, Zap, Hash, CheckCircle2 } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What is WOTS+? | Xcoin",
+  title: "What is WOTS+?",
   description:
     "WOTS+ stands for Winternitz One-Time Signature Plus—a quantum-secure digital signature scheme that's simple, fast, and impossible to break, even by future quantum computers.",
   openGraph: {
-    title: "What is WOTS+? | Xcoin",
+    title: "What is WOTS+?",
     description: "A quantum-secure digital signature scheme that's simple, fast, and impossible to break.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What is WOTS+? | Xcoin",
+    title: "What is WOTS+?",
     description: "Quantum-resistant signatures built on hash functions only.",
   },
 }

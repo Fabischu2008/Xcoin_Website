@@ -4,17 +4,17 @@ import { ArrowRight, Users, Vote, Coins, Settings, Award, Lightbulb, Handshake, 
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "Power in the Hands of the Community | Xcoin",
+  title: "Power in the Hands of the Community",
   description:
     "The XXX DAO is run by its members. Every member has a voice, and every voice counts. Through on-chain voting, the community decides how the project evolves.",
   openGraph: {
-    title: "Power in the Hands of the Community | Xcoin",
+    title: "Power in the Hands of the Community",
     description: "Join the XXX DAO and have a real impact on the direction of the project.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Power in the Hands of the Community | Xcoin",
+    title: "Power in the Hands of the Community",
     description: "Decentralized governance at its best: transparent, democratic, and community-led.",
   },
 }

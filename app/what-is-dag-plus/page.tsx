@@ -4,17 +4,17 @@ import { Network, Zap, Shield, CheckCircle2, Lock, ArrowRight } from "lucide-rea
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "DAG+: Beyond Blocks, Beyond Chains | Xcoin",
+  title: "DAG+: Beyond Blocks, Beyond Chains",
   description:
     "Instead of bundling transactions into blocks, a Directed Acyclic Graph lets every transaction connect directly to others—like branches of a tree constantly growing outward.",
   openGraph: {
-    title: "DAG+: Beyond Blocks, Beyond Chains | Xcoin",
+    title: "DAG+: Beyond Blocks, Beyond Chains",
     description: "No blocks, no miners, no delays. Just fast, unstoppable private payments.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DAG+: Beyond Blocks, Beyond Chains | Xcoin",
+    title: "DAG+: Beyond Blocks, Beyond Chains",
     description: "You don't need to imagine what comes after blockchains. It's already here—and it's not a chain.",
   },
 }

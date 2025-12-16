@@ -4,17 +4,17 @@ import { Server, Zap, Check, Shield, Network, Coins, TrendingUp, Globe, ArrowLef
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What Is a Validator? | Xcoin",
+  title: "What Is a Validator?",
   description:
     "A validator is someone who runs a node that validates Xcoin transactions. Such a node is called a SEP Node. Learn how to become a validator and earn Xcoin.",
   openGraph: {
-    title: "What Is a Validator? | Xcoin",
+    title: "What Is a Validator?",
     description: "By operating a SEP Node, validators keep the Xcoin network running: fast, invisible, and quantum-secure.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What Is a Validator? | Xcoin",
+    title: "What Is a Validator?",
     description: "Being a validator isn't just about protecting privacy—it's also profitable.",
   },
 }

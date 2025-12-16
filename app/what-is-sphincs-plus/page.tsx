@@ -4,17 +4,17 @@ import { Shield, Lock, Zap, Hash, CheckCircle2 } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What is SPHINCS+? | Xcoin",
+  title: "What is SPHINCS+?",
   description:
     "SPHINCS+ is a quantum-secure digital signature algorithm designed to protect data—even from future quantum computers.",
   openGraph: {
-    title: "What is SPHINCS+? | Xcoin",
+    title: "What is SPHINCS+?",
     description: "A quantum-secure digital signature algorithm resistant to quantum computer attacks.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What is SPHINCS+? | Xcoin",
+    title: "What is SPHINCS+?",
     description: "Post-quantum security standardized by NIST.",
   },
 }

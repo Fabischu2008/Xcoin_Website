@@ -4,17 +4,17 @@ import { Eye, Lock, Shield, Users, CheckCircle2 } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What is a Ring Signature? | Xcoin",
+  title: "What is a Ring Signature?",
   description:
     "A Ring Signature is a cryptographic method that lets a user sign a transaction anonymously within a group—so that no one can tell who actually signed it.",
   openGraph: {
-    title: "What is a Ring Signature? | Xcoin",
+    title: "What is a Ring Signature?",
     description: "Sender anonymity. Unlinkable transactions. No coordination needed.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What is a Ring Signature? | Xcoin",
+    title: "What is a Ring Signature?",
     description: "No sender, no traces, no leaks—ever.",
   },
 }

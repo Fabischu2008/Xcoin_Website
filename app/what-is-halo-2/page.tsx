@@ -4,17 +4,17 @@ import { Eye, Lock, Shield, CheckCircle2, Zap, X } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "Halo 2: Obscuring Transaction Amounts | Xcoin",
+  title: "Halo 2: Obscuring Transaction Amounts",
   description:
     "Privacy isn't complete if it only hides who was involved. True financial privacy also means hiding how much was sent. Halo 2 closes that gap.",
   openGraph: {
-    title: "Halo 2: Obscuring Transaction Amounts | Xcoin",
+    title: "Halo 2: Obscuring Transaction Amounts",
     description: "Proof without exposure. Precision without exposure. Seamless, built-in privacy.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Halo 2: Obscuring Transaction Amounts | Xcoin",
+    title: "Halo 2: Obscuring Transaction Amounts",
     description: "In the world of Xcoin, the blockchain says yes or no — never how much.",
   },
 }

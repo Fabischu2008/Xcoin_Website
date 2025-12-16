@@ -4,17 +4,17 @@ import { Hash, Zap, Shield, Lock, CheckCircle2 } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What is Keccak-512? | Xcoin",
+  title: "What is Keccak-512?",
   description:
     "Keccak-512 is the hash function at the heart of Xcoin's cryptographic foundation. It transforms any input into a unique, fixed-length fingerprint that can't be reversed, forged, or faked.",
   openGraph: {
-    title: "What is Keccak-512? | Xcoin",
+    title: "What is Keccak-512?",
     description: "The ultimate hash algorithm. Fast. Proven. Unbreakable.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What is Keccak-512? | Xcoin",
+    title: "What is Keccak-512?",
     description: "512 bits of strength. Quantum-safe by design. Used in production.",
   },
 }

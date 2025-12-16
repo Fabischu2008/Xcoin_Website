@@ -4,7 +4,7 @@ import BackButton from "@/components/back-button"
 import { Zap } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Why Xcoin Uses No Mining, No Staking, No Block Rewards | Xcoin",
+  title: "Why Xcoin Uses No Mining, No Staking, No Block Rewards",
   description: "No wasteful computation or incentives that centralize power — only security and speed.",
 }
 

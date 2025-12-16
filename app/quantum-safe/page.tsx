@@ -4,17 +4,17 @@ import { Shield, X, AlertTriangle, Check, Lock, Zap } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "Why Quantum-Safe Cryptography Matters | Xcoin",
+  title: "Why Quantum-Safe Cryptography Matters",
   description:
     "Encryption protects your wallet, transactions, and private communication. But today's cryptographic systems weren't designed for quantum computing. Xcoin is quantum-safe by default.",
   openGraph: {
-    title: "Why Quantum-Safe Cryptography Matters | Xcoin",
+    title: "Why Quantum-Safe Cryptography Matters",
     description: "Quantum safety isn't a future feature. It's an absolute necessity.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Why Quantum-Safe Cryptography Matters | Xcoin",
+    title: "Why Quantum-Safe Cryptography Matters",
     description: "Xcoin is already quantum-resistant. No migration needed. Protection from day one.",
   },
 }

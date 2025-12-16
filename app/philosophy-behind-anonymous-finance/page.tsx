@@ -4,17 +4,17 @@ import { Lock, Eye, Shield, X, Check, Users, Globe } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "The Philosophy Behind Anonymous Finance | Xcoin",
+  title: "The Philosophy Behind Anonymous Finance",
   description:
     "Privacy isn't just a personal preference—it's a fundamental human right. Xcoin brings money back to its original purpose: empowering people, not controlling them.",
   openGraph: {
-    title: "The Philosophy Behind Anonymous Finance | Xcoin",
+    title: "The Philosophy Behind Anonymous Finance",
     description: "With Xcoin, privacy is something you can count on. It's built for moments when trust breaks, systems overreach, or the world is watching.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Philosophy Behind Anonymous Finance | Xcoin",
+    title: "The Philosophy Behind Anonymous Finance",
     description: "It's the foundation of freedom.",
   },
 }

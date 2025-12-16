@@ -4,17 +4,17 @@ import { Server, Zap, Users, Shield, X, Check, Network, Coins, ArrowLeft } from 
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "The Rise of the Validators | Xcoin",
+  title: "The Rise of the Validators",
   description:
     "From wasteful mining to true participation. Xcoin does it differently with SEP Node validators. No race, no waste. Just collaboration, efficiency, and true decentralization.",
   openGraph: {
-    title: "The Rise of the Validators | Xcoin",
+    title: "The Rise of the Validators",
     description: "Validators are the heroes of tomorrow. They are the ones keeping the system online, private, fast, and secure for everyone.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Rise of the Validators | Xcoin",
+    title: "The Rise of the Validators",
     description: "Be part of it. Run a SEP Node. Earn Xcoin. Shape the future.",
   },
 }

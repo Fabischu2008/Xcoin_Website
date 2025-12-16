@@ -4,7 +4,7 @@ import BackButton from "@/components/back-button"
 import { Lock, Eye, Shield, CheckCircle2 } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "What is Privacy by Default? | Xcoin",
+  title: "What is Privacy by Default?",
   description: "Every Xcoin transaction is private by default — no settings, no opt-ins.",
 }
 

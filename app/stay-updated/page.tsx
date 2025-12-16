@@ -4,7 +4,7 @@ import BackButton from "@/components/back-button"
 import { Bell } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Stay Updated | Xcoin",
+  title: "Stay Updated",
   description: "Join our community channels and be the first to hear what's next.",
 }
 

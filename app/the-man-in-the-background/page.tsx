@@ -4,17 +4,17 @@ import { UserX, Shield, Eye, ArrowLeft } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "The Man in the Background | Xcoin",
+  title: "The Man in the Background",
   description:
     "There's a name you won't find on this site. No photos. No interviews. No social media. Just whispers. Traces. A signal behind the signal.",
   openGraph: {
-    title: "The Man in the Background | Xcoin",
+    title: "The Man in the Background",
     description: "He is member #1. We call him Mr. X.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Man in the Background | Xcoin",
+    title: "The Man in the Background",
     description: "The man behind Xcoin remains in the shadows. Not out of fear. But out of strategy.",
   },
 }

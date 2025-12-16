@@ -4,17 +4,17 @@ import { Zap, Coins, Eye, Lock, CheckCircle2, Shield } from "lucide-react"
 import BackButton from "@/components/back-button"
 
 export const metadata: Metadata = {
-  title: "What is a zk-Rollup? | Xcoin",
+  title: "What is a zk-Rollup?",
   description:
     "A zero-knowledge-Rollup is a blockchain technology that bundles thousands of transactions into a single proof—making the network faster, cheaper, and more private.",
   openGraph: {
-    title: "What is a zk-Rollup? | Xcoin",
+    title: "What is a zk-Rollup?",
     description: "Massive scalability, low fees, and zero-knowledge privacy—all in one solution.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "What is a zk-Rollup? | Xcoin",
+    title: "What is a zk-Rollup?",
     description: "Private, high-speed, low-cost payments that scale to millions of users.",
   },
 }

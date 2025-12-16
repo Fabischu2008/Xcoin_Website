@@ -4,7 +4,7 @@ import BackButton from "@/components/back-button"
 import { Zap, Network, Shield, CheckCircle2 } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "How Xcoin Scales Without Mining | Xcoin",
+  title: "How Xcoin Scales Without Mining",
   description: "Xcoin removes mining entirely, using validators and a DAG to scale securely and sustainably.",
 }
 
