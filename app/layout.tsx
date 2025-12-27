@@ -69,9 +69,12 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/xcoin-logo.png",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/xcoin-logo.png", type: "image/png" },
+    ],
     apple: "/xcoin-logo.png",
-    shortcut: "/xcoin-logo.png",
+    shortcut: "/favicon.svg",
   },
 }
 

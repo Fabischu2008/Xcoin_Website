@@ -120,7 +120,17 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden" role="menu" aria-label="Mobile navigation menu">
+        <div 
+          className="lg:hidden fixed inset-0 top-[73px] bg-background/95 backdrop-blur-md z-40" 
+          role="menu" 
+          aria-label="Mobile navigation menu"
+          onClick={(e) => {
+            // Close menu when clicking on backdrop
+            if (e.target === e.currentTarget) {
+              setMobileMenuOpen(false)
+            }
+          }}
+        >
           <div className="space-y-1 border-t border-border pl-6 pr-6 py-4">
             {navigation.map((item) => (
               <Link
