@@ -17,8 +17,8 @@
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.96 0 0);
   --muted-foreground: oklch(0.45 0 0);
-  /* Cyan blue accent from logo #7eeefe */
-  --accent: oklch(0.88 0.12 195);
+  /* Cyan blue accent from Xcoin_Basti #93c5fd */
+  --accent: oklch(0.78 0.10 240);
   --accent-foreground: oklch(0.15 0.02 195);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
@@ -54,8 +54,8 @@
   --secondary-foreground: oklch(0.95 0 0);
   --muted: oklch(0.18 0.015 200);
   --muted-foreground: oklch(0.65 0 0);
-  /* Cyan blue accent from logo #7eeefe */
-  --accent: oklch(0.88 0.12 195);
+  /* Cyan blue accent from Xcoin_Basti #93c5fd */
+  --accent: oklch(0.78 0.10 240);
   --accent-foreground: oklch(0.12 0.02 195);
   --destructive: oklch(0.5 0.2 25);
   --destructive-foreground: oklch(0.95 0 0);
