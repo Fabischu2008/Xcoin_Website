@@ -57,7 +57,7 @@ export default function ThePowerOfXXXDAOMembersPage() {
               priority
             />
             {/* Content Overlay */}
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-8 lg:p-12">
+            <div className="absolute inset-0 bg-black/20 flex items-center justify-center p-8 lg:p-12">
               <div className="text-center max-w-4xl">
                 <h1 className="font-[family-name:var(--font-heading)] text-4xl lg:text-6xl font-bold tracking-tight text-white mb-6">
                   The Power of XXX DAO Members

@@ -93,11 +93,16 @@ const comparisonFeatures = [
 function renderTextWithLinks(text: string, links?: Record<string, string>) {
   if (!links) return <span>{text}</span>
 
+  // Filter out undefined values
+  const validLinks = Object.fromEntries(
+    Object.entries(links).filter(([_, href]) => href !== undefined)
+  ) as Record<string, string>
+
   // Split text and find links
   const parts: (string | { text: string; href: string })[] = []
   let remaining = text
 
-  for (const [key, href] of Object.entries(links)) {
+  for (const [key, href] of Object.entries(validLinks)) {
     const index = remaining.indexOf(key)
     if (index !== -1) {
       // Add text before the link
@@ -160,7 +165,7 @@ export default function WhyXcoinReplacesBitcoinPage() {
               priority
             />
             {/* Content Overlay */}
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-8 lg:p-12">
+            <div className="absolute inset-0 bg-black/20 flex items-center justify-center p-8 lg:p-12">
               <div className="text-center max-w-4xl">
                 <h1 className="font-[family-name:var(--font-heading)] text-4xl lg:text-6xl font-bold tracking-tight text-white mb-6">
                   Why Xcoin Will Replace Bitcoin
@@ -230,7 +235,7 @@ export default function WhyXcoinReplacesBitcoinPage() {
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2 text-foreground">
                           <Check className="h-5 w-5 text-accent flex-shrink-0" />
-                          {renderTextWithLinks(item.xcoin, item.xcoinLinks)}
+                          {renderTextWithLinks(item.xcoin, item.xcoinLinks as Record<string, string> | undefined)}
                         </div>
                       </td>
                     </tr>
