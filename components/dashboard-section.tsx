@@ -564,17 +564,11 @@ export default function DashboardSection() {
 
           <div className="flex flex-row gap-2 sm:gap-4 lg:gap-8">
             {/* Sidebar Navigation - Slides in from left (Desktop & Mobile) */}
-            <aside className="w-16 sm:w-20 flex-shrink-0 lg:w-64">
-              <div className="sticky top-24 lg:top-32">
+            <aside className="w-16 sm:w-20 flex-shrink-0 lg:w-64 relative">
+              <div className="relative">
                 {/* Mobile: Current Category Indicator */}
                 <div className="mb-4 lg:hidden">
-                  <div 
-                    className="rounded-lg border border-accent/30 bg-accent/10 px-2.5 py-1.5 text-center scroll-animated"
-              style={{
-                opacity: scrollProgress,
-                      transform: `translateX(${(1 - scrollProgress) * (isMobile ? 0 : -150)}px) translateY(${(1 - scrollProgress) * (isMobile ? 15 : 30)}px) scale(${0.9 + scrollProgress * 0.1})`,
-              }}
-            >
+                  <div className="rounded-lg border border-accent/30 bg-accent/10 px-2.5 py-1.5 text-center">
                     <p className="text-[10px] font-semibold text-accent capitalize leading-tight">
                       {navItems.find((item) => item.id === activeFilter)?.label || "Xcoin"}
                     </p>
@@ -583,12 +577,6 @@ export default function DashboardSection() {
                 
                 <nav className="space-y-3 lg:space-y-1">
                   {navItems.map((item, index) => {
-                    // Anpassung: Animation startet früher und endet früher, damit alle Items rechtzeitig fertig sind
-                    const delay = index * 0.12
-                    const duration = 0.4
-                    const itemProgress = Math.max(0, Math.min(1, (scrollProgress - delay) / duration))
-                    const translateX = (1 - itemProgress) * -150
-                    const scale = 0.7 + itemProgress * 0.3
                     return (
                       <button
                         key={item.id}
@@ -598,10 +586,6 @@ export default function DashboardSection() {
                             ? "bg-accent/10 text-accent"
                             : "text-muted-foreground hover:bg-secondary"
                         }`}
-                        style={{
-                          opacity: itemProgress,
-                          transform: `translateX(${translateX}px) scale(${scale})`,
-                        }}
                         title={item.label}
                       >
                       <div className="db-nav__icon flex h-10 w-10 items-center justify-center sm:h-12 sm:w-12 lg:h-10 lg:w-10">

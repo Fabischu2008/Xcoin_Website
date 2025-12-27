@@ -144,3 +144,27 @@
     overflow-x: hidden;
   }
 }
+
+/* Hide scrollbar for testimonials section */
+.testimonials-section-scroll::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.testimonials-section-scroll {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Hide scrollbar globally for horizontal scroll */
+.overflow-x-auto::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.overflow-x-auto {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}

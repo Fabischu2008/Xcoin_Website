@@ -5,6 +5,7 @@ import Link from "next/link"
 import Hero from "@/components/hero"
 import CTA from "@/components/cta"
 import DashboardSection from "@/components/dashboard-section"
+import TestimonialsSection from "@/components/testimonials-section"
 import { Check } from "lucide-react"
 
 function renderTextWithLinks(text: string, links: Record<string, string>) {
@@ -73,6 +74,76 @@ function renderTextWithLinks(text: string, links: Record<string, string>) {
         )
       })}
     </span>
+  )
+}
+
+function VideoPlayer() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isHovered, setIsHovered] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  const handleVideoClick = () => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play()
+        setIsPlaying(true)
+      } else {
+        videoRef.current.pause()
+        setIsPlaying(false)
+      }
+    }
+  }
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (video) {
+      const handlePlay = () => setIsPlaying(true)
+      const handlePause = () => setIsPlaying(false)
+      video.addEventListener('play', handlePlay)
+      video.addEventListener('pause', handlePause)
+      return () => {
+        video.removeEventListener('play', handlePlay)
+        video.removeEventListener('pause', handlePause)
+      }
+    }
+  }, [])
+
+  return (
+    <div 
+      className="mt-12 rounded-2xl border border-border bg-card overflow-hidden w-full cursor-pointer group relative"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={handleVideoClick}
+    >
+      <video
+        ref={videoRef}
+        controls={false}
+        playsInline
+        preload="none"
+        poster="/xcoin-vid-poster.jpg"
+        className={`w-full h-auto min-h-[600px] object-cover transition-transform duration-300 ${
+          isHovered ? 'scale-[1.02]' : 'scale-100'
+        }`}
+      >
+        <source src="/xcoin-vid-compressed.mp4" type="video/mp4" />
+      </video>
+      {/* Hover Overlay */}
+      <div className={`absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent transition-opacity duration-300 pointer-events-none ${
+        isHovered ? 'opacity-100' : 'opacity-0'
+      }`} />
+      {/* Play Button Overlay (when paused) */}
+      {!isPlaying && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className={`w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/30 transition-all duration-300 ${
+            isHovered ? 'scale-110 opacity-100' : 'scale-100 opacity-80'
+          }`}>
+            <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -201,7 +272,7 @@ export default function HomePage() {
 
       {/* Why Xcoin Matters Section */}
       <section className="py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-[98vw] px-2 lg:px-3">
           <div className="mx-auto max-w-4xl text-center">
             <h2 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
               Why Xcoin Matters
@@ -216,19 +287,9 @@ export default function HomePage() {
             </p>
           </div>
 
-            <div className="mt-12 rounded-2xl border border-border bg-card overflow-hidden">
-              <video
-                controls
-                playsInline
-                preload="none"
-                poster="/xcoin-vid-poster.jpg"
-                className="w-full h-auto"
-              >
-                <source src="/xcoin-vid-compressed.mp4" type="video/mp4" />
-              </video>
-            </div>
+            <VideoPlayer />
           </div>
-                </div>
+        </div>
       </section>
 
       {/* Quote Section */}
@@ -263,6 +324,9 @@ export default function HomePage() {
 
       {/* Dashboard Section */}
       <DashboardSection />
+
+      {/* Testimonials Section */}
+      <TestimonialsSection />
 
       {/* Xcoin Features Section */}
       <section className="relative py-24 overflow-hidden">

@@ -4,8 +4,8 @@ import { Eye, Rocket } from "lucide-react"
 export default function Hero() {
   return (
     <section className="relative overflow-x-hidden min-h-screen flex items-center pt-20">
-      {/* Video Background */}
-      <div className="absolute inset-0 -z-20">
+      {/* Video Background - Größer, fast über den kompletten Bildschirm */}
+      <div className="absolute inset-0 -z-20 scale-110">
         <video
           autoPlay
           loop

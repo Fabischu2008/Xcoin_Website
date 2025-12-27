@@ -65,9 +65,10 @@ export default function Header() {
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm font-medium text-white transition-colors hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded"
+              className="text-base font-medium text-white transition-all relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded"
             >
               {item.name}
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
             </Link>
           ))}
         </nav>
@@ -75,12 +76,13 @@ export default function Header() {
         <div className="hidden lg:flex lg:items-center lg:gap-4 transition-all duration-400" style={{ paddingRight: isScrolled ? '0.5rem' : '1.5rem' }}>
           <Link
             href="/crowdfunding"
-            className="text-sm font-medium text-white transition-all duration-400 hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded"
+            className="text-base font-medium text-white transition-all duration-400 relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded"
             style={{ 
               transform: isScrolled ? 'translateX(0.5rem) translateY(-0.25rem)' : 'translateX(0) translateY(0)'
             }}
           >
             Crowdfunding
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
           </Link>
           <Link
             href="#waitlist"
