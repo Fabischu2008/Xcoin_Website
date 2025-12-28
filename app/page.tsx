@@ -3,10 +3,9 @@
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import Hero from "@/components/hero"
-import CTA from "@/components/cta"
 import DashboardSection from "@/components/dashboard-section"
 import TestimonialsSection from "@/components/testimonials-section"
-import { Check } from "lucide-react"
+import { useParallax } from "@/lib/useParallax"
 
 function renderTextWithLinks(text: string, links: Record<string, string>) {
   if (!links || Object.keys(links).length === 0) {
@@ -110,125 +109,242 @@ function VideoPlayer() {
 
   return (
     <div 
-      className="mt-12 rounded-2xl border border-border bg-card overflow-hidden w-full cursor-pointer group relative"
+      className="mt-12 w-full cursor-pointer group relative flex justify-center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleVideoClick}
     >
-      <video
-        ref={videoRef}
-        controls={false}
-        playsInline
-        preload="none"
-        poster="/xcoin-vid-poster.jpg"
-        className={`w-full h-auto min-h-[600px] object-cover transition-transform duration-300 ${
-          isHovered ? 'scale-[1.02]' : 'scale-100'
+      {/* Video Background with Hover Effect - Like XCoin_Basti */}
+      <div 
+        className={`relative w-full max-w-[95%] aspect-[1.6] rounded-2xl overflow-hidden transition-all duration-300 ${
+          isHovered ? 'bg-white/10' : 'bg-white/5'
         }`}
+        style={{
+          backdropFilter: 'blur(4em)',
+          WebkitBackdropFilter: 'blur(4em)',
+        }}
       >
-        <source src="/xcoin-vid-compressed.mp4" type="video/mp4" />
-      </video>
-      {/* Hover Overlay */}
-      <div className={`absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent transition-opacity duration-300 pointer-events-none ${
-        isHovered ? 'opacity-100' : 'opacity-0'
-      }`} />
-      {/* Play Button Overlay (when paused) */}
-      {!isPlaying && (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className={`w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/30 transition-all duration-300 ${
-            isHovered ? 'scale-110 opacity-100' : 'scale-100 opacity-80'
-          }`}>
-            <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z" />
-            </svg>
+        <video
+          ref={videoRef}
+          controls={false}
+          playsInline
+          preload="none"
+          poster="/xcoin-vid-poster.jpg"
+          className={`w-full h-full object-cover transition-transform duration-500 ease-out ${
+            isHovered ? 'scale-110' : 'scale-100'
+          }`}
+        >
+          <source src="/xcoin-vid-compressed.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Play Button Overlay (when paused) - Like XCoin_Basti */}
+        {!isPlaying && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className={`video-play-button-modern ${isHovered ? 'play-button-hover' : ''}`}>
+              <div className="play-button-inner">
+                {/* Pulse Animation */}
+                <div className={`play-button-pulse ${isHovered ? 'play-button-pulse-blue' : ''}`}></div>
+                {/* Play Icon */}
+                <div className={`play-button-icon ${isHovered ? 'play-button-icon-blue' : ''}`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="6,4 20,12 6,20" fill="currentColor"></polygon>
+                  </svg>
+                </div>
+                {/* Glow Effect */}
+                <div className={`play-button-glow ${isHovered ? 'play-button-glow-blue' : ''}`}></div>
+              </div>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }
 
-function FeatureCard({ text, direction, index, links }: { text: string; direction: string; index: number; links?: Record<string, string> | undefined }) {
-  const [isVisible, setIsVisible] = useState(false)
-  const cardRef = useRef<HTMLDivElement>(null)
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+function DevelopmentImageColumn({ images, parallaxStart, parallaxEnd, scrub }: { images: string[], parallaxStart: number, parallaxEnd: number, scrub: number }) {
+  const columnRef = useRef<HTMLDivElement>(null)
+  const [transform, setTransform] = useState(0)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Clear any existing timeout
-            if (timeoutRef.current) {
-              clearTimeout(timeoutRef.current)
-            }
-            // Staggered animation when entering
-            timeoutRef.current = setTimeout(() => setIsVisible(true), index * 80)
-          } else {
-            // Hide immediately when leaving viewport
-            if (timeoutRef.current) {
-              clearTimeout(timeoutRef.current)
-            }
-            setIsVisible(false)
-          }
-        })
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-    )
+    const element = columnRef.current
+    if (!element) return
 
-    if (cardRef.current) {
-      observer.observe(cardRef.current)
+    const handleScroll = () => {
+      const rect = element.getBoundingClientRect()
+      const windowHeight = window.innerHeight
+      const elementTop = rect.top
+      const elementHeight = rect.height
+      
+      const scrollProgress = Math.max(0, Math.min(1, 
+        (windowHeight - elementTop) / (windowHeight + elementHeight)
+      ))
+
+      const range = parallaxEnd - parallaxStart
+      const value = parallaxStart + (range * scrollProgress * scrub)
+      setTransform(value)
     }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
 
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
-      }
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current)
-      }
+      window.removeEventListener('scroll', handleScroll)
     }
-  }, [index])
-
-  const getInitialTransform = () => {
-    switch (direction) {
-      case "left":
-        return "translateX(-150px) rotateY(-15deg)"
-      case "right":
-        return "translateX(150px) rotateY(15deg)"
-      case "top":
-        return "translateY(-150px) rotateX(15deg)"
-      case "bottom":
-        return "translateY(150px) rotateX(-15deg)"
-      case "back":
-        return "translateZ(-300px) scale(0.3) rotateY(45deg)"
-      default:
-        return "translateY(100px)"
-    }
-  }
+  }, [parallaxStart, parallaxEnd, scrub])
 
   return (
-    <div
-      ref={cardRef}
-      className="rounded-2xl border border-border bg-card p-6 transition-all duration-1000 ease-out hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
-      style={{
-        transform: isVisible
-          ? "translateX(0) translateY(0) translateZ(0) scale(1) rotateX(0) rotateY(0)"
-          : getInitialTransform(),
-        opacity: isVisible ? 1 : 0,
-        transformStyle: "preserve-3d",
-        perspective: "1000px",
-      }}
+    <div 
+      ref={columnRef}
+      className="flex-1 flex flex-col gap-2"
+      style={{ transform: `translateY(${transform}px)` }}
     >
-      <div className="flex items-start gap-4">
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent/10 flex-shrink-0 mt-0.5">
-          <Check className="h-5 w-5 text-accent" />
+      {images.map((image, index) => (
+        <div key={index} className="relative aspect-square overflow-hidden rounded">
+          <img 
+            src={`/img/xcoin_grid/screens/${image}`}
+            alt=""
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
         </div>
-        <p className="text-sm font-medium text-foreground leading-relaxed">
-          {links && Object.keys(links).length > 0 ? renderTextWithLinks(text, links) : text}
-        </p>
-      </div>
+      ))}
     </div>
   )
+}
+
+function QuantumIconsRow({ icons, parallaxStart, parallaxEnd, scrub }: { icons: string[], parallaxStart: number, parallaxEnd: number, scrub: number }) {
+  const rowRef = useRef<HTMLDivElement>(null)
+  const [transform, setTransform] = useState(0)
+
+  useEffect(() => {
+    const element = rowRef.current
+    if (!element) return
+
+    const handleScroll = () => {
+      const element = rowRef.current
+      if (!element) return
+      
+      const rect = element.getBoundingClientRect()
+      const windowHeight = window.innerHeight
+      const elementTop = rect.top
+      const elementHeight = rect.height
+      
+      // Calculate scroll progress (0 to 1)
+      const scrollProgress = Math.max(0, Math.min(1, 
+        (windowHeight - elementTop) / (windowHeight + elementHeight)
+      ))
+
+      // Calculate transform value - using percentage like XCoin_Basti (xPercent)
+      const range = parallaxEnd - parallaxStart
+      const value = parallaxStart + (range * scrollProgress * scrub)
+      setTransform(value)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [parallaxStart, parallaxEnd, scrub])
+
+  return (
+    <div 
+      ref={rowRef}
+      className="flex gap-3"
+      style={{ transform: `translateX(${transform}%)` }}
+    >
+      {icons.map((icon) => (
+        <div key={icon} className="flex flex-col items-center pointer-events-none flex-none relative" style={{ width: '6em', height: '6em', transformStyle: 'preserve-3d' }}>
+          <div className="w-full h-full rounded-lg border border-border/50 bg-[#1a1a1a] flex items-center justify-center relative overflow-hidden">
+            <div className="absolute inset-0" style={{ paddingTop: '100%' }}></div>
+            <div className="absolute inset-0 flex items-center justify-center" style={{ marginBottom: '0.5em' }}>
+              <img 
+                src={`/img/crypto-icons/color/${icon}.svg`} 
+                alt={icon === 'xcoin' ? 'XXX' : icon.toUpperCase()}
+                className="w-6 h-6"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div className="absolute bottom-0 left-0 right-0 flex justify-center items-center" style={{ paddingTop: '0.25em', paddingBottom: '0.75em' }}>
+            <p className="eyebrow small text-muted-foreground uppercase">{icon === 'xcoin' ? 'XXX' : icon.toUpperCase()}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function MatrixAnimation() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    // Set canvas size
+    function resizeCanvas() {
+      if (!canvas) return
+      const container = canvas.parentElement
+      if (container) {
+        canvas.width = container.offsetWidth
+        canvas.height = container.offsetHeight
+      }
+    }
+
+    resizeCanvas()
+    window.addEventListener('resize', resizeCanvas)
+
+    // Matrix characters
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;':\",./<>?`~"
+    const charArray = chars.split('')
+
+    const fontSize = 14
+    const columns = Math.floor(canvas.width / fontSize)
+
+    // Array to store the y position for each column
+    const drops = new Array(columns).fill(0)
+
+    function draw() {
+      if (!canvas || !ctx) return
+
+      // Semi-transparent black background for trail effect
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+      ctx.font = fontSize + 'px monospace'
+
+      for (let i = 0; i < drops.length; i++) {
+        // Random character
+        const text = charArray[Math.floor(Math.random() * charArray.length)]
+
+        // Draw the character with green color variation
+        ctx.fillStyle = `hsl(${120 + Math.random() * 60}, 100%, ${50 + Math.random() * 50}%)`
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize)
+
+        // Reset drop position randomly or when it reaches bottom
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0
+        }
+
+        drops[i]++
+      }
+    }
+
+    // Animation loop
+    const interval = setInterval(draw, 35)
+
+    return () => {
+      clearInterval(interval)
+      window.removeEventListener('resize', resizeCanvas)
+    }
+  }, [])
+
+  return <canvas ref={canvasRef} className="w-full h-full absolute inset-0" />
 }
 
 export default function HomePage() {
@@ -274,50 +390,20 @@ export default function HomePage() {
       <section className="py-24">
         <div className="mx-auto max-w-[98vw] px-2 lg:px-3">
           <div className="mx-auto max-w-4xl text-center">
-            <h2 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
-              Why Xcoin Matters
-            </h2>
-            
+            <h2 className="h-medium mb-12">Why Xcoin Matters</h2>
             <div className="mt-12 grid gap-8 md:grid-cols-2 md:text-left">
-              <p className="text-lg text-muted-foreground">
+              <p className="p-reg text-muted-foreground">
                 Xcoin was built with one purpose: real, unstoppable privacy. While others follow trends, we built technology that anticipates a world where surveillance is the norm, not the exception.
               </p>
-              <p className="text-lg text-muted-foreground">
+              <p className="p-reg text-muted-foreground">
                 Whether you're protecting your personal freedom, operating in high-risk environments, or simply tired of being watched, Xcoin gives you silence in a world of noise.
             </p>
           </div>
-
-            <VideoPlayer />
           </div>
-        </div>
-      </section>
-
-      {/* Quote Section */}
-      <section className="relative pt-24 pb-12">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl text-center">
-            <blockquote className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
-              <p className="text-foreground">
-                A privacy coin that finally<br />
-                gets it right. Technically<br />
-                <span className="relative inline-block">
-                  <span className="bg-gradient-to-r from-accent via-cyan-400 to-accent bg-clip-text text-transparent">
-                    elegant.
-                  </span>
-                  <span className="absolute -inset-1 bg-accent/20 blur-xl -z-10 rounded-lg" />
-                </span>
-                <span className="text-foreground"> </span>
-                <span className="relative inline-block">
-                  <span className="bg-gradient-to-r from-accent via-cyan-400 to-accent bg-clip-text text-transparent">
-                    Practically invisible.
-                  </span>
-                  <span className="absolute -inset-1 bg-accent/20 blur-xl -z-10 rounded-lg" />
-                </span>
-              </p>
-            </blockquote>
-            <p className="mt-8 text-base sm:text-lg text-muted-foreground italic">
-              — Independent Crypto Auditor
-            </p>
+          
+          {/* Video Player - Full Width, Almost Full Screen */}
+          <div className="mt-12 w-full">
+            <VideoPlayer />
           </div>
         </div>
       </section>
@@ -328,105 +414,237 @@ export default function HomePage() {
       {/* Testimonials Section */}
       <TestimonialsSection />
 
-      {/* Xcoin Features Section */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl text-center mb-16">
-            <h2 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl mb-6">
-              Xcoin is built to finish what Bitcoin started — and fix what it couldn't
-            </h2>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto mb-16">
-            {([
-              { text: "Fully anonymous — no traceable IP addresses or wallet links", direction: "left" as const },
-              { text: "Invisible to third parties — transactions can't be observed, linked, or monitored", direction: "right" as const },
-              { text: "100% private transactions by default", direction: "top" as const },
-              { text: "Zero metadata, no optional privacy toggles", direction: "bottom" as const },
-              { text: "Mega-fast — supports thousands of transactions per second", direction: "left" as const },
-              { text: "Low transaction fees, even under high network load", direction: "right" as const },
-              { text: "Energy-efficient — no mining, no staking farms", direction: "top" as const },
-              { text: "Fixed supply: 21 million coins — no inflation", direction: "bottom" as const, links: { "21 million coins": "/what-is-fixed-supply" } as Record<string, string> },
-              { text: "AES-512 encryption & zk-STARKs for quantum-safe privacy", direction: "back" as const, links: { "AES-512 encryption": "/what-is-aes-512", "zk-STARKs": "/what-is-zk-starks" } as Record<string, string> },
-              { text: "Fully decentralized DAO — no central control", direction: "left" as const, links: { "DAO": "/what-is-xxx-dao" } as Record<string, string> },
-            ] as Array<{ text: string; direction: string; links?: Record<string, string> }>).map((feature, index) => (
-              <FeatureCard key={index} text={feature.text} direction={feature.direction} index={index} links={feature.links} />
-            ))}
-          </div>
-
-          <div className="mx-auto max-w-4xl text-center">
-            <p className="text-lg text-muted-foreground mb-4">
-              Xcoin isn't just another coin — it's a next-generation privacy cryptocurrency designed for total anonymity, quantum resistance, and real-world utility.
-            </p>
-            <p className="text-lg text-muted-foreground mb-4">
-              The Xcoin blockchain is built on a unique foundation of cutting-edge innovations — including quantum-safe cryptography, zero-knowledge proofs, and breakthrough privacy technology.
-            </p>
-            <p className="text-lg font-semibold text-foreground">
-              Discover the <Link href="/cryptographic-building-blocks" className="text-accent hover:text-accent/80 underline">cryptographic building blocks</Link> that make Xcoin unstoppable.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
+      {/* The Future Standard for Anonymous Value Transfer */}
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold tracking-tight lg:text-4xl">
-              How the Network Works
+          <div className="mx-auto max-w-4xl text-center mb-16">
+            <h2 className="h-medium">
+              The Future Standard for Anonymous Value Transfer
             </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Two connected layers working in harmony for privacy and governance.
-            </p>
           </div>
 
-          <div className="mt-16 grid gap-8 lg:grid-cols-2">
-            <div className="rounded-2xl border border-border bg-background p-8">
-              <div className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
-                Payment Layer
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {/* Development Block */}
+            <Link href="/develop" className="md:col-span-2 rounded-2xl border border-border bg-background p-8 lg:p-10 relative group cursor-pointer hover:border-accent/50 transition-all overflow-hidden h-[26em] flex flex-col">
+              <div className="flex items-start justify-between mb-6 relative z-10">
+                <h3 className="h-small">Development</h3>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="50" 
+                  height="50" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="text-accent opacity-0 -translate-x-5 translate-y-5 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute top-0 right-0 z-10"
+                >
+                  <path d="M7 7h10v10"/>
+                  <path d="M7 17 17 7"/>
+                </svg>
               </div>
-              <h3 className="mt-6 font-[family-name:var(--font-heading)] text-2xl font-bold">XXX DAG Network</h3>
-              <p className="mt-4 text-muted-foreground">
-                Replaces traditional blockchain with a Directed Acyclic Graph. Transactions confirm each other directly
-                and continuously, enabling instant confirmations, massive throughput, and true scalability.
-              </p>
-              <ul className="mt-6 space-y-3">
-                {["Instant confirmations", "Parallel validation", "No mining or staking", "Energy efficient"].map(
-                  (item) => (
-                    <li key={item} className="flex items-center gap-3 text-muted-foreground">
-                      <div className="h-2 w-2 rounded-full bg-accent" />
-                      {item}
-                    </li>
-                  ),
-                )}
-              </ul>
+              <div className="relative z-10">
+                <p className="text-muted-foreground p-small">
+                  The development of Xcoin and its supporting infrastructure is underway. Much of it is pioneering work, because we are building an entirely new, privacy-first, censorship-resistant, quantum-proof financial ecosystem. This is the new future standard for anonymous value transfer. Discover the core technologies under development.
+                </p>
+              </div>
+              {/* Development Images Columns with Parallax */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl opacity-20">
+                <div className="flex h-full gap-2">
+                  {/* Column 1 */}
+                  <DevelopmentImageColumn 
+                    images={['group-security-dashboard.png', 'SAsP6Lv.png', 'matrix.webp', 'php.jpg', 'programming-code-abstract-technology-background-of-software-developer-and-computer-script.jpg']}
+                    parallaxStart={0}
+                    parallaxEnd={-45}
+                    scrub={1.25}
+                  />
+                  {/* Column 2 */}
+                  <DevelopmentImageColumn 
+                    images={['HD-wallpaper-coding-game-development-csharp-unity-technology.jpg', 'HD-wallpaper-programming-coding-language-hi-tech-and-background-den-code-programmer.jpg', 'images-1.jpg', 'images-2.jpg', 'images.jpg']}
+                    parallaxStart={0}
+                    parallaxEnd={-40}
+                    scrub={1.5}
+                  />
+                  {/* Column 3 */}
+                  <DevelopmentImageColumn 
+                    images={['Is-Python-good-for-software-development.avif', 'IT_Engineer_Salary.avif', 'premium_photo-1720287601920-ee8c503af775.jpg', 'software-development-lifecycle-1024x682-1.webp', 'software-development-specialist.jpg']}
+                    parallaxStart={0}
+                    parallaxEnd={-30}
+                    scrub={1.75}
+                  />
+                  {/* Column 4 */}
+                  <DevelopmentImageColumn 
+                    images={['Top-10-Blockchain-Development-Tools-For-Startups.jpg', 'top-12-cryptocurrency-tokens-by-600nw-2300861397.webp', 'Top-6-Software-Development-Methodologies.jpg', 'top-blockchain-development-companies-main.jpg', 'Comparing-10-Different-Blockchain-Development-Platforms.png']}
+                    parallaxStart={0}
+                    parallaxEnd={-20}
+                    scrub={2}
+                  />
+                </div>
+              </div>
+            </Link>
+
+            {/* Discover the Vision Behind Xcoin Block */}
+            <Link href="/about" className="md:col-span-2 rounded-2xl border border-border bg-background p-8 lg:p-10 relative group cursor-pointer hover:border-accent/50 transition-all overflow-hidden h-[26em] flex flex-col">
+              <div className="flex items-start justify-between mb-6">
+                <h3 className="h-small">
+                  <span className="hidden md:inline">Discover the </span>
+                  <span className="md:hidden">The </span>
+                  Vision Behind Xcoin
+                </h3>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="50" 
+                  height="50" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="text-accent opacity-0 -translate-x-5 translate-y-5 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute top-0 right-0 z-10"
+                >
+                  <path d="M7 7h10v10"/>
+                  <path d="M7 17 17 7"/>
+                </svg>
+              </div>
+              <div className="md:pr-20">
+                <p className="text-muted-foreground p-small mb-4">
+                  Xcoin is more than just a cryptocurrency. It is a movement to reclaim privacy, challenge surveillance, and reinvent digital finance from the ground up. Our whitepapers reveal the foundation of this mission. Dive into the cryptography, architecture, economic model, and governance framework that set Xcoin apart from Bitcoin, Ethereum, and Monero.
+                </p>
+                <p className="text-muted-foreground p-small hidden md:block">
+                  Whether you are a developer, investor, researcher, or privacy advocate, these documents offer a clear blueprint for a more private, decentralized, and equitable financial future.
+                </p>
+              </div>
+              {/* Matrix Animation Container */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl">
+                <MatrixAnimation />
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-blue-500/10 backdrop-blur-[1px]" />
+              </div>
+            </Link>
+
+            {/* Xcoin Community Block */}
+            <div className="md:col-span-1 rounded-2xl border border-border bg-background p-6 relative group h-[26em] flex flex-col">
+              {/* Community Images Slider - Like XCoin_Basti */}
+              <div className="flex gap-2 overflow-x-auto pb-4 -mx-6 px-6 mb-6" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                {[
+                  { src: "/img/xcoin_grid/community_1.jpeg", label: "Brainstorming" },
+                  { src: "/img/xcoin_grid/community_2.jpeg", label: "Privacy, freedom, & independence" },
+                  { src: "/img/xcoin_grid/community_3.jpeg", label: "Planning the Future" },
+                  { src: "/img/xcoin_grid/community_4.jpeg", label: "Global Decentralized Community" },
+                ].map((item, index) => (
+                  <div key={index} className="flex-shrink-0 relative">
+                    <div className="relative w-[70px] aspect-square rounded overflow-hidden border border-border bg-[#0e0e0e]">
+                      <img 
+                        src={item.src} 
+                        alt={item.label}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        onError={(e) => {
+                          console.error('Image failed to load:', item.src);
+                        }}
+                      />
+                    </div>
+                    <div className="mt-2 w-[70px]">
+                      <div className="flex items-center justify-between">
+                        <p className="p-small text-muted-foreground leading-tight flex-1">{item.label}</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground flex-shrink-0 ml-1">
+                          <path d="M10 17L15 12"/>
+                          <path d="M10 7L15 12"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-auto">
+                <h3 className="h-small mb-3">Xcoin Community</h3>
+                <p className="text-muted-foreground p-small">
+                  Curious about what it means to be part of something different? You don't "sign up" in the traditional sense. You don't become a member of a club or platform. If you join, you become part of something bigger: a global decentralized community built for people who value privacy, freedom, and independence.
+                </p>
+              </div>
             </div>
 
-            <div className="rounded-2xl border border-border bg-background p-8">
-              <div className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
-                Governance Layer
+            {/* Use Cases Block - Breiter wie im Original */}
+            <Link href="/use" className="md:col-span-2 rounded-2xl border border-border bg-background p-8 lg:p-10 relative group cursor-pointer hover:border-accent/50 transition-all overflow-hidden h-[26em] flex flex-col">
+              <div className="flex items-start justify-between mb-6">
+                <h3 className="h-small">Use Cases</h3>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="50" 
+                  height="50" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="text-accent opacity-0 -translate-x-5 translate-y-5 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute top-0 right-0 z-10"
+                >
+                  <path d="M7 7h10v10"/>
+                  <path d="M7 17 17 7"/>
+                </svg>
               </div>
-              <h3 className="mt-6 font-[family-name:var(--font-heading)] text-2xl font-bold">XXX DAO</h3>
-              <p className="mt-4 text-muted-foreground">
-                The democratic part of the ecosystem. Allows the community to propose and vote on future developments,
-                funding, or rules. Decisions are made collectively rather than by a company.
+              <p className="text-muted-foreground p-small mb-6">
+                Let's be honest: Xcoin doesn't exist yet. Not as a wallet. Not as a network. Not as something you can use today. It's still in development, being tested, hardened, prepared. So no, there are no live use cases. Not yet. But that's not the full truth.
               </p>
-              <ul className="mt-6 space-y-3">
-                {["Community proposals", "Democratic voting", "Treasury management", "Protocol upgrades"].map(
-                  (item) => (
-                    <li key={item} className="flex items-center gap-3 text-muted-foreground">
-                      <div className="h-2 w-2 rounded-full bg-accent" />
-                      {item}
-                    </li>
-                  ),
-                )}
-              </ul>
+              <div className="relative rounded-3xl overflow-hidden flex-1 min-h-0 mx-auto w-[calc(100%-2rem)]">
+                <img 
+                  src="/img/xcoin_grid/use-cases.jpeg" 
+                  alt="Use Cases" 
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  onError={(e) => {
+                    console.error('Use cases image failed to load');
+                  }}
+                />
+              </div>
+            </Link>
+
+            {/* Quantum-Resistant Block - Like XCoin_Basti */}
+            <div className="md:col-span-1 lg:col-span-1 rounded-2xl border border-border bg-background p-8 lg:p-10 relative group h-[26em] flex flex-col">
+              <Link href="/xcoin_grid/quantum-safe" className="absolute inset-0 z-10" title="Quantum-Resistant" />
+              
+              {/* Crypto Icons Grid with Parallax - Top Section - Like XCoin_Basti */}
+              <div className="relative mb-6 flex-1 min-h-0 -mt-4" style={{ perspective: '1000px' }}>
+                <div className="relative h-full overflow-hidden flex flex-col gap-4">
+                  {/* Top Row with Parallax */}
+                  <div className="flex justify-center">
+                    <QuantumIconsRow 
+                      icons={['trx', 'bch', 'xcoin', 'doge']} 
+                      parallaxStart={25} 
+                      parallaxEnd={-10}
+                      scrub={1}
+                    />
+                  </div>
+                  {/* Bottom Row with Parallax */}
+                  <div className="flex justify-center">
+                    <QuantumIconsRow 
+                      icons={['sol', 'eth', 'btc', 'xmr', 'zec', 'dash']} 
+                      parallaxStart={25} 
+                      parallaxEnd={-30}
+                      scrub={1}
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              {/* Text Section - Bottom */}
+              <div className="relative z-0 mt-auto">
+                <h3 className="h-small mb-3">Quantum-Resistant</h3>
+                <p className="text-muted-foreground p-small">
+                  Most coins aren't prepared for quantum threats. Some are exploring upgrades. Xcoin doesn't need to, because it is built from the ground up with post-quantum cryptography. No fallback algorithms. No temporary fixes. Quantum safety isn't an add-on; it is the foundation.
+                </p>
+              </div>
+            </div>
+
+            {/* Final Card */}
+            <div className="md:col-span-2 lg:col-span-4 rounded-2xl border border-border bg-background p-8 lg:p-10 flex items-center justify-center">
+              <p className="text-muted-foreground p-small opacity-70">And more is coming...</p>
             </div>
           </div>
         </div>
       </section>
-
-      <CTA />
     </>
   )
 }

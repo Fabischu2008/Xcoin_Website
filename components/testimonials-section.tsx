@@ -93,13 +93,13 @@ export default function TestimonialsSection() {
         {/* Main Quote */}
         <div className="text-center mb-16">
           <div className="max-w-4xl mx-auto">
-            <h3 className="font-medium text-4xl md:text-6xl text-white mb-4">
+            <h3 className="h-medium text-white mb-4">
               "A privacy coin that finally gets it right.
               <br />
               Technically elegant,{" "}
               <span className="bg-[#93c5fd] text-black px-2">practically invisible</span>."
             </h3>
-            <span className="text-sm text-white/50 relative top-5 block">
+            <span className="p-small text-white/50 relative top-5 block">
               – Independent Crypto Auditor
             </span>
           </div>
@@ -128,7 +128,7 @@ export default function TestimonialsSection() {
                       className="rounded-full object-cover"
                     />
                   </div>
-                  <p className={`text-xs ${selectedIndex === index ? "text-white" : "text-white/50"}`}>
+                  <p className={`eyebrow small ${selectedIndex === index ? "text-white" : "text-white/50"}`}>
                     {testimonial.name}
                   </p>
                 </button>
@@ -176,7 +176,7 @@ export default function TestimonialsSection() {
                 {/* Corner Brackets - Bottom Right */}
                 <div className={`absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 ${isSelected ? 'border-[#93c5fd]' : 'border-white/20'}`} />
                 
-                <p className="text-white mb-6 leading-relaxed text-sm">{testimonial.quote}</p>
+                <p className="text-white mb-6 p-small">{testimonial.quote}</p>
                 <div className="flex items-center gap-4">
                   <Image
                     src={testimonial.avatar}
@@ -186,8 +186,8 @@ export default function TestimonialsSection() {
                     className="rounded-full object-cover"
                   />
                   <div>
-                    <h4 className="text-sm font-bold text-white uppercase tracking-wide">{testimonial.name}</h4>
-                    <p className="text-xs text-white/50 uppercase tracking-wide mt-1">{testimonial.title}</p>
+                    <h4 className="p-small font-semibold text-white uppercase tracking-wide">{testimonial.name}</h4>
+                    <p className="eyebrow small text-white/50 mt-1">{testimonial.title}</p>
                   </div>
                 </div>
               </div>

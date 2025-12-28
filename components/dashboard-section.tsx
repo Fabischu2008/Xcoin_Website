@@ -214,7 +214,7 @@ export default function DashboardSection() {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 1024)
     }
-    
+
     checkMobile()
     window.addEventListener("resize", checkMobile)
     return () => window.removeEventListener("resize", checkMobile)
@@ -239,10 +239,10 @@ export default function DashboardSection() {
 
     setIsAnimating(true)
     setPrevFilter(activeFilter)
-    
+
     // Exit animation
     setDisplayItems([])
-    
+
     setTimeout(() => {
       // Enter animation
       setDisplayItems(filteredItems)
@@ -259,37 +259,40 @@ export default function DashboardSection() {
 
       const rect = sectionRef.current.getBoundingClientRect()
       const windowHeight = window.innerHeight
-      
+
       // Calculate when section starts entering viewport
       const sectionTop = rect.top
       const sectionHeight = rect.height
-      
+
       // Animation range: adjusted for mobile (shorter range)
       const mobileCheck = window.innerWidth < 1024
       const animationStart = mobileCheck ? windowHeight * 0.7 : windowHeight * 0.8
       const animationEnd = mobileCheck ? windowHeight * 0.3 : windowHeight * 0.2
-      
+
       // Calculate progress (0 to 1)
       let progress = 0
-      
+
       if (sectionTop < animationStart && sectionTop > animationEnd) {
         // Section is in animation range
         progress = 1 - (sectionTop - animationEnd) / (animationStart - animationEnd)
         progress = Math.max(0, Math.min(1, progress)) // Clamp between 0 and 1
       } else if (sectionTop <= animationEnd) {
-        // Section is fully visible
+        // Section is fully visible or past - keep progress at 1
         progress = 1
-      } else {
-        // Section hasn't reached animation start
+      } else if (sectionTop > windowHeight) {
+        // Section is below viewport - keep progress at 0 for animation
         progress = 0
+      } else {
+        // Section hasn't reached animation start but is in viewport
+        progress = 0.3 // Minimum visibility for navigation
       }
-      
+
       setScrollProgress(progress)
     }
 
     // Initial calculation
     handleScroll()
-    
+
     window.addEventListener("scroll", handleScroll, { passive: true })
     window.addEventListener("resize", handleScroll, { passive: true })
     return () => {
@@ -368,6 +371,7 @@ export default function DashboardSection() {
           visibility: visible !important;
           pointer-events: auto !important;
         }
+
 
         @keyframes fadeInUp {
           from {
@@ -557,26 +561,35 @@ export default function DashboardSection() {
               transform: `translateX(${(1 - scrollProgress) * (isMobile ? 0 : 150)}px) translateY(${(1 - scrollProgress) * (isMobile ? 10 : 20)}px) scale(${0.8 + scrollProgress * 0.2})`,
             }}
           >
-            <div className="privacy-button relative inline-flex items-center gap-2 border-2 border-accent bg-accent px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-semibold text-accent-foreground whitespace-nowrap">
+            <div className="privacy-button relative inline-flex items-center gap-2 border-2 border-accent bg-accent px-4 py-2.5 sm:px-6 sm:py-3 p-small sm:p-reg font-semibold text-accent-foreground whitespace-nowrap">
               <span className="relative z-10">Privacy is Power</span>
             </div>
           </div>
 
           <div className="flex flex-row gap-2 sm:gap-4 lg:gap-8">
             {/* Sidebar Navigation - Slides in from left (Desktop & Mobile) */}
-            <aside className="w-16 sm:w-20 flex-shrink-0 lg:w-64 relative">
-              <div className="relative">
+            <aside className="w-16 sm:w-20 flex-shrink-0 lg:w-64" style={{ position: 'relative' }}>
+              <div style={{ position: 'relative' }}>
                 {/* Mobile: Current Category Indicator */}
                 <div className="mb-4 lg:hidden">
-                  <div className="rounded-lg border border-accent/30 bg-accent/10 px-2.5 py-1.5 text-center">
-                    <p className="text-[10px] font-semibold text-accent capitalize leading-tight">
+                  <div 
+                    className="rounded-lg border border-accent/30 bg-accent/10 px-2.5 py-1.5 text-center"
+                    style={{
+                      opacity: scrollProgress,
+                    }}
+                  >
+                    <p className="eyebrow small font-semibold text-accent capitalize leading-tight">
                       {navItems.find((item) => item.id === activeFilter)?.label || "Xcoin"}
                     </p>
                   </div>
                 </div>
-                
+
                 <nav className="space-y-3 lg:space-y-1">
                   {navItems.map((item, index) => {
+                    // Anpassung: Animation startet früher und endet früher, damit alle Items rechtzeitig fertig sind
+                    const delay = index * 0.12
+                    const duration = 0.4
+                    const itemProgress = Math.max(0.3, Math.min(1, (scrollProgress - delay) / duration)) // Minimum opacity 0.3 statt 0
                     return (
                       <button
                         key={item.id}
@@ -586,6 +599,9 @@ export default function DashboardSection() {
                             ? "bg-accent/10 text-accent"
                             : "text-muted-foreground hover:bg-secondary"
                         }`}
+                        style={{
+                          opacity: itemProgress,
+                        }}
                         title={item.label}
                       >
                       <div className="db-nav__icon flex h-10 w-10 items-center justify-center sm:h-12 sm:w-12 lg:h-10 lg:w-10">
@@ -599,7 +615,7 @@ export default function DashboardSection() {
                           />
                         </div>
                       </div>
-                      <p className="hidden text-xs font-semibold transition-colors duration-300 group-hover:text-cyan-400 lg:block lg:text-base">
+                      <p className="hidden eyebrow small font-semibold transition-colors duration-300 group-hover:text-cyan-400 lg:block lg:p-reg">
                         {item.label}
                       </p>
                     </button>
@@ -628,15 +644,15 @@ export default function DashboardSection() {
                       // Adjust animation intensity for mobile
                       const cardProgress = Math.max(0, Math.min(1, scrollProgress / (isMobile ? 0.6 : 0.5)))
                       // Smooth easing function for more natural movement
-                      const easedProgress = cardProgress < 0.5 
-                        ? 2 * cardProgress * cardProgress 
+                      const easedProgress = cardProgress < 0.5
+                        ? 2 * cardProgress * cardProgress
                         : 1 - Math.pow(-2 * cardProgress + 2, 3) / 2
                       const scale = isMobile ? (0.6 + easedProgress * 0.4) : (0.4 + easedProgress * 0.6)
                       const translateZ = isMobile ? (-150 + easedProgress * 150) : (-250 + easedProgress * 250)
                       const translateY = isMobile ? ((1 - easedProgress) * 60) : ((1 - easedProgress) * 100)
                       const rotateY = isMobile ? ((1 - easedProgress) * 8) : ((1 - easedProgress) * 15)
                       const blur = isMobile ? ((1 - easedProgress) * 3) : ((1 - easedProgress) * 5)
-                      
+
                       return (
                       <div
                         key={item.id}
@@ -674,7 +690,7 @@ export default function DashboardSection() {
                                       className="object-contain"
                                     />
                                   </div>
-                                  <p className="text-xs font-medium text-muted-foreground capitalize">
+                                  <p className="eyebrow small font-medium text-muted-foreground capitalize">
                                     {item.category}
                                   </p>
                                 </div>
@@ -682,7 +698,7 @@ export default function DashboardSection() {
                             </div>
                           </div>
                           <div className="db-card__info mt-4 flex items-center justify-between">
-                            <p className="text-sm font-medium leading-tight">{item.title}</p>
+                            <p className="p-small font-medium leading-tight">{item.title}</p>
                             <div className="db-card__arrow ml-4 flex h-6 w-6 shrink-0 items-center justify-center text-muted-foreground transition-colors group-hover:text-accent">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"

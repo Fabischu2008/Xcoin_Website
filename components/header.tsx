@@ -56,7 +56,7 @@ export default function Header() {
             />
             <div className="absolute inset-0 bg-[#93c5fd] rounded-lg blur-lg opacity-70 -z-10" />
           </div>
-          <span className="text-3xl font-bold tracking-tight text-white">Xcoin</span>
+          <span className="h-small text-white">Xcoin</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -65,7 +65,7 @@ export default function Header() {
             <Link
               key={item.name}
               href={item.href}
-              className="text-base font-medium text-white transition-all relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded"
+              className="p-reg font-medium text-white transition-all relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded"
             >
               {item.name}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
@@ -86,7 +86,7 @@ export default function Header() {
           </Link>
           <Link
             href="#waitlist"
-            className="relative flex items-center gap-2 rounded px-5 py-2.5 text-sm font-semibold text-black transition-all duration-400 overflow-hidden group"
+            className="relative flex items-center gap-2 rounded px-5 py-2.5 p-small font-semibold text-black transition-all duration-400 overflow-hidden group"
             style={{ 
               transform: isScrolled ? 'translateX(0.5rem) translateY(-0.25rem)' : 'translateX(0) translateY(0)'
             }}
@@ -139,7 +139,7 @@ export default function Header() {
                 key={item.name}
                 href={item.href}
                 role="menuitem"
-                className="block py-2 text-base font-medium text-white hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded"
+                className="block py-2 p-reg font-medium text-white hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
@@ -156,7 +156,7 @@ export default function Header() {
             <Link
               href="#waitlist"
               role="menuitem"
-              className="mt-4 relative flex items-center justify-center gap-2 w-full rounded px-5 py-2.5 text-center text-sm font-semibold text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 transition-all overflow-hidden group"
+              className="mt-4 relative flex items-center justify-center gap-2 w-full rounded px-5 py-2.5 text-center p-small font-semibold text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 transition-all overflow-hidden group"
               onClick={() => setMobileMenuOpen(false)}
             >
               <div className="flex items-center gap-2 relative z-10">

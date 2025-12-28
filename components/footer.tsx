@@ -32,7 +32,7 @@ export default function Footer() {
           decoding="async" 
           aria-hidden="true" 
           role="presentation" 
-          className="hidden lg:block h-auto w-full absolute top-12 right-0 bottom-0 left-0 object-contain opacity-10 pointer-events-none"
+          className="hidden lg:block h-auto w-[110%] absolute top-8 left-1/2 -translate-x-1/2 bottom-0 object-contain opacity-10 pointer-events-none"
           style={{ filter: 'grayscale(100%)' }}
         />
         <div className="relative grid grid-cols-2 gap-12 md:grid-cols-4">
@@ -44,8 +44,9 @@ export default function Footer() {
                 width={64} 
                 height={64} 
                 className="h-16 w-16"
+                style={{ filter: 'brightness(0) saturate(100%) invert(67%) sepia(78%) saturate(1234%) hue-rotate(180deg) brightness(101%) contrast(101%)' }}
               />
-              <span className="text-4xl lg:text-5xl font-bold tracking-tight">Xcoin</span>
+              <span className="text-4xl lg:text-5xl font-bold tracking-tight text-[#93c5fd]">Xcoin</span>
             </Link>
             <p className="mt-6 text-base lg:text-lg text-muted-foreground">The future of private, quantum-secure finance.</p>
           </div>

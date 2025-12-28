@@ -3,6 +3,41 @@
 
 @custom-variant dark (&:is(.dark *));
 
+
+/* Font Face Definitions - PP Neue Montreal */
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Font Face Definitions - RM Mono */
+@font-face {
+  font-family: "RM Mono";
+  src: url("/fonts/RMMono-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Updated accent color to cyan blue #7eeefe from the Xcoin logo */
 :root {
   --background: oklch(0.98 0 0);
@@ -78,9 +113,9 @@
 }
 
 @theme inline {
-  --font-sans: "Inter", "Inter Fallback", system-ui, sans-serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
-  --font-heading: var(--font-heading), "Space Grotesk", "Space Grotesk Fallback", system-ui, sans-serif;
+  --font-sans: "PP Neue Montreal", Arial, sans-serif;
+  --font-mono: "RM Mono", monospace;
+  --font-heading: "PP Neue Montreal", Arial, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -139,9 +174,107 @@
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden;
+    font-family: "PP Neue Montreal", Arial, sans-serif;
+    font-weight: 500;
+    line-height: 1;
   }
   html {
     overflow-x: hidden;
+  }
+}
+
+/* Text Size Classes from XCoin_Basti */
+.eyebrow {
+  text-transform: uppercase;
+  font-family: "RM Mono", monospace;
+  font-size: 0.75em;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.eyebrow.small {
+  font-size: 0.65em;
+}
+
+.p-tiny {
+  font-size: 0.75em;
+}
+
+.p-small {
+  font-size: 0.875em;
+  line-height: 1.3;
+}
+
+.p-reg {
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+.p-med {
+  font-size: 1.125em;
+}
+
+.p-large {
+  font-size: 1.5em;
+  line-height: 1.15;
+}
+
+.h-small {
+  letter-spacing: -0.02em;
+  font-size: 1.75em;
+  font-weight: 500;
+  line-height: 1;
+  font-family: "PP Neue Montreal", Arial, sans-serif;
+}
+
+.h-medium {
+  font-size: 3.375em;
+  font-weight: 500;
+  line-height: 1;
+  font-family: "PP Neue Montreal", Arial, sans-serif;
+}
+
+.h-large {
+  font-size: 5em;
+  font-weight: 500;
+  line-height: 1;
+  font-family: "PP Neue Montreal", Arial, sans-serif;
+}
+
+.h-display {
+  letter-spacing: -0.01em;
+  font-size: 5.625em;
+  font-weight: 500;
+  line-height: 0.95;
+  font-family: "PP Neue Montreal", Arial, sans-serif;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 991px) {
+  .h-medium {
+    font-size: 2.8em;
+  }
+  
+  .h-large {
+    font-size: 4em;
+  }
+  
+  .h-display {
+    font-size: 4.5em;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .h-medium {
+    font-size: 3em;
+  }
+  
+  .h-large {
+    font-size: 3.5em;
+  }
+  
+  .h-display {
+    font-size: 2.5rem;
   }
 }
 
@@ -167,4 +300,89 @@
 .overflow-x-auto {
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
+}
+
+/* Video Play Button Styles from XCoin_Basti */
+.video-play-button-modern {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-button-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-button-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  transition: background 0.3s ease;
+}
+
+.play-button-pulse-blue {
+  background: rgba(147, 197, 253, 0.3); /* #93c5fd with opacity */
+}
+
+.play-button-icon {
+  position: relative;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 3px; /* Slight offset for visual centering */
+  transition: color 0.3s ease;
+}
+
+.play-button-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.play-button-icon-blue {
+  color: #93c5fd; /* Logo blue */
+}
+
+.play-button-glow {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  filter: blur(10px);
+  transition: background 0.3s ease, opacity 0.3s ease;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.play-button-glow-blue {
+  background: radial-gradient(circle, rgba(147, 197, 253, 0.5) 0%, transparent 70%);
+  opacity: 1;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
 }

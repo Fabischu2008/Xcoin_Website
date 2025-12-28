@@ -1,16 +1,9 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Space_Grotesk } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-
-const _spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-heading",
-  display: "swap",
-})
 
 export const metadata: Metadata = {
   title: {
@@ -89,7 +82,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`font-sans antialiased ${_spaceGrotesk.variable}`}>
+      <body className="font-sans antialiased">
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />
