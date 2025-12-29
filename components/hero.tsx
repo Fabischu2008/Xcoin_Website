@@ -1,18 +1,20 @@
+"use client"
+
 import Link from "next/link"
 import { Eye, Rocket } from "lucide-react"
 
 export default function Hero() {
   return (
-    <section className="relative overflow-x-hidden min-h-screen flex items-center pt-20 pb-20" style={{ touchAction: 'pan-y', WebkitOverflowScrolling: 'touch', position: 'relative', zIndex: 1 }}>
-      {/* Video Background - Größer, fast über den kompletten Bildschirm */}
-      <div className="absolute inset-0 -z-20 scale-110 pointer-events-none">
+    <section className="relative overflow-x-hidden min-h-screen flex items-center pt-20">
+      {/* Video Background - Desktop only */}
+      <div className="absolute inset-0 scale-110 pointer-events-none hidden md:block" style={{ zIndex: -1 }}>
         <video
           autoPlay
           loop
           muted
           playsInline
-          preload="metadata"
-          className="h-full w-full object-cover pointer-events-none"
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         >
           <source src="/1208-compressed.mp4" type="video/mp4" />
         </video>
@@ -21,8 +23,21 @@ export default function Hero() {
         {/* Blauer Gradient wie in Xcoin_Basti */}
         <div className="absolute inset-0 bg-gradient-to-tl from-blue-300 to-blue-300 mix-blend-multiply pointer-events-none" />
       </div>
+      
+      {/* Static Image Background - Mobile only (fast loading) */}
+      <div className="absolute inset-0 scale-110 pointer-events-none md:hidden" style={{ zIndex: -1 }}>
+        <img
+          src="/xcoin-vid-poster.jpg"
+          alt="Xcoin Background"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        />
+        {/* Overlay für bessere Textlesbarkeit */}
+        <div className="absolute inset-0 bg-black/50 pointer-events-none" />
+        {/* Blauer Gradient wie in Xcoin_Basti */}
+        <div className="absolute inset-0 bg-gradient-to-tl from-blue-300 to-blue-300 mix-blend-multiply pointer-events-none" />
+      </div>
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 w-full py-20">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 w-full py-20 relative z-10">
         <div className="home-hero__inner relative">
           {/* Top Row: Features and Title */}
           <div className="flex flex-col md:flex-row items-start gap-4 md:gap-8">
