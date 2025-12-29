@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useEffect, useRef, useState } from "react"
@@ -208,6 +209,108 @@ function DevelopmentImageColumn({ images, parallaxStart, parallaxEnd, scrub }: {
           />
         </div>
       ))}
+    </div>
+  )
+}
+
+function DividerAnimation() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [isAnimated, setIsAnimated] = useState(false)
+
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isAnimated) {
+            setIsAnimated(true)
+          }
+        })
+      },
+      { threshold: 0.3 }
+    )
+
+    observer.observe(container)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [isAnimated])
+
+  return (
+    <div ref={containerRef} className="mx-auto max-w-4xl pt-10">
+      <div className="flex items-center justify-center" style={{ gap: isAnimated ? '0.5rem' : '0.25rem' }}>
+        {/* Left Video */}
+        <div 
+          className="flex-none w-10 h-10 relative rounded-full overflow-hidden transition-all duration-1200 ease-out"
+          style={{ 
+            transform: isAnimated ? 'translateX(0)' : 'translateX(20rem)',
+            opacity: isAnimated ? 1 : 0,
+          }}
+        >
+          <video 
+            src="/vid/hero9.mp4" 
+            autoPlay 
+            muted 
+            loop 
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+        
+        {/* Left Divider */}
+        <div 
+          className="h-px transition-all duration-1000 ease-out flex-1"
+          style={{ 
+            backgroundImage: 'linear-gradient(90deg, transparent, rgba(239, 238, 236, 0.25) 25%, rgba(239, 238, 236, 0.25) 75%, transparent)',
+            transformOrigin: 'center right',
+            transform: isAnimated ? 'scaleX(1)' : 'scaleX(0.1)',
+            minWidth: '0',
+          }}
+        />
+        
+        {/* Logo */}
+        <div className="flex-none w-12 h-12 flex items-center justify-center relative z-10">
+          <img 
+            src="/img/xcoin.svg" 
+            alt="Xcoin" 
+            className="w-full h-full object-contain animate-spin-slow"
+            style={{ animationDuration: '10000ms' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 rounded-lg blur-lg opacity-70 -z-10" />
+        </div>
+        
+        {/* Right Divider */}
+        <div 
+          className="h-px transition-all duration-1000 ease-out flex-1"
+          style={{ 
+            backgroundImage: 'linear-gradient(90deg, transparent, rgba(239, 238, 236, 0.25) 25%, rgba(239, 238, 236, 0.25) 75%, transparent)',
+            transformOrigin: 'center left',
+            transform: isAnimated ? 'scaleX(1)' : 'scaleX(0.1)',
+            minWidth: '0',
+          }}
+        />
+        
+        {/* Right Video */}
+        <div 
+          className="flex-none w-10 h-10 relative rounded-full overflow-hidden transition-all duration-1200 ease-out"
+          style={{ 
+            transform: isAnimated ? 'translateX(0)' : 'translateX(-20rem)',
+            opacity: isAnimated ? 1 : 0,
+          }}
+        >
+          <video 
+            src="/vid/hero9.mp4" 
+            autoPlay 
+            muted 
+            loop 
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+      </div>
     </div>
   )
 }
@@ -426,23 +529,25 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {/* Development Block */}
             <Link href="/develop" className="md:col-span-2 rounded-2xl border border-border bg-background p-8 lg:p-10 relative group cursor-pointer hover:border-accent/50 transition-all overflow-hidden h-[26em] flex flex-col">
+              {/* Arrow Icon - Top Right */}
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="50" 
+                height="50" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="text-accent opacity-0 -translate-x-5 translate-y-5 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute top-0 right-0 z-10"
+              >
+                <path d="M7 7h10v10"/>
+                <path d="M7 17 17 7"/>
+              </svg>
+              
               <div className="flex items-start justify-between mb-6 relative z-10">
                 <h3 className="h-small">Development</h3>
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="50" 
-                  height="50" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="text-accent opacity-0 -translate-x-5 translate-y-5 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute top-0 right-0 z-10"
-                >
-                  <path d="M7 7h10v10"/>
-                  <path d="M7 17 17 7"/>
-                </svg>
               </div>
               <div className="relative z-10">
                 <p className="text-muted-foreground p-small">
@@ -524,7 +629,24 @@ export default function HomePage() {
             </Link>
 
             {/* Xcoin Community Block */}
-            <div className="md:col-span-1 rounded-2xl border border-border bg-background p-6 relative group h-[26em] flex flex-col">
+            <Link href="/community" className="md:col-span-1 rounded-2xl border border-border bg-background p-6 relative group cursor-pointer hover:border-accent/50 transition-all h-[26em] flex flex-col">
+              {/* Arrow Icon - Top Right */}
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="50" 
+                height="50" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="text-accent opacity-0 -translate-x-5 translate-y-5 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute top-0 right-0 z-10"
+              >
+                <path d="M7 7h10v10"/>
+                <path d="M7 17 17 7"/>
+              </svg>
+              
               {/* Community Images Slider - Like XCoin_Basti */}
               <div className="flex gap-2 overflow-x-auto pb-4 -mx-6 px-6 mb-6" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                 {[
@@ -563,7 +685,7 @@ export default function HomePage() {
                   Curious about what it means to be part of something different? You don't "sign up" in the traditional sense. You don't become a member of a club or platform. If you join, you become part of something bigger: a global decentralized community built for people who value privacy, freedom, and independence.
                 </p>
               </div>
-            </div>
+            </Link>
 
             {/* Use Cases Block - Breiter wie im Original */}
             <Link href="/use" className="md:col-span-2 rounded-2xl border border-border bg-background p-8 lg:p-10 relative group cursor-pointer hover:border-accent/50 transition-all overflow-hidden h-[26em] flex flex-col">
@@ -602,8 +724,25 @@ export default function HomePage() {
             </Link>
 
             {/* Quantum-Resistant Block - Like XCoin_Basti */}
-            <div className="md:col-span-1 lg:col-span-1 rounded-2xl border border-border bg-background p-8 lg:p-10 relative group h-[26em] flex flex-col">
+            <div className="md:col-span-1 lg:col-span-1 rounded-2xl border border-border bg-background p-8 lg:p-10 relative group cursor-pointer hover:border-accent/50 transition-all h-[26em] flex flex-col">
               <Link href="/xcoin_grid/quantum-safe" className="absolute inset-0 z-10" title="Quantum-Resistant" />
+              
+              {/* Arrow Icon - Top Right */}
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="50" 
+                height="50" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="text-accent opacity-0 -translate-x-5 translate-y-5 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute top-0 right-0 z-20"
+              >
+                <path d="M7 7h10v10"/>
+                <path d="M7 17 17 7"/>
+              </svg>
               
               {/* Crypto Icons Grid with Parallax - Top Section - Like XCoin_Basti */}
               <div className="relative mb-6 flex-1 min-h-0 -mt-4" style={{ perspective: '1000px' }}>
@@ -645,6 +784,404 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Crowdfunding Section */}
+      <section className="relative py-24 overflow-hidden group">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          {/* Text Container */}
+          <div className="text-center mb-16">
+            <div className="mx-auto max-w-4xl">
+              {/* Heading with proper spacing */}
+              <div className="relative mb-16" style={{ minHeight: '4rem' }}>
+                <h2 className="h-large transition-opacity duration-500 group-hover:opacity-0">
+                  Crowdfunding and how it works
+                </h2>
+                <h2 className="h-large absolute top-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  Explore the perks of joining the community
+                </h2>
+              </div>
+              
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                <Link 
+                  href="/crowdfunding" 
+                  className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 text-black"
+                >
+                  <div className="absolute inset-0 bg-[#93c5fd] rounded-lg -z-10" />
+                  <span className="p-reg text-black">Explore Crowdfunding</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-black">
+                    <rect width="7" height="7" x="3" y="3" rx="1"/>
+                    <rect width="7" height="7" x="14" y="3" rx="1"/>
+                    <rect width="7" height="7" x="14" y="14" rx="1"/>
+                    <rect width="7" height="7" x="3" y="14" rx="1"/>
+                  </svg>
+                </Link>
+                <Link 
+                  href="/xcoin_grid/xcoin-better" 
+                  className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg backdrop-blur-md bg-white/10 border border-white/20 hover:border-[#93c5fd]/50 transition-all duration-300 text-white"
+                >
+                  <span className="p-reg text-white">Why is Xcoin better?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                    <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Divider with Videos and Logo - Animated */}
+          <DividerAnimation />
+        </div>
+
+        {/* Background Rocks - 3D Graphic */}
+        <div className="absolute inset-0 top-[60%] z-0 w-full h-[50em] overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black" />
+          {/* Placeholder for 3D rocks - kann später durch echte 3D-Grafik ersetzt werden */}
+          <div className="absolute inset-0 opacity-20" style={{
+            backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(147, 197, 253, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(147, 197, 253, 0.1) 0%, transparent 50%)',
+            filter: 'blur(40px)'
+          }} />
+        </div>
+      </section>
+
+      {/* DAO Tabs Section */}
+      <DAOTabsSection />
+
+      {/* Pricing Section */}
+      <PricingSection />
     </>
+  )
+}
+
+function DAOTabsSection() {
+  const [activeTab, setActiveTab] = useState(0)
+
+  const tabs = [
+    {
+      id: 'members',
+      label: 'Members',
+      title: 'Members Own CREO',
+      content: 'Want more than just access? Become an active part of the XXX DAO, with real influence, voting power on what comes next and Xcoins at a guaranteed low rate. Ready to unlock your role?',
+      buttonText: 'Explore Members',
+      buttonHref: '/community#members',
+      video: '/vid/dao1.mp4',
+    },
+    {
+      id: 'validators',
+      label: 'Validators',
+      title: 'Becoming a Validator',
+      content: 'Want to help secure the network and get rewarded for it? Becoming a Validator means joining the core of the Xcoin ecosystem. Curious how it works? Let\'s break it down.',
+      buttonText: 'More About Validators',
+      buttonHref: '/community#validators',
+      video: '/vid/dao2.mp4',
+    },
+    {
+      id: 'investors',
+      label: 'Investors',
+      title: 'Funding the Future',
+      content: 'Want more than just returns? Investing in Xcoin means early access to a fast-growing ecosystem, with real utility, real adoption, and real upside.\n\nYour capital doesn\'t fund a corporation. It powers a movement. Your support fuels privacy, autonomy, and a new digital future.',
+      buttonText: 'Explore Investors',
+      buttonHref: '/community#investors',
+      video: '/vid/dao3.mp4',
+    },
+  ]
+
+  return (
+    <section className="relative py-24">
+      <div className="mx-auto max-w-[1920px] px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12">
+          {/* Left Column - Tabs and Content */}
+          <div className="flex flex-col">
+            <div className="mb-8">
+              <h3 className="h-medium mb-2">XXX DAO</h3>
+              <span className="text-sm text-muted-foreground relative -top-3 block">(Decentralized Autonomous Organization)</span>
+              
+              {/* Tab Buttons - Smaller */}
+              <div className="mt-6 p-1.5 border border-border rounded-lg bg-background/50 backdrop-blur-md flex gap-1">
+                {tabs.map((tab, index) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(index)}
+                    onMouseEnter={(e) => {
+                      if (activeTab !== index) {
+                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (activeTab !== index) {
+                        e.currentTarget.style.borderColor = 'transparent'
+                      }
+                    }}
+                    className="flex-1 px-4 py-2.5 rounded-md transition-all duration-250 relative bg-transparent border border-transparent hover:border-white/10"
+                    style={{
+                      borderColor: activeTab === index ? 'rgba(255, 255, 255, 0.15)' : 'transparent',
+                    }}
+                  >
+                    {activeTab === index && (
+                      <div 
+                        className="absolute inset-0 rounded-md -z-10 transition-all duration-250"
+                        style={{
+                          backgroundColor: 'rgba(239, 238, 236, 0.06)',
+                          border: '1px solid rgba(239, 238, 236, 0.08)',
+                          inset: '-1px',
+                        }}
+                      />
+                    )}
+                    <div className="p-med text-white relative z-10 text-sm">{tab.label}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Tab Content */}
+            <div className="flex-1 relative min-h-[200px]">
+              {tabs.map((tab, index) => (
+                <div
+                  key={tab.id}
+                  className={`absolute inset-0 flex flex-col gap-4 transition-opacity duration-300 ${
+                    activeTab === index ? 'opacity-100 visible' : 'opacity-0 invisible'
+                  }`}
+                >
+                  <h4 className="h-small">{tab.title}</h4>
+                  <p className="p-med text-muted-foreground opacity-70 whitespace-pre-line">
+                    {tab.content}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Tab Buttons */}
+            <div className="mt-4 flex flex-col gap-3">
+              {tabs.map((tab, index) => (
+                <Link
+                  key={tab.id}
+                  href={tab.buttonHref}
+                  className={`group relative inline-flex items-center justify-center px-6 py-3 rounded-lg transition-all duration-300 ${
+                    activeTab === index ? 'opacity-100 visible' : 'opacity-0 invisible absolute'
+                  }`}
+                >
+                  <div className="absolute inset-0 bg-[#93c5fd] rounded-lg -z-10 group-hover:bg-[#93c5fd]/90 transition-colors" />
+                  <span className="p-reg text-black">{tab.buttonText}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column - Video - Full Width */}
+          <div className="relative h-[750px] lg:h-[800px] w-full">
+            {tabs.map((tab, index) => (
+              <div
+                key={tab.id}
+                className={`absolute inset-0 transition-opacity duration-500 ${
+                  activeTab === index ? 'opacity-100 visible' : 'opacity-0 invisible'
+                }`}
+              >
+                <div className="w-full h-full rounded-lg overflow-hidden">
+                  <video
+                    src={tab.video}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function PricingSection() {
+  const [showOverlay, setShowOverlay] = useState(false)
+
+  return (
+    <section className="relative py-24">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="h-medium mb-6">This is your early access opportunity.</h2>
+            <p className="p-reg text-muted-foreground opacity-70">
+              This is not a promo. This is not a presale for whales. This is your direct path to owning a part of the next-generation financial platform, before it launches to the world.
+            </p>
+          </div>
+        </div>
+
+        {/* Pricing Cards Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          {/* Left Card - Main Price */}
+          <div className="relative aspect-square rounded-2xl border border-border bg-background/50 p-12 lg:p-16 flex flex-col justify-between">
+            <div className="flex flex-col items-center gap-9">
+              {/* Price Header */}
+              <div className="w-full">
+                <div className="flex items-center justify-center gap-3 mb-4 flex-wrap">
+                  <h3 className="h-price leading-none whitespace-nowrap">€100</h3>
+                  <span className="h-price leading-none">/</span>
+                  <div className="h-price leading-none whitespace-nowrap">XXX Token</div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent opacity-25" />
+                  <div className="eyebrow">Fixed minimum price at launch, guaranteed</div>
+                  <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent opacity-25" />
+                </div>
+              </div>
+
+              {/* Description */}
+              <p className="p-small text-muted-foreground opacity-70 text-left w-full">
+                The protocol is offering a one-time release of XXX Tokens. 1 XXX Token = 10 Xcoins. In addition every XXX Token grants you exclusive access to the DAO, including governance rights, voting power, proposal access, and participation in key community decisions.
+              </p>
+
+              {/* Features */}
+              <div className="space-y-4 w-full text-left">
+                {[
+                  { title: 'Costs €100 per XXX Token', desc: 'one-time investment for 10 Xcoins' },
+                  { title: 'Redeemable for 10 Xcoins at launch', desc: 'fixed exchange rate guaranteed' },
+                  { title: 'Guaranteed entry price of €10 per Xcoin', desc: 'no price volatility risk before launch' },
+                  { title: 'Delivered instantly to your wallet', desc: 'automatic and secure token transfer' },
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <div className="bg-[#1a1a1a] text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 6 9 17l-5-5"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="p-reg font-medium mb-1">{feature.title}</p>
+                      <p className="p-small opacity-70">{feature.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Button */}
+            <div className="relative mt-8">
+              <Link
+                href="#"
+                className="group relative inline-flex items-center justify-center w-full px-6 py-3 rounded-lg transition-all duration-300"
+              >
+                <div className="absolute inset-0 bg-[#93c5fd] rounded-lg -z-10 group-hover:bg-[#93c5fd]/90 transition-colors" />
+                <span className="p-reg text-black">Get XXX Tokens now</span>
+              </Link>
+              <div className="absolute inset-0 bg-black/70 text-white border border-white/10 px-4 py-2 shadow-xl text-center space-y-1 cursor-not-allowed flex flex-col items-center justify-center rounded-lg">
+                <span className="text-[10px] uppercase tracking-widest opacity-80">Available from</span>
+                <span className="block font-semibold text-sm">XXXXXXX XX, 2025</span>
+              </div>
+              <p className="text-sm opacity-50 mt-5 text-center">This is the only round. No KYC. No second chances.</p>
+            </div>
+          </div>
+
+          {/* Right Card - Orange Card with Overlay */}
+          <div className="relative aspect-square rounded-2xl border border-border bg-[#93c5fd] p-12 lg:p-16 flex flex-col justify-between text-black">
+            {/* Tag Button */}
+            <button
+              onClick={() => setShowOverlay(!showOverlay)}
+              className="absolute top-10 left-10 z-30 flex items-center gap-2 bg-black text-white rounded-md px-2 py-1"
+            >
+              <div className="eyebrow text-white">explore benefits</div>
+              <div className="eyebrow circle text-white">?</div>
+            </button>
+
+            {/* Main Content */}
+            <div className={`flex flex-col gap-14 text-left transition-opacity duration-300 ${showOverlay ? 'opacity-0 invisible' : 'opacity-100 visible'}`}>
+              <h4 className="h-small mt-8">Start Now. It's This Simple:</h4>
+              
+              <div className="space-y-4">
+                {[
+                  { num: '1', title: 'Choose your investment amount', desc: '(starting at €100 for 10 Xcoins)' },
+                  { num: '2', title: 'Send crypto to the indicated wallet address' },
+                  { num: '3', title: 'Receive XXX Tokens to your wallet' },
+                  { num: '4', title: 'Done. You\'re in.' },
+                ].map((step, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <div className="bg-[#1a1a1a] text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      {step.num}
+                    </div>
+                    <div>
+                      <p className="p-reg font-medium mb-1">{step.title}</p>
+                      {step.desc && <p className="p-small opacity-70">{step.desc}</p>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <p className="p-small">
+                No KYC. No account. No name needed.<br/>
+                Just you, your wallet, and your stake in the future of private finance
+              </p>
+
+              <p className="p-small mb-20">
+                <span className="block h-small mb-3">Ready to Act?</span>
+                This sale only exists for one reason: to give you a fair shot at something most people will only hear about when it's too late. First-come, first-served. When it's gone — it's gone. When Xcoin hits exchanges, you'll either be watching… or already holding. The choice is yours.
+              </p>
+            </div>
+
+            {/* Overlay Content */}
+            <div className={`absolute inset-0 rounded-2xl bg-[#93c5fd] p-12 lg:p-16 flex flex-col gap-9 text-left transition-opacity duration-300 ${showOverlay ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+              <button
+                onClick={() => setShowOverlay(false)}
+                className="absolute top-10 left-10 z-30 bg-black text-white rounded-md w-6 h-6 flex items-center justify-center"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none" className="w-full h-full">
+                  <path d="M7.02441 0.2C7.02441 0.0895426 7.11396 0 7.22441 0H8.57441C8.68487 0 8.77441 0.0895431 8.77441 0.2V13.8C8.77441 13.9105 8.68487 14 8.57441 14H7.22441C7.11396 14 7.02441 13.9105 7.02441 13.8V0.2Z" fill="currentColor" />
+                  <path d="M14.6994 6.125C14.8099 6.125 14.8994 6.21454 14.8994 6.325V7.675C14.8994 7.78546 14.8099 7.875 14.6994 7.875L1.09941 7.875C0.988957 7.875 0.899414 7.78546 0.899414 6.325C0.899414 6.21454 0.988957 6.125 1.09941 6.125L14.6994 6.125Z" fill="currentColor" />
+                </svg>
+              </button>
+
+              <h4 className="h-small mt-8">Why This Moment Matters.</h4>
+              <p className="p-small mb-5">
+                Ask yourself: What if you could go back in time and buy Bitcoin before anyone knew its name? What if you had a second chance... but this time, the technology is stronger, the mission is clearer, and the playing field is finally fair?<br/><br/>
+                This is your moment to decide again, only now with a better blueprint.<br/>
+                Xcoin offers:
+              </p>
+
+              <div className="space-y-4 pb-20">
+                {[
+                  { title: 'True privacy', desc: 'your activity, identity, and assets are invisible by default' },
+                  { title: 'Quantum-proof security', desc: 'immune to future supercomputer attacks' },
+                  { title: 'No mining, no inflation', desc: 'energy-efficient and economically sound' },
+                  { title: 'Massive scalability', desc: '— 10,000+ transactions per second' },
+                  { title: 'DAO-led', desc: 'no central control, no backdoors, no founders with veto power' },
+                ].map((benefit, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <div className="bg-[#1a1a1a] text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 6 9 17l-5-5"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="p-reg font-medium mb-1">{benefit.title}</p>
+                      <p className="p-small opacity-70">{benefit.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Button */}
+            <div className="relative">
+              <div className="bg-black/90 backdrop-blur-xl text-white border border-white/10 px-4 py-2 shadow-xl text-center space-y-1 cursor-not-allowed">
+                <span className="text-[10px] uppercase tracking-widest opacity-80">Available from</span>
+                <span className="block font-semibold text-sm">XXXXXXX XX, 2025</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Card - Why You'll Want to Be First */}
+        <div className="rounded-2xl border border-border bg-background/50 p-12 lg:p-16">
+          <div className="max-w-3xl mx-auto">
+            <h4 className="h-small mb-6">Why You'll Want to Be First.</h4>
+            <p className="p-reg text-muted-foreground opacity-70">
+              After launch, there will be no fixed prices, no guarantees — only raw market forces. The XXX Tokens sale ends. The €10 price tag disappears. Global demand begins. Just look at history: Bitcoin launched under €1. Ethereum at a few euros. Today? Tens of thousands. Do you really think a quantum-secure, private-by-default upgrade to Bitcoin will still go for €10 once the world catches on? Probably not. And by then, your chance will be long gone.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }

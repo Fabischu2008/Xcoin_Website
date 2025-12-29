@@ -174,12 +174,18 @@
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
     font-family: "PP Neue Montreal", Arial, sans-serif;
     font-weight: 500;
     line-height: 1;
   }
   html {
     overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
   }
 }
 
@@ -246,6 +252,13 @@
   font-size: 5.625em;
   font-weight: 500;
   line-height: 0.95;
+  font-family: "PP Neue Montreal", Arial, sans-serif;
+}
+
+.h-price {
+  font-size: 3em;
+  font-weight: 500;
+  line-height: 1;
   font-family: "PP Neue Montreal", Arial, sans-serif;
 }
 

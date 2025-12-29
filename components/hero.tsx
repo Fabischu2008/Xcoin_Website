@@ -3,23 +3,23 @@ import { Eye, Rocket } from "lucide-react"
 
 export default function Hero() {
   return (
-    <section className="relative overflow-x-hidden min-h-screen flex items-center pt-20">
+    <section className="relative overflow-x-hidden min-h-screen flex items-center pt-20 touch-pan-y">
       {/* Video Background - Größer, fast über den kompletten Bildschirm */}
-      <div className="absolute inset-0 -z-20 scale-110">
+      <div className="absolute inset-0 -z-20 scale-110 pointer-events-none">
         <video
           autoPlay
           loop
           muted
           playsInline
           preload="metadata"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover pointer-events-none"
         >
           <source src="/1208-compressed.mp4" type="video/mp4" />
         </video>
         {/* Overlay für bessere Textlesbarkeit */}
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/50 pointer-events-none" />
         {/* Blauer Gradient wie in Xcoin_Basti */}
-        <div className="absolute inset-0 bg-gradient-to-tl from-blue-300 to-blue-300 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-tl from-blue-300 to-blue-300 mix-blend-multiply pointer-events-none" />
       </div>
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8 w-full py-20">
