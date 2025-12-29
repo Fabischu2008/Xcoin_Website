@@ -86,7 +86,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <RotatingFavicon />
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen" style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>{children}</main>
         <Footer />
         <Analytics />
       </body>

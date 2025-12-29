@@ -3,7 +3,7 @@ import { Eye, Rocket } from "lucide-react"
 
 export default function Hero() {
   return (
-    <section className="relative overflow-x-hidden min-h-screen flex items-center pt-20">
+    <section className="relative overflow-x-hidden min-h-screen flex items-center pt-20 pb-20" style={{ touchAction: 'pan-y', WebkitOverflowScrolling: 'touch', position: 'relative', zIndex: 1 }}>
       {/* Video Background - Größer, fast über den kompletten Bildschirm */}
       <div className="absolute inset-0 -z-20 scale-110 pointer-events-none">
         <video
