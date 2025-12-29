@@ -11,29 +11,30 @@ export default function RotatingFavicon() {
     if (!ctx) return
 
     let rotation = 0
-    const rotationSpeed = (360 / 10000) * 16.67 // 360 degrees in 10 seconds at 60fps
+    const rotationSpeed = 2 // degrees per frame
 
-    const updateFavicon = () => {
-      if (!ctx) return
-      
+    const drawFavicon = () => {
+      // Clear canvas
       ctx.clearRect(0, 0, 32, 32)
+      
+      // Save context and apply rotation
       ctx.save()
-      ctx.translate(16, 16)
-      ctx.rotate((rotation * Math.PI) / 180)
-      ctx.translate(-16, -16)
+      ctx.translate(16, 16) // Move to center
+      ctx.rotate((rotation * Math.PI) / 180) // Rotate
+      ctx.translate(-16, -16) // Move back
 
-      // Draw Xcoin logo SVG path (simplified asterisk shape)
-      ctx.strokeStyle = "#93c5fd"
-      ctx.fillStyle = "#93c5fd"
+      // Draw black asterisk shape
+      ctx.fillStyle = "#000000"
+      ctx.strokeStyle = "#000000"
       ctx.lineWidth = 2
       ctx.beginPath()
       
-      // Draw asterisk shape (6-pointed star)
       const centerX = 16
       const centerY = 16
       const radius = 12
       const points = 6
       
+      // Draw 6-pointed star
       for (let i = 0; i < points * 2; i++) {
         const angle = (i * Math.PI) / points - Math.PI / 2
         const r = i % 2 === 0 ? radius : radius * 0.5
@@ -51,27 +52,35 @@ export default function RotatingFavicon() {
 
       ctx.restore()
 
-      // Update favicon
-      const link = document.querySelector("link[rel*='icon']") as HTMLLinkElement || document.createElement("link")
-      link.type = "image/png"
-      link.rel = "icon"
-      link.href = canvas.toDataURL()
-      if (!document.querySelector("link[rel*='icon']")) {
-        document.getElementsByTagName("head")[0].appendChild(link)
-      }
-
+      // Update rotation
       rotation += rotationSpeed
       if (rotation >= 360) {
         rotation = 0
       }
+
+      // Update favicon
+      const link = document.querySelector("link[rel*='icon']") as HTMLLinkElement
+      if (link) {
+        link.href = canvas.toDataURL()
+      } else {
+        const newLink = document.createElement("link")
+        newLink.rel = "icon"
+        newLink.type = "image/png"
+        newLink.href = canvas.toDataURL()
+        document.head.appendChild(newLink)
+      }
     }
 
-    const interval = setInterval(updateFavicon, 16.67) // ~60fps
-    updateFavicon() // Initial render
+    // Start animation loop
+    const intervalId = setInterval(drawFavicon, 50) // Update every 50ms (20fps)
+    
+    // Initial draw
+    drawFavicon()
 
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(intervalId)
+    }
   }, [])
 
   return null
 }
-

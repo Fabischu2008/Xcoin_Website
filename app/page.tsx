@@ -114,14 +114,11 @@ function VideoPlayer() {
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleVideoClick}
     >
-      {/* Video Background with Hover Effect - Like XCoin_Basti */}
+      {/* Simple Video with Hover Effect */}
       <div 
-        className={`relative w-full aspect-video rounded-2xl overflow-hidden transition-all duration-500 ${
-          isHovered ? 'bg-white/10 scale-[1.02]' : 'bg-white/5'
-        }`}
+        className="relative w-full aspect-video rounded-2xl overflow-hidden transition-all duration-500 ease-out"
         style={{
-          backdropFilter: 'blur(4em)',
-          WebkitBackdropFilter: 'blur(4em)',
+          transform: isHovered ? 'scale(1.05)' : 'scale(1)',
         }}
       >
         <video
@@ -130,18 +127,18 @@ function VideoPlayer() {
           playsInline
           preload="metadata"
           autoPlay
-          muted
           loop
           poster="/xcoin-vid-poster.jpg"
-          className={`w-full h-full object-cover transition-transform duration-500 ease-out ${
-            isHovered ? 'scale-110' : 'scale-100'
-          }`}
+          className="w-full h-full object-cover"
+          style={{
+            transform: 'scale(0.95)', // Video 5% kleiner
+          }}
         >
           <source src="/xcoin-vid-compressed.mp4" type="video/mp4" />
         </video>
         
-        {/* Play Button Overlay - Always visible, blue glow on hover - Like XCoin_Basti */}
-        <div className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-all duration-500 ease-out transform ${isHovered ? 'opacity-100 scale-100' : 'opacity-90 scale-90'}`}>
+        {/* Play Button Overlay */}
+        <div className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-all duration-500 ease-out ${isHovered ? 'opacity-100 scale-100' : 'opacity-90 scale-90'}`}>
           <div className="video-play-button-modern">
             <div className="play-button-inner">
               {/* Pulse Animation - Blue when hovered */}
