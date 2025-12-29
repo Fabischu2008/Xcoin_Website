@@ -849,7 +849,38 @@ export default function HomePage() {
 
       {/* Pricing Section */}
       <PricingSection />
+
+      {/* Privacy is Power Section */}
+      <PrivacyPowerSection />
     </>
+  )
+}
+
+function PrivacyPowerSection() {
+  return (
+    <section className="relative py-12">
+      <div className="absolute top-0 left-0 right-0">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent opacity-20" />
+        </div>
+      </div>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="flex flex-col items-center gap-8">
+          <div className="relative">
+            <img 
+              src="/img/xcoin.svg" 
+              alt="Xcoin logo" 
+              loading="lazy" 
+              decoding="async" 
+              className="w-32 h-32 animate-spin-slow object-contain"
+              style={{ animationDuration: '10000ms' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 rounded-lg blur-md opacity-30" aria-hidden="true" />
+          </div>
+          <h2 className="h-medium md:h-large uppercase text-center">Privacy is Power.</h2>
+        </div>
+      </div>
+    </section>
   )
 }
 
@@ -1005,7 +1036,7 @@ function PricingSection() {
         <div className="text-center mb-16">
           <div className="mx-auto max-w-3xl">
             <h2 className="h-medium mb-6">This is your early access opportunity.</h2>
-            <p className="p-reg text-muted-foreground opacity-70">
+            <p className="p-reg text-white opacity-70">
               This is not a promo. This is not a presale for whales. This is your direct path to owning a part of the next-generation financial platform, before it launches to the world.
             </p>
           </div>

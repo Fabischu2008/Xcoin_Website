@@ -39,12 +39,15 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-4">
               <Image 
-                src="/xcoin-logo.png" 
+                src="/img/xcoin.svg" 
                 alt="Xcoin Logo" 
                 width={64} 
                 height={64} 
-                className="h-16 w-16"
-                style={{ filter: 'brightness(0) saturate(100%) invert(67%) sepia(78%) saturate(1234%) hue-rotate(180deg) brightness(101%) contrast(101%)' }}
+                className="h-16 w-16 animate-spin-slow"
+                style={{ 
+                  filter: 'brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1234%) hue-rotate(185deg) brightness(101%) contrast(101%)',
+                  animationDuration: '10000ms'
+                }}
               />
               <span className="text-4xl lg:text-5xl font-bold tracking-tight text-[#93c5fd]">Xcoin</span>
             </Link>
