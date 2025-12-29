@@ -302,7 +302,7 @@ export default function DashboardSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative mt-12 pb-24">
+    <section ref={sectionRef} className="relative mt-12 pb-24" style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}>
       <style jsx>{`
         .db-nav__item:hover {
           background-color: #1f1f1f !important;
@@ -354,12 +354,13 @@ export default function DashboardSection() {
         }
 
         .db-content__card:hover {
-          transform: scale(1.05) !important;
+          transform: scale(1.1) !important;
           z-index: 10 !important;
         }
 
         .db-content__card:hover img {
           transform: rotateY(180deg) scaleX(-1) !important;
+          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
 
         .db-content__card,
@@ -552,23 +553,40 @@ export default function DashboardSection() {
       `}</style>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="relative">
-          {/* Privacy is Power Banner - Right Aligned, Blue, Square, Closer to Cards */}
+        <div className="relative border border-border rounded-2xl p-6 sm:p-8">
+          {/* Privacy is Power Banner - Flies in from top right, starts elongated, becomes normal */}
           <div
             className="mb-4 flex justify-end scroll-animated sm:mb-6"
             style={{
-              opacity: scrollProgress,
-              transform: `translateX(${(1 - scrollProgress) * (isMobile ? 0 : 150)}px) translateY(${(1 - scrollProgress) * (isMobile ? 10 : 20)}px) scale(${0.8 + scrollProgress * 0.2})`,
+              opacity: Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6)), // Longer animation duration
+              transform: `
+                translateX(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6))) * 400}px)
+                translateY(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6))) * -200}px)
+                scaleX(${4.0 - (Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6)) * 3.0)})
+                scaleY(${0.5 + (Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6)) * 0.5)})
+              `,
+              transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
             }}
           >
-            <div className="privacy-button relative inline-flex items-center gap-2 border-2 border-accent bg-accent px-4 py-2.5 sm:px-6 sm:py-3 p-small sm:p-reg font-semibold text-accent-foreground whitespace-nowrap">
-              <span className="relative z-10">Privacy is Power</span>
+            <div className="privacy-button relative inline-flex items-center justify-center gap-2 border-2 border-accent bg-accent px-8 py-2.5 sm:px-12 sm:py-3 p-small sm:p-reg font-semibold text-accent-foreground whitespace-nowrap min-w-[280px] sm:min-w-[350px]">
+              <span className="relative z-10 text-center">Privacy is Power</span>
             </div>
           </div>
 
           <div className="flex flex-row gap-2 sm:gap-4 lg:gap-8">
-            {/* Sidebar Navigation - Slides in from left (Desktop & Mobile) */}
-            <aside className="w-16 sm:w-20 flex-shrink-0 lg:w-64" style={{ position: 'relative' }}>
+            {/* Sidebar Navigation - Flies in from top left */}
+            <aside 
+              className="w-16 sm:w-20 flex-shrink-0 lg:w-64" 
+              style={{ 
+                position: 'relative',
+                opacity: Math.max(0, Math.min(1, (scrollProgress - 0.15) / 0.4)),
+                transform: `
+                  translateX(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.15) / 0.4))) * -400}px)
+                  translateY(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.15) / 0.4))) * -200}px)
+                `,
+                transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
+              }}
+            >
               <div style={{ position: 'relative' }}>
                 {/* Mobile: Current Category Indicator */}
                 <div className="mb-4 lg:hidden">
@@ -625,8 +643,20 @@ export default function DashboardSection() {
               </div>
             </aside>
 
-            {/* Content Grid - Cards stacked vertically on mobile, 3x3 grid on desktop */}
-            <div className="flex-1 min-w-0">
+            {/* Content Grid - Cards come from background with zoom forward */}
+            <div 
+              className="flex-1 min-w-0"
+              style={{
+                opacity: Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.5)),
+                transform: `
+                  translateZ(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.5))) * -500}px)
+                  scale(${0.3 + (Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.5)) * 0.7)})
+                `,
+                transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
+                transformStyle: 'preserve-3d',
+                perspective: '1000px',
+              }}
+            >
               <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-6 w-full overflow-visible">
                 {displayItems.length === 0 && filteredItems.length > 0
                   ? filteredItems.map((item, index) => (
@@ -640,29 +670,18 @@ export default function DashboardSection() {
                       </div>
                     ))
                   : displayItems.map((item, index) => {
-                      // All cards animate together from bottom, no staggering
-                      // Adjust animation intensity for mobile
-                      const cardProgress = Math.max(0, Math.min(1, scrollProgress / (isMobile ? 0.6 : 0.5)))
-                      // Smooth easing function for more natural movement
-                      const easedProgress = cardProgress < 0.5
-                        ? 2 * cardProgress * cardProgress
-                        : 1 - Math.pow(-2 * cardProgress + 2, 3) / 2
-                      const scale = isMobile ? (0.6 + easedProgress * 0.4) : (0.4 + easedProgress * 0.6)
-                      const translateZ = isMobile ? (-150 + easedProgress * 150) : (-250 + easedProgress * 250)
-                      const translateY = isMobile ? ((1 - easedProgress) * 60) : ((1 - easedProgress) * 100)
-                      const rotateY = isMobile ? ((1 - easedProgress) * 8) : ((1 - easedProgress) * 15)
-                      const blur = isMobile ? ((1 - easedProgress) * 3) : ((1 - easedProgress) * 5)
-
+                      // Cards are now animated by the parent container, so individual card animations are simpler
+                      // Just ensure they're visible when parent animation completes
+                      const cardProgress = Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.5))
+                      
                       return (
                       <div
                         key={item.id}
                         data-category={item.category}
                         className="db-content__card group scroll-animated"
                         style={{
-                          opacity: Math.max(0.1, easedProgress), // Ensure minimum visibility
-                          transform: `translateZ(${translateZ}px) scale(${scale}) translateY(${translateY}px) rotateY(${rotateY}deg)`,
-                          filter: `blur(${blur}px)`,
-                          pointerEvents: easedProgress > 0.3 ? 'auto' : 'none', // Enable clicks when visible
+                          opacity: cardProgress > 0.5 ? 1 : cardProgress * 2, // Fade in as parent zooms
+                          pointerEvents: cardProgress > 0.3 ? 'auto' : 'none', // Enable clicks when visible
                         }}
                       >
                         <Link href={item.href} className="block h-full w-full max-w-full">
