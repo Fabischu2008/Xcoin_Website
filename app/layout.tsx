@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     siteName: "Xcoin",
     images: [
       {
-        url: "/xcoin-logo.png",
+        url: "/img/xcoin.svg",
         width: 1200,
         height: 630,
         alt: "Xcoin Logo",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "Xcoin - The Future of Finance",
     description:
       "A truly private, quantum-secure, and community-governed cryptocurrency. Fixed supply of 21 million. Zero inflation. Zero-knowledge privacy by default.",
-    images: ["/xcoin-logo.png"],
+    images: ["/img/xcoin.svg"],
     creator: "@xcoin",
   },
   robots: {
@@ -62,14 +62,8 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/xcoin-logo.png", type: "image/png" },
-    ],
-    apple: "/xcoin-logo.png",
-    shortcut: "/favicon.svg",
-  },
+  // Icons are automatically handled by Next.js via app/icon.png and app/apple-icon.png
+  // RotatingFavicon component handles dynamic favicon updates
 }
 
 export const viewport: Viewport = {
