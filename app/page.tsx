@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import Hero from "@/components/hero"
 import DashboardSection from "@/components/dashboard-section"
 import TestimonialsSection from "@/components/testimonials-section"
@@ -500,7 +501,7 @@ export default function HomePage() {
     description:
       "A truly private, quantum-secure, and community-governed cryptocurrency. Fixed supply of 21 million. Zero inflation. Zero-knowledge privacy by default.",
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://xcoin-website.vercel.app",
-    logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://xcoin-website.vercel.app"}/xcoin-logo.png`,
+    logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://xcoin-website.vercel.app"}/img/xcoin.svg`,
     sameAs: [
       // Add your social media links here when available
     ],
@@ -699,14 +700,14 @@ export default function HomePage() {
                 ].map((item, index) => (
                   <div key={index} className="flex-shrink-0 relative">
                     <div className="relative w-[70px] aspect-square rounded overflow-hidden border border-border bg-[#0e0e0e]">
-                      <img 
+                      <Image 
                         src={item.src} 
                         alt={item.label}
+                        width={70}
+                        height={70}
                         className="w-full h-full object-cover"
                         loading="lazy"
-                        onError={(e) => {
-                          console.error('Image failed to load:', item.src);
-                        }}
+                        unoptimized={true}
                       />
                     </div>
                     <div className="mt-2 w-[70px]">

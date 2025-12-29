@@ -62,8 +62,14 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  // Icons are automatically handled by Next.js via app/icon.png and app/apple-icon.png
-  // RotatingFavicon component handles dynamic favicon updates
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/xcoin-logo.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: "/xcoin-logo.png",
+    shortcut: "/favicon.svg",
+  },
 }
 
 export const viewport: Viewport = {
