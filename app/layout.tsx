@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     siteName: "Xcoin",
     images: [
       {
-        url: "/xcoin-logo.png",
+        url: "/img/xcoin.svg",
         width: 1200,
         height: 630,
         alt: "Xcoin Logo",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "Xcoin - The Future of Finance",
     description:
       "A truly private, quantum-secure, and community-governed cryptocurrency. Fixed supply of 21 million. Zero inflation. Zero-knowledge privacy by default.",
-    images: ["/xcoin-logo.png"],
+    images: ["/img/xcoin.svg"],
     creator: "@xcoin",
   },
   robots: {
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/xcoin-logo.png", type: "image/png" },
+      { url: "/xcoin-logo.png", type: "image/png", sizes: "32x32" },
     ],
     apple: "/xcoin-logo.png",
     shortcut: "/favicon.svg",
@@ -86,7 +86,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <RotatingFavicon />
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen" style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>{children}</main>
         <Footer />
         <Analytics />
       </body>
