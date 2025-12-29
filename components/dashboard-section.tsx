@@ -354,12 +354,13 @@ export default function DashboardSection() {
         }
 
         .db-content__card:hover {
-          transform: scale(1.05) !important;
+          transform: scale(1.1) !important;
           z-index: 10 !important;
         }
 
         .db-content__card:hover img {
           transform: rotateY(180deg) scaleX(-1) !important;
+          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
 
         .db-content__card,

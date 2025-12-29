@@ -6,7 +6,6 @@ import Link from "next/link"
 import Hero from "@/components/hero"
 import DashboardSection from "@/components/dashboard-section"
 import TestimonialsSection from "@/components/testimonials-section"
-import { useParallax } from "@/lib/useParallax"
 
 function renderTextWithLinks(text: string, links: Record<string, string>) {
   if (!links || Object.keys(links).length === 0) {
@@ -110,15 +109,15 @@ function VideoPlayer() {
 
   return (
     <div 
-      className="mt-12 w-full cursor-pointer group relative flex justify-center"
+      className="relative w-full cursor-pointer group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleVideoClick}
     >
       {/* Video Background with Hover Effect - Like XCoin_Basti */}
       <div 
-        className={`relative w-full max-w-[95%] aspect-[1.6] rounded-2xl overflow-hidden transition-all duration-300 ${
-          isHovered ? 'bg-white/10' : 'bg-white/5'
+        className={`relative w-full aspect-video rounded-2xl overflow-hidden transition-all duration-500 ${
+          isHovered ? 'bg-white/10 scale-[1.02]' : 'bg-white/5'
         }`}
         style={{
           backdropFilter: 'blur(4em)',
@@ -129,7 +128,10 @@ function VideoPlayer() {
           ref={videoRef}
           controls={false}
           playsInline
-          preload="none"
+          preload="metadata"
+          autoPlay
+          muted
+          loop
           poster="/xcoin-vid-poster.jpg"
           className={`w-full h-full object-cover transition-transform duration-500 ease-out ${
             isHovered ? 'scale-110' : 'scale-100'
@@ -138,25 +140,23 @@ function VideoPlayer() {
           <source src="/xcoin-vid-compressed.mp4" type="video/mp4" />
         </video>
         
-        {/* Play Button Overlay (when paused) - Like XCoin_Basti */}
-        {!isPlaying && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className={`video-play-button-modern ${isHovered ? 'play-button-hover' : ''}`}>
-              <div className="play-button-inner">
-                {/* Pulse Animation */}
-                <div className={`play-button-pulse ${isHovered ? 'play-button-pulse-blue' : ''}`}></div>
-                {/* Play Icon */}
-                <div className={`play-button-icon ${isHovered ? 'play-button-icon-blue' : ''}`}>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="6,4 20,12 6,20" fill="currentColor"></polygon>
-                  </svg>
-                </div>
-                {/* Glow Effect */}
-                <div className={`play-button-glow ${isHovered ? 'play-button-glow-blue' : ''}`}></div>
+        {/* Play Button Overlay - Always visible, blue glow on hover - Like XCoin_Basti */}
+        <div className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-all duration-500 ease-out transform ${isHovered ? 'opacity-100 scale-100' : 'opacity-90 scale-90'}`}>
+          <div className="video-play-button-modern">
+            <div className="play-button-inner">
+              {/* Pulse Animation - Blue when hovered */}
+              <div className={`play-button-pulse ${isHovered ? 'play-button-pulse-blue' : ''}`}></div>
+              {/* Play Icon - Blue when hovered */}
+              <div className={`play-button-icon ${isHovered ? 'play-button-icon-blue' : ''}`}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="6,4 20,12 6,20" fill="currentColor"></polygon>
+                </svg>
               </div>
+              {/* Glow Effect - Blue when hovered */}
+              <div className={`play-button-glow ${isHovered ? 'play-button-glow-blue' : ''}`}></div>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   )
@@ -504,10 +504,10 @@ export default function HomePage() {
           </div>
           </div>
           
-          {/* Video Player - Full Width, Almost Full Screen */}
-          <div className="mt-12 w-full">
-            <VideoPlayer />
-          </div>
+      {/* Video Player - Full Width, Almost Full Screen - Like Original */}
+      <div className="mt-10 mb-16 w-full hidden md:block">
+        <VideoPlayer />
+      </div>
         </div>
       </section>
 

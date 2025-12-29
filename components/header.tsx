@@ -4,7 +4,6 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
-import XcoinLogo from "./xcoin-logo"
 
 const navigation = [
   { name: "Overview", href: "/overview" },
