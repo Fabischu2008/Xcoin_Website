@@ -80,6 +80,16 @@ function VideoPlayer() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isHovered, setIsHovered] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const handleVideoClick = () => {
     if (videoRef.current) {
@@ -110,13 +120,13 @@ function VideoPlayer() {
   return (
     <div 
       className="relative w-full cursor-pointer group"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => !isMobile && setIsHovered(true)}
+      onMouseLeave={() => !isMobile && setIsHovered(false)}
       onClick={handleVideoClick}
     >
-      {/* Simple Video with Hover Effect */}
+      {/* Desktop: Video with Hover Effect */}
       <div 
-        className="relative w-full aspect-video rounded-2xl overflow-hidden transition-all duration-500 ease-out"
+        className="relative w-full aspect-video rounded-2xl overflow-hidden transition-all duration-500 ease-out hidden md:block"
         style={{
           transform: isHovered ? 'scale(1.05)' : 'scale(1)',
         }}
@@ -154,6 +164,41 @@ function VideoPlayer() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Mobile: Video with Play Button - Always visible */}
+      <div className="relative w-full aspect-video rounded-2xl overflow-hidden md:hidden">
+        <video
+          ref={videoRef}
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          poster="/xcoin-vid-poster.jpg"
+          className="w-full h-full object-cover"
+        >
+          <source src="/xcoin-vid-compressed.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Play Button Overlay - Show when paused */}
+        {!isPlaying && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="video-play-button-modern">
+              <div className="play-button-inner">
+                {/* Pulse Animation */}
+                <div className="play-button-pulse play-button-pulse-blue"></div>
+                {/* Play Icon */}
+                <div className="play-button-icon play-button-icon-blue">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="6,4 20,12 6,20" fill="currentColor"></polygon>
+                  </svg>
+                </div>
+                {/* Glow Effect */}
+                <div className="play-button-glow play-button-glow-blue"></div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
@@ -501,8 +546,8 @@ export default function HomePage() {
           </div>
           </div>
           
-      {/* Video Player - Full Width, Almost Full Screen - Like Original */}
-      <div className="mt-10 mb-16 w-full hidden md:block">
+      {/* Video Player - Full Width, Almost Full Screen - Desktop and Mobile */}
+      <div className="mt-10 mb-16 w-full">
         <VideoPlayer />
       </div>
         </div>
