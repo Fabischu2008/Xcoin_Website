@@ -4,7 +4,6 @@
 import { useEffect, useRef, useState, lazy, Suspense } from "react"
 import Link from "next/link"
 import Hero from "@/components/hero"
-import { useParallax } from "@/lib/useParallax"
 
 // Lazy load heavy components for better mobile performance
 const DashboardSection = lazy(() => import("@/components/dashboard-section"))
@@ -81,18 +80,20 @@ function renderTextWithLinks(text: string, links: Record<string, string>) {
 
 function VideoPlayer() {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [isHovered, setIsHovered] = useState(false)
+  const modalVideoRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleVideoClick = () => {
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play()
-        setIsPlaying(true)
-      } else {
-        videoRef.current.pause()
-        setIsPlaying(false)
-      }
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    if (modalVideoRef.current) {
+      modalVideoRef.current.pause()
+      modalVideoRef.current.currentTime = 0
     }
   }
 
@@ -110,56 +111,126 @@ function VideoPlayer() {
     }
   }, [])
 
+  useEffect(() => {
+    if (isModalOpen && modalVideoRef.current) {
+      modalVideoRef.current.play().catch(() => {
+        // Autoplay might fail, that's okay
+      })
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+
+    // Handle ESC key to close modal
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isModalOpen) {
+        handleCloseModal()
+      }
+    }
+
+    window.addEventListener('keydown', handleEscape)
+    return () => {
+      window.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = ''
+    }
+  }, [isModalOpen])
+
   return (
-    <div 
-      className="mt-12 w-full cursor-pointer group relative flex justify-center"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={handleVideoClick}
-    >
-      {/* Video Background with Hover Effect - Like XCoin_Basti */}
+    <>
       <div 
-        className={`relative w-full max-w-[95%] aspect-[1.6] rounded-2xl overflow-hidden transition-all duration-300 ${
-          isHovered ? 'bg-white/10' : 'bg-white/5'
-        }`}
-        style={{
-          backdropFilter: 'blur(4em)',
-          WebkitBackdropFilter: 'blur(4em)',
-        }}
+        className="mt-12 w-full cursor-pointer group relative flex justify-center"
+        onClick={handleVideoClick}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        <video
-          ref={videoRef}
-          controls={false}
-          playsInline
-          preload="none"
-          className={`w-full h-full object-cover transition-transform duration-500 ease-out ${
-            isHovered ? 'scale-110' : 'scale-100'
-          }`}
+        {/* Video Background - Only the container scales on hover, not the video */}
+        <div 
+          className="relative w-full max-w-[95%] aspect-[1.6] rounded-2xl overflow-hidden bg-white/5 transition-transform duration-500 ease-out"
+          style={{
+            backdropFilter: 'blur(4em)',
+            WebkitBackdropFilter: 'blur(4em)',
+            transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+          }}
         >
-          <source src="/xcoin-vid-compressed.mp4" type="video/mp4" />
-        </video>
-        
-        {/* Play Button Overlay (when paused) - Like XCoin_Basti */}
-        {!isPlaying && (
+          <video
+            ref={videoRef}
+            controls={false}
+            playsInline
+            preload="metadata"
+            poster="/xcoin-vid-poster.jpg"
+            className="w-full h-full object-contain"
+          >
+            <source src="/xcoin-vid-compressed.mp4" type="video/mp4" />
+          </video>
+          
+          {/* Play Button Overlay */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className={`video-play-button-modern ${isHovered ? 'play-button-hover' : ''}`}>
+            <div className="video-play-button-modern">
               <div className="play-button-inner">
                 {/* Pulse Animation */}
-                <div className={`play-button-pulse ${isHovered ? 'play-button-pulse-blue' : ''}`}></div>
+                <div className="play-button-pulse play-button-pulse-blue"></div>
                 {/* Play Icon */}
-                <div className={`play-button-icon ${isHovered ? 'play-button-icon-blue' : ''}`}>
+                <div className="play-button-icon play-button-icon-blue">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0" strokeLinecap="round" strokeLinejoin="round">
                     <polygon points="6,4 20,12 6,20" fill="currentColor"></polygon>
                   </svg>
                 </div>
                 {/* Glow Effect */}
-                <div className={`play-button-glow ${isHovered ? 'play-button-glow-blue' : ''}`}></div>
+                <div className="play-button-glow play-button-glow-blue"></div>
               </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
-    </div>
+
+      {/* Video Modal/Lightbox */}
+      {isModalOpen && (
+        <div 
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-sm"
+          onClick={handleCloseModal}
+        >
+          {/* Close Button */}
+          <button
+            onClick={handleCloseModal}
+            className="absolute top-4 right-4 z-[10000] w-12 h-12 flex items-center justify-center rounded-full bg-black/50 hover:bg-black/70 border border-white/20 hover:border-white/40 transition-all"
+            aria-label="Close video"
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="24" 
+              height="24" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              className="text-white"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+
+          {/* Video Container */}
+          <div 
+            className="relative w-full h-full max-w-[95vw] max-h-[95vh] flex items-center justify-center p-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <video
+              ref={modalVideoRef}
+              controls
+              autoPlay
+              playsInline
+              className="w-full h-full object-contain rounded-lg"
+            >
+              <source src="/xcoin-vid-compressed.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 
