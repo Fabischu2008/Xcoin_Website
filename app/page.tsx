@@ -146,7 +146,7 @@ function VideoPlayer() {
       >
         {/* Video Background - Only the container scales on hover, not the video */}
         <div 
-          className="relative w-full max-w-[95%] aspect-[1.6] rounded-2xl overflow-hidden bg-white/5 transition-transform duration-500 ease-out"
+          className="relative w-full max-w-[95%] aspect-video rounded-2xl overflow-hidden bg-white/5 transition-transform duration-500 ease-out"
           style={{
             backdropFilter: 'blur(4em)',
             WebkitBackdropFilter: 'blur(4em)',
@@ -159,8 +159,9 @@ function VideoPlayer() {
             playsInline
             preload="metadata"
             poster="/xcoin-vid-poster.jpg"
-            className="w-full h-full object-contain"
+            className="w-full h-full object-cover"
           >
+            <source src="/vid/xcoin-vid.mp4" type="video/mp4" />
             <source src="/xcoin-vid-compressed.mp4" type="video/mp4" />
           </video>
           
@@ -225,6 +226,7 @@ function VideoPlayer() {
               playsInline
               className="w-full h-full object-contain rounded-lg"
             >
+              <source src="/vid/xcoin-vid.mp4" type="video/mp4" />
               <source src="/xcoin-vid-compressed.mp4" type="video/mp4" />
             </video>
           </div>
@@ -368,7 +370,7 @@ function DividerAnimation() {
         {/* Right Video */}
         <div 
           className="flex-none w-10 h-10 relative rounded-full overflow-hidden transition-all duration-1200 ease-out"
-          style={{ 
+      style={{
             transform: isAnimated ? 'translateX(0)' : 'translateX(-20rem)',
             opacity: isAnimated ? 1 : 0,
           }}
@@ -573,7 +575,7 @@ export default function HomePage() {
               <p className="p-reg text-muted-foreground">
                 Whether you're protecting your personal freedom, operating in high-risk environments, or simply tired of being watched, Xcoin gives you silence in a world of noise.
             </p>
-          </div>
+            </div>
           </div>
           
           {/* Video Player - Full Width, Almost Full Screen */}
@@ -585,7 +587,7 @@ export default function HomePage() {
 
       {/* Dashboard Section */}
       <Suspense fallback={<div className="min-h-[400px]" />}>
-        <DashboardSection />
+      <DashboardSection />
       </Suspense>
 
       {/* Testimonials Section */}
@@ -753,8 +755,8 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
+            ))}
+          </div>
               <div className="mt-auto">
                 <h3 className="h-small mb-3">Xcoin Community</h3>
                 <p className="text-muted-foreground p-small">
@@ -874,7 +876,7 @@ export default function HomePage() {
                 </h2>
                 <h2 className="h-large absolute top-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   Explore the perks of joining the community
-                </h2>
+            </h2>
               </div>
               
               {/* Buttons */}
@@ -1116,7 +1118,7 @@ function PricingSection() {
               This is not a promo. This is not a presale for whales. This is your direct path to owning a part of the next-generation financial platform, before it launches to the world.
             </p>
           </div>
-        </div>
+          </div>
 
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
@@ -1286,9 +1288,9 @@ function PricingSection() {
             <p className="p-reg text-muted-foreground opacity-70">
               After launch, there will be no fixed prices, no guarantees — only raw market forces. The XXX Tokens sale ends. The €10 price tag disappears. Global demand begins. Just look at history: Bitcoin launched under €1. Ethereum at a few euros. Today? Tens of thousands. Do you really think a quantum-secure, private-by-default upgrade to Bitcoin will still go for €10 once the world catches on? Probably not. And by then, your chance will be long gone.
             </p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
   )
 }

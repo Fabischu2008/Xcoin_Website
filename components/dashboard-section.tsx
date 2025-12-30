@@ -265,21 +265,21 @@ export default function DashboardSection() {
         }
       `}</style>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="relative border border-border rounded-2xl p-6 sm:p-8">
+      <div className="mx-auto max-w-[90rem] px-4 sm:px-6 lg:px-8">
+        <div className="relative border border-border rounded-2xl p-6 sm:p-8 lg:p-10">
           {/* Privacy is Power Button */}
           <div className="mb-6 flex justify-end">
             <Link
               href="/community"
-              className="relative inline-flex items-center justify-center gap-2 border-2 border-accent bg-accent px-[28px] py-[10px] sm:px-[35px] sm:py-[12px] text-sm sm:text-base font-semibold text-accent-foreground whitespace-nowrap min-w-[200px] sm:min-w-[250px] transition-all hover:scale-105"
+              className="relative inline-flex items-center justify-center gap-2 border-2 border-accent bg-accent px-8 py-3 sm:px-10 sm:py-4 p-small font-semibold text-accent-foreground whitespace-nowrap min-w-[200px] sm:min-w-[240px] transition-all hover:scale-105"
             >
               <span>Privacy is Power</span>
             </Link>
           </div>
 
-          <div className="flex flex-row gap-4 lg:gap-8">
+          <div className="flex flex-row gap-6 lg:gap-8">
             {/* Sidebar Navigation - Left side */}
-            <aside className="w-16 sm:w-20 lg:w-[294px] flex-shrink-0">
+            <aside className="w-20 sm:w-24 lg:w-[360px] flex-shrink-0 h-full flex flex-col">
               {/* Mobile: Current Category Indicator */}
               <div className="mb-3 lg:hidden">
                 <div className="rounded-lg border border-accent/30 bg-accent/10 px-2.5 py-1.5 text-center">
@@ -289,32 +289,35 @@ export default function DashboardSection() {
                 </div>
               </div>
 
-              {/* Desktop: Box around navigation */}
-              <div className="hidden lg:block border border-border rounded-xl p-[21px] bg-card/50">
-                <nav className="space-y-[5.25px]">
+              {/* Desktop: Box around navigation - full height */}
+              <div className="hidden lg:flex lg:flex-col border border-border rounded-xl p-8 bg-card/50 h-full">
+                <nav className="space-y-3 flex-1">
                   {navItems.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => setActiveFilter(item.id)}
-                      className={`db-nav__item group flex w-full items-center justify-start gap-[15.75px] rounded-lg p-[15.75px] transition-all ${
+                      className={`db-nav__item group flex w-full items-center justify-start gap-6 rounded-lg p-6 transition-all ${
                         activeFilter === item.id
                           ? "bg-accent/10 text-accent"
                           : "text-muted-foreground hover:bg-secondary"
                       }`}
                     >
-                      <div className="db-nav__icon flex h-[50px] w-[50px] items-center justify-center">
-                        <div className="relative h-[32px] w-[32px]">
+                      <div className="db-nav__icon flex h-16 w-16 items-center justify-center">
+                        <div className="relative h-12 w-12">
                           <Image
                             src="/xcoin-logo.png"
                             alt={item.label}
-                            width={48}
-                            height={48}
+                            width={64}
+                            height={64}
                             className="animate-spin [animation-duration:10000ms] object-contain"
+                            style={{
+                              filter: 'brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1234%) hue-rotate(185deg) brightness(101%) contrast(101%)',
+                            }}
                             unoptimized
                           />
                         </div>
                       </div>
-                      <p className="text-[18.9px] font-semibold transition-colors duration-300 group-hover:text-cyan-400">
+                      <p className="text-lg font-semibold transition-colors duration-300 group-hover:text-cyan-400">
                         {item.label}
                       </p>
                     </button>
@@ -323,7 +326,7 @@ export default function DashboardSection() {
               </div>
 
               {/* Mobile: Navigation without box - vertical */}
-              <nav className="flex flex-col lg:hidden gap-2.5">
+              <nav className="flex flex-col lg:hidden gap-2.5 flex-1">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
@@ -342,6 +345,9 @@ export default function DashboardSection() {
                           width={48}
                           height={48}
                           className="animate-spin [animation-duration:10000ms] object-contain"
+                          style={{
+                            filter: 'brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1234%) hue-rotate(185deg) brightness(101%) contrast(101%)',
+                          }}
                           unoptimized
                         />
                       </div>
@@ -352,8 +358,8 @@ export default function DashboardSection() {
             </aside>
 
             {/* Content Grid */}
-            <div className="flex-1 min-w-0">
-              <div className="grid grid-cols-1 gap-[21px] sm:gap-[31.5px] lg:grid-cols-3 lg:gap-[31.5px] w-full">
+            <div className="flex-1 min-w-0 p-4 sm:p-6 lg:p-8">
+              <div className="grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-3 lg:gap-16 w-full">
                 {filteredItems.map((item) => (
                   <div
                     key={item.id}
@@ -363,16 +369,13 @@ export default function DashboardSection() {
                     <Link href={item.href} className="block h-full w-full">
                       <div className="db-card__visual relative w-full overflow-hidden rounded-xl border border-border bg-card">
                         <div className="dash-res-card__visual-before absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
-                        <div className="relative aspect-video w-full flex items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background overflow-hidden">
+                        <div className="relative w-full aspect-[4/3] flex items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background overflow-hidden">
                           {item.image ? (
-                            <Image
+                            <img
                               src={item.image}
                               alt={item.title}
-                              fill
-                              className="object-cover"
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              className="w-full h-full object-cover"
                               loading="lazy"
-                              quality={85}
                             />
                           ) : (
                             <div className="text-center">
@@ -385,16 +388,16 @@ export default function DashboardSection() {
                                   className="object-contain"
                                 />
                               </div>
-                              <p className="text-xs font-medium text-muted-foreground capitalize">
+                              <p className="p-small text-muted-foreground capitalize">
                                 {item.category}
                               </p>
                             </div>
                           )}
                         </div>
                       </div>
-                      <div className="db-card__info mt-4 flex items-center justify-between">
-                        <p className="text-sm font-medium leading-tight">{item.title}</p>
-                        <div className="db-card__arrow ml-4 flex h-6 w-6 shrink-0 items-center justify-center text-muted-foreground transition-colors group-hover:text-accent">
+                      <div className="db-card__info mt-6 flex items-center justify-between">
+                        <p className="p-small leading-tight">{item.title}</p>
+                        <div className="db-card__arrow ml-6 flex h-6 w-6 shrink-0 items-center justify-center text-muted-foreground transition-colors group-hover:text-accent">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"

@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import RotatingFavicon from "@/components/rotating-favicon"
 
 export const metadata: Metadata = {
   title: {
@@ -80,6 +81,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.ico" />
       </head>
       <body className="font-sans antialiased">
+        <RotatingFavicon />
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />
