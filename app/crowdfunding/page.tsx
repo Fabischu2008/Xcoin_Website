@@ -107,7 +107,7 @@ export default function CrowdfundingPage() {
         <div className="mx-auto max-w-6xl mb-12">
           <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden">
             <Image
-              src="/xcoin_grid/crowdfunding.jpg"
+              src="/img/xcoin_grid/crowdfunding.jpg"
               alt="Crowdfunding"
               fill
               className="object-cover"

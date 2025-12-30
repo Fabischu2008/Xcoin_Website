@@ -93,7 +93,7 @@ export default function PowerInTheHandsOfTheCommunityPage() {
         <div className="mx-auto max-w-6xl mb-12">
           <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden">
             <Image
-              src="/members_grid/power_in_the_hands_of_the_community.jpg"
+              src="/img/members_grid/power_in_the_hands_of_the_community.jpg"
               alt="Power in the Hands of the Community"
               fill
               className="object-cover"

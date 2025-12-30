@@ -15,6 +15,10 @@ const nextConfig = {
     unoptimized: false,
   },
   compress: true,
+  // Performance optimizations
+  experimental: {
+    optimizePackageImports: ['lucide-react'],
+  },
 }
 
 export default nextConfig

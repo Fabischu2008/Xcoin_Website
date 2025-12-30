@@ -112,7 +112,7 @@ export default function QuantumSafePage() {
         <div className="mx-auto max-w-6xl mb-12">
           <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden">
             <Image
-              src="/xcoin_grid/quantum_safe.jpg"
+              src="/img/xcoin_grid/quantum_safe.jpg"
               alt="Why Quantum-Safe Cryptography Matters"
               fill
               className="object-cover"

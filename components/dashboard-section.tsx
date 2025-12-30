@@ -20,63 +20,63 @@ const dashboardItems: DashboardItem[] = [
     id: 1,
     category: "xcoin",
     title: "Xcoin Will Replace Bitcoin",
-    image: "/xcoin_grid/xcoin_will_replace_bitcoin.jpeg",
+    image: "/img/xcoin_grid/box1.jpeg",
     href: "/why-xcoin-replaces-bitcoin",
   },
   {
     id: 2,
     category: "xcoin",
     title: "Crowdfunding",
-    image: "/xcoin_grid/crowdfunding.jpg",
+    image: "/img/xcoin_grid/crowdfunding.jpg",
     href: "/crowdfunding",
   },
   {
     id: 3,
     category: "xcoin",
     title: "The Man in the Background",
-    image: "/xcoin_grid/the_man_in_the_background.jpeg",
+    image: "/img/xcoin_grid/box3.jpeg",
     href: "/the-man-in-the-background",
   },
   {
     id: 4,
     category: "xcoin",
     title: "What is the XXX Blockchain?",
-    image: "/xcoin_grid/xxx_blockchain.jpeg",
+    image: "/img/xcoin_grid/box4.jpeg",
     href: "/what-is-xxx-blockchain",
   },
   {
     id: 5,
     category: "xcoin",
     title: "Why Xcoin Is Better Than Monero, Zcash, or Bitcoin",
-    image: "/xcoin_grid/xcoin_is_better.jpeg",
+    image: "/img/xcoin_grid/box5.jpeg",
     href: "/why-xcoin-is-better",
   },
   {
     id: 6,
     category: "xcoin",
     title: "Optional Compliance for Audits and Taxes",
-    image: "/xcoin_grid/compliance.jpg",
+    image: "/img/xcoin_grid/compliance.jpg",
     href: "/optional-compliance",
   },
   {
     id: 7,
     category: "xcoin",
     title: "The Philosophy Behind Anonymous Finance",
-    image: "/xcoin_grid/anonymous_finance.jpg",
+    image: "/img/xcoin_grid/anonymous_finance.jpg",
     href: "/philosophy-behind-anonymous-finance",
   },
   {
     id: 8,
     category: "xcoin",
     title: "Why Quantum-Safe Cryptography Matters",
-    image: "/xcoin_grid/quantum_safe.jpg",
+    image: "/img/xcoin_grid/quantum_safe.jpg",
     href: "/quantum-safe",
   },
   {
     id: 9,
     category: "xcoin",
     title: "Get XXX Tokens",
-    image: "/xcoin_grid/get_xxx.jpeg",
+    image: "/img/xcoin_grid/box8.jpeg",
     href: "/what-are-xxx-tokens",
   },
   // Members category - 3 items
@@ -84,21 +84,21 @@ const dashboardItems: DashboardItem[] = [
     id: 10,
     category: "members",
     title: "Power in the Hands of the Community",
-    image: "/members_grid/power_in_the_hands_of_the_community.jpg",
+    image: "/img/members_grid/power_in_the_hands_of_the_community.jpg",
     href: "/power-in-the-hands-of-the-community",
   },
   {
     id: 11,
     category: "members",
     title: "See What's Coming",
-    image: "/members_grid/see_whats_coming.jpg",
+    image: "/img/members_grid/see_whats_coming.jpg",
     href: "/see-whats-coming",
   },
   {
     id: 12,
     category: "members",
     title: "The Power of XXX DAO Members",
-    image: "/members_grid/the_power_of_xxx_dao_members.jpg",
+    image: "/img/members_grid/the_power_of_xxx_dao_members.jpg",
     href: "/the-power-of-xxx-dao-members",
   },
   // Validators category - 3 items
@@ -106,21 +106,21 @@ const dashboardItems: DashboardItem[] = [
     id: 19,
     category: "validators",
     title: "Earn Xcoin. Effortlessly.",
-    image: "/validators_grid/earn_xcoin_effortlessly.jpg",
+    image: "/img/validators_grid/earn_xcoin_effortlessly.jpg",
     href: "/validator",
   },
   {
     id: 20,
     category: "validators",
     title: "Apply to Run a SEP Node",
-    image: "/validators_grid/apply_to_run_a_sep_node.jpg",
+    image: "/img/validators_grid/apply_to_run_a_sep_node.jpg",
     href: "/validator-application",
   },
   {
     id: 21,
     category: "validators",
     title: "The Rise of the Validators",
-    image: "/validators_grid/the_rise_of_the_validators.jpg",
+    image: "/img/validators_grid/the_rise_of_the_validators.jpg",
     href: "/the-rise-of-validators",
   },
   // Whitepapers category - 3 items
@@ -128,21 +128,21 @@ const dashboardItems: DashboardItem[] = [
     id: 28,
     category: "whitepapers",
     title: "Every Revolution Begins with an Idea",
-    image: "/whitepapers_grid/every_revolution_begins_with_an_idea.jpg",
+    image: "/img/whitepapers_grid/every_revolution_begins_with_an_idea.jpg",
     href: "/docs",
   },
   {
     id: 29,
     category: "whitepapers",
     title: "The Path to Bitcoin Replacement",
-    image: "/whitepapers_grid/the_path_to_bitcoin_replacement.jpg",
+    image: "/img/whitepapers_grid/the_path_to_bitcoin_replacement.jpg",
     href: "/technology",
   },
   {
     id: 30,
     category: "whitepapers",
     title: "XXX DAO Governance Protocol",
-    image: "/whitepapers_grid/xxx_dao_governance_protocol.jpg",
+    image: "/img/whitepapers_grid/xxx_dao_governance_protocol.jpg",
     href: "/governance",
   },
   // Learning category - 6 items
@@ -150,42 +150,42 @@ const dashboardItems: DashboardItem[] = [
     id: 37,
     category: "learning",
     title: "Core Concepts",
-    image: "/learning_center_grid/core_concepts.jpg",
+    image: "/img/learning_center_grid/core_concepts.jpg",
     href: "/overview",
   },
   {
     id: 38,
     category: "learning",
     title: "Cryptographic Foundations",
-    image: "/learning_center_grid/cryptographic_foundations.jpg",
+    image: "/img/learning_center_grid/cryptographic_foundations.jpg",
     href: "/overview",
   },
   {
     id: 39,
     category: "learning",
     title: "Technology Architecture",
-    image: "/learning_center_grid/technology_architecture.jpg",
+    image: "/img/learning_center_grid/technology_architecture.jpg",
     href: "/overview",
   },
   {
     id: 40,
     category: "learning",
     title: "Governance DAO",
-    image: "/learning_center_grid/governance_dao.jpg",
+    image: "/img/learning_center_grid/governance_dao.jpg",
     href: "/overview",
   },
   {
     id: 41,
     category: "learning",
     title: "Use Cases & Benefits",
-    image: "/learning_center_grid/use_cases_benefits.jpg",
+    image: "/img/learning_center_grid/use_cases_benefits.jpg",
     href: "/overview",
   },
   {
     id: 42,
     category: "learning",
     title: "Getting Involved",
-    image: "/learning_center_grid/getting_involved.jpg",
+    image: "/img/learning_center_grid/getting_involved.jpg",
     href: "/overview",
   },
 ]
@@ -252,42 +252,52 @@ export default function DashboardSection() {
     }, 300)
   }, [activeFilter, filteredItems, isAnimating, prevFilter])
 
-  // Scroll-based animation progress
+  // Scroll-based animation progress - throttled for better mobile performance
   useEffect(() => {
+    let ticking = false
+    let rafId: number | null = null
+
     const handleScroll = () => {
       if (!sectionRef.current) return
 
-      const rect = sectionRef.current.getBoundingClientRect()
-      const windowHeight = window.innerHeight
+      if (!ticking) {
+        rafId = requestAnimationFrame(() => {
+          const rect = sectionRef.current?.getBoundingClientRect()
+          if (!rect) return
 
-      // Calculate when section starts entering viewport
-      const sectionTop = rect.top
-      const sectionHeight = rect.height
+          const windowHeight = window.innerHeight
 
-      // Animation range: adjusted for mobile (shorter range)
-      const mobileCheck = window.innerWidth < 1024
-      const animationStart = mobileCheck ? windowHeight * 0.7 : windowHeight * 0.8
-      const animationEnd = mobileCheck ? windowHeight * 0.3 : windowHeight * 0.2
+          // Calculate when section starts entering viewport
+          const sectionTop = rect.top
 
-      // Calculate progress (0 to 1)
-      let progress = 0
+          // Animation range: adjusted for mobile (shorter range, simpler animations)
+          const mobileCheck = window.innerWidth < 1024
+          const animationStart = mobileCheck ? windowHeight * 0.7 : windowHeight * 0.8
+          const animationEnd = mobileCheck ? windowHeight * 0.3 : windowHeight * 0.2
 
-      if (sectionTop < animationStart && sectionTop > animationEnd) {
-        // Section is in animation range
-        progress = 1 - (sectionTop - animationEnd) / (animationStart - animationEnd)
-        progress = Math.max(0, Math.min(1, progress)) // Clamp between 0 and 1
-      } else if (sectionTop <= animationEnd) {
-        // Section is fully visible or past - keep progress at 1
-        progress = 1
-      } else if (sectionTop > windowHeight) {
-        // Section is below viewport - keep progress at 0 for animation
-        progress = 0
-      } else {
-        // Section hasn't reached animation start but is in viewport
-        progress = 0.3 // Minimum visibility for navigation
+          // Calculate progress (0 to 1)
+          let progress = 0
+
+          if (sectionTop < animationStart && sectionTop > animationEnd) {
+            // Section is in animation range
+            progress = 1 - (sectionTop - animationEnd) / (animationStart - animationEnd)
+            progress = Math.max(0, Math.min(1, progress)) // Clamp between 0 and 1
+          } else if (sectionTop <= animationEnd) {
+            // Section is fully visible or past - keep progress at 1
+            progress = 1
+          } else if (sectionTop > windowHeight) {
+            // Section is below viewport - keep progress at 0 for animation
+            progress = 0
+          } else {
+            // Section hasn't reached animation start but is in viewport
+            progress = 0.3 // Minimum visibility for navigation
+          }
+
+          setScrollProgress(progress)
+          ticking = false
+        })
+        ticking = true
       }
-
-      setScrollProgress(progress)
     }
 
     // Initial calculation
@@ -298,6 +308,9 @@ export default function DashboardSection() {
     return () => {
       window.removeEventListener("scroll", handleScroll)
       window.removeEventListener("resize", handleScroll)
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+      }
     }
   }, [])
 
@@ -710,9 +723,9 @@ export default function DashboardSection() {
                                   fill
                                   className="object-cover"
                                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                  loading={index < 3 ? "eager" : "lazy"}
-                                  priority={index < 3}
-                                  quality={85}
+                                  loading={isMobile ? "lazy" : (index < 3 ? "eager" : "lazy")}
+                                  priority={!isMobile && index < 3}
+                                  quality={isMobile ? 75 : 85}
                                 />
                               ) : (
                                 <div className="text-center">

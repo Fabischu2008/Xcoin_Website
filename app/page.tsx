@@ -1,12 +1,14 @@
 
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, lazy, Suspense } from "react"
 import Link from "next/link"
 import Hero from "@/components/hero"
-import DashboardSection from "@/components/dashboard-section"
-import TestimonialsSection from "@/components/testimonials-section"
 import { useParallax } from "@/lib/useParallax"
+
+// Lazy load heavy components for better mobile performance
+const DashboardSection = lazy(() => import("@/components/dashboard-section"))
+const TestimonialsSection = lazy(() => import("@/components/testimonials-section"))
 
 function renderTextWithLinks(text: string, links: Record<string, string>) {
   if (!links || Object.keys(links).length === 0) {
@@ -511,10 +513,14 @@ export default function HomePage() {
       </section>
 
       {/* Dashboard Section */}
-      <DashboardSection />
+      <Suspense fallback={<div className="min-h-[400px]" />}>
+        <DashboardSection />
+      </Suspense>
 
       {/* Testimonials Section */}
-      <TestimonialsSection />
+      <Suspense fallback={<div className="min-h-[400px]" />}>
+        <TestimonialsSection />
+      </Suspense>
 
       {/* The Future Standard for Anonymous Value Transfer */}
       <section className="py-24">

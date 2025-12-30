@@ -55,7 +55,7 @@ export default function WhatAreXXXTokensPage() {
         <div className="mx-auto max-w-6xl mb-12">
           <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden">
             <Image
-              src="/xcoin_grid/get_xxx.jpeg"
+              src="/img/xcoin_grid/box8.jpeg"
               alt="What are XXX Tokens?"
               fill
               className="object-cover"

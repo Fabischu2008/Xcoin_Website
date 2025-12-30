@@ -7,10 +7,27 @@ import { Eye, Rocket } from "lucide-react"
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    // Preload video metadata only
-    if (videoRef.current) {
+    // Detect mobile device
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  useEffect(() => {
+    // On mobile, skip video loading for faster initial load
+    if (isMobile) {
+      setIsLoaded(true)
+      return
+    }
+
+    // Preload video metadata only on desktop
+    if (videoRef.current && !isMobile) {
       // Load only metadata, not the full video
       videoRef.current.load()
       
@@ -32,23 +49,27 @@ export default function Hero() {
         }
       }
     }
-  }, [])
+  }, [isMobile])
 
   return (
     <section className="relative overflow-x-hidden min-h-screen flex items-center pt-20">
-      {/* Video Background - Desktop AND Mobile */}
+      {/* Video Background - Desktop only, static background on mobile */}
       <div className="absolute inset-0 scale-110 pointer-events-none" style={{ zIndex: -1 }}>
-        <video
-          ref={videoRef}
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-          style={{ opacity: isLoaded ? 1 : 0, transition: 'opacity 0.5s ease-in' }}
-        >
-          <source src="/1208-compressed.mp4" type="video/mp4" />
-        </video>
+        {!isMobile ? (
+          <video
+            ref={videoRef}
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            style={{ opacity: isLoaded ? 1 : 0, transition: 'opacity 0.5s ease-in' }}
+          >
+            <source src="/1208-compressed.mp4" type="video/mp4" />
+          </video>
+        ) : (
+          <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900" />
+        )}
         {/* Overlay für bessere Textlesbarkeit */}
         <div className="absolute inset-0 bg-black/50 pointer-events-none" />
         {/* Blauer Gradient wie in Xcoin_Basti */}

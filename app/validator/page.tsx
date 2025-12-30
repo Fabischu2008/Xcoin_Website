@@ -51,7 +51,7 @@ export default function ValidatorPage() {
         <div className="mx-auto max-w-6xl mb-12">
           <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden">
             <Image
-              src="/validators_grid/earn_xcoin_effortlessly.jpg"
+              src="/img/validators_grid/earn_xcoin_effortlessly.jpg"
               alt="Earn Xcoin. Effortlessly."
               fill
               className="object-cover"

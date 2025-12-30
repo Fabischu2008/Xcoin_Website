@@ -59,7 +59,7 @@ export default function TheRiseOfValidatorsPage() {
         <div className="mx-auto max-w-6xl mb-12">
           <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden">
             <Image
-              src="/validators_grid/the_rise_of_the_validators.jpg"
+              src="/img/validators_grid/the_rise_of_the_validators.jpg"
               alt="The Rise of the Validators"
               fill
               className="object-cover"

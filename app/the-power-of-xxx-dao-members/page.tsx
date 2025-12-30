@@ -50,7 +50,7 @@ export default function ThePowerOfXXXDAOMembersPage() {
         <div className="mx-auto max-w-6xl mb-12">
           <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden">
             <Image
-              src="/members_grid/the_power_of_xxx_dao_members.jpg"
+              src="/img/members_grid/the_power_of_xxx_dao_members.jpg"
               alt="The Power of XXX DAO Members"
               fill
               className="object-cover"

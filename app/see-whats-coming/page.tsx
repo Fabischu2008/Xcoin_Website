@@ -32,7 +32,7 @@ export default function SeeWhatsComingPage() {
         <div className="mx-auto max-w-6xl mb-12">
           <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden">
             <Image
-              src="/members_grid/see_whats_coming.jpg"
+              src="/img/members_grid/see_whats_coming.jpg"
               alt="See What's Coming"
               fill
               className="object-cover"
