@@ -4,7 +4,6 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import RotatingFavicon from "@/components/rotating-favicon"
 
 export const metadata: Metadata = {
   title: {
@@ -62,14 +61,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/xcoin-logo.png", type: "image/png", sizes: "32x32" },
-    ],
-    apple: "/xcoin-logo.png",
-    shortcut: "/favicon.svg",
-  },
 }
 
 export const viewport: Viewport = {
@@ -83,8 +74,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
+      </head>
       <body className="font-sans antialiased">
-        <RotatingFavicon />
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />

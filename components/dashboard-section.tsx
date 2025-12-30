@@ -199,12 +199,12 @@ const navItems = [
 ]
 
 export default function DashboardSection() {
+  const sectionRef = useRef<HTMLDivElement>(null)
   const [activeFilter, setActiveFilter] = useState("xcoin")
   const [scrollProgress, setScrollProgress] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
   const [prevFilter, setPrevFilter] = useState<string | null>(null)
   const [isMobile, setIsMobile] = useState(false)
-  const sectionRef = useRef<HTMLDivElement>(null)
 
   const filteredItems = dashboardItems.filter((item) => item.category === activeFilter).slice(0, 9)
   const [displayItems, setDisplayItems] = useState<DashboardItem[]>([])
@@ -314,20 +314,9 @@ export default function DashboardSection() {
     }
   }, [])
 
-  // Preload logo for faster navigation
-  useEffect(() => {
-    const link = document.createElement('link')
-    link.rel = 'preload'
-    link.as = 'image'
-    link.href = '/xcoin-logo.png'
-    document.head.appendChild(link)
-    return () => {
-      document.head.removeChild(link)
-    }
-  }, [])
 
   return (
-    <section ref={sectionRef} className="relative mt-12 pb-24" style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}>
+    <section ref={sectionRef} className="relative mt-12 pb-24">
       <style jsx>{`
         .db-nav__item:hover {
           background-color: #1f1f1f !important;
@@ -578,93 +567,108 @@ export default function DashboardSection() {
       `}</style>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="relative border border-border rounded-2xl p-6 sm:p-8">
-          {/* Privacy is Power Banner - Flies in from top right, starts elongated, becomes normal */}
-          <div
-            className="mb-4 flex justify-end scroll-animated sm:mb-6"
-            style={{
-              opacity: Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6)), // Longer animation duration
-              transform: `
-                translateX(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6))) * 400}px)
-                translateY(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6))) * -200}px)
-                scaleX(${4.0 - (Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6)) * 3.0)})
-                scaleY(${0.5 + (Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6)) * 0.5)})
-              `,
-              transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
-            }}
-          >
-            <div className="privacy-button relative inline-flex items-center justify-center gap-2 border-2 border-accent bg-accent px-8 py-2.5 sm:px-12 sm:py-3 p-small sm:p-reg font-semibold text-accent-foreground whitespace-nowrap min-w-[280px] sm:min-w-[350px]">
-              <span className="relative z-10 text-center">Privacy is Power</span>
-            </div>
-          </div>
-
-          <div className="flex flex-row gap-2 sm:gap-4 lg:gap-8">
-            {/* Sidebar Navigation - Flies in from top left */}
-            <aside 
-              className="w-16 sm:w-20 flex-shrink-0 lg:w-64" 
-              style={{ 
-                position: 'relative',
-                opacity: Math.max(0, Math.min(1, (scrollProgress - 0.15) / 0.4)),
-                transform: `
-                  translateX(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.15) / 0.4))) * -400}px)
-                  translateY(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.15) / 0.4))) * -200}px)
-                `,
-                transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
-              }}
-            >
-              <div style={{ position: 'relative' }}>
+        <div className="relative border border-border rounded-2xl p-6 sm:p-8 flex flex-col">
+          <div className="flex flex-row gap-2 sm:gap-4 lg:gap-8 flex-1 min-h-0 items-start">
+            {/* Sidebar Navigation - Left side with its own box, full height from top to bottom, aligned with top */}
+            <aside className="w-16 sm:w-20 flex-shrink-0 lg:w-[294px]">
+              <div>
                 {/* Mobile: Current Category Indicator */}
                 <div className="mb-4 lg:hidden">
                   <div 
-                    className="rounded-lg border border-accent/30 bg-accent/10 px-2.5 py-1.5 text-center"
+                    className="rounded-lg border border-accent/30 bg-accent/10 px-2.5 py-1.5 text-center scroll-animated"
                     style={{
                       opacity: scrollProgress,
+                      transform: `translateX(${(1 - scrollProgress) * (isMobile ? 0 : -150)}px) translateY(${(1 - scrollProgress) * (isMobile ? 15 : 30)}px) scale(${0.9 + scrollProgress * 0.1})`,
                     }}
                   >
-                    <p className="eyebrow small font-semibold text-accent capitalize leading-tight">
+                    <p className="text-[10px] font-semibold text-accent capitalize leading-tight">
                       {navItems.find((item) => item.id === activeFilter)?.label || "Xcoin"}
                     </p>
                   </div>
                 </div>
+                
+                {/* Desktop: Box around navigation */}
+                <div className="hidden lg:block border border-border rounded-xl p-[21px] bg-card/50">
+                  <nav className="space-y-[5.25px]">
+                    {navItems.map((item, index) => {
+                      const delay = index * 0.12
+                      const duration = 0.4
+                      const itemProgress = Math.max(0.3, Math.min(1, (scrollProgress - delay) / duration))
+                      return (
+                        <button
+                          key={item.id}
+                          onClick={() => setActiveFilter(item.id)}
+                          className={`db-nav__item group flex w-full items-center justify-center rounded-lg p-[15.75px] transition-all lg:justify-start lg:gap-[15.75px] lg:px-[15.75px] lg:py-[15.75px] ${
+                            activeFilter === item.id
+                              ? "bg-accent/10 text-accent"
+                              : "text-muted-foreground hover:bg-secondary"
+                          }`}
+                          style={{
+                            opacity: itemProgress,
+                          }}
+                          title={item.label}
+                        >
+                          <div className="db-nav__icon flex h-12 w-12 items-center justify-center sm:h-14 sm:w-14 lg:h-[50px] lg:w-[50px]">
+                            <div className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-[32px] lg:w-[32px]">
+                              <Image
+                                src="/xcoin-logo.png"
+                                alt={item.label}
+                                width={48}
+                                height={48}
+                                className="animate-spin [animation-duration:10000ms] object-contain"
+                                loading={index === 0 ? "eager" : "lazy"}
+                                priority={index === 0}
+                                unoptimized
+                              />
+                            </div>
+                          </div>
+                          <p className="hidden text-xs font-semibold transition-colors duration-300 group-hover:text-cyan-400 lg:block lg:text-[18.9px]">
+                            {item.label}
+                          </p>
+                        </button>
+                      )
+                    })}
+                  </nav>
+                </div>
 
-                <nav className="space-y-3 lg:space-y-1">
+                {/* Mobile: Navigation without box */}
+                <nav className="space-y-3 lg:hidden">
                   {navItems.map((item, index) => {
-                    // Anpassung: Animation startet früher und endet früher, damit alle Items rechtzeitig fertig sind
                     const delay = index * 0.12
                     const duration = 0.4
-                    const itemProgress = Math.max(0.3, Math.min(1, (scrollProgress - delay) / duration)) // Minimum opacity 0.3 statt 0
+                    const itemProgress = Math.max(0, Math.min(1, (scrollProgress - delay) / duration))
+                    const translateX = (1 - itemProgress) * -150
+                    const scale = 0.7 + itemProgress * 0.3
                     return (
                       <button
                         key={item.id}
                         onClick={() => setActiveFilter(item.id)}
-                        className={`db-nav__item group flex w-full items-center justify-center rounded-lg p-3 transition-all lg:justify-start lg:gap-3 lg:px-4 lg:py-3 ${
+                        className={`db-nav__item group flex w-full items-center justify-center rounded-lg p-3 transition-all ${
                           activeFilter === item.id
                             ? "bg-accent/10 text-accent"
                             : "text-muted-foreground hover:bg-secondary"
                         }`}
                         style={{
                           opacity: itemProgress,
+                          transform: `translateX(${translateX}px) scale(${scale})`,
                         }}
                         title={item.label}
                       >
-                      <div className="db-nav__icon flex h-10 w-10 items-center justify-center sm:h-12 sm:w-12 lg:h-10 lg:w-10">
-                        <div className="relative h-8 w-8 sm:h-10 sm:w-10 lg:h-6 lg:w-6">
-                          <Image
-                            src="/xcoin-logo.png"
-                            alt={item.label}
-                            width={40}
-                            height={40}
-                            className="animate-spin [animation-duration:10000ms] object-contain"
-                            loading={index === 0 ? "eager" : "lazy"}
-                            priority={index === 0}
-                            unoptimized
-                          />
+                        <div className="db-nav__icon flex h-12 w-12 items-center justify-center sm:h-14 sm:w-14">
+                          <div className="relative h-10 w-10 sm:h-12 sm:w-12">
+                            <Image
+                              src="/xcoin-logo.png"
+                              alt={item.label}
+                              width={48}
+                              height={48}
+                              className="animate-spin [animation-duration:10000ms] object-contain"
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <p className="hidden eyebrow small font-semibold transition-colors duration-300 group-hover:text-cyan-400 lg:block lg:p-reg">
-                        {item.label}
-                      </p>
-                    </button>
+                        <p className="hidden text-xs font-semibold transition-colors duration-300 group-hover:text-cyan-400 lg:block lg:text-base">
+                          {item.label}
+                        </p>
+                      </button>
                     )
                   })}
                 </nav>
@@ -672,20 +676,38 @@ export default function DashboardSection() {
             </aside>
 
             {/* Content Grid - Cards come from background with zoom forward */}
-            <div 
-              className="flex-1 min-w-0"
-              style={{
-                opacity: Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.5)),
-                transform: `
-                  translateZ(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.5))) * -500}px)
-                  scale(${0.3 + (Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.5)) * 0.7)})
-                `,
-                transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
-                transformStyle: 'preserve-3d',
-                perspective: '1000px',
-              }}
-            >
-              <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-6 w-full overflow-visible">
+            <div className="flex-1 min-w-0 flex flex-col w-full">
+              {/* Privacy is Power Banner - Flies in from top right, starts elongated, becomes normal */}
+              <div
+                className="mb-4 flex justify-end scroll-animated sm:mb-6 flex-shrink-0"
+                style={{
+                  opacity: Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6)), // Longer animation duration
+                  transform: `
+                    translateX(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6))) * 400}px)
+                    translateY(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6))) * -200}px)
+                    scaleX(${4.0 - (Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6)) * 3.0)})
+                    scaleY(${0.5 + (Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6)) * 0.5)})
+                  `,
+                  transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
+                }}
+              >
+                <div className="privacy-button relative inline-flex items-center justify-center gap-[8px] border-2 border-accent bg-accent px-[28px] py-[10px] sm:px-[35px] sm:py-[12px] text-sm sm:text-base font-semibold text-accent-foreground whitespace-nowrap min-w-[200px] sm:min-w-[250px]">
+                  <span className="relative z-10 text-center">Privacy is Power</span>
+                </div>
+              </div>
+
+              <div 
+                className="flex-1 min-w-0 mt-4"
+                style={{
+                  opacity: Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.5)),
+                  transform: scrollProgress > 0.7 ? 'none' : `
+                    translateZ(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.5))) * -500}px)
+                    scale(${0.3 + (Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.5)) * 0.7)})
+                  `,
+                  transition: scrollProgress > 0.7 ? 'none' : 'transform 0.1s ease-out, opacity 0.1s ease-out',
+                }}
+              >
+                <div className="grid grid-cols-1 gap-[21px] sm:gap-[31.5px] lg:grid-cols-3 lg:gap-[31.5px] w-full overflow-visible">
                 {displayItems.length === 0 && filteredItems.length > 0
                   ? filteredItems.map((item, index) => (
                       <div
@@ -777,6 +799,7 @@ export default function DashboardSection() {
                       </div>
                       )
                     })}
+                </div>
               </div>
             </div>
           </div>
