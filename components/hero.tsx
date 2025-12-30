@@ -13,7 +13,8 @@ export default function Hero() {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
+          poster="/xcoin-vid-poster.jpg"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         >
           <source src="/1208-compressed.mp4" type="video/mp4" />
