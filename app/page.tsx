@@ -130,7 +130,6 @@ function VideoPlayer() {
           controls={false}
           playsInline
           preload="none"
-          poster="/xcoin-vid-poster.jpg"
           className={`w-full h-full object-cover transition-transform duration-500 ease-out ${
             isHovered ? 'scale-110' : 'scale-100'
           }`}

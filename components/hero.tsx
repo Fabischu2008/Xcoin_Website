@@ -1,21 +1,51 @@
 "use client"
 
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { Eye, Rocket } from "lucide-react"
 
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    // Preload video metadata only
+    if (videoRef.current) {
+      // Load only metadata, not the full video
+      videoRef.current.load()
+      
+      // Wait for metadata to be ready
+      const handleLoadedMetadata = () => {
+        setIsLoaded(true)
+        if (videoRef.current) {
+          videoRef.current.play().catch(() => {
+            // Autoplay might fail, that's okay
+          })
+        }
+      }
+
+      videoRef.current.addEventListener('loadedmetadata', handleLoadedMetadata)
+      
+      return () => {
+        if (videoRef.current) {
+          videoRef.current.removeEventListener('loadedmetadata', handleLoadedMetadata)
+        }
+      }
+    }
+  }, [])
+
   return (
     <section className="relative overflow-x-hidden min-h-screen flex items-center pt-20">
       {/* Video Background - Desktop AND Mobile */}
       <div className="absolute inset-0 scale-110 pointer-events-none" style={{ zIndex: -1 }}>
         <video
-          autoPlay
+          ref={videoRef}
           loop
           muted
           playsInline
           preload="metadata"
-          poster="/xcoin-vid-poster.jpg"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ opacity: isLoaded ? 1 : 0, transition: 'opacity 0.5s ease-in' }}
         >
           <source src="/1208-compressed.mp4" type="video/mp4" />
         </video>

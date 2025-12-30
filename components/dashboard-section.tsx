@@ -301,6 +301,18 @@ export default function DashboardSection() {
     }
   }, [])
 
+  // Preload logo for faster navigation
+  useEffect(() => {
+    const link = document.createElement('link')
+    link.rel = 'preload'
+    link.as = 'image'
+    link.href = '/xcoin-logo.png'
+    document.head.appendChild(link)
+    return () => {
+      document.head.removeChild(link)
+    }
+  }, [])
+
   return (
     <section ref={sectionRef} className="relative mt-12 pb-24" style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}>
       <style jsx>{`
@@ -630,6 +642,9 @@ export default function DashboardSection() {
                             width={40}
                             height={40}
                             className="animate-spin [animation-duration:10000ms] object-contain"
+                            loading={index === 0 ? "eager" : "lazy"}
+                            priority={index === 0}
+                            unoptimized
                           />
                         </div>
                       </div>
@@ -687,16 +702,17 @@ export default function DashboardSection() {
                         <Link href={item.href} className="block h-full w-full max-w-full">
                           <div className="db-card__visual relative w-full max-w-full overflow-hidden rounded-xl border border-border bg-card">
                             <div className="dash-res-card__visual-before absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
-                            <div className="relative aspect-video w-full max-w-full flex items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background">
+                            <div className="relative aspect-video w-full max-w-full flex items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background overflow-hidden">
                               {item.image ? (
                                 <Image
                                   src={item.image}
                                   alt={item.title}
                                   fill
-                                  className="object-cover max-w-full"
+                                  className="object-cover"
                                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                  unoptimized={true}
+                                  loading={index < 3 ? "eager" : "lazy"}
                                   priority={index < 3}
+                                  quality={85}
                                 />
                               ) : (
                                 <div className="text-center">
