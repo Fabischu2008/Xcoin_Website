@@ -56,17 +56,17 @@ export default function Hero() {
       {/* Video Background - Desktop only, static background on mobile */}
       <div className="absolute inset-0 scale-110 pointer-events-none" style={{ zIndex: -1 }}>
         {!isMobile ? (
-          <video
+        <video
             ref={videoRef}
-            loop
-            muted
-            playsInline
-            preload="metadata"
+          loop
+          muted
+          playsInline
+          preload="metadata"
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             style={{ opacity: isLoaded ? 1 : 0, transition: 'opacity 0.5s ease-in' }}
-          >
-            <source src="/1208-compressed.mp4" type="video/mp4" />
-          </video>
+        >
+          <source src="/1208-compressed.mp4" type="video/mp4" />
+        </video>
         ) : (
           <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900" />
         )}
@@ -99,15 +99,15 @@ export default function Hero() {
                 <div className="text-gray-400 p-reg">Unlinkable Outputs</div>
                 <div className="text-gray-400 p-reg">Untraceable Transactions</div>
                 <div className="text-gray-400 p-reg">AES-512 Cascade Encryption</div>
-              </div>
-            </div>
+      </div>
+          </div>
 
             {/* Right Column - Headline, Buttons and Text */}
             <div className="flex-1">
               <h1 className="h-display text-white max-w-3xl">
                 The Future of Financial Privacy Starts Here
-              </h1>
-              
+          </h1>
+
               {/* Buttons - Directly under Title - Only show on desktop */}
               <div className="hidden md:flex flex-col sm:flex-row gap-4 mt-4">
                 <Link
@@ -136,7 +136,7 @@ export default function Hero() {
               <div className="mt-6 max-w-2xl">
                 <p className="p-reg text-white text-left px-4 md:px-0">
                   Xcoin isn't just another coin. It's a next-generation privacy cryptocurrency designed for total anonymity, quantum resistance, and real-world utility. The Xcoin blockchain is built on a unique foundation of cutting-edge innovations, including quantum-safe cryptography, zero-knowledge proofs, and breakthrough privacy technology. Discover the cryptographic building blocks that make Xcoin unstoppable.
-                </p>
+          </p>
               </div>
             </div>
           </div>

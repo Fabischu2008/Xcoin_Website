@@ -1,9 +1,8 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight } from "lucide-react"
 
 interface DashboardItem {
   id: number
@@ -199,124 +198,12 @@ const navItems = [
 ]
 
 export default function DashboardSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
   const [activeFilter, setActiveFilter] = useState("xcoin")
-  const [scrollProgress, setScrollProgress] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
-  const [prevFilter, setPrevFilter] = useState<string | null>(null)
-  const [isMobile, setIsMobile] = useState(false)
 
   const filteredItems = dashboardItems.filter((item) => item.category === activeFilter).slice(0, 9)
-  const [displayItems, setDisplayItems] = useState<DashboardItem[]>([])
-
-  // Detect mobile screen size
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024)
-    }
-
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
-    return () => window.removeEventListener("resize", checkMobile)
-  }, [])
-
-  // Initialize displayItems on mount
-  useEffect(() => {
-    if (displayItems.length === 0 && filteredItems.length > 0) {
-      setDisplayItems(filteredItems)
-      setPrevFilter(activeFilter)
-    }
-  }, [filteredItems, displayItems.length, activeFilter])
-
-  // Handle filter change with exit/enter animations
-  useEffect(() => {
-    if (prevFilter === null) {
-      // Initial load - skip animation
-      return
-    }
-
-    if (prevFilter === activeFilter || isAnimating) return
-
-    setIsAnimating(true)
-    setPrevFilter(activeFilter)
-
-    // Exit animation
-    setDisplayItems([])
-
-    setTimeout(() => {
-      // Enter animation
-      setDisplayItems(filteredItems)
-      setTimeout(() => {
-        setIsAnimating(false)
-      }, 100)
-    }, 300)
-  }, [activeFilter, filteredItems, isAnimating, prevFilter])
-
-  // Scroll-based animation progress - throttled for better mobile performance
-  useEffect(() => {
-    let ticking = false
-    let rafId: number | null = null
-
-    const handleScroll = () => {
-      if (!sectionRef.current) return
-
-      if (!ticking) {
-        rafId = requestAnimationFrame(() => {
-          const rect = sectionRef.current?.getBoundingClientRect()
-          if (!rect) return
-
-          const windowHeight = window.innerHeight
-
-          // Calculate when section starts entering viewport
-          const sectionTop = rect.top
-
-          // Animation range: adjusted for mobile (shorter range, simpler animations)
-          const mobileCheck = window.innerWidth < 1024
-          const animationStart = mobileCheck ? windowHeight * 0.7 : windowHeight * 0.8
-          const animationEnd = mobileCheck ? windowHeight * 0.3 : windowHeight * 0.2
-
-          // Calculate progress (0 to 1)
-          let progress = 0
-
-          if (sectionTop < animationStart && sectionTop > animationEnd) {
-            // Section is in animation range
-            progress = 1 - (sectionTop - animationEnd) / (animationStart - animationEnd)
-            progress = Math.max(0, Math.min(1, progress)) // Clamp between 0 and 1
-          } else if (sectionTop <= animationEnd) {
-            // Section is fully visible or past - keep progress at 1
-            progress = 1
-          } else if (sectionTop > windowHeight) {
-            // Section is below viewport - keep progress at 0 for animation
-            progress = 0
-          } else {
-            // Section hasn't reached animation start but is in viewport
-            progress = 0.3 // Minimum visibility for navigation
-          }
-
-          setScrollProgress(progress)
-          ticking = false
-        })
-        ticking = true
-      }
-    }
-
-    // Initial calculation
-    handleScroll()
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    window.addEventListener("resize", handleScroll, { passive: true })
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-      window.removeEventListener("resize", handleScroll)
-      if (rafId !== null) {
-        cancelAnimationFrame(rafId)
-      }
-    }
-  }, [])
-
 
   return (
-    <section ref={sectionRef} className="relative mt-12 pb-24">
+    <section className="relative mt-12 pb-24">
       <style jsx>{`
         .db-nav__item:hover {
           background-color: #1f1f1f !important;
@@ -376,430 +263,166 @@ export default function DashboardSection() {
           transform: rotateY(180deg) scaleX(-1) !important;
           transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
-
-        .db-content__card,
-        .db-content__card a,
-        .db-side,
-        .db-nav__item,
-        .db-search {
-          opacity: 1 !important;
-          visibility: visible !important;
-          pointer-events: auto !important;
-        }
-
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px) scale(0.95);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-
-        @keyframes fadeOutDown {
-          from {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-          to {
-            opacity: 0;
-            transform: translateY(-30px) scale(0.95);
-          }
-        }
-
-        @keyframes fadeInLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-150px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes fadeOutLeft {
-          from {
-            opacity: 1;
-            transform: translateX(0);
-          }
-          to {
-            opacity: 0;
-            transform: translateX(-150px);
-          }
-        }
-
-        @keyframes fadeInRight {
-          from {
-            opacity: 0;
-            transform: translateX(150px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes fadeOutRight {
-          from {
-            opacity: 1;
-            transform: translateX(0);
-          }
-          to {
-            opacity: 0;
-            transform: translateX(150px);
-          }
-        }
-
-        @keyframes fadeInFromBack {
-          from {
-            opacity: 0;
-            transform: translateZ(-200px) scale(0.5) translateY(50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateZ(0) scale(1) translateY(0);
-          }
-        }
-
-        @keyframes fadeOutToBack {
-          from {
-            opacity: 1;
-            transform: translateZ(0) scale(1) translateY(0);
-          }
-          to {
-            opacity: 0;
-            transform: translateZ(-200px) scale(0.5) translateY(50px);
-          }
-        }
-
-        .card-exit {
-          animation: fadeOutDown 0.3s ease-in forwards;
-        }
-
-        .scroll-animated {
-          transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        @keyframes glow {
-          0%, 100% {
-            box-shadow: 0 0 20px rgba(126, 238, 254, 0.3), 0 0 40px rgba(126, 238, 254, 0.2), 0 0 60px rgba(126, 238, 254, 0.1);
-          }
-          50% {
-            box-shadow: 0 0 30px rgba(126, 238, 254, 0.5), 0 0 60px rgba(126, 238, 254, 0.3), 0 0 90px rgba(126, 238, 254, 0.2);
-          }
-        }
-
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-5px);
-          }
-        }
-
-        @keyframes shimmer {
-          0% {
-            background-position: -1000px 0;
-          }
-          100% {
-            background-position: 1000px 0;
-          }
-        }
-
-        .privacy-button {
-          position: relative;
-          overflow: hidden;
-          animation: glow 3s ease-in-out infinite, float 4s ease-in-out infinite;
-        }
-
-        .privacy-button::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.3),
-            transparent
-          );
-          animation: shimmer 3s infinite;
-        }
-
-        .privacy-button:hover {
-          animation: glow 1s ease-in-out infinite, float 2s ease-in-out infinite;
-          transform: scale(1.05);
-        }
-
-        .animate-fade-in-up {
-          animation: fadeInUp 0.6s ease-out forwards;
-        }
-
-        .animate-fade-in-left {
-          animation: fadeInLeft 0.6s ease-out forwards;
-        }
-
-        .card-delay-0 {
-          animation-delay: 0s;
-        }
-        .card-delay-1 {
-          animation-delay: 0.1s;
-        }
-        .card-delay-2 {
-          animation-delay: 0.2s;
-        }
-        .card-delay-3 {
-          animation-delay: 0.3s;
-        }
-        .card-delay-4 {
-          animation-delay: 0.4s;
-        }
-        .card-delay-5 {
-          animation-delay: 0.5s;
-        }
       `}</style>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="relative border border-border rounded-2xl p-6 sm:p-8 flex flex-col">
-          <div className="flex flex-row gap-2 sm:gap-4 lg:gap-8 flex-1 min-h-0 items-start">
-            {/* Sidebar Navigation - Left side with its own box, full height from top to bottom, aligned with top */}
-            <aside className="w-16 sm:w-20 flex-shrink-0 lg:w-[294px]">
-              <div>
-                {/* Mobile: Current Category Indicator */}
-                <div className="mb-4 lg:hidden">
-                  <div 
-                    className="rounded-lg border border-accent/30 bg-accent/10 px-2.5 py-1.5 text-center scroll-animated"
-                    style={{
-                      opacity: scrollProgress,
-                      transform: `translateX(${(1 - scrollProgress) * (isMobile ? 0 : -150)}px) translateY(${(1 - scrollProgress) * (isMobile ? 15 : 30)}px) scale(${0.9 + scrollProgress * 0.1})`,
-                    }}
-                  >
-                    <p className="text-[10px] font-semibold text-accent capitalize leading-tight">
-                      {navItems.find((item) => item.id === activeFilter)?.label || "Xcoin"}
-                    </p>
-                  </div>
-                </div>
-                
-                {/* Desktop: Box around navigation */}
-                <div className="hidden lg:block border border-border rounded-xl p-[21px] bg-card/50">
-                  <nav className="space-y-[5.25px]">
-                    {navItems.map((item, index) => {
-                      const delay = index * 0.12
-                      const duration = 0.4
-                      const itemProgress = Math.max(0.3, Math.min(1, (scrollProgress - delay) / duration))
-                      return (
-                        <button
-                          key={item.id}
-                          onClick={() => setActiveFilter(item.id)}
-                          className={`db-nav__item group flex w-full items-center justify-center rounded-lg p-[15.75px] transition-all lg:justify-start lg:gap-[15.75px] lg:px-[15.75px] lg:py-[15.75px] ${
-                            activeFilter === item.id
-                              ? "bg-accent/10 text-accent"
-                              : "text-muted-foreground hover:bg-secondary"
-                          }`}
-                          style={{
-                            opacity: itemProgress,
-                          }}
-                          title={item.label}
-                        >
-                          <div className="db-nav__icon flex h-12 w-12 items-center justify-center sm:h-14 sm:w-14 lg:h-[50px] lg:w-[50px]">
-                            <div className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-[32px] lg:w-[32px]">
-                              <Image
-                                src="/xcoin-logo.png"
-                                alt={item.label}
-                                width={48}
-                                height={48}
-                                className="animate-spin [animation-duration:10000ms] object-contain"
-                                loading={index === 0 ? "eager" : "lazy"}
-                                priority={index === 0}
-                                unoptimized
-                              />
-                            </div>
-                          </div>
-                          <p className="hidden text-xs font-semibold transition-colors duration-300 group-hover:text-cyan-400 lg:block lg:text-[18.9px]">
-                            {item.label}
-                          </p>
-                        </button>
-                      )
-                    })}
-                  </nav>
-                </div>
+        <div className="relative border border-border rounded-2xl p-6 sm:p-8">
+          {/* Privacy is Power Button */}
+          <div className="mb-6 flex justify-end">
+            <Link
+              href="/community"
+              className="relative inline-flex items-center justify-center gap-2 border-2 border-accent bg-accent px-[28px] py-[10px] sm:px-[35px] sm:py-[12px] text-sm sm:text-base font-semibold text-accent-foreground whitespace-nowrap min-w-[200px] sm:min-w-[250px] transition-all hover:scale-105"
+            >
+              <span>Privacy is Power</span>
+            </Link>
+          </div>
 
-                {/* Mobile: Navigation without box */}
-                <nav className="space-y-3 lg:hidden">
-                  {navItems.map((item, index) => {
-                    const delay = index * 0.12
-                    const duration = 0.4
-                    const itemProgress = Math.max(0, Math.min(1, (scrollProgress - delay) / duration))
-                    const translateX = (1 - itemProgress) * -150
-                    const scale = 0.7 + itemProgress * 0.3
-                    return (
-                      <button
-                        key={item.id}
-                        onClick={() => setActiveFilter(item.id)}
-                        className={`db-nav__item group flex w-full items-center justify-center rounded-lg p-3 transition-all ${
-                          activeFilter === item.id
-                            ? "bg-accent/10 text-accent"
-                            : "text-muted-foreground hover:bg-secondary"
-                        }`}
-                        style={{
-                          opacity: itemProgress,
-                          transform: `translateX(${translateX}px) scale(${scale})`,
-                        }}
-                        title={item.label}
-                      >
-                        <div className="db-nav__icon flex h-12 w-12 items-center justify-center sm:h-14 sm:w-14">
-                          <div className="relative h-10 w-10 sm:h-12 sm:w-12">
-                            <Image
-                              src="/xcoin-logo.png"
-                              alt={item.label}
-                              width={48}
-                              height={48}
-                              className="animate-spin [animation-duration:10000ms] object-contain"
-                            />
-                          </div>
+          <div className="flex flex-row gap-4 lg:gap-8">
+            {/* Sidebar Navigation - Left side */}
+            <aside className="w-16 sm:w-20 lg:w-[294px] flex-shrink-0">
+              {/* Mobile: Current Category Indicator */}
+              <div className="mb-3 lg:hidden">
+                <div className="rounded-lg border border-accent/30 bg-accent/10 px-2.5 py-1.5 text-center">
+                  <p className="text-[10px] font-semibold text-accent capitalize leading-tight">
+                    {navItems.find((item) => item.id === activeFilter)?.label || "Xcoin"}
+                  </p>
+                </div>
+              </div>
+
+              {/* Desktop: Box around navigation */}
+              <div className="hidden lg:block border border-border rounded-xl p-[21px] bg-card/50">
+                <nav className="space-y-[5.25px]">
+                  {navItems.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => setActiveFilter(item.id)}
+                      className={`db-nav__item group flex w-full items-center justify-start gap-[15.75px] rounded-lg p-[15.75px] transition-all ${
+                        activeFilter === item.id
+                          ? "bg-accent/10 text-accent"
+                          : "text-muted-foreground hover:bg-secondary"
+                      }`}
+                    >
+                      <div className="db-nav__icon flex h-[50px] w-[50px] items-center justify-center">
+                        <div className="relative h-[32px] w-[32px]">
+                          <Image
+                            src="/xcoin-logo.png"
+                            alt={item.label}
+                            width={48}
+                            height={48}
+                            className="animate-spin [animation-duration:10000ms] object-contain"
+                            unoptimized
+                          />
                         </div>
-                        <p className="hidden text-xs font-semibold transition-colors duration-300 group-hover:text-cyan-400 lg:block lg:text-base">
-                          {item.label}
-                        </p>
-                      </button>
-                    )
-                  })}
+                      </div>
+                      <p className="text-[18.9px] font-semibold transition-colors duration-300 group-hover:text-cyan-400">
+                        {item.label}
+                      </p>
+                    </button>
+                  ))}
                 </nav>
               </div>
+
+              {/* Mobile: Navigation without box - vertical */}
+              <nav className="flex flex-col lg:hidden gap-2.5">
+                {navItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveFilter(item.id)}
+                    className={`db-nav__item group flex items-center justify-center rounded-lg p-3 transition-all ${
+                      activeFilter === item.id
+                        ? "bg-accent/10 text-accent"
+                        : "text-muted-foreground hover:bg-secondary"
+                    }`}
+                  >
+                    <div className="db-nav__icon flex h-12 w-12 items-center justify-center sm:h-14 sm:w-14">
+                      <div className="relative h-10 w-10 sm:h-12 sm:w-12">
+                        <Image
+                          src="/xcoin-logo.png"
+                          alt={item.label}
+                          width={48}
+                          height={48}
+                          className="animate-spin [animation-duration:10000ms] object-contain"
+                          unoptimized
+                        />
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </nav>
             </aside>
 
-            {/* Content Grid - Cards come from background with zoom forward */}
-            <div className="flex-1 min-w-0 flex flex-col w-full">
-              {/* Privacy is Power Banner - Flies in from top right, starts elongated, becomes normal */}
-              <div
-                className="mb-4 flex justify-end scroll-animated sm:mb-6 flex-shrink-0"
-                style={{
-                  opacity: Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6)), // Longer animation duration
-                  transform: `
-                    translateX(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6))) * 400}px)
-                    translateY(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6))) * -200}px)
-                    scaleX(${4.0 - (Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6)) * 3.0)})
-                    scaleY(${0.5 + (Math.max(0, Math.min(1, (scrollProgress - 0.05) / 0.6)) * 0.5)})
-                  `,
-                  transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
-                }}
-              >
-                <div className="privacy-button relative inline-flex items-center justify-center gap-[8px] border-2 border-accent bg-accent px-[28px] py-[10px] sm:px-[35px] sm:py-[12px] text-sm sm:text-base font-semibold text-accent-foreground whitespace-nowrap min-w-[200px] sm:min-w-[250px]">
-                  <span className="relative z-10 text-center">Privacy is Power</span>
-                </div>
-              </div>
-
-              <div 
-                className="flex-1 min-w-0 mt-4"
-                style={{
-                  opacity: Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.5)),
-                  transform: scrollProgress > 0.7 ? 'none' : `
-                    translateZ(${(1 - Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.5))) * -500}px)
-                    scale(${0.3 + (Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.5)) * 0.7)})
-                  `,
-                  transition: scrollProgress > 0.7 ? 'none' : 'transform 0.1s ease-out, opacity 0.1s ease-out',
-                }}
-              >
-                <div className="grid grid-cols-1 gap-[21px] sm:gap-[31.5px] lg:grid-cols-3 lg:gap-[31.5px] w-full overflow-visible">
-                {displayItems.length === 0 && filteredItems.length > 0
-                  ? filteredItems.map((item, index) => (
-                      <div
-                        key={`placeholder-${item.id}`}
-                        data-category={item.category}
-                        className="db-content__card group opacity-0"
-                      >
-                        <div className="db-card__visual relative aspect-video overflow-hidden rounded-xl border border-border bg-card" />
-                        <div className="db-card__info mt-4 h-5 bg-transparent" />
-                      </div>
-                    ))
-                  : displayItems.map((item, index) => {
-                      // Cards are now animated by the parent container, so individual card animations are simpler
-                      // Just ensure they're visible when parent animation completes
-                      const cardProgress = Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.5))
-                      
-                      return (
-                      <div
-                        key={item.id}
-                        data-category={item.category}
-                        className="db-content__card group scroll-animated"
-                        style={{
-                          opacity: cardProgress > 0.5 ? 1 : cardProgress * 2, // Fade in as parent zooms
-                          pointerEvents: cardProgress > 0.3 ? 'auto' : 'none', // Enable clicks when visible
-                        }}
-                      >
-                        <Link href={item.href} className="block h-full w-full max-w-full">
-                          <div className="db-card__visual relative w-full max-w-full overflow-hidden rounded-xl border border-border bg-card">
-                            <div className="dash-res-card__visual-before absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
-                            <div className="relative aspect-video w-full max-w-full flex items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background overflow-hidden">
-                              {item.image ? (
+            {/* Content Grid */}
+            <div className="flex-1 min-w-0">
+              <div className="grid grid-cols-1 gap-[21px] sm:gap-[31.5px] lg:grid-cols-3 lg:gap-[31.5px] w-full">
+                {filteredItems.map((item) => (
+                  <div
+                    key={item.id}
+                    data-category={item.category}
+                    className="db-content__card group"
+                  >
+                    <Link href={item.href} className="block h-full w-full">
+                      <div className="db-card__visual relative w-full overflow-hidden rounded-xl border border-border bg-card">
+                        <div className="dash-res-card__visual-before absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
+                        <div className="relative aspect-video w-full flex items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background overflow-hidden">
+                          {item.image ? (
+                            <Image
+                              src={item.image}
+                              alt={item.title}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              loading="lazy"
+                              quality={85}
+                            />
+                          ) : (
+                            <div className="text-center">
+                              <div className="mx-auto mb-2 flex h-16 w-16 items-center justify-center rounded-full bg-accent/10">
                                 <Image
-                                  src={item.image}
-                                  alt={item.title}
-                                  fill
-                                  className="object-cover"
-                                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                  loading={isMobile ? "lazy" : (index < 3 ? "eager" : "lazy")}
-                                  priority={!isMobile && index < 3}
-                                  quality={isMobile ? 75 : 85}
+                                  src="/xcoin-logo.png"
+                                  alt="Xcoin"
+                                  width={32}
+                                  height={32}
+                                  className="object-contain"
                                 />
-                              ) : (
-                                <div className="text-center">
-                                  <div className="mx-auto mb-2 flex h-16 w-16 items-center justify-center rounded-full bg-accent/10">
-                                    <Image
-                                      src="/xcoin-logo.png"
-                                      alt="Xcoin"
-                                      width={32}
-                                      height={32}
-                                      className="object-contain"
-                                    />
-                                  </div>
-                                  <p className="eyebrow small font-medium text-muted-foreground capitalize">
-                                    {item.category}
-                                  </p>
-                                </div>
-                              )}
+                              </div>
+                              <p className="text-xs font-medium text-muted-foreground capitalize">
+                                {item.category}
+                              </p>
                             </div>
-                          </div>
-                          <div className="db-card__info mt-4 flex items-center justify-between">
-                            <p className="p-small font-medium leading-tight">{item.title}</p>
-                            <div className="db-card__arrow ml-4 flex h-6 w-6 shrink-0 items-center justify-center text-muted-foreground transition-colors group-hover:text-accent">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                className="h-full w-full"
-                              >
-                                <path
-                                  d="M10 17L15 12"
-                                  stroke="currentColor"
-                                  strokeWidth="1.5"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                                <path
-                                  d="M10 7L15 12"
-                                  stroke="currentColor"
-                                  strokeWidth="1.5"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            </div>
-                          </div>
-                        </Link>
+                          )}
+                        </div>
                       </div>
-                      )
-                    })}
-                </div>
+                      <div className="db-card__info mt-4 flex items-center justify-between">
+                        <p className="text-sm font-medium leading-tight">{item.title}</p>
+                        <div className="db-card__arrow ml-4 flex h-6 w-6 shrink-0 items-center justify-center text-muted-foreground transition-colors group-hover:text-accent">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            className="h-full w-full"
+                          >
+                            <path
+                              d="M10 17L15 12"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M10 7L15 12"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -808,4 +431,3 @@ export default function DashboardSection() {
     </section>
   )
 }
-
