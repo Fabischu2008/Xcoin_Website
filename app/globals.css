@@ -314,6 +314,14 @@
   scrollbar-width: none !important;
 }
 
+/* Testimonial Cards Styles */
+.testimonial-item {
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  background-color: hsl(var(--card));
+  position: relative;
+}
+
 /* Hide scrollbar globally for horizontal scroll */
 .overflow-x-auto::-webkit-scrollbar {
   display: none !important;

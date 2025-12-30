@@ -67,31 +67,67 @@ const testimonials = [
 ]
 
 export default function TestimonialsSection() {
-  const [selectedIndex, setSelectedIndex] = useState(7) // Start with Stephanie Cho (index 7)
+  const [selectedIndex, setSelectedIndex] = useState(4) // Start with Marco Delano (index 4)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const [isInitialized, setIsInitialized] = useState(false)
 
   useEffect(() => {
-    if (scrollRef.current) {
-      const cardWidth = 380 // Card width
+    if (scrollRef.current && !isInitialized) {
+      // Initial scroll to center Marco Delano
+      const selectedCard = scrollRef.current.children[4] as HTMLElement
+      if (selectedCard) {
+        const containerWidth = scrollRef.current.offsetWidth
+        const cardLeft = selectedCard.offsetLeft
+        const cardWidthActual = selectedCard.offsetWidth
+        
+        const scrollPosition = cardLeft - (containerWidth / 2) + (cardWidthActual / 2)
+        
+        scrollRef.current.scrollTo({
+          left: Math.max(0, scrollPosition),
+          behavior: 'auto' // Use 'auto' for initial load to avoid animation
+        })
+        setIsInitialized(true)
+      }
+    }
+  }, [isInitialized])
+
+  useEffect(() => {
+    if (scrollRef.current && isInitialized) {
+      const cardWidth = 420 // Card width (updated)
       const gap = 24 // Gap between cards (gap-6 = 1.5rem = 24px)
       const containerWidth = scrollRef.current.offsetWidth
       const cardWithGap = cardWidth + gap
       
-      // Calculate scroll position to center the selected card
-      const scrollPosition = selectedIndex * cardWithGap - (containerWidth / 2 - cardWidth / 2)
-      
-      scrollRef.current.scrollTo({
-        left: Math.max(0, scrollPosition),
-        behavior: 'smooth'
-      })
+      // Get the selected card element
+      const selectedCard = scrollRef.current.children[selectedIndex] as HTMLElement
+      if (selectedCard) {
+        // Get the position of the card relative to the scroll container
+        const cardLeft = selectedCard.offsetLeft
+        const cardWidthActual = selectedCard.offsetWidth
+        
+        // Calculate scroll position to center the card
+        const scrollPosition = cardLeft - (containerWidth / 2) + (cardWidthActual / 2)
+        
+        scrollRef.current.scrollTo({
+          left: Math.max(0, scrollPosition),
+          behavior: 'smooth'
+        })
+      } else {
+        // Fallback to simple calculation
+        const scrollPosition = selectedIndex * cardWithGap - (containerWidth / 2 - cardWidth / 2)
+        scrollRef.current.scrollTo({
+          left: Math.max(0, scrollPosition),
+          behavior: 'smooth'
+        })
+      }
     }
-  }, [selectedIndex])
+  }, [selectedIndex, isInitialized])
 
   return (
-    <section className="section py-24 bg-background">
-      <div className="container mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="section py-24 bg-background w-full">
+      <div className="w-full px-0">
         {/* Main Quote */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <h3 className="h-medium text-white mb-4">
               "A privacy coin that finally gets it right.
@@ -99,7 +135,7 @@ export default function TestimonialsSection() {
               Technically elegant,{" "}
               <span className="bg-[#93c5fd] text-black px-2">practically invisible</span>."
             </h3>
-            <span className="p-small text-white/50 relative top-5 block">
+            <span className="p-small text-white/50 relative top-5 block" style={{ fontSize: '0.875em', lineHeight: '1.3' }}>
               – Independent Crypto Auditor
             </span>
           </div>
@@ -109,7 +145,7 @@ export default function TestimonialsSection() {
 
           {/* Trusted By Section */}
           <div className="flex flex-col gap-4">
-            <p className="text-muted-foreground">Trusted by:</p>
+            <p className="p-reg text-muted-foreground" style={{ fontSize: '1em', lineHeight: '1.4' }}>Trusted by:</p>
             <div className="flex flex-wrap justify-center gap-4">
               {testimonials.map((testimonial, index) => (
                 <button
@@ -119,16 +155,17 @@ export default function TestimonialsSection() {
                     selectedIndex === index ? "opacity-100" : "opacity-50 hover:opacity-75"
                   }`}
                 >
-                  <div className={`rounded-full p-1 ${selectedIndex === index ? "ring-2 ring-white" : ""}`}>
+                  <div className={`rounded-full p-1 w-[60px] h-[60px] overflow-hidden ${selectedIndex === index ? "ring-2 ring-white" : ""}`}>
                     <Image
                       src={testimonial.avatar}
                       alt={testimonial.name}
                       width={60}
                       height={60}
-                      className="rounded-full object-cover"
+                      className="rounded-full object-cover w-full h-full"
+                      unoptimized
                     />
                   </div>
-                  <p className={`eyebrow small ${selectedIndex === index ? "text-white" : "text-white/50"}`}>
+                  <p className={`eyebrow small ${selectedIndex === index ? "text-white" : "text-white/50"}`} style={{ fontSize: '0.75em', fontFamily: '"RM Mono", monospace', fontWeight: 400, lineHeight: 1, textTransform: 'uppercase' }}>
                     {testimonial.name}
                   </p>
                 </button>
@@ -137,15 +174,15 @@ export default function TestimonialsSection() {
           </div>
         </div>
 
-        {/* Testimonials Horizontal Scroll */}
-        <div 
-          ref={scrollRef}
-          className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory testimonials-section-scroll"
-          style={{ 
-            scrollbarWidth: 'none', 
-            msOverflowStyle: 'none'
-          }}
-        >
+            {/* Testimonials Horizontal Scroll */}
+            <div 
+              ref={scrollRef}
+              className="flex gap-6 overflow-x-auto pb-6 pt-4 snap-x snap-mandatory testimonials-section-scroll"
+              style={{ 
+                scrollbarWidth: 'none', 
+                msOverflowStyle: 'none'
+              }}
+            >
           {testimonials.map((testimonial, index) => {
             const isSelected = selectedIndex === index
             const distance = Math.abs(index - selectedIndex)
@@ -155,7 +192,7 @@ export default function TestimonialsSection() {
                 key={index}
                 onClick={() => setSelectedIndex(index)}
                 className={`
-                  testimonial-item flex-shrink-0 w-[380px] p-6 relative transition-all cursor-pointer snap-center
+                  testimonial-item flex-shrink-0 w-[420px] relative transition-all cursor-pointer snap-center
                   ${isSelected 
                     ? "scale-100 opacity-100" 
                     : "scale-95 opacity-40 hover:opacity-60"
@@ -163,31 +200,48 @@ export default function TestimonialsSection() {
                 `}
                 style={{ 
                   transform: isSelected ? 'scale(1)' : `scale(${1 - distance * 0.05})`,
-                  opacity: isSelected ? 1 : Math.max(0.3, 1 - distance * 0.2),
-                  scrollSnapAlign: 'center'
+                  opacity: isSelected ? 1 : 0.45,
+                  scrollSnapAlign: 'center',
+                  backgroundColor: isSelected ? 'rgba(239, 238, 236, 0.1)' : 'rgba(239, 238, 236, 0.06)',
+                  border: 'none',
+                  borderRadius: '0.5em',
+                  overflow: 'visible',
+                  paddingTop: '2rem',
+                  paddingBottom: '2rem',
+                  paddingLeft: '1.75rem',
+                  paddingRight: '1.75rem',
+                  minHeight: '20rem'
                 }}
               >
-                {/* Corner Brackets - Top Left */}
-                <div className={`absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 ${isSelected ? 'border-[#93c5fd]' : 'border-white/20'}`} />
-                {/* Corner Brackets - Bottom Left */}
-                <div className={`absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 ${isSelected ? 'border-[#93c5fd]' : 'border-white/20'}`} />
-                {/* Corner Brackets - Top Right */}
-                <div className={`absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 ${isSelected ? 'border-[#93c5fd]' : 'border-white/20'}`} />
-                {/* Corner Brackets - Bottom Right */}
-                <div className={`absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 ${isSelected ? 'border-[#93c5fd]' : 'border-white/20'}`} />
+                {/* Corner Brackets - Only show for selected testimonial */}
+                {isSelected && (
+                  <>
+                    {/* Corner Brackets - Top Left */}
+                    <div className="absolute w-6 h-6 border-t-2 border-l-2 border-[#93c5fd]" style={{ top: '-3mm', left: '-3mm' }} />
+                    {/* Corner Brackets - Bottom Left */}
+                    <div className="absolute w-6 h-6 border-b-2 border-l-2 border-[#93c5fd]" style={{ bottom: '-3mm', left: '-3mm' }} />
+                    {/* Corner Brackets - Top Right */}
+                    <div className="absolute w-6 h-6 border-t-2 border-r-2 border-[#93c5fd]" style={{ top: '-3mm', right: '-3mm' }} />
+                    {/* Corner Brackets - Bottom Right */}
+                    <div className="absolute w-6 h-6 border-b-2 border-r-2 border-[#93c5fd]" style={{ bottom: '-3mm', right: '-3mm' }} />
+                  </>
+                )}
                 
-                <p className="text-white mb-6 p-small">{testimonial.quote}</p>
+                <p className="text-white mb-6" style={{ fontSize: '1.125em', lineHeight: '1.4' }}>{testimonial.quote}</p>
                 <div className="flex items-center gap-4">
-                  <Image
-                    src={testimonial.avatar}
-                    alt={testimonial.name}
-                    width={48}
-                    height={48}
-                    className="rounded-full object-cover"
-                  />
+                  <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+                    <Image
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      width={48}
+                      height={48}
+                      className="rounded-full object-cover w-full h-full"
+                      unoptimized
+                    />
+                  </div>
                   <div>
-                    <h4 className="p-small font-semibold text-white uppercase tracking-wide">{testimonial.name}</h4>
-                    <p className="eyebrow small text-white/50 mt-1">{testimonial.title}</p>
+                    <h4 className="text-white uppercase tracking-wide" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75em', fontWeight: 400, lineHeight: 1 }}>{testimonial.name}</h4>
+                    <p className="text-white/50 mt-1" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75em', fontWeight: 400, lineHeight: 1 }}>{testimonial.title}</p>
                   </div>
                 </div>
               </div>

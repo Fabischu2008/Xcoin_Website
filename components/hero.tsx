@@ -54,7 +54,7 @@ export default function Hero() {
   return (
     <section className="relative overflow-x-hidden min-h-screen flex items-center pt-20 pb-32 lg:pb-40">
       {/* Video Background - Desktop only, static background on mobile */}
-      <div className="absolute inset-0 scale-110 pointer-events-none" style={{ zIndex: -1 }}>
+      <div className="absolute inset-0 scale-105 pointer-events-none" style={{ zIndex: -1 }}>
         {!isMobile ? (
         <video
             ref={videoRef}
