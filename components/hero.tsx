@@ -6,8 +6,8 @@ import { Eye, Rocket } from "lucide-react"
 export default function Hero() {
   return (
     <section className="relative overflow-x-hidden min-h-screen flex items-center pt-20">
-      {/* Video Background - Desktop only */}
-      <div className="absolute inset-0 scale-110 pointer-events-none hidden md:block" style={{ zIndex: -1 }}>
+      {/* Video Background - Desktop AND Mobile */}
+      <div className="absolute inset-0 scale-110 pointer-events-none" style={{ zIndex: -1 }}>
         <video
           autoPlay
           loop
@@ -18,19 +18,6 @@ export default function Hero() {
         >
           <source src="/1208-compressed.mp4" type="video/mp4" />
         </video>
-        {/* Overlay für bessere Textlesbarkeit */}
-        <div className="absolute inset-0 bg-black/50 pointer-events-none" />
-        {/* Blauer Gradient wie in Xcoin_Basti */}
-        <div className="absolute inset-0 bg-gradient-to-tl from-blue-300 to-blue-300 mix-blend-multiply pointer-events-none" />
-      </div>
-      
-      {/* Static Image Background - Mobile only (fast loading) */}
-      <div className="absolute inset-0 scale-110 pointer-events-none md:hidden" style={{ zIndex: -1 }}>
-        <img
-          src="/xcoin-vid-poster.jpg"
-          alt="Xcoin Background"
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        />
         {/* Overlay für bessere Textlesbarkeit */}
         <div className="absolute inset-0 bg-black/50 pointer-events-none" />
         {/* Blauer Gradient wie in Xcoin_Basti */}
