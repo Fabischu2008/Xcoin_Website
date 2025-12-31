@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -11,6 +11,8 @@ interface DashboardItem {
   image?: string
   href: string
 }
+
+const LOGO_FILTER = 'brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1234%) hue-rotate(185deg) brightness(101%) contrast(101%)'
 
 // Exactly 9 items per category for 3x3 grid
 const dashboardItems: DashboardItem[] = [
@@ -197,115 +199,68 @@ const navItems = [
   { id: "learning", label: "Learning Center" },
 ]
 
+const getNavButtonClasses = (isActive: boolean) =>
+  `db-nav__item group flex w-full items-center justify-start gap-4 rounded-lg p-3.5 transition-all ${
+    isActive
+      ? "bg-accent/10 text-accent"
+      : "text-muted-foreground hover:bg-secondary"
+  }`
+
+const getMobileNavButtonClasses = (isActive: boolean) =>
+  `db-nav__item group flex items-center justify-center rounded-lg p-3 transition-all ${
+    isActive
+      ? "bg-accent/10 text-accent"
+      : "text-muted-foreground hover:bg-secondary"
+  }`
+
 export default function DashboardSection() {
   const [activeFilter, setActiveFilter] = useState("xcoin")
 
-  const filteredItems = dashboardItems.filter((item) => item.category === activeFilter).slice(0, 9)
+  const filteredItems = useMemo(
+    () => dashboardItems.filter((item) => item.category === activeFilter).slice(0, 9),
+    [activeFilter]
+  )
+
+  const activeLabel = useMemo(
+    () => navItems.find((item) => item.id === activeFilter)?.label || "Xcoin",
+    [activeFilter]
+  )
 
   return (
-    <section className="relative mt-12 pb-24">
-      <style jsx>{`
-        .db-nav__item:hover {
-          background-color: #1f1f1f !important;
-        }
-        .db-nav__item:hover .db-nav__icon {
-          color: #93c5fd !important;
-        }
-        .db-nav__item:hover p {
-          color: #93c5fd !important;
-        }
-
-        .db-content__card {
-          background: transparent !important;
-          border: none !important;
-          outline: none !important;
-          position: relative !important;
-        }
-
-        .db-content__card img {
-          border: none !important;
-          outline: none !important;
-          box-shadow: none !important;
-          background: transparent !important;
-          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
-          transform-style: preserve-3d !important;
-        }
-
-        .db-card__visual,
-        .dash-res-card__visual-before {
-          background: transparent !important;
-          background-color: transparent !important;
-        }
-
-        .db-content__card[data-category="learning"],
-        .db-content__card[data-category="learning"] *,
-        .db-content__card[data-category="learning"] *::before,
-        .db-content__card[data-category="learning"] *::after {
-          background: transparent !important;
-          background-color: transparent !important;
-          background-image: none !important;
-          box-shadow: none !important;
-        }
-
-        .db-content__card[data-category="whitepapers"] {
-          background: transparent !important;
-          border: none !important;
-          outline: none !important;
-          box-shadow: none !important;
-        }
-
-        .db-content__card:hover {
-          transform: scale(1.1) !important;
-          z-index: 10 !important;
-        }
-
-        .db-content__card:hover img {
-          transform: rotateY(180deg) scaleX(-1) !important;
-          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        }
-      `}</style>
-
-      <div className="mx-auto max-w-[90rem] px-4 sm:px-6 lg:px-8">
-        <div className="relative border border-border rounded-2xl p-4 sm:p-6 lg:p-8">
-          <div className="flex flex-row gap-4 lg:gap-6">
+    <section className="relative mt-8 pb-16">
+      <div className="mx-auto max-w-[110rem] px-[2mm]">
+        <div className="relative border border-border rounded-2xl p-[3mm] lg:p-[4mm]">
+          <div className="flex flex-row gap-2 lg:gap-3">
             {/* Sidebar Navigation - Left side */}
-            <aside className="w-20 sm:w-24 lg:w-[360px] flex-shrink-0 h-full flex flex-col">
+            <aside className="w-20 sm:w-24 lg:w-[304px] flex-shrink-0 flex flex-col">
               {/* Mobile: Current Category Indicator */}
               <div className="mb-3 lg:hidden">
                 <div className="rounded-lg border border-accent/30 bg-accent/10 px-2.5 py-1.5 text-center">
                   <p className="text-[10px] font-semibold text-accent capitalize leading-tight">
-                    {navItems.find((item) => item.id === activeFilter)?.label || "Xcoin"}
+                    {activeLabel}
                   </p>
                 </div>
               </div>
 
-              {/* Desktop: Box around navigation - full height */}
-              <div className="hidden lg:flex lg:flex-col border border-border rounded-xl p-8 bg-card/50 h-full">
-                <nav className="space-y-3 flex-1">
+              {/* Desktop: Box around navigation */}
+              <div className="hidden lg:flex lg:flex-col border border-border rounded-xl p-4 bg-gray-800/30">
+                <nav className="space-y-2.5">
                   {navItems.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => setActiveFilter(item.id)}
-                      className={`db-nav__item group flex w-full items-center justify-start gap-6 rounded-lg p-6 transition-all ${
-                        activeFilter === item.id
-                          ? "bg-accent/10 text-accent"
-                          : "text-muted-foreground hover:bg-secondary"
-                      }`}
+                      className={getNavButtonClasses(activeFilter === item.id)}
                     >
-                      <div className="db-nav__icon flex h-16 w-16 items-center justify-center">
-                        <div className="relative h-12 w-12">
-                          <Image
-                            src="/xcoin-logo.png"
-                            alt={item.label}
-                            width={64}
-                            height={64}
-                            className="animate-spin [animation-duration:10000ms] object-contain"
-                            style={{
-                              filter: 'brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1234%) hue-rotate(185deg) brightness(101%) contrast(101%)',
-                            }}
-                            unoptimized
-                          />
-                        </div>
+                      <div className="db-nav__icon flex h-12 w-12 items-center justify-center">
+                        <Image
+                          src="/xcoin-logo.png"
+                          alt={item.label}
+                          width={45}
+                          height={45}
+                          className="animate-spin [animation-duration:10000ms] object-contain"
+                          style={{ filter: LOGO_FILTER }}
+                          unoptimized
+                        />
                       </div>
                       <p className="text-lg font-semibold transition-colors duration-300 group-hover:text-cyan-400">
                         {item.label}
@@ -316,62 +271,49 @@ export default function DashboardSection() {
               </div>
 
               {/* Mobile: Navigation without box - vertical */}
-              <nav className="flex flex-col lg:hidden gap-2.5 flex-1">
+              <nav className="flex flex-col lg:hidden gap-2.5">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => setActiveFilter(item.id)}
-                    className={`db-nav__item group flex items-center justify-center rounded-lg p-3 transition-all ${
-                      activeFilter === item.id
-                        ? "bg-accent/10 text-accent"
-                        : "text-muted-foreground hover:bg-secondary"
-                    }`}
+                    className={getMobileNavButtonClasses(activeFilter === item.id)}
                   >
-                    <div className="db-nav__icon flex h-12 w-12 items-center justify-center sm:h-14 sm:w-14">
-                      <div className="relative h-10 w-10 sm:h-12 sm:w-12">
-                        <Image
-                          src="/xcoin-logo.png"
-                          alt={item.label}
-                          width={48}
-                          height={48}
-                          className="animate-spin [animation-duration:10000ms] object-contain"
-                          style={{
-                            filter: 'brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1234%) hue-rotate(185deg) brightness(101%) contrast(101%)',
-                          }}
-                          unoptimized
-                        />
-                      </div>
-                    </div>
+                    <Image
+                      src="/xcoin-logo.png"
+                      alt={item.label}
+                      width={45}
+                      height={45}
+                      className="animate-spin [animation-duration:10000ms] object-contain"
+                      style={{ filter: LOGO_FILTER }}
+                      unoptimized
+                    />
                   </button>
                 ))}
               </nav>
             </aside>
 
             {/* Content Grid */}
-            <div className="flex-1 min-w-0 p-0 sm:p-2 lg:p-4">
+            <div className="flex-1 min-w-0 p-0 sm:p-1 lg:p-4">
               {/* Privacy is Power Button */}
-              <div className="mb-6 flex justify-end -mt-[5mm]">
+              <div className="mb-5 flex justify-end lg:-mt-[2mm]">
                 <Link
                   href="/community"
-                  className="relative inline-flex items-center justify-center gap-2 border-2 border-accent bg-accent px-8 py-3 sm:px-10 sm:py-4 p-small font-semibold text-accent-foreground whitespace-nowrap transition-all hover:scale-105 w-full lg:w-[calc((100%-2*2rem)/3)]"
-                  style={{
-                    boxShadow: '0 0 20px rgba(147, 197, 253, 0.4), 0 0 40px rgba(147, 197, 253, 0.2)'
-                  }}
+                  className="relative inline-flex items-center justify-center gap-2 border-2 border-accent bg-accent px-11 py-2.5 sm:px-12 sm:py-3 p-reg font-semibold text-accent-foreground whitespace-nowrap transition-all hover:scale-105 w-full lg:w-[calc((100%-2*2rem)/3)] dashboard-banner"
                 >
                   <span>Privacy is Power</span>
                 </Link>
               </div>
-              <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3 lg:gap-8 w-full">
+              <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-3 lg:gap-5 w-full">
                 {filteredItems.map((item) => (
                   <div
                     key={item.id}
                     data-category={item.category}
                     className="db-content__card group"
                   >
-                    <Link href={item.href} className="block h-full w-full">
+                    <Link href={item.href} className="block w-full">
                       <div className="db-card__visual relative w-full overflow-hidden rounded-xl border border-border bg-card">
                         <div className="dash-res-card__visual-before absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
-                        <div className="relative w-full aspect-video flex items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background overflow-hidden">
+                        <div className="relative w-full aspect-video overflow-hidden">
                           {item.image ? (
                             <img
                               src={item.image}
@@ -380,25 +322,27 @@ export default function DashboardSection() {
                               loading="lazy"
                             />
                           ) : (
-                            <div className="text-center">
-                              <div className="mx-auto mb-2 flex h-16 w-16 items-center justify-center rounded-full bg-accent/10">
-                                <Image
-                                  src="/xcoin-logo.png"
-                                  alt="Xcoin"
-                                  width={32}
-                                  height={32}
-                                  className="object-contain"
-                                />
+                            <div className="flex h-full items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background">
+                              <div className="text-center">
+                                <div className="mx-auto mb-2 flex h-16 w-16 items-center justify-center rounded-full bg-accent/10">
+                                  <Image
+                                    src="/xcoin-logo.png"
+                                    alt="Xcoin"
+                                    width={32}
+                                    height={32}
+                                    className="object-contain"
+                                  />
+                                </div>
+                                <p className="p-small text-muted-foreground capitalize">
+                                  {item.category}
+                                </p>
                               </div>
-                              <p className="p-small text-muted-foreground capitalize">
-                                {item.category}
-                              </p>
                             </div>
                           )}
                         </div>
                       </div>
-                      <div className="db-card__info mt-6 flex items-center justify-between">
-                        <p className="p-small leading-tight">{item.title}</p>
+                      <div className="db-card__info mt-3 flex items-center justify-between">
+                        <p className="p-reg leading-tight">{item.title}</p>
                         <div className="db-card__arrow ml-6 flex h-6 w-6 shrink-0 items-center justify-center text-muted-foreground transition-colors group-hover:text-accent">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

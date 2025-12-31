@@ -1176,3 +1176,69 @@
 .button:not(.is--dark) .p-reg {
   color: #131313;
 }
+
+/* Dashboard Section - Optimized */
+.db-nav__item:hover {
+  background-color: #1f1f1f !important;
+}
+
+.db-nav__item:hover .db-nav__icon {
+  color: #93c5fd !important;
+}
+
+.db-nav__item:hover p {
+  color: #93c5fd !important;
+}
+
+.db-content__card {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  position: relative !important;
+}
+
+.db-content__card img {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transform-style: preserve-3d !important;
+}
+
+.db-card__visual,
+.dash-res-card__visual-before {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.db-content__card[data-category="learning"],
+.db-content__card[data-category="learning"] *,
+.db-content__card[data-category="learning"] *::before,
+.db-content__card[data-category="learning"] *::after {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+.db-content__card[data-category="whitepapers"] {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.db-content__card:hover {
+  transform: scale(1.1) !important;
+  z-index: 10 !important;
+}
+
+.db-content__card:hover img {
+  transform: rotateY(180deg) scaleX(-1) !important;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.dashboard-banner {
+  box-shadow: 0 0 30px rgba(147, 197, 253, 0.6), 0 0 60px rgba(147, 197, 253, 0.4), 0 0 90px rgba(147, 197, 253, 0.2);
+}
