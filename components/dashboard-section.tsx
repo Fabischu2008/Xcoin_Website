@@ -266,18 +266,8 @@ export default function DashboardSection() {
       `}</style>
 
       <div className="mx-auto max-w-[90rem] px-4 sm:px-6 lg:px-8">
-        <div className="relative border border-border rounded-2xl p-6 sm:p-8 lg:p-10">
-          {/* Privacy is Power Button */}
-          <div className="mb-6 flex justify-end">
-            <Link
-              href="/community"
-              className="relative inline-flex items-center justify-center gap-2 border-2 border-accent bg-accent px-8 py-3 sm:px-10 sm:py-4 p-small font-semibold text-accent-foreground whitespace-nowrap min-w-[200px] sm:min-w-[240px] transition-all hover:scale-105"
-            >
-              <span>Privacy is Power</span>
-            </Link>
-          </div>
-
-          <div className="flex flex-row gap-6 lg:gap-8">
+        <div className="relative border border-border rounded-2xl p-4 sm:p-6 lg:p-8">
+          <div className="flex flex-row gap-4 lg:gap-6">
             {/* Sidebar Navigation - Left side */}
             <aside className="w-20 sm:w-24 lg:w-[360px] flex-shrink-0 h-full flex flex-col">
               {/* Mobile: Current Category Indicator */}
@@ -358,8 +348,20 @@ export default function DashboardSection() {
             </aside>
 
             {/* Content Grid */}
-            <div className="flex-1 min-w-0 p-4 sm:p-6 lg:p-8">
-              <div className="grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-3 lg:gap-16 w-full">
+            <div className="flex-1 min-w-0 p-0 sm:p-2 lg:p-4">
+              {/* Privacy is Power Button */}
+              <div className="mb-6 flex justify-end -mt-[5mm]">
+                <Link
+                  href="/community"
+                  className="relative inline-flex items-center justify-center gap-2 border-2 border-accent bg-accent px-8 py-3 sm:px-10 sm:py-4 p-small font-semibold text-accent-foreground whitespace-nowrap transition-all hover:scale-105 w-full lg:w-[calc((100%-2*2rem)/3)]"
+                  style={{
+                    boxShadow: '0 0 20px rgba(147, 197, 253, 0.4), 0 0 40px rgba(147, 197, 253, 0.2)'
+                  }}
+                >
+                  <span>Privacy is Power</span>
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3 lg:gap-8 w-full">
                 {filteredItems.map((item) => (
                   <div
                     key={item.id}
@@ -369,7 +371,7 @@ export default function DashboardSection() {
                     <Link href={item.href} className="block h-full w-full">
                       <div className="db-card__visual relative w-full overflow-hidden rounded-xl border border-border bg-card">
                         <div className="dash-res-card__visual-before absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
-                        <div className="relative w-full aspect-[4/3] flex items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background overflow-hidden">
+                        <div className="relative w-full aspect-video flex items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background overflow-hidden">
                           {item.image ? (
                             <img
                               src={item.image}
