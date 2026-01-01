@@ -314,7 +314,7 @@ function DividerAnimation() {
   }, [isAnimated])
 
   return (
-    <div ref={containerRef} className="mx-auto max-w-4xl pt-10">
+    <div ref={containerRef} className="mx-auto max-w-4xl pt-24 pb-24">
       <div className="flex items-center justify-center" style={{ gap: isAnimated ? '0.5rem' : '0.25rem' }}>
         {/* Left Video */}
         <div 
@@ -389,60 +389,6 @@ function DividerAnimation() {
   )
 }
 
-function RockBackground() {
-  const rockRef = useRef<HTMLDivElement>(null)
-  const [transform, setTransform] = useState(0)
-
-  useEffect(() => {
-    const element = rockRef.current
-    if (!element) return
-
-    const handleScroll = () => {
-      if (!rockRef.current) return
-      
-      const rect = rockRef.current.getBoundingClientRect()
-      const windowHeight = window.innerHeight
-      const elementTop = rect.top
-      const elementHeight = rect.height
-      
-      // Calculate scroll progress (0 to 1)
-      const scrollProgress = Math.max(0, Math.min(1, 
-        (windowHeight - elementTop) / (windowHeight + elementHeight)
-      ))
-
-      // Subtle parallax movement
-      const value = scrollProgress * 20 - 10 // Move from -10% to 10%
-      setTransform(value)
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
-  return (
-    <div 
-      ref={rockRef}
-      data-parallax="trigger" 
-      className="rock-wrap absolute inset-0 top-[60%] z-0 w-full h-[50em] overflow-hidden pointer-events-none"
-    >
-      <div 
-        className="bg-wrapper w-full h-full relative flex items-center justify-center overflow-hidden"
-        style={{ transform: `translateY(${transform}%)` }}
-      >
-        {/* Placeholder for animated rocks - kann später durch echte 3D-Grafik ersetzt werden */}
-        <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(147, 197, 253, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(147, 197, 253, 0.1) 0%, transparent 50%)',
-          filter: 'blur(40px)'
-        }} />
-      </div>
-      <div className="rock-wrap-overlay absolute inset-0 z-[2] bg-gradient-to-b from-black/50 via-black/100 to-black" />
-    </div>
-  )
-}
 
 function QuantumIconsRow({ icons, parallaxStart, parallaxEnd, scrub }: { icons: string[], parallaxStart: number, parallaxEnd: number, scrub: number }) {
   const rowRef = useRef<HTMLDivElement>(null)
@@ -1006,61 +952,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Crowdfunding Section */}
-      <section className="relative py-24 overflow-hidden group">
-        {/* Background Rocks - Animated */}
-        <RockBackground />
-        
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-          {/* Text Container */}
-          <div className="text-center mb-16">
-            <div className="mx-auto max-w-4xl">
-              {/* Heading with proper spacing */}
-              <div className="relative mb-16" style={{ minHeight: '4rem' }}>
-                <h2 className="h-large transition-opacity duration-500 group-hover:opacity-0">
-                  Crowdfunding and how it works
-                </h2>
-                <h2 className="h-large absolute top-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  Explore the perks of joining the community
-            </h2>
-              </div>
-              
-              {/* Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-                <Link 
-                  href="/crowdfunding" 
-                  className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 text-black"
-                >
-                  <div className="absolute inset-0 bg-[#93c5fd] rounded-lg -z-10" />
-                  <span className="p-reg text-black">Explore Crowdfunding</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-black">
-                    <rect width="7" height="7" x="3" y="3" rx="1"/>
-                    <rect width="7" height="7" x="14" y="3" rx="1"/>
-                    <rect width="7" height="7" x="14" y="14" rx="1"/>
-                    <rect width="7" height="7" x="3" y="14" rx="1"/>
-                  </svg>
-                </Link>
-                <Link 
-                  href="/xcoin_grid/xcoin-better" 
-                  className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg backdrop-blur-md bg-white/10 border border-white/20 hover:border-[#93c5fd]/50 transition-all duration-300 text-white"
-                >
-                  <span className="p-reg text-white">Why is Xcoin better?</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                    <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
-                  </svg>
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Divider with Videos and Logo - Animated */}
-          <DividerAnimation />
-        </div>
-
-      </section>
-
-      {/* DAO Tabs Section */}
-      <DAOTabsSection />
+      {/* Crowdfunding & DAO Section - Combined */}
+      <CrowdfundingDAOSection />
 
       {/* Pricing Section */}
       <PricingSection />
@@ -1099,7 +992,7 @@ function PrivacyPowerSection() {
   )
 }
 
-function DAOTabsSection() {
+function CrowdfundingDAOSection() {
   const [activeTab, setActiveTab] = useState(0)
 
   const tabs = [
@@ -1133,8 +1026,70 @@ function DAOTabsSection() {
   ]
 
   return (
-    <section className="relative py-24">
-      <div className="mx-auto max-w-[1920px] px-6 lg:px-8">
+    <section className="relative py-24 overflow-visible group">
+      {/* Background Rocks - spans both sections */}
+      <div 
+        data-parallax="trigger" 
+        className="rock-wrap absolute inset-0 top-[20%] z-0 w-full h-[50em] overflow-visible pointer-events-none"
+      >
+        <img 
+          src="/img/bg-rocks.avif" 
+          alt="Decorative moody background of charcoal" 
+          className="rock-wrap-image absolute inset-0 w-full h-full object-cover opacity-60"
+          loading="lazy"
+        />
+        <div className="rock-wrap-overlay absolute inset-0 z-[2] bg-gradient-to-b from-black/10 via-black/40 to-black" />
+      </div>
+      
+      {/* Crowdfunding Content */}
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+        {/* Text Container */}
+        <div className="text-center mb-16">
+          <div className="mx-auto max-w-4xl">
+            {/* Heading with proper spacing */}
+            <div className="relative mb-16" style={{ minHeight: '4rem' }}>
+              <h2 className="h-large transition-opacity duration-500 group-hover:opacity-0">
+                Crowdfunding and how it works
+              </h2>
+              <h2 className="h-large absolute top-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                Explore the perks of joining the community
+              </h2>
+            </div>
+            
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+              <Link 
+                href="/crowdfunding" 
+                className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 text-black"
+              >
+                <div className="absolute inset-0 bg-[#93c5fd] rounded-lg -z-10" />
+                <span className="p-reg text-black">Explore Crowdfunding</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-black">
+                  <rect width="7" height="7" x="3" y="3" rx="1"/>
+                  <rect width="7" height="7" x="14" y="3" rx="1"/>
+                  <rect width="7" height="7" x="14" y="14" rx="1"/>
+                  <rect width="7" height="7" x="3" y="14" rx="1"/>
+                </svg>
+              </Link>
+              <Link 
+                href="/xcoin_grid/xcoin-better" 
+                className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg backdrop-blur-md bg-white/10 border border-white/20 hover:border-[#93c5fd]/50 transition-all duration-300 text-white"
+              >
+                <span className="p-reg text-white">Why is Xcoin better?</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Divider with Videos and Logo - Animated */}
+        <DividerAnimation />
+      </div>
+
+      {/* DAO Tabs Content */}
+      <div className="mx-auto max-w-[1920px] px-6 lg:px-8 relative z-10 mt-24">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12">
           {/* Left Column - Tabs and Content */}
           <div className="flex flex-col">
