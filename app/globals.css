@@ -74,6 +74,12 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.9 0 0);
   --sidebar-ring: oklch(0.88 0.12 195);
+  /* XCoin_Basti variables */
+  --gap-tiny: 0.5em;
+  --gap-large: 1.5em;
+  --card--radius-small: 0.5em;
+  --card--radius-reg: 0.75em;
+  --card--border-color: rgba(239, 238, 236, 0.14);
 }
 
 .dark {
@@ -1206,8 +1212,9 @@
   transform-style: preserve-3d !important;
 }
 
-.db-card__visual,
-.dash-res-card__visual-before {
+/* Only apply transparent background to specific dashboard cards, not all db-card__visual */
+.db-content__card .db-card__visual,
+.db-content__card .dash-res-card__visual-before {
   background: transparent !important;
   background-color: transparent !important;
 }
@@ -1242,3 +1249,429 @@
 .dashboard-banner {
   box-shadow: 0 0 30px rgba(147, 197, 253, 0.6), 0 0 60px rgba(147, 197, 253, 0.4), 0 0 90px rgba(147, 197, 253, 0.2);
 }
+
+/* Features Grid Section - XCoin_Basti Style */
+.f-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1.575em; /* 1.5em * 1.05 = 1.575em (5% larger) */
+  width: 100%;
+  max-width: 100%; /* Use almost full width of the page */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.f-grid-card {
+  display: flex;
+  flex-flow: column;
+  grid-column: span 2;
+  height: 25.11em; /* 27.9em * 0.9 = 25.11em (10% further reduction) */
+  padding: 2.1em 1.575em 1.575em; /* 2em * 1.05 = 2.1em, 1.5em * 1.05 = 1.575em (5% larger) */
+  border-radius: 1rem;
+  background-color: rgba(239, 238, 236, 0.06); /* #efeeec0f */
+  border: 1px solid rgba(239, 238, 236, 0.08); /* #efeeec14 */
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.f-grid-card:hover {
+  border-color: rgba(147, 197, 253, 0.5); /* accent color with opacity */
+}
+
+.f-grid-card.basics {
+  grid-column: span 1;
+  justify-content: space-between;
+  align-items: stretch;
+  overflow: hidden; /* Prevent content from overflowing the box */
+}
+
+.f-grid-card.video {
+  grid-column: span 2;
+  padding-bottom: 0;
+  gap: 2.1em; /* 2em * 1.05 = 2.1em (5% larger) */
+}
+
+.f-grid-card.components {
+  grid-column: span 2;
+  padding-bottom: 0;
+}
+
+.f-grid-card.icons {
+  grid-column: span 1;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.f-grid-card.snippets {
+  grid-column: span 2;
+}
+
+.f-grid__snippet {
+  max-height: 12em; /* Reduced image height */
+  flex: 0 0 auto; /* Don't grow, use fixed height */
+  margin-top: auto; /* Push image to bottom */
+}
+
+.f-grid-card.full {
+  grid-column: span 4;
+}
+
+.f-grid-card.full.end {
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  min-height: auto;
+  padding-top: 2.1em; /* 2em * 1.05 = 2.1em (5% larger) */
+  padding-bottom: 2.1em; /* 2em * 1.05 = 2.1em (5% larger) */
+}
+
+.f-card__text {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
+  gap: 0.75em;
+  overflow: hidden; /* Prevent text from overflowing */
+}
+
+.f-card__paragraph {
+  width: 100%;
+  max-width: 30em;
+  overflow-wrap: break-word; /* Break long words if needed */
+  word-wrap: break-word; /* Legacy support */
+}
+
+.f-grid-card.basics .f-card__paragraph p {
+  font-size: 0.75em; /* Smaller font size for community box text */
+  line-height: 1.4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .f-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1.575em; /* Maintain 5% larger gap on tablet */
+  }
+  
+  .f-grid-card {
+    grid-column: span 1;
+    height: 25.11em; /* 27.9em * 0.9 = 25.11em (10% further reduction on tablet) */
+    padding: 2.1em 1.575em 1.575em; /* Maintain 5% larger padding on tablet */
+  }
+  
+  .f-grid-card.video,
+  .f-grid-card.components,
+  .f-grid-card.snippets {
+    grid-column: span 2;
+  }
+  
+  .f-grid-card.full {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .f-grid {
+    grid-template-columns: 1fr;
+    grid-gap: 1.26em; /* 1.2em * 1.05 = 1.26em (slightly smaller gap on mobile, but still 5% larger than base) */
+  }
+  
+  .f-grid-card {
+    grid-column: span 1;
+    height: auto; /* Auto height on mobile for better responsiveness */
+    min-height: 21.76em; /* 24.18em * 0.9 = 21.76em (10% further reduction on mobile) */
+    padding: 1.68em 1.26em; /* 1.6em * 1.05 = 1.68em, 1.2em * 1.05 = 1.26em (5% larger, adjusted for mobile) */
+  }
+  
+  .f-grid-card.video,
+  .f-grid-card.components,
+  .f-grid-card.snippets,
+  .f-grid-card.full {
+    grid-column: span 1;
+  }
+}
+
+/* Features Grid Basics Items */
+.f-grid__basics {
+  width: calc(100% + 3em);
+  margin-left: -1.5em;
+  padding-top: 0.5em; /* Prevent top border from being cut off */
+}
+
+.f-grid-basics__item {
+  padding: var(--gap-tiny);
+  border: 1px solid var(--card--border-color);
+  border-radius: var(--card--radius-small);
+  cursor: pointer;
+  background-color: #0e0e0e;
+  flex-flow: column;
+  flex: none;
+  width: 17.955em; /* 18.9em * 0.95 = 17.955em (5% smaller) */
+  margin-left: 0.9975em; /* 1.05em * 0.95 = 0.9975em (5% smaller) */
+  margin-right: 0.9975em; /* 1.05em * 0.95 = 0.9975em (5% smaller) */
+  font-size: 0.648375em; /* 0.6825em * 0.95 = 0.648375em (5% smaller) */
+  font-weight: 500;
+  transition: border-color 0.2s, background-color 0.2s;
+  display: flex;
+  position: relative;
+}
+
+.f-grid-basics__item:hover {
+  background-color: #141414;
+  border-color: rgba(239, 238, 236, 0.15);
+}
+
+/* Dashboard Section Styles - Keep original */
+/* Base db-card__visual - used by dashboard section */
+.db-card__visual {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--card--radius-small);
+  flex-shrink: 0;
+}
+
+/* Dashboard cards should use aspect-video, not fixed height */
+.db-content__card .db-card__visual {
+  aspect-ratio: 16 / 9;
+}
+
+.dash-res-card__visual-before {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+}
+
+.dash-res-card__visual-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.db-card__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5em;
+}
+
+.db-card__info.tiny {
+  font-size: 0.65em;
+}
+
+.db-card__info-start {
+  flex: 1;
+}
+
+.db-card__info-end {
+  display: flex;
+  align-items: center;
+}
+
+.db-card__arrow {
+  position: relative;
+  width: 1.5em;
+  height: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: clip-path 0.3s;
+}
+
+/* Only hide arrow for f-grid-basics items that use db-card__arrow (if any), not dashboard cards */
+/* Note: Community cards use community-card__arrow, so this only applies if db-card__arrow is used in f-grid-basics */
+.f-grid-basics__item .db-card__arrow {
+  clip-path: circle(0% at 50% 50%);
+}
+
+.f-grid-basics__item:hover .db-card__arrow {
+  clip-path: circle(50% at 50% 50%);
+}
+
+/* Dashboard cards should always show arrow */
+.db-content__card .db-card__arrow {
+  clip-path: none !important;
+}
+
+.db-card__arrow-back {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(147, 197, 253, 0.2);
+  border-radius: 50%;
+}
+
+.db-card__arrow-svg {
+  width: 100%;
+  height: 100%;
+  color: currentColor;
+  transition: transform 0.3s;
+  transform: translateX(-75%) rotate(0.001deg);
+}
+
+.f-grid-basics__item:hover .db-card__arrow-svg {
+  transform: translateX(0%) rotate(0.001deg);
+}
+
+/* Community Images Card Styles - Separate from Dashboard */
+.community-card__visual {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--card--radius-small);
+  flex-shrink: 0;
+}
+
+.community-card__visual-before {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+}
+
+.community-card__visual-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.community-card__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5em; /* Reduced top spacing */
+  margin-bottom: 0.25em; /* Further reduced bottom spacing */
+  padding-top: 0.5em; /* Reduced top padding */
+  padding-bottom: 0.25em; /* Further reduced bottom padding */
+  padding-left: 1.5em; /* Increased left padding */
+  font-size: 0.875em; /* Same as p-small - matching XCoin_Basti */
+}
+
+.community-card__info-start {
+  flex: 1;
+}
+
+.community-card__info-end {
+  display: flex;
+  align-items: center;
+}
+
+.community-card__arrow {
+  position: relative;
+  width: 1.5em;
+  height: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: clip-path 0.3s;
+  clip-path: circle(0% at 50% 50%);
+}
+
+.f-grid-basics__item:hover .community-card__arrow {
+  clip-path: circle(50% at 50% 50%);
+}
+
+.community-card__arrow-back {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(147, 197, 253, 0.2);
+  border-radius: 50%;
+}
+
+.community-card__arrow-svg {
+  width: 100%;
+  height: 100%;
+  color: currentColor;
+  transition: transform 0.3s;
+  transform: translateX(-75%) rotate(0.001deg);
+}
+
+.f-grid-basics__item:hover .community-card__arrow-svg {
+  transform: translateX(0%) rotate(0.001deg);
+}
+
+/* Browser Window Styles for Vision Card */
+.f-grid__vid-wrap {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  position: relative;
+  transform: translate(0, 1px);
+  margin-top: auto;
+}
+
+.system-overlay {
+  z-index: 5;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.25em;
+  border: 1px solid var(--card--border-color);
+  background-color: #1b1b1b;
+  border-top-left-radius: 0.375em;
+  border-top-right-radius: 0.375em;
+  padding: 0.375em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translate(0, -85%);
+}
+
+.system-overlay__dot {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 2em;
+  width: 0.375em;
+  height: 0.375em;
+}
+
+.vimeo-wrap {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: #000;
+  border: 1px solid var(--card--border-color);
+}
+
+/* Responsive adjustments for browser window */
+@media (max-width: 1024px) {
+  .f-grid__vid-wrap {
+    width: 100%;
+  }
+}
+
+/* Rock Wrap Background */
+.rock-wrap {
+  z-index: 0;
+  width: 100%;
+  height: 50em;
+  position: absolute;
+  inset: 60% 0% auto;
+  overflow: hidden;
+}
+
+.bg-wrapper {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-wrapper canvas {
+  position: absolute;
+}
+
+.rock-wrap-overlay {
+  z-index: 2;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 1) 100%, rgba(0, 0, 0, 1));
+  position: absolute;
+  inset: 0%;
+}
+

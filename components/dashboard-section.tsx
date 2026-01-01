@@ -311,9 +311,9 @@ export default function DashboardSection() {
                     className="db-content__card group"
                   >
                     <Link href={item.href} className="block w-full">
-                      <div className="db-card__visual relative w-full overflow-hidden rounded-xl border border-border bg-card">
+                      <div className="db-card__visual relative w-full aspect-video overflow-hidden rounded-xl border border-border bg-card">
                         <div className="dash-res-card__visual-before absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
-                        <div className="relative w-full aspect-video overflow-hidden">
+                        <div className="relative w-full h-full overflow-hidden">
                           {item.image ? (
                             <img
                               src={item.image}

@@ -71,6 +71,14 @@ export default function TestimonialsSection() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [isInitialized, setIsInitialized] = useState(false)
 
+  // Auto-advance every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSelectedIndex((prev) => (prev + 1) % testimonials.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [])
+
   useEffect(() => {
     if (scrollRef.current && !isInitialized) {
       // Initial scroll to center Marco Delano
