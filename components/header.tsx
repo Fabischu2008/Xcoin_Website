@@ -9,6 +9,7 @@ const navigation = [
   { name: "Overview", href: "/overview", hasDivider: true },
   { name: "Use", href: "/use" },
   { name: "Develop", href: "/develop", hasDivider: true },
+  { name: "Docs", href: "/docs", hasDivider: true },
   { name: "Community", href: "/community", hasDivider: true },
   { name: "FAQ", href: "/faq" },
   { name: "Learning", href: "/learning", hasDivider: true },

@@ -71,10 +71,10 @@ export default function CommunityPage() {
             {/* Logo */}
             <div className="mb-6 sm:mb-8 flex justify-center">
               <Image 
-                src="/logo2.png" 
+                src="/img/xcoin.svg" 
                 alt="Xcoin Logo" 
-                width={64} 
-                height={64} 
+                width={64}
+                height={64}
                 className="w-12 h-12 sm:w-16 sm:h-16"
               />
             </div>
@@ -168,7 +168,7 @@ export default function CommunityPage() {
             </div>
             <div className="relative bg-accent/5 overflow-hidden min-h-[400px]">
               <Image 
-                src="/Validator.png" 
+                src="/Validator.webp" 
                 alt="Xcoin Validator" 
                 width={800}
                 height={600}
