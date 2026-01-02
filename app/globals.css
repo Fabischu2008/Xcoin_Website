@@ -1308,9 +1308,19 @@
 }
 
 .f-grid__snippet {
-  max-height: 12em; /* Reduced image height */
-  flex: 0 0 auto; /* Don't grow, use fixed height */
-  margin-top: auto; /* Push image to bottom */
+  max-height: 12em;
+  flex: 0 0 auto;
+  margin-top: auto;
+  overflow: hidden;
+}
+
+.f-grid__snippet img {
+  width: 100%;
+  height: auto;
+  max-height: 12em;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .f-grid-card.full {
@@ -1348,17 +1358,18 @@
   line-height: 1.4;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments - Simplified */
 @media (max-width: 1024px) {
   .f-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 1.575em; /* Maintain 5% larger gap on tablet */
+    grid-template-columns: 1fr; /* Alles untereinander auf Tablet */
+    grid-gap: 1.575em;
   }
   
   .f-grid-card {
     grid-column: span 1;
-    height: 25.11em; /* 27.9em * 0.9 = 25.11em (10% further reduction on tablet) */
-    padding: 2.1em 1.575em 1.575em; /* Maintain 5% larger padding on tablet */
+    height: auto;
+    min-height: auto;
+    padding: 2.1em 1.575em 1.575em;
   }
   
   .f-grid-card.video,
@@ -1366,25 +1377,34 @@
   .f-grid-card.snippets,
   .f-grid-card.basics,
   .f-grid-card.icons {
-    grid-column: span 2;
+    grid-column: span 1; /* Alles untereinander */
   }
   
   .f-grid-card.full {
-    grid-column: span 2;
+    grid-column: span 1;
+  }
+  
+  /* Prevent image stretching on tablet */
+  .f-grid__snippet {
+    max-height: 10em;
+  }
+  
+  .f-grid__snippet img {
+    max-height: 10em;
   }
 }
 
 @media (max-width: 768px) {
   .f-grid {
     grid-template-columns: 1fr;
-    grid-gap: 1.26em; /* 1.2em * 1.05 = 1.26em (slightly smaller gap on mobile, but still 5% larger than base) */
+    grid-gap: 1.26em;
   }
   
   .f-grid-card {
     grid-column: span 1;
-    height: auto; /* Auto height on mobile for better responsiveness */
-    min-height: 21.76em; /* 24.18em * 0.9 = 21.76em (10% further reduction on mobile) */
-    padding: 1.68em 1.26em; /* 1.6em * 1.05 = 1.68em, 1.2em * 1.05 = 1.26em (5% larger, adjusted for mobile) */
+    height: auto;
+    min-height: auto;
+    padding: 1.68em 1.26em;
   }
   
   .f-grid-card.video,
@@ -1392,6 +1412,56 @@
   .f-grid-card.snippets,
   .f-grid-card.full {
     grid-column: span 1;
+  }
+  
+  /* Prevent image stretching on mobile */
+  .f-grid__snippet {
+    max-height: 8em;
+    flex: 0 0 auto;
+  }
+  
+  .f-grid__snippet img {
+    max-height: 8em;
+    height: auto;
+  }
+  
+  /* Prevent stretching of video wrap on mobile */
+  .f-grid__vid-wrap {
+    flex: 0 1 auto;
+    max-height: 10em;
+  }
+  
+  .vimeo-wrap {
+    max-height: 10em;
+    min-height: 150px;
+    height: auto;
+  }
+  
+  /* Prevent stretching of card content */
+  .f-card__text {
+    flex: 0 1 auto;
+  }
+  
+  /* Prevent stretching of development images container */
+  .f-grid-card.components .absolute {
+    flex: 0 1 auto;
+    height: auto;
+    max-height: 15em;
+    opacity: 0.1; /* Noch dezenter auf Mobile */
+  }
+  
+  .f-grid-card.components .absolute .flex {
+    height: auto;
+    max-height: 15em;
+  }
+  
+  /* Development Images Columns - Mobile: weniger Spalten */
+  .f-grid-card.components .absolute .flex {
+    flex-wrap: wrap;
+  }
+  
+  .f-grid-card.components .absolute .flex > div {
+    flex: 0 0 calc(50% - 0.25em); /* 2 Spalten statt 4 auf Mobile */
   }
 }
 
@@ -1597,6 +1667,7 @@
   flex: 1;
   width: 100%;
   min-height: 0;
+  max-height: 15em;
   position: relative;
   transform: translate(0, 1px);
   margin-top: auto;
@@ -1631,6 +1702,7 @@
 .vimeo-wrap {
   width: 100%;
   height: 100%;
+  max-height: 15em;
   min-height: 200px;
   position: relative;
   border-radius: 0.75rem;
@@ -1643,6 +1715,24 @@
 @media (max-width: 1024px) {
   .f-grid__vid-wrap {
     width: 100%;
+    max-height: 12em;
+  }
+  
+  .vimeo-wrap {
+    max-height: 12em;
+  }
+}
+
+@media (max-width: 768px) {
+  .f-grid__vid-wrap {
+    flex: 0 1 auto;
+    max-height: 10em;
+  }
+  
+  .vimeo-wrap {
+    height: auto;
+    max-height: 10em;
+    min-height: 150px;
   }
 }
 

@@ -274,12 +274,13 @@ function DevelopmentImageColumn({ images, parallaxStart, parallaxEnd, scrub }: {
       style={{ transform: `translateY(${transform}px)` }}
     >
       {images.map((image, index) => (
-        <div key={index} className="relative aspect-square overflow-hidden rounded">
+        <div key={index} className="relative aspect-square overflow-hidden rounded flex-shrink-0">
           <img 
             src={`/img/xcoin_grid/screens/${image}`}
             alt=""
             className="w-full h-full object-cover"
             loading="lazy"
+            style={{ maxHeight: '100%' }}
           />
         </div>
       ))}
@@ -896,8 +897,9 @@ export default function HomePage() {
                 <img 
                   src="/img/xcoin_grid/use-cases.jpeg" 
                   alt="Use Cases" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto object-cover"
                   loading="lazy"
+                  style={{ maxHeight: '12em' }}
                   onError={(e) => {
                     // Image failed to load - silently handle
                     (e.target as HTMLImageElement).style.display = 'none'
