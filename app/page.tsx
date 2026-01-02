@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useEffect, useRef, useState, lazy, Suspense, useMemo } from "react"
+import { useEffect, useRef, useState, lazy, Suspense, useMemo, useCallback } from "react"
 import Link from "next/link"
 import Hero from "@/components/hero"
 
@@ -118,7 +118,7 @@ function VideoPlayer() {
       })
       // Prevent body scroll when modal is open
       document.body.style.overflow = 'hidden'
-    } else {
+          } else {
       document.body.style.overflow = ''
     }
 
@@ -555,10 +555,10 @@ function CommunityImagesCard() {
   return (
     <div className="f-grid-card basics group">
       <div className="f-grid__basics">
-        <div 
+    <div
           ref={scrollRef}
           className="flex gap-1 overflow-x-auto pt-2 pb-8 snap-x snap-mandatory"
-          style={{ 
+      style={{
             scrollbarWidth: 'none', 
             msOverflowStyle: 'none',
             justifyContent: 'flex-start',
@@ -582,7 +582,7 @@ function CommunityImagesCard() {
                     className="community-card__visual-img w-full h-full object-cover"
                     loading="lazy"
                   />
-                </div>
+        </div>
                 <div className="community-card__info">
                   <div className="community-card__info-start">
                     <p className="p-small">{item.label}</p>
@@ -767,12 +767,12 @@ export default function HomePage() {
             </p>
             </div>
           </div>
-          
+
           {/* Video Player - Full Width, Almost Full Screen */}
           <div className="mt-12 w-full">
             <VideoPlayer />
           </div>
-        </div>
+                </div>
       </section>
 
       {/* Dashboard Section */}
@@ -857,8 +857,8 @@ export default function HomePage() {
                       <br/>
                       <br/>
                       Whether you are a developer, investor, researcher, or privacy advocate, these documents offer a clear blueprint for a more private, decentralized, and equitable financial future.
-                    </span>
-                  </p>
+                </span>
+              </p>
                 </div>
               </div>
               {/* Browser Window Container */}
@@ -994,6 +994,42 @@ function PrivacyPowerSection() {
 
 function CrowdfundingDAOSection() {
   const [activeTab, setActiveTab] = useState(0)
+  const [hoveredTab, setHoveredTab] = useState<number | null>(null)
+  const rockRef = useRef<HTMLDivElement>(null)
+  const [rockTransform, setRockTransform] = useState(0)
+  
+  // Calculate position for sliding background - optimized with useMemo
+  const backgroundPosition = useMemo(() => {
+    return (hoveredTab !== null && hoveredTab !== activeTab) ? hoveredTab : activeTab
+  }, [hoveredTab, activeTab])
+
+  // Parallax scroll animation for rocks - optimized with useCallback
+  const handleScroll = useCallback(() => {
+    if (!rockRef.current) return
+    
+    const rect = rockRef.current.getBoundingClientRect()
+    const windowHeight = window.innerHeight
+    const elementTop = rect.top
+    const elementHeight = rect.height
+    
+    // Calculate scroll progress (0 to 1)
+    const scrollProgress = Math.max(0, Math.min(1, 
+      (windowHeight - elementTop) / (windowHeight + elementHeight)
+    ))
+
+    // Parallax movement - move slower than scroll (subtle effect)
+    const value = scrollProgress * 30 - 15 // Move from -15% to 15%
+    setRockTransform(value)
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll() // Initial call
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [handleScroll])
 
   const tabs = [
     {
@@ -1026,19 +1062,25 @@ function CrowdfundingDAOSection() {
   ]
 
   return (
-    <section className="relative py-24 overflow-visible group">
+    <section className="relative py-24 pb-40 overflow-visible group">
       {/* Background Rocks - spans both sections */}
       <div 
+        ref={rockRef}
         data-parallax="trigger" 
-        className="rock-wrap absolute inset-0 top-[20%] z-0 w-full h-[50em] overflow-visible pointer-events-none"
+        className="rock-wrap absolute inset-0 top-[20%] z-0 w-full pointer-events-none"
       >
-        <img 
-          src="/img/bg-rocks.avif" 
-          alt="Decorative moody background of charcoal" 
-          className="rock-wrap-image absolute inset-0 w-full h-full object-cover opacity-60"
-          loading="lazy"
-        />
-        <div className="rock-wrap-overlay absolute inset-0 z-[2] bg-gradient-to-b from-black/10 via-black/40 to-black" />
+        <div 
+          className="rock-wrap-image-container"
+          style={{ transform: `translateY(${rockTransform}%)` }}
+        >
+          <img 
+            src="/img/bg-rocks.avif" 
+            alt="Decorative moody background of charcoal" 
+            className="rock-wrap-image opacity-80"
+            loading="lazy"
+          />
+          <div className="rock-wrap-overlay" />
+        </div>
       </div>
       
       {/* Crowdfunding Content */}
@@ -1053,9 +1095,9 @@ function CrowdfundingDAOSection() {
               </h2>
               <h2 className="h-large absolute top-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                 Explore the perks of joining the community
-              </h2>
-            </div>
-            
+            </h2>
+          </div>
+
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               <Link 
@@ -1089,62 +1131,55 @@ function CrowdfundingDAOSection() {
       </div>
 
       {/* DAO Tabs Content */}
-      <div className="mx-auto max-w-[1920px] px-6 lg:px-8 relative z-10 mt-24">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12">
+      <div className="mx-auto max-w-[1920px] px-6 lg:px-8 lg:pl-32 relative z-10 mt-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr] gap-12 relative">
           {/* Left Column - Tabs and Content */}
-          <div className="flex flex-col">
-            <div className="mb-8">
-              <h3 className="h-medium mb-2">XXX DAO</h3>
-              <span className="text-sm text-muted-foreground relative -top-3 block">(Decentralized Autonomous Organization)</span>
+          <div className="flex flex-col lg:max-w-[50%] dao-tab-container">
+            <div className="dao-tab-container-top mb-8">
+              <h3 className="text-[4.5em] font-medium leading-none mb-0.5" style={{ fontFamily: '"PP Neue Montreal", Arial, sans-serif' }}>XXX DAO</h3>
+              <span className="text-xl text-white relative -top-1.5 block">(Decentralized Autonomous Organization)</span>
               
-              {/* Tab Buttons - Smaller */}
-              <div className="mt-6 p-1.5 border border-border rounded-lg bg-background/50 backdrop-blur-md flex gap-1">
-                {tabs.map((tab, index) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(index)}
-                    onMouseEnter={(e) => {
-                      if (activeTab !== index) {
-                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (activeTab !== index) {
-                        e.currentTarget.style.borderColor = 'transparent'
-                      }
-                    }}
-                    className="flex-1 px-4 py-2.5 rounded-md transition-all duration-250 relative bg-transparent border border-transparent hover:border-white/10"
-                    style={{
-                      borderColor: activeTab === index ? 'rgba(255, 255, 255, 0.15)' : 'transparent',
-                    }}
-                  >
-                    {activeTab === index && (
-                      <div 
-                        className="absolute inset-0 rounded-md -z-10 transition-all duration-250"
-                        style={{
-                          backgroundColor: 'rgba(239, 238, 236, 0.06)',
-                          border: '1px solid rgba(239, 238, 236, 0.08)',
-                          inset: '-1px',
-                        }}
-                      />
-                    )}
-                    <div className="p-med text-white relative z-10 text-sm">{tab.label}</div>
-                  </button>
-                ))}
+              {/* Tab Buttons - matching XCoin_Basti */}
+              <div className="dao-filter-bar mt-6 mb-8 relative">
+                {/* Sliding background - moves between tabs */}
+                <div 
+                  className="dao-tab-sliding-bg"
+                  style={{
+                    transform: `translateX(${backgroundPosition * 100}%)`,
+                  }}
+                />
+                {tabs.map((tab, index) => {
+                  const isActive = activeTab === index
+                  const isHovered = hoveredTab === index
+                  const showBorderOnly = isActive && hoveredTab !== null && !isHovered
+                  
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveTab(index)}
+                      className={`dao-filter-button ${isActive ? 'active' : ''}`}
+                      onMouseEnter={() => setHoveredTab(index)}
+                      onMouseLeave={() => setHoveredTab(null)}
+                    >
+                      <div className="p-med text-white relative z-10">{tab.label}</div>
+                      {showBorderOnly && <div className="dao-tab-button-border-only" />}
+                    </button>
+                  )
+                })}
               </div>
             </div>
 
             {/* Tab Content */}
-            <div className="flex-1 relative min-h-[200px]">
+            <div className="dao-tab-content-wrap flex-1">
               {tabs.map((tab, index) => (
                 <div
                   key={tab.id}
-                  className={`absolute inset-0 flex flex-col gap-4 transition-opacity duration-300 ${
-                    activeTab === index ? 'opacity-100 visible' : 'opacity-0 invisible'
+                  className={`dao-tab-content-item ${
+                    activeTab === index ? 'active' : ''
                   }`}
                 >
-                  <h4 className="h-small">{tab.title}</h4>
-                  <p className="p-med text-muted-foreground opacity-70 whitespace-pre-line">
+                  <h4 className="h-small mb-4">{tab.title}</h4>
+                  <p className="p-reg opacity-70 whitespace-pre-line">
                     {tab.content}
                   </p>
                 </div>
@@ -1152,24 +1187,27 @@ function CrowdfundingDAOSection() {
             </div>
 
             {/* Tab Buttons */}
-            <div className="mt-4 flex flex-col gap-3">
-              {tabs.map((tab, index) => (
-                <Link
-                  key={tab.id}
-                  href={tab.buttonHref}
-                  className={`group relative inline-flex items-center justify-center px-6 py-3 rounded-lg transition-all duration-300 ${
-                    activeTab === index ? 'opacity-100 visible' : 'opacity-0 invisible absolute'
-                  }`}
-                >
-                  <div className="absolute inset-0 bg-[#93c5fd] rounded-lg -z-10 group-hover:bg-[#93c5fd]/90 transition-colors" />
-                  <span className="p-reg text-black">{tab.buttonText}</span>
-                </Link>
-              ))}
+            <div className="dao-tab-button-wrap mt-4">
+              {tabs.map((tab, index) => {
+                const isActive = activeTab === index
+                return (
+                  <Link
+                    key={tab.id}
+                    href={tab.buttonHref}
+                    className={`dao-button group relative items-center justify-center rounded-lg transition-opacity duration-300 ${
+                      isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                    }`}
+                  >
+                    <div className="dao-button-bg absolute inset-0 bg-[#93c5fd] rounded-lg -z-10 transition-transform duration-300" />
+                    <span className="p-reg text-black relative z-10">{tab.buttonText}</span>
+                  </Link>
+                )
+              })}
             </div>
           </div>
 
-          {/* Right Column - Video - Full Width */}
-          <div className="relative h-[750px] lg:h-[800px] w-full">
+          {/* Right Column - Video - Extends beyond screen */}
+          <div className="relative h-[750px] lg:h-[800px] lg:absolute lg:left-1/2 lg:right-0 lg:top-0 lg:w-[50vw]">
             {tabs.map((tab, index) => (
               <div
                 key={tab.id}
@@ -1177,7 +1215,9 @@ function CrowdfundingDAOSection() {
                   activeTab === index ? 'opacity-100 visible' : 'opacity-0 invisible'
                 }`}
               >
-                <div className="w-full h-full rounded-lg overflow-hidden">
+                <div className="w-full h-full rounded-lg overflow-hidden" style={{
+                  boxShadow: '0 0 20px rgba(147, 197, 253, 0.3), 0 0 40px rgba(147, 197, 253, 0.2), inset 0 0 20px rgba(147, 197, 253, 0.1)'
+                }}>
                   <video
                     src={tab.video}
                     autoPlay
@@ -1190,9 +1230,9 @@ function CrowdfundingDAOSection() {
               </div>
             ))}
           </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
   )
 }
 
@@ -1201,7 +1241,7 @@ function PricingSection() {
 
   return (
     <section className="relative py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="mx-auto max-w-3xl">
@@ -1223,7 +1263,7 @@ function PricingSection() {
                   <h3 className="h-price leading-none whitespace-nowrap">€100</h3>
                   <span className="h-price leading-none">/</span>
                   <div className="h-price leading-none whitespace-nowrap">XXX Token</div>
-                </div>
+              </div>
                 <div className="flex items-center gap-2">
                   <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent opacity-25" />
                   <div className="eyebrow">Fixed minimum price at launch, guaranteed</div>
@@ -1353,11 +1393,11 @@ function PricingSection() {
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M20 6 9 17l-5-5"/>
                       </svg>
-                    </div>
+          </div>
                     <div>
                       <p className="p-reg font-medium mb-1">{benefit.title}</p>
                       <p className="p-small opacity-70">{benefit.desc}</p>
-                    </div>
+        </div>
                   </div>
                 ))}
               </div>

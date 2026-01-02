@@ -1656,17 +1656,170 @@
   overflow: visible;
 }
 
+.rock-wrap-image-container {
+  width: 100%;
+  height: 50em;
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+  position: relative;
+  overflow: hidden; /* Verhindert, dass Overlay über Container hinausragt */
+}
+
 .rock-wrap-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
+  display: block;
 }
 
 .rock-wrap-overlay {
   z-index: 2;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 1) 100%);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 1) 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+/* DAO Button Styles - matching XCoin_Basti */
+.dao-button {
+  color: var(--foreground);
+  background-color: transparent;
+  border: 1px solid transparent;
+  justify-content: center;
+  align-items: center;
+  height: 3.125em;
+  padding: 1.8em 2.4em;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0.25em;
+  width: 100%;
+}
+
+.dao-button-bg {
+  z-index: -1;
+  background-color: #93c5fd;
+  border-radius: 0.25em;
   position: absolute;
   inset: 0;
+  transition: transform 0.3s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.dao-button:hover .dao-button-bg {
+  transform: scale(0.95);
+}
+
+/* DAO Filter Bar and Buttons - matching XCoin_Basti */
+.dao-filter-bar {
+  padding: var(--gap-tiny, 0.5em);
+  border: 1px solid var(--card--border-color, rgba(255, 255, 255, 0.1));
+  border-radius: var(--card--radius-small, 0.5em);
+  background-color: rgba(239, 238, 236, 0.06);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  gap: 0.25em;
+  position: relative;
+  overflow: hidden;
+}
+
+.dao-filter-button {
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.25em;
+  padding: 1.8em 2.4em; /* Further increased */
+  transition: border-color 0.25s;
+  position: relative;
+  flex: 1;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.dao-filter-button.active {
+  visibility: visible;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.dao-tab-sliding-bg {
+  z-index: 0;
+  background-color: rgba(239, 238, 236, 0.06);
+  pointer-events: none;
+  border: 1px solid rgba(239, 238, 236, 0.08);
+  border-radius: 0.25em;
+  position: absolute;
+  top: 0.5em;
+  left: 0.5em;
+  width: calc(33.333% - 0.333em);
+  height: calc(100% - 1em);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dao-tab-button-border-only {
+  z-index: 0;
+  background-color: transparent;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.25em;
+  position: absolute;
+  inset: -1px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* DAO Tab Container - matching XCoin_Basti */
+.dao-tab-container {
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 100%;
+  padding-top: 2em;
+  padding-bottom: 3em;
+  padding-right: 4em; /* Increased right padding for spacing from image */
+  display: flex;
+  gap: 3em;
+  position: relative;
+}
+
+.dao-tab-container-top {
+  grid-column-gap: 2em;
+  grid-row-gap: 2em;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+.dao-tab-content-wrap {
+  width: 100%;
+  min-width: 24em;
+  position: relative;
+  min-height: 10em;
+}
+
+.dao-tab-content-item {
+  z-index: 1;
+  grid-column-gap: 1.25em;
+  grid-row-gap: 1.25em;
+  visibility: hidden;
+  flex-flow: column;
+  display: flex;
+  position: absolute;
+  inset: auto 0% 0%;
+  width: 100%;
+}
+
+.dao-tab-content-item.active {
+  visibility: visible;
+}
+
+.dao-tab-button-wrap {
+  width: 100%;
+  position: relative;
+  min-height: 3.125em; /* Mindesthöhe für den Button */
 }
 
