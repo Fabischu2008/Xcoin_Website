@@ -9,6 +9,21 @@ import Hero from "@/components/hero"
 const DashboardSection = lazy(() => import("@/components/dashboard-section"))
 const TestimonialsSection = lazy(() => import("@/components/testimonials-section"))
 
+// Performance: Throttle function for scroll listeners
+function throttle<T extends (...args: any[]) => void>(
+  func: T,
+  limit: number
+): (...args: Parameters<T>) => void {
+  let inThrottle: boolean
+  return function(this: any, ...args: Parameters<T>) {
+    if (!inThrottle) {
+      func.apply(this, args)
+      inThrottle = true
+      setTimeout(() => inThrottle = false, limit)
+    }
+  }
+}
+
 function renderTextWithLinks(text: string, links: Record<string, string>) {
   if (!links || Object.keys(links).length === 0) {
     return <span>{text}</span>
@@ -244,7 +259,15 @@ function DevelopmentImageColumn({ images, parallaxStart, parallaxEnd, scrub }: {
     const element = columnRef.current
     if (!element) return
 
+    // Deaktiviere Parallax auf Mobile für bessere Performance
+    const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+    if (isMobile) {
+      setTransform(0)
+      return
+    }
+
     const handleScroll = () => {
+      if (!element) return
       const rect = element.getBoundingClientRect()
       const windowHeight = window.innerHeight
       const elementTop = rect.top
@@ -259,11 +282,13 @@ function DevelopmentImageColumn({ images, parallaxStart, parallaxEnd, scrub }: {
       setTransform(value)
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    // Throttle auf 16ms (60fps) für bessere Performance
+    const throttledScroll = throttle(handleScroll, 16)
+    window.addEventListener('scroll', throttledScroll, { passive: true })
     handleScroll()
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('scroll', throttledScroll)
     }
   }, [parallaxStart, parallaxEnd, scrub])
 
@@ -399,6 +424,13 @@ function QuantumIconsRow({ icons, parallaxStart, parallaxEnd, scrub }: { icons: 
     const element = rowRef.current
     if (!element) return
 
+    // Deaktiviere Parallax auf Mobile für bessere Performance
+    const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+    if (isMobile) {
+      setTransform(0)
+      return
+    }
+
     const handleScroll = () => {
       if (!rowRef.current) return
       
@@ -418,11 +450,13 @@ function QuantumIconsRow({ icons, parallaxStart, parallaxEnd, scrub }: { icons: 
       setTransform(value)
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    // Throttle auf 16ms (60fps) für bessere Performance
+    const throttledScroll = throttle(handleScroll, 16)
+    window.addEventListener('scroll', throttledScroll, { passive: true })
     handleScroll()
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('scroll', throttledScroll)
     }
   }, [parallaxStart, parallaxEnd, scrub])
 
@@ -646,10 +680,22 @@ function CommunityImagesCard() {
 
 function MatrixAnimation() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
+
+    // IntersectionObserver für Visibility - Animation nur wenn sichtbar
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting)
+        })
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(canvas)
 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
@@ -665,20 +711,33 @@ function MatrixAnimation() {
     }
 
     resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
+    const throttledResize = throttle(resizeCanvas, 100)
+    window.addEventListener('resize', throttledResize)
 
     // Matrix characters
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;':\",./<>?`~"
     const charArray = chars.split('')
 
     const fontSize = 14
-    const columns = Math.floor(canvas.width / fontSize)
+    let columns = Math.floor(canvas.width / fontSize)
+    let drops = new Array(columns).fill(0)
 
-    // Array to store the y position for each column
-    const drops = new Array(columns).fill(0)
+    let animationFrame: number
 
     function draw() {
-      if (!canvas || !ctx) return
+      if (!canvas || !ctx || !isVisible) {
+        if (animationFrame) {
+          cancelAnimationFrame(animationFrame)
+        }
+        return
+      }
+
+      // Recalculate columns if canvas size changed
+      const newColumns = Math.floor(canvas.width / fontSize)
+      if (newColumns !== columns) {
+        columns = newColumns
+        drops = new Array(columns).fill(0)
+      }
 
       // Semi-transparent black background for trail effect
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'
@@ -701,16 +760,24 @@ function MatrixAnimation() {
 
         drops[i]++
       }
+
+      if (isVisible) {
+        animationFrame = requestAnimationFrame(draw)
+      }
     }
 
-    // Animation loop
-    const interval = setInterval(draw, 35)
+    if (isVisible) {
+      draw()
+    }
 
     return () => {
-      clearInterval(interval)
-      window.removeEventListener('resize', resizeCanvas)
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame)
+      }
+      observer.disconnect()
+      window.removeEventListener('resize', throttledResize)
     }
-  }, [])
+  }, [isVisible])
 
   return <canvas ref={canvasRef} className="w-full h-full absolute inset-0" />
 }
@@ -1006,7 +1073,12 @@ function CrowdfundingDAOSection() {
 
   // Parallax scroll animation for rocks - optimized with useCallback
   const handleScroll = useCallback(() => {
-    if (!rockRef.current) return
+    // Deaktiviere Parallax auf Mobile für bessere Performance
+    const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+    if (isMobile || !rockRef.current) {
+      setRockTransform(0)
+      return
+    }
     
     const rect = rockRef.current.getBoundingClientRect()
     const windowHeight = window.innerHeight
@@ -1024,11 +1096,19 @@ function CrowdfundingDAOSection() {
   }, [])
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+    if (isMobile) {
+      setRockTransform(0)
+      return
+    }
+
+    // Throttle auf 16ms (60fps) für bessere Performance
+    const throttledScroll = throttle(handleScroll, 16)
+    window.addEventListener('scroll', throttledScroll, { passive: true })
     handleScroll() // Initial call
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('scroll', throttledScroll)
     }
   }, [handleScroll])
 

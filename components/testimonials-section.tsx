@@ -70,14 +70,34 @@ export default function TestimonialsSection() {
   const [selectedIndex, setSelectedIndex] = useState(4) // Start with Marco Delano (index 4)
   const scrollRef = useRef<HTMLDivElement>(null)
   const [isInitialized, setIsInitialized] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
 
-  // Auto-advance every 4 seconds
+  // IntersectionObserver für Visibility - Auto-advance nur wenn sichtbar
   useEffect(() => {
+    if (!scrollRef.current) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting)
+        })
+      },
+      { threshold: 0.3 }
+    )
+    observer.observe(scrollRef.current)
+
+    return () => observer.disconnect()
+  }, [])
+
+  // Auto-advance every 4 seconds - nur wenn sichtbar
+  useEffect(() => {
+    if (!isVisible) return
+
     const interval = setInterval(() => {
       setSelectedIndex((prev) => (prev + 1) % testimonials.length)
     }, 4000)
     return () => clearInterval(interval)
-  }, [])
+  }, [isVisible])
 
   useEffect(() => {
     if (scrollRef.current && !isInitialized) {
