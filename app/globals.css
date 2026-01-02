@@ -328,6 +328,19 @@
   position: relative;
 }
 
+/* Testimonial Cards - Mobile Anpassungen */
+@media (max-width: 768px) {
+  .testimonials-section-scroll {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .testimonial-item {
+    max-width: calc(100vw - 3rem) !important;
+    width: calc(100vw - 3rem) !important;
+  }
+}
+
 /* Hide scrollbar globally for horizontal scroll */
 .overflow-x-auto::-webkit-scrollbar {
   display: none !important;
@@ -794,6 +807,19 @@
 .header-logo-image {
   animation: spin-slow 10s linear infinite;
   filter: brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1234%) hue-rotate(185deg) brightness(101%) contrast(101%);
+}
+
+/* Sicherstellen, dass der Filter auch auf Mobile angewendet wird */
+@media (max-width: 1024px) {
+  .header-logo-image {
+    filter: brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1234%) hue-rotate(185deg) brightness(101%) contrast(101%) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-logo-image {
+    filter: brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1234%) hue-rotate(185deg) brightness(101%) contrast(101%) !important;
+  }
 }
 
 .header-logo-glow {
