@@ -185,7 +185,7 @@ export default function TestimonialsSection() {
             {/* Testimonials Horizontal Scroll */}
             <div 
               ref={scrollRef}
-              className="flex gap-6 overflow-x-auto pb-6 pt-4 snap-x snap-mandatory testimonials-section-scroll px-4 md:px-6 lg:px-8"
+              className="flex gap-6 overflow-x-auto pb-6 pt-4 snap-x snap-mandatory testimonials-section-scroll"
               style={{ 
                 scrollbarWidth: 'none', 
                 msOverflowStyle: 'none'
@@ -200,7 +200,7 @@ export default function TestimonialsSection() {
                 key={index}
                 onClick={() => setSelectedIndex(index)}
                 className={`
-                  testimonial-item flex-shrink-0 w-[calc(100vw-3rem)] md:w-[420px] relative transition-all cursor-pointer snap-center
+                  testimonial-item flex-shrink-0 w-[420px] relative transition-all cursor-pointer snap-center
                   ${isSelected 
                     ? "scale-100 opacity-100" 
                     : "scale-95 opacity-40 hover:opacity-60"
@@ -221,17 +221,17 @@ export default function TestimonialsSection() {
                   minHeight: '20rem'
                 }}
               >
-                {/* Corner Brackets - Only show for selected testimonial, hide on mobile */}
+                {/* Corner Brackets - Only show for selected testimonial */}
                 {isSelected && (
                   <>
                     {/* Corner Brackets - Top Left */}
-                    <div className="hidden md:block absolute w-6 h-6 border-t-2 border-l-2 border-[#93c5fd]" style={{ top: '-3mm', left: '-3mm' }} />
+                    <div className="absolute w-6 h-6 border-t-2 border-l-2 border-[#93c5fd]" style={{ top: '-3mm', left: '-3mm' }} />
                     {/* Corner Brackets - Bottom Left */}
-                    <div className="hidden md:block absolute w-6 h-6 border-b-2 border-l-2 border-[#93c5fd]" style={{ bottom: '-3mm', left: '-3mm' }} />
+                    <div className="absolute w-6 h-6 border-b-2 border-l-2 border-[#93c5fd]" style={{ bottom: '-3mm', left: '-3mm' }} />
                     {/* Corner Brackets - Top Right */}
-                    <div className="hidden md:block absolute w-6 h-6 border-t-2 border-r-2 border-[#93c5fd]" style={{ top: '-3mm', right: '-3mm' }} />
+                    <div className="absolute w-6 h-6 border-t-2 border-r-2 border-[#93c5fd]" style={{ top: '-3mm', right: '-3mm' }} />
                     {/* Corner Brackets - Bottom Right */}
-                    <div className="hidden md:block absolute w-6 h-6 border-b-2 border-r-2 border-[#93c5fd]" style={{ bottom: '-3mm', right: '-3mm' }} />
+                    <div className="absolute w-6 h-6 border-b-2 border-r-2 border-[#93c5fd]" style={{ bottom: '-3mm', right: '-3mm' }} />
                   </>
                 )}
                 

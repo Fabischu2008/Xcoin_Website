@@ -328,19 +328,6 @@
   position: relative;
 }
 
-/* Testimonial Cards - Mobile Anpassungen */
-@media (max-width: 768px) {
-  .testimonials-section-scroll {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-  }
-  
-  .testimonial-item {
-    max-width: calc(100vw - 3rem) !important;
-    width: calc(100vw - 3rem) !important;
-  }
-}
-
 /* Hide scrollbar globally for horizontal scroll */
 .overflow-x-auto::-webkit-scrollbar {
   display: none !important;
