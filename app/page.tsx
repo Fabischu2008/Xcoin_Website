@@ -873,8 +873,7 @@ export default function HomePage() {
                 {/* Matrix Animation Container */}
                 <div className="vimeo-wrap w-full h-full relative">
                   <MatrixAnimation />
-                  {/* Glassmorphism Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-blue-500/10 backdrop-blur-[1px]" />
+                  {/* Green shimmer removed */}
                 </div>
               </div>
             </Link>
@@ -1245,19 +1244,19 @@ function PricingSection() {
     <section className="relative py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 pricing-header">
           <div className="mx-auto max-w-3xl">
-            <h2 className="h-medium mb-6">This is your early access opportunity.</h2>
-            <p className="p-reg text-white opacity-70">
+            <h2 className="h-medium mb-6 pricing-header-title">This is your early access opportunity.</h2>
+            <p className="p-reg text-white opacity-70 pricing-header-text">
               This is not a promo. This is not a presale for whales. This is your direct path to owning a part of the next-generation financial platform, before it launches to the world.
             </p>
           </div>
           </div>
 
         {/* Pricing Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 items-stretch pricing-cards-container">
           {/* Left Card - Main Price */}
-          <div className="relative aspect-square rounded-2xl border border-border bg-background/50 p-12 lg:p-16 flex flex-col justify-between">
+          <div className="relative rounded-2xl border border-border bg-background/50 p-12 lg:p-16 flex flex-col justify-between h-full pricing-card-wrapper">
             <div className="flex flex-col items-center gap-9">
               {/* Price Header */}
               <div className="w-full">
@@ -1319,7 +1318,7 @@ function PricingSection() {
           </div>
 
           {/* Right Card - Orange Card with Overlay */}
-          <div className="relative aspect-square rounded-2xl border border-border bg-[#93c5fd] p-12 lg:p-16 flex flex-col justify-between text-black">
+          <div className="relative rounded-2xl border border-border bg-[#93c5fd] p-12 lg:p-16 flex flex-col justify-between text-black h-full pricing-card-wrapper">
             {/* Tag Button */}
             <button
               onClick={() => setShowOverlay(!showOverlay)}

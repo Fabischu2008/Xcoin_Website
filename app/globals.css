@@ -1915,3 +1915,123 @@
   min-height: 3.125em; /* Mindesthöhe für den Button */
 }
 
+/* Pricing Cards - 15% größer */
+.pricing-cards-container {
+  gap: 1.38em; /* 1.2em * 1.15 = 1.38em (15% größer) */
+}
+
+.pricing-card-wrapper {
+  padding: 2.76em 2.76em !important; /* 2.4em * 1.15 = 2.76em (15% größer) */
+}
+
+@media (min-width: 1024px) {
+  .pricing-card-wrapper {
+    padding: 3.68em 3.68em !important; /* 3.2em * 1.15 = 3.68em (15% größer) */
+  }
+}
+
+/* Increase font sizes by 15% */
+.pricing-card-wrapper .h-price {
+  font-size: 3.45em !important; /* 3em * 1.15 = 3.45em */
+}
+
+.pricing-card-wrapper .h-small {
+  font-size: 2.0125em !important; /* 1.75em * 1.15 = 2.0125em */
+}
+
+.pricing-card-wrapper .p-reg {
+  font-size: 1.15em !important; /* 1em * 1.15 = 1.15em */
+}
+
+.pricing-card-wrapper .p-small {
+  font-size: 1.00625em !important; /* 0.875em * 1.15 = 1.00625em */
+}
+
+.pricing-card-wrapper .eyebrow {
+  font-size: 0.8625em !important; /* 0.75em * 1.15 = 0.8625em */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .pricing-card-wrapper {
+    padding: 2.4em 2.4em !important; /* Etwas kleiner auf Tablet */
+  }
+  
+  .pricing-cards-container {
+    gap: 1.2em;
+  }
+  
+  .pricing-card-wrapper .h-price {
+    font-size: 3.2em !important;
+  }
+  
+  .pricing-card-wrapper .h-small {
+    font-size: 1.9em !important;
+  }
+  
+  .pricing-card-wrapper .p-reg {
+    font-size: 1.1em !important;
+  }
+  
+  .pricing-card-wrapper .p-small {
+    font-size: 0.98em !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-card-wrapper {
+    padding: 1.84em 1.84em !important; /* 1.6em * 1.15 = 1.84em */
+  }
+  
+  .pricing-cards-container {
+    gap: 1em;
+  }
+  
+  .pricing-card-wrapper .h-price {
+    font-size: 2.8em !important;
+  }
+  
+  .pricing-card-wrapper .h-small {
+    font-size: 1.75em !important; /* Originalgröße */
+  }
+  
+  .pricing-card-wrapper .p-reg {
+    font-size: 1em !important; /* Originalgröße */
+  }
+  
+  .pricing-card-wrapper .p-small {
+    font-size: 0.875em !important; /* Originalgröße */
+  }
+}
+
+/* Pricing Header - 20% größer */
+.pricing-header-title {
+  font-size: 4.05em !important; /* 3.375em * 1.2 = 4.05em (20% größer) */
+}
+
+.pricing-header-text {
+  font-size: 1.2em !important; /* 1em * 1.2 = 1.2em (20% größer) */
+}
+
+/* Responsive adjustments for pricing header */
+@media (max-width: 1024px) {
+  .pricing-header-title {
+    font-size: 3.36em !important; /* 2.8em * 1.2 = 3.36em */
+  }
+  
+  .pricing-header-text {
+    font-size: 1.1em !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-header-title {
+    font-size: 3.6em !important; /* 3em * 1.2 = 3.6em */
+  }
+  
+  .pricing-header-text {
+    font-size: 1em !important; /* Originalgröße auf Mobile */
+  }
+}
+
+
