@@ -1915,9 +1915,27 @@
   min-height: 3.125em; /* Mindesthöhe für den Button */
 }
 
-/* Pricing Cards - 15% größer */
+/* Pricing Section Container - breiter */
+.pricing-section-container {
+  max-width: 85% !important;
+}
+
+/* Leicht grauer Hintergrund für Pricing-Karten und Bottom-Card */
+.pricing-card-gray {
+  background-color: rgba(239, 238, 236, 0.08) !important; /* Leicht grauer Hintergrund */
+}
+
+/* Pricing Cards - 15% größer und breiter */
 .pricing-cards-container {
   gap: 1.38em; /* 1.2em * 1.15 = 1.38em (15% größer) */
+  max-width: 100%;
+}
+
+/* Karten breiter machen */
+@media (min-width: 1024px) {
+  .pricing-cards-container {
+    gap: 1.8em; /* Größerer Gap für breitere Karten */
+  }
 }
 
 .pricing-card-wrapper {
@@ -2004,9 +2022,9 @@
   }
 }
 
-/* Pricing Header - 20% größer */
+/* Pricing Header - größer */
 .pricing-header-title {
-  font-size: 4.05em !important; /* 3.375em * 1.2 = 4.05em (20% größer) */
+  font-size: 4.5em !important; /* Etwas größer als 4.05em */
 }
 
 .pricing-header-text {
@@ -2016,7 +2034,7 @@
 /* Responsive adjustments for pricing header */
 @media (max-width: 1024px) {
   .pricing-header-title {
-    font-size: 3.36em !important; /* 2.8em * 1.2 = 3.36em */
+    font-size: 3.8em !important; /* Etwas größer */
   }
   
   .pricing-header-text {
@@ -2026,11 +2044,46 @@
 
 @media (max-width: 768px) {
   .pricing-header-title {
-    font-size: 3.6em !important; /* 3em * 1.2 = 3.6em */
+    font-size: 3.8em !important; /* Etwas größer */
   }
   
   .pricing-header-text {
     font-size: 1em !important; /* Originalgröße auf Mobile */
+  }
+}
+
+/* Pricing Bottom Card Title - größer */
+.pricing-bottom-title {
+  font-size: 3.2em !important; /* Noch größer */
+}
+
+@media (max-width: 1024px) {
+  .pricing-bottom-title {
+    font-size: 2.8em !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-bottom-title {
+    font-size: 2.5em !important;
+  }
+}
+
+/* Pricing Bottom Card Text - größer und weiß */
+.pricing-bottom-text {
+  font-size: 1.3em !important; /* Größer als p-reg (1em) */
+  color: white !important;
+}
+
+@media (max-width: 1024px) {
+  .pricing-bottom-text {
+    font-size: 1.2em !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-bottom-text {
+    font-size: 1.1em !important;
   }
 }
 

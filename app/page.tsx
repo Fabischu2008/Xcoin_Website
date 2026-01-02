@@ -970,10 +970,10 @@ function PrivacyPowerSection() {
     <section className="relative py-12">
       <div className="absolute top-0 left-0 right-0">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent opacity-20" />
+          <div className="h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-60" />
         </div>
       </div>
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-12">
         <div className="flex flex-col items-center gap-8">
           <div className="relative">
             <img 
@@ -1241,8 +1241,8 @@ function PricingSection() {
   const [showOverlay, setShowOverlay] = useState(false)
 
   return (
-    <section className="relative py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="relative py-24">
+        <div className="mx-auto max-w-[85%] px-6 lg:px-8 pricing-section-container">
         {/* Header */}
         <div className="text-center mb-16 pricing-header">
           <div className="mx-auto max-w-3xl">
@@ -1256,7 +1256,7 @@ function PricingSection() {
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 items-stretch pricing-cards-container">
           {/* Left Card - Main Price */}
-          <div className="relative rounded-2xl border border-border bg-background/50 p-12 lg:p-16 flex flex-col justify-between h-full pricing-card-wrapper">
+          <div className="relative rounded-2xl border border-border p-12 lg:p-16 flex flex-col justify-between h-full pricing-card-wrapper pricing-card-gray">
             <div className="flex flex-col items-center gap-9">
               {/* Price Header */}
               <div className="w-full">
@@ -1415,10 +1415,10 @@ function PricingSection() {
         </div>
 
         {/* Bottom Card - Why You'll Want to Be First */}
-        <div className="rounded-2xl border border-border bg-background/50 p-12 lg:p-16">
-          <div className="max-w-3xl mx-auto">
-            <h4 className="h-small mb-6">Why You'll Want to Be First.</h4>
-            <p className="p-reg text-muted-foreground opacity-70">
+        <div className="rounded-2xl border border-border p-12 lg:p-16 pricing-card-gray">
+          <div className="max-w-3xl mx-auto text-center">
+            <h4 className="h-small mb-6 pricing-bottom-title">Why You'll Want to Be First.</h4>
+            <p className="p-reg text-white pricing-bottom-text">
               After launch, there will be no fixed prices, no guarantees — only raw market forces. The XXX Tokens sale ends. The €10 price tag disappears. Global demand begins. Just look at history: Bitcoin launched under €1. Ethereum at a few euros. Today? Tens of thousands. Do you really think a quantum-secure, private-by-default upgrade to Bitcoin will still go for €10 once the world catches on? Probably not. And by then, your chance will be long gone.
             </p>
             </div>
