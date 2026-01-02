@@ -826,7 +826,7 @@
 
 .header-nav-link {
   position: relative;
-  font-size: 1em;
+  font-size: 1.3em;
   font-weight: 500;
   color: white;
   transition: color 0.3s;
@@ -873,7 +873,7 @@
   gap: 0.5rem;
   border-radius: 0.375rem;
   padding: 0.625rem 1.25rem;
-  font-size: 1em;
+  font-size: 1.3em;
   font-weight: 400;
   color: black;
   transition: all 0.4s;
@@ -2085,6 +2085,13 @@
   .pricing-bottom-text {
     font-size: 1.1em !important;
   }
+}
+
+/* Header Actions - größere Schrift */
+.header-actions .p-reg,
+.header-actions a.p-reg,
+header a.p-reg {
+  font-size: 1.3em !important;
 }
 
 
