@@ -1363,7 +1363,9 @@
   
   .f-grid-card.video,
   .f-grid-card.components,
-  .f-grid-card.snippets {
+  .f-grid-card.snippets,
+  .f-grid-card.basics,
+  .f-grid-card.icons {
     grid-column: span 2;
   }
   
