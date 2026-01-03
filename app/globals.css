@@ -510,7 +510,7 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 5rem;
+  padding-top: 13em; /* 13em Abstand nach oben zum Header */
   padding-bottom: 8rem;
 }
 
@@ -569,13 +569,13 @@
 
 .hero-content {
   margin-left: auto;
-  margin-right: auto;
+  margin-right: 0; /* Margin rechts entfernen */
   width: 100%;
   position: relative;
   z-index: 20;
-  max-width: clamp(90rem, 90vw, 120rem);
+  max-width: 100%; /* Max-width auf 100% setzen */
   padding-left: clamp(1rem, 1.5vw, 3rem);
-  padding-right: clamp(1rem, 1.5vw, 3rem);
+  padding-right: 0; /* Padding rechts entfernt */
   padding-top: clamp(3rem, 5vh, 6rem);
   padding-bottom: clamp(3rem, 5vh, 6rem);
 }
@@ -585,24 +585,45 @@
   display: flex;
   flex-direction: column;
   gap: clamp(2rem, 4vw, 4.5rem);
+  padding-right: 0; /* Padding rechts entfernt */
+  margin-right: 0; /* Margin rechts entfernt */
 }
 
 @media (min-width: 768px) {
   .hero-inner {
     flex-direction: row;
     align-items: flex-start;
+    gap: clamp(1rem, 2vw, 2rem); /* Gap reduziert */
   }
 }
 
 .hero-features {
   display: none;
   flex-shrink: 0;
-  gap: clamp(1rem, 1.2vw, 1.5rem);
+  gap: clamp(0.5rem, 0.8vw, 1rem); /* Reduzierter Abstand zwischen Spalten */
+  margin-left: 0; /* Fester Abstand - kein negativer Wert */
+  margin-right: 0; /* Fester Abstand - kein negativer Wert */
 }
 
 @media (min-width: 768px) {
   .hero-features {
     display: flex;
+    margin-left: 0; /* Kein Abstand nach außen */
+    margin-right: 0; /* Kein Abstand nach außen */
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-features {
+    margin-left: 0; /* Kein Abstand nach außen */
+    margin-right: 0; /* Kein Abstand nach außen */
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-features {
+    margin-left: 0; /* Kein Abstand nach außen */
+    margin-right: 0; /* Kein Abstand nach außen */
   }
 }
 
@@ -612,7 +633,7 @@
 
 .hero-feature-item {
   color: rgb(156, 163, 175);
-  margin-bottom: 0.125rem;
+  margin-bottom: calc(0.125rem + 2mm); /* 2mm mehr Abstand zwischen Zeilen */
   font-size: clamp(0.95em, 1.1vw, 1.2em);
 }
 
@@ -622,17 +643,22 @@
 
 .hero-main {
   flex: 1;
-  max-width: clamp(22rem, 40vw, 46rem);
+  max-width: none; /* Max-width entfernen */
 }
 
 .hero-title {
-  font-size: clamp(3.325rem, 5.7vw, 6.175rem);
+  font-size: clamp(2.5rem, 6.5vw, 7.5em); /* 7.5em auf Desktop */
   font-weight: 500;
   line-height: 0.95;
+  margin-bottom: clamp(1.5rem, 2.5vh, 2.5rem); /* Abstand zu den Buttons erhöht */
   color: white;
-  margin-bottom: clamp(1rem, 1.5vh, 1.5rem);
   letter-spacing: -0.01em;
   font-family: var(--font-heading);
+}
+
+/* Abstand zwischen Titel und Buttons */
+.hero-buttons-container {
+  margin-top: clamp(1.5rem, 2.5vh, 2.5rem) !important; /* Abstand erhöht */
 }
 
 .hero-buttons-desktop {
@@ -674,62 +700,71 @@
   }
 }
 
+/* Hero Buttons - XCoin_Basti Style */
 .hero-button {
-  position: relative;
-  display: flex;
-  align-items: center;
+  color: var(--foreground);
+  background-color: transparent;
+  border: 1px solid transparent;
   justify-content: center;
-  gap: 0.5rem;
-  border-radius: 0.375rem;
-  font-weight: 600;
-  transition: all 0.3s;
-  overflow: hidden;
-  padding: clamp(0.875rem, 1.3vh, 1.375rem) clamp(1.5rem, 2vw, 3rem);
-  font-size: clamp(0.9375rem, 1.2vw, 1.1875rem);
+  align-items: center;
+  height: 4.275em; /* 4.5em * 0.95 = 4.275em (5% kleiner) */
+  padding-left: 2.6136em; /* 2.376em * 1.1 = 2.6136em (nochmal 10% breiter) */
+  padding-right: 2.6136em; /* 2.376em * 1.1 = 2.6136em (nochmal 10% breiter) */
+  display: flex;
+  position: relative;
   text-decoration: none;
   cursor: pointer;
-  z-index: 30;
-}
-
-.hero-button > * {
-  position: relative;
-  z-index: 31;
 }
 
 .hero-button-primary {
-  color: black !important;
-}
-
-.hero-button-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: #93c5fd;
-  border-radius: 0.375rem;
-  z-index: 0;
-  transition: transform 0.3s;
-}
-
-.hero-button-primary:hover::before {
-  transform: scale(0.95);
+  color: #131313 !important; /* Schwarzer Text wie XCoin_Basti */
 }
 
 .hero-button-secondary {
-  color: white !important;
+  color: #efeeec !important; /* Weißer Text wie XCoin_Basti */
 }
 
-.hero-button-secondary::before {
-  content: '';
+.button-inner-row {
+  grid-column-gap: 0.5em;
+  grid-row-gap: 0.5em;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+
+/* Größere Schrift und Icons für Hero-Buttons */
+.hero-button .p-reg {
+  font-size: 1.2em; /* 20% größer */
+}
+
+.hero-button svg {
+  width: 1.5em; /* 24px * 1.25 = 30px (w-6 h-6 = 24px, also etwa 25% größer) */
+  height: 1.5em;
+}
+
+.button-bg {
+  z-index: -1;
+  background-color: #93c5fd; /* Standard Blau-Farbe */
+  border-radius: 0.25em;
   position: absolute;
-  inset: 0;
-  background: rgba(239, 238, 236, 0.15);
-  border-radius: 0.375rem;
-  z-index: 0;
-  transition: transform 0.3s;
-  backdrop-filter: blur(8px);
+  inset: 0%;
+  transition: transform 0.3s ease, background-color 0.2s ease-in-out;
 }
 
-.hero-button-secondary:hover::before {
+/* Spezifische Regel für den primären Hero-Button */
+.hero-button-primary .button-bg {
+  background-color: #93c5fd; /* Standard Blau-Farbe */
+}
+
+.button-bg.is--secondary {
+  -webkit-backdrop-filter: blur(1em);
+  backdrop-filter: blur(1em);
+  background-color: #efeeec26;
+}
+
+.hero-button:hover .button-bg {
   transform: scale(0.95);
 }
 
@@ -791,22 +826,34 @@
   position: relative;
 }
 
+/* Responsive Logo Icon */
+@media (max-width: 1440px) {
+  .header-logo-icon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .header-logo-image {
+    width: 36px !important;
+    height: 36px !important;
+  }
+}
+
+@media (max-width: 1280px) {
+  .header-logo-icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .header-logo-image {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
 .header-logo-image {
   animation: spin-slow 10s linear infinite;
-  filter: brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1234%) hue-rotate(185deg) brightness(101%) contrast(101%);
-}
-
-/* Sicherstellen, dass der Filter auch auf Mobile angewendet wird */
-@media (max-width: 1024px) {
-  .header-logo-image {
-    filter: brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1234%) hue-rotate(185deg) brightness(101%) contrast(101%) !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .header-logo-image {
-    filter: brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1234%) hue-rotate(185deg) brightness(101%) contrast(101%) !important;
-  }
+  /* Filter entfernt - SVG hat bereits die blaue Farbe (#93c5fd) eingebaut */
 }
 
 .header-logo-glow {
@@ -823,6 +870,19 @@
   font-size: 1.875rem;
   font-weight: 700;
   color: white;
+}
+
+/* Responsive Logo Text */
+@media (max-width: 1440px) {
+  .header-logo-text {
+    font-size: 1.65rem;
+  }
+}
+
+@media (max-width: 1280px) {
+  .header-logo-text {
+    font-size: 1.5rem;
+  }
 }
 
 .header-nav-desktop {
@@ -845,6 +905,27 @@
   transition: color 0.3s;
   padding: 0.5rem 0;
   font-family: var(--font-sans);
+}
+
+/* Responsive Navigation - kleiner auf mittleren Bildschirmen */
+@media (max-width: 1440px) {
+  .header-nav-link {
+    font-size: 1.15em;
+  }
+  
+  .header-nav-desktop {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 1280px) {
+  .header-nav-link {
+    font-size: 1.05em;
+  }
+  
+  .header-nav-desktop {
+    gap: 1.25rem;
+  }
 }
 
 .header-nav-link-underline {
@@ -921,6 +1002,31 @@
 
 .header-button:hover .header-button-icon-image {
   animation: spin-slow 10s linear infinite;
+}
+
+/* Responsive Header Actions (Crowdfunding & Buy Token) */
+@media (max-width: 1440px) {
+  .header-actions .p-reg,
+  .header-actions a.p-reg {
+    font-size: 1.15em !important;
+  }
+  
+  .header-button {
+    font-size: 1.15em;
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 1280px) {
+  .header-actions .p-reg,
+  .header-actions a.p-reg {
+    font-size: 1.05em !important;
+  }
+  
+  .header-button {
+    font-size: 1.05em;
+    padding: 0.45rem 0.9rem;
+  }
 }
 
 .header-mobile-toggle {
@@ -1162,18 +1268,26 @@
 .button-bg {
   position: absolute;
   inset: 0;
-  z-index: 0;
-  border-radius: 0.25rem;
-  transition: transform 0.3s;
+  z-index: -1;
+  border-radius: 0.25em;
+  transition: transform 0.3s ease, background-color 0.2s ease-in-out;
+  background-color: var(--background);
 }
 
 .button-bg.black {
   background-color: #131313;
+  z-index: 0;
 }
 
 .button-bg.is--dark-outline {
   background-color: transparent;
   border: 1px solid rgba(19, 19, 19, 0.15);
+}
+
+.button-bg.is--secondary {
+  -webkit-backdrop-filter: blur(1em);
+  backdrop-filter: blur(1em);
+  background-color: #efeeec26;
 }
 
 .button .u--clip {

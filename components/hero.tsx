@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import { Eye, Rocket } from "lucide-react"
+import { Coins, Rocket } from "lucide-react"
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -90,47 +90,31 @@ export default function Hero() {
               The Future of Financial Privacy Starts Here
             </h1>
 
-            {/* Desktop Buttons - Original inline styles */}
+            {/* Desktop Buttons - XCoin_Basti Style */}
             <div 
-              className="hidden md:flex flex-col sm:flex-row"
-              style={{
-                gap: 'clamp(0.5rem, 0.8vw, 1rem)',
-                marginTop: 'clamp(1rem, 1.5vh, 1.5rem)',
-              }}
+              className="hidden md:flex flex-col sm:flex-row gap-2 hero-buttons-container"
             >
               <Link
                 href="/use"
-                className="relative flex items-center justify-center gap-2 rounded font-semibold text-black transition-all overflow-hidden"
-                style={{
-                  paddingLeft: 'clamp(1.5rem, 2vw, 3rem)',
-                  paddingRight: 'clamp(1.5rem, 2vw, 3rem)',
-                  paddingTop: 'clamp(0.875rem, 1.3vh, 1.375rem)',
-                  paddingBottom: 'clamp(0.875rem, 1.3vh, 1.375rem)',
-                  fontSize: 'clamp(0.9375rem, 1.2vw, 1.1875rem)',
-                }}
+                className="hero-button hero-button-primary"
+                aria-label="How to use"
               >
-                <div className="flex items-center gap-2 relative z-10">
-                  <Eye style={{ width: 'clamp(1.25rem, 1.5vw, 1.625rem)', height: 'clamp(1.25rem, 1.5vw, 1.625rem)' }} />
-                  <span>How to use</span>
+                <div className="button-inner-row">
+                  <p className="p-reg">How to use</p>
+                  <Coins className="w-6 h-6" />
                 </div>
-                <div className="absolute inset-0 bg-[#93c5fd] rounded -z-10 transition-transform duration-300 hover:scale-95" />
+                <div className="button-bg"></div>
               </Link>
               <Link
                 href="/overview"
-                className="relative flex items-center justify-center gap-2 rounded font-semibold text-white transition-all overflow-hidden backdrop-blur-sm"
-                style={{
-                  paddingLeft: 'clamp(1.5rem, 2vw, 3rem)',
-                  paddingRight: 'clamp(1.5rem, 2vw, 3rem)',
-                  paddingTop: 'clamp(0.875rem, 1.3vh, 1.375rem)',
-                  paddingBottom: 'clamp(0.875rem, 1.3vh, 1.375rem)',
-                  fontSize: 'clamp(0.9375rem, 1.2vw, 1.1875rem)',
-                }}
+                className="hero-button hero-button-secondary"
+                aria-label="Explore Xcoin"
               >
-                <div className="flex items-center gap-2 relative z-10">
-                  <Rocket style={{ width: 'clamp(1.25rem, 1.5vw, 1.625rem)', height: 'clamp(1.25rem, 1.5vw, 1.625rem)' }} />
-                  <span>Explore Xcoin</span>
+                <div className="button-inner-row">
+                  <p className="p-reg">Explore Xcoin</p>
+                  <Rocket className="w-6 h-6" />
                 </div>
-                <div className="absolute inset-0 bg-[#efeeec26] rounded -z-10 transition-transform duration-300 hover:scale-95 backdrop-blur-md" />
+                <div className="button-bg is--secondary"></div>
               </Link>
             </div>
 
@@ -141,27 +125,29 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Mobile Buttons - Original inline styles */}
+        {/* Mobile Buttons - XCoin_Basti Style */}
         <div className="md:hidden flex flex-col gap-4 mt-6 w-full">
           <Link
             href="/use"
-            className="relative flex items-center justify-center gap-2 rounded px-6 py-3 p-small font-semibold text-black transition-all overflow-hidden w-full"
+            className="hero-button hero-button-primary w-full"
+            aria-label="How to use"
           >
-            <div className="flex items-center gap-2 relative z-10">
-              <Eye className="h-4 w-4" />
-              <span>How to use</span>
+            <div className="button-inner-row">
+              <p className="p-reg">How to use</p>
+              <Coins className="w-6 h-6" />
             </div>
-            <div className="absolute inset-0 bg-[#93c5fd] rounded -z-10 transition-transform duration-300 hover:scale-95" />
+            <div className="button-bg"></div>
           </Link>
           <Link
             href="/overview"
-            className="relative flex items-center justify-center gap-2 rounded px-6 py-3 p-small font-semibold text-white transition-all overflow-hidden backdrop-blur-sm w-full"
+            className="hero-button hero-button-secondary w-full"
+            aria-label="Explore Xcoin"
           >
-            <div className="flex items-center gap-2 relative z-10">
-              <Rocket className="h-4 w-4" />
-              <span>Explore Xcoin</span>
+            <div className="button-inner-row">
+              <p className="p-reg">Explore Xcoin</p>
+              <Rocket className="w-6 h-6" />
             </div>
-            <div className="absolute inset-0 bg-[#efeeec26] rounded -z-10 transition-transform duration-300 hover:scale-95 backdrop-blur-md" />
+            <div className="button-bg is--secondary"></div>
           </Link>
         </div>
       </div>
