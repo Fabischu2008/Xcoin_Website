@@ -1414,7 +1414,7 @@
 .f-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 1.575em; /* 1.5em * 1.05 = 1.575em (5% larger) */
+  grid-gap: 1.8em; /* 1.575em * 1.143 = 1.8em (additional spacing) */
   width: 100%;
   max-width: 100%; /* Use almost full width of the page */
   margin-left: auto;
@@ -1425,8 +1425,8 @@
   display: flex;
   flex-flow: column;
   grid-column: span 2;
-  height: 25.11em; /* 27.9em * 0.9 = 25.11em (10% further reduction) */
-  padding: 2.1em 1.575em 1.575em; /* 2em * 1.05 = 2.1em, 1.5em * 1.05 = 1.575em (5% larger) */
+  height: 30.132em; /* 25.11em * 1.2 = 30.132em (20% increase) */
+  padding: 2.52em 1.89em 1.89em; /* 2.1em * 1.2 = 2.52em, 1.575em * 1.2 = 1.89em (20% increase) */
   border-radius: 1rem;
   background-color: rgba(239, 238, 236, 0.06); /* #efeeec0f */
   border: 1px solid rgba(239, 238, 236, 0.08); /* #efeeec14 */
@@ -1449,7 +1449,7 @@
 .f-grid-card.video {
   grid-column: span 2;
   padding-bottom: 0;
-  gap: 2.1em; /* 2em * 1.05 = 2.1em (5% larger) */
+  gap: 2.52em; /* 2.1em * 1.2 = 2.52em (20% increase) */
 }
 
 .f-grid-card.components {
@@ -1468,7 +1468,7 @@
 }
 
 .f-grid__snippet {
-  max-height: 12em;
+  max-height: 14.4em; /* 12em * 1.2 = 14.4em (20% increase) */
   flex: 0 0 auto;
   margin-top: auto;
   overflow: hidden;
@@ -1477,7 +1477,7 @@
 .f-grid__snippet img {
   width: 100%;
   height: auto;
-  max-height: 12em;
+  max-height: 14.4em; /* 12em * 1.2 = 14.4em (20% increase) */
   object-fit: cover;
   object-position: center;
   display: block;
@@ -1492,8 +1492,8 @@
   align-items: center;
   height: auto;
   min-height: auto;
-  padding-top: 2.1em; /* 2em * 1.05 = 2.1em (5% larger) */
-  padding-bottom: 2.1em; /* 2em * 1.05 = 2.1em (5% larger) */
+  padding-top: 2.52em; /* 2.1em * 1.2 = 2.52em (20% increase) */
+  padding-bottom: 2.52em; /* 2.1em * 1.2 = 2.52em (20% increase) */
 }
 
 .f-card__text {
@@ -1514,22 +1514,35 @@
 }
 
 .f-grid-card.basics .f-card__paragraph p {
-  font-size: 0.75em; /* Smaller font size for community box text */
+  font-size: 0.9em; /* 0.75em * 1.2 = 0.9em (20% increase) */
   line-height: 1.4;
+}
+
+/* Increase font sizes for all text in f-grid-card fields (20% increase) */
+.f-grid-card .h-small {
+  font-size: 2.1em !important; /* 1.75em * 1.2 = 2.1em (20% increase) */
+}
+
+.f-grid-card .p-small {
+  font-size: 1.2em !important; /* 1.05em * 1.143 = 1.2em (additional increase) */
+}
+
+.f-grid-card .f-card__paragraph .p-small {
+  font-size: 1.2em !important; /* 1.05em * 1.143 = 1.2em (additional increase) */
 }
 
 /* Responsive adjustments - Simplified */
 @media (max-width: 1024px) {
   .f-grid {
     grid-template-columns: 1fr; /* Alles untereinander auf Tablet */
-    grid-gap: 1.575em;
+    grid-gap: 1.8em; /* Increased spacing */
   }
   
   .f-grid-card {
     grid-column: span 1;
     height: auto;
     min-height: auto;
-    padding: 2.1em 1.575em 1.575em;
+    padding: 2.52em 1.89em 1.89em; /* 2.1em * 1.2 = 2.52em, 1.575em * 1.2 = 1.89em (20% increase) */
   }
   
   .f-grid-card.video,
@@ -1546,25 +1559,34 @@
   
   /* Prevent image stretching on tablet */
   .f-grid__snippet {
-    max-height: 10em;
+    max-height: 12em; /* 10em * 1.2 = 12em (20% increase) */
   }
   
   .f-grid__snippet img {
-    max-height: 10em;
+    max-height: 12em; /* 10em * 1.2 = 12em (20% increase) */
+  }
+  
+  /* Responsive font sizes for tablet */
+  .f-grid-card .h-small {
+    font-size: 1.9em !important; /* Slightly smaller on tablet */
+  }
+  
+  .f-grid-card .p-small {
+    font-size: 1.1em !important; /* Increased for tablet */
   }
 }
 
 @media (max-width: 768px) {
   .f-grid {
     grid-template-columns: 1fr;
-    grid-gap: 1.26em;
+    grid-gap: 1.5em; /* 1.26em * 1.19 = 1.5em (increased spacing) */
   }
   
   .f-grid-card {
     grid-column: span 1;
     height: auto;
     min-height: auto;
-    padding: 1.68em 1.26em;
+    padding: 2.016em 1.512em; /* 1.68em * 1.2 = 2.016em, 1.26em * 1.2 = 1.512em (20% increase) */
   }
   
   .f-grid-card.video,
@@ -1576,13 +1598,22 @@
   
   /* Prevent image stretching on mobile */
   .f-grid__snippet {
-    max-height: 8em;
+    max-height: 9.6em; /* 8em * 1.2 = 9.6em (20% increase) */
     flex: 0 0 auto;
   }
   
   .f-grid__snippet img {
-    max-height: 8em;
+    max-height: 9.6em; /* 8em * 1.2 = 9.6em (20% increase) */
     height: auto;
+  }
+  
+  /* Responsive font sizes for mobile */
+  .f-grid-card .h-small {
+    font-size: 1.75em !important; /* Original size on mobile */
+  }
+  
+  .f-grid-card .p-small {
+    font-size: 1em !important; /* Increased for mobile */
   }
   
   /* Prevent stretching of video wrap on mobile */

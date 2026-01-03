@@ -879,7 +879,7 @@ export default function HomePage() {
                 <div className="flex h-full gap-2">
                   {/* Column 1 */}
                   <DevelopmentImageColumn 
-                    images={['group-security-dashboard.png', 'SAsP6Lv.png', 'matrix.webp', 'php.jpg', 'programming-code-abstract-technology-background-of-software-developer-and-computer-script.jpg']}
+                    images={['group-security-dashboard.png', 'SAsP6Lv.webp', 'matrix.webp', 'php.jpg', 'programming-code-abstract-technology-background-of-software-developer-and-computer-script.jpg']}
                     parallaxStart={0}
                     parallaxEnd={-45}
                     scrub={1.25}
@@ -977,7 +977,6 @@ export default function HomePage() {
             {/* Quantum-Resistant Block */}
             <div className="f-grid-card icons group cursor-pointer relative">
               <Link href="/xcoin_grid/quantum-safe" className="absolute inset-0 z-10" title="Quantum-Resistant" />
-              <ArrowIcon className="z-20" />
               
               {/* Crypto Icons Grid with Parallax - Top Section */}
               <div className="f-grid__icons relative mb-6 flex-1 min-h-0" style={{ marginTop: '-1em', display: 'flex', flexFlow: 'column', gap: '1em', justifyContent: 'flex-start', alignItems: 'center', perspective: '1000px' }}>
@@ -1003,6 +1002,7 @@ export default function HomePage() {
               
               {/* Text Section - Bottom */}
               <div className="f-card__text relative z-0">
+                <ArrowIcon />
                 <h4 className="h-small">Quantum-Resistant</h4>
                 <div className="f-card__paragraph">
                   <p className="p-small text-white/55">
