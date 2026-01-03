@@ -582,7 +582,7 @@
   z-index: 20;
   max-width: 100%; /* Max-width auf 100% setzen */
   padding-left: clamp(1rem, 1.5vw, 3rem);
-  padding-right: 0; /* Padding rechts entfernt */
+  padding-right: clamp(1rem, 1.5vw, 3rem); /* Padding rechts hinzugefügt für symmetrischen Abstand */
   padding-top: clamp(3rem, 5vh, 6rem);
   padding-bottom: clamp(3rem, 5vh, 6rem);
 }
@@ -591,6 +591,8 @@
 @media (max-width: 767px) {
   .hero-content {
     padding-top: clamp(1.5rem, 3vh, 3rem); /* Reduzierter Abstand auf Mobile */
+    padding-left: clamp(1rem, 1.5vw, 3rem); /* Gleicher Abstand links und rechts */
+    padding-right: clamp(1rem, 1.5vw, 3rem); /* Gleicher Abstand links und rechts */
   }
 }
 
@@ -862,6 +864,23 @@
   .header-logo-image {
     width: 32px !important;
     height: 32px !important;
+  }
+}
+
+/* Mobile: Größeres Logo */
+@media (max-width: 767px) {
+  .header-logo-icon {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .header-logo-image {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  
+  .header-logo-text {
+    font-size: 2rem;
   }
 }
 

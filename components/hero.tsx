@@ -141,7 +141,7 @@ export default function Hero() {
         <div className="md:hidden flex flex-col gap-4 mt-6 w-full items-center px-4">
           <Link
             href="/use"
-            className="hero-button hero-button-primary w-full max-w-sm"
+            className="hero-button hero-button-primary w-full max-w-md mx-auto"
             aria-label="How to use"
           >
             <div className="button-inner-row">
@@ -152,7 +152,7 @@ export default function Hero() {
           </Link>
           <Link
             href="/overview"
-            className="hero-button hero-button-secondary w-full max-w-sm"
+            className="hero-button hero-button-secondary w-full max-w-md mx-auto"
             aria-label="Explore Xcoin"
           >
             <div className="button-inner-row">
