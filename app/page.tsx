@@ -1440,15 +1440,26 @@ function PricingSection() {
           </div>
 
           {/* Right Card - Orange Card with Overlay */}
-          <div className="relative rounded-2xl border border-border bg-[#93c5fd] p-12 lg:p-16 flex flex-col justify-between text-black h-full pricing-card-wrapper">
-            {/* Tag Button */}
-            <button
-              onClick={() => setShowOverlay(!showOverlay)}
-              className="absolute top-10 left-10 z-30 flex items-center gap-2 bg-black text-white rounded-md px-2 py-1"
-            >
-              <div className="eyebrow text-white">explore benefits</div>
-              <div className="eyebrow circle text-white">?</div>
-            </button>
+          <div className={`relative rounded-2xl border border-border bg-[#93c5fd] p-12 lg:p-16 flex flex-col justify-between text-black h-full pricing-card-wrapper ${showOverlay ? 'show-overlay' : ''}`}>
+            {/* Tag Button - XCoin_Basti Style */}
+            <div className="price-card-tag">
+              <button 
+                onClick={() => setShowOverlay(!showOverlay)}
+                className="price-card-tag__inner"
+              >
+                <div className="eyebrow text-white">explore benefits</div>
+                <div className="eyebrow circle text-white">?</div>
+              </button>
+              {/* Close button for overlay */}
+              <div className="price-overlay__close">
+                <button onClick={() => setShowOverlay(false)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 15 14" fill="none" className="close-icon">
+                    <path d="M7.02441 0.2C7.02441 0.0895426 7.11396 0 7.22441 0H8.57441C8.68487 0 8.77441 0.0895431 8.77441 0.2V13.8C8.77441 13.9105 8.68487 14 8.57441 14H7.22441C7.11396 14 7.02441 13.9105 7.02441 13.8V0.2Z" fill="currentColor" />
+                    <path d="M14.6994 6.125C14.8099 6.125 14.8994 6.21454 14.8994 6.325V7.675C14.8994 7.78546 14.8099 7.875 14.6994 7.875L1.09941 7.875C0.988957 7.875 0.899414 7.78546 0.899414 6.325C0.899414 6.21454 0.988957 6.125 1.09941 6.125L14.6994 6.125Z" fill="currentColor" />
+                  </svg>
+                </button>
+              </div>
+            </div>
 
             {/* Main Content */}
             <div className={`flex flex-col gap-14 text-left transition-opacity duration-300 ${showOverlay ? 'opacity-0 invisible' : 'opacity-100 visible'}`}>
@@ -1486,15 +1497,6 @@ function PricingSection() {
 
             {/* Overlay Content */}
             <div className={`absolute inset-0 rounded-2xl bg-[#93c5fd] p-12 lg:p-16 flex flex-col gap-9 text-left transition-opacity duration-300 ${showOverlay ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-              <button
-                onClick={() => setShowOverlay(false)}
-                className="absolute top-10 left-10 z-30 bg-black text-white rounded-md w-6 h-6 flex items-center justify-center"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none" className="w-full h-full">
-                  <path d="M7.02441 0.2C7.02441 0.0895426 7.11396 0 7.22441 0H8.57441C8.68487 0 8.77441 0.0895431 8.77441 0.2V13.8C8.77441 13.9105 8.68487 14 8.57441 14H7.22441C7.11396 14 7.02441 13.9105 7.02441 13.8V0.2Z" fill="currentColor" />
-                  <path d="M14.6994 6.125C14.8099 6.125 14.8994 6.21454 14.8994 6.325V7.675C14.8994 7.78546 14.8099 7.875 14.6994 7.875L1.09941 7.875C0.988957 7.875 0.899414 7.78546 0.899414 6.325C0.899414 6.21454 0.988957 6.125 1.09941 6.125L14.6994 6.125Z" fill="currentColor" />
-                </svg>
-              </button>
 
               <h4 className="h-small mt-8">Why This Moment Matters.</h4>
               <p className="p-small mb-5">

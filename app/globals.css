@@ -2300,38 +2300,38 @@
   }
 }
 
-/* Pricing Bottom Card Title - größer */
+/* Pricing Bottom Card Title - 10% kleiner */
 .pricing-bottom-title {
-  font-size: 3.2em !important; /* Noch größer */
+  font-size: 2.88em !important; /* 3.2em * 0.9 = 2.88em */
 }
 
 @media (max-width: 1024px) {
   .pricing-bottom-title {
-    font-size: 2.8em !important;
+    font-size: 2.52em !important; /* 2.8em * 0.9 = 2.52em */
   }
 }
 
 @media (max-width: 768px) {
   .pricing-bottom-title {
-    font-size: 2.5em !important;
+    font-size: 2.25em !important; /* 2.5em * 0.9 = 2.25em */
   }
 }
 
-/* Pricing Bottom Card Text - größer und weiß */
+/* Pricing Bottom Card Text - 10% kleiner */
 .pricing-bottom-text {
-  font-size: 1.3em !important; /* Größer als p-reg (1em) */
+  font-size: 1.17em !important; /* 1.3em * 0.9 = 1.17em */
   color: white !important;
 }
 
 @media (max-width: 1024px) {
   .pricing-bottom-text {
-    font-size: 1.2em !important;
+    font-size: 1.08em !important; /* 1.2em * 0.9 = 1.08em */
   }
 }
 
 @media (max-width: 768px) {
   .pricing-bottom-text {
-    font-size: 1.1em !important;
+    font-size: 0.99em !important; /* 1.1em * 0.9 = 0.99em */
   }
 }
 
@@ -2340,6 +2340,145 @@
 .header-actions a.p-reg,
 header a.p-reg {
   font-size: 1.3em !important;
+}
+
+/* Price Card Tag - XCoin_Basti Style */
+.price-card-tag {
+  z-index: 30;
+  display: flex;
+  gap: 0.6em; /* Etwas größerer Gap für bessere Abstände */
+  color: #efeeec;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 2.5em;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  perspective: 1000px; /* Für 3D-Effekt */
+}
+
+.price-card-tag__inner {
+  z-index: 1;
+  display: flex;
+  gap: 0.6em; /* Größerer Gap zwischen Text und Icon */
+  color: #efeeec;
+  background-color: #131313;
+  border-radius: 0.35em; /* Runderes Aussehen */
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.35em 0.7em; /* 30% größer: 0.25em -> 0.35em, 0.5em -> 0.7em */
+  position: relative;
+  border: none;
+  cursor: pointer;
+  transition: all 0.65s cubic-bezier(0.65, 0.05, 0, 1); /* Langsamere, smoothere Animation */
+  transform-style: preserve-3d;
+  min-height: 2em; /* Mindesthöhe für bessere Proportionen */
+}
+
+.price-card-tag__inner:hover {
+  background-color: #1a1a1a;
+}
+
+.price-overlay__close {
+  z-index: 0;
+  background-color: #131313;
+  border-radius: 0.35em; /* Runderes Aussehen, passt zum Button */
+  justify-content: center;
+  align-items: center;
+  width: 2em; /* 33% größer: 1.5em -> 2em */
+  height: 2em; /* 33% größer: 1.5em -> 2em */
+  padding: 0.5em; /* Etwas größeres Padding */
+  display: flex;
+  position: absolute;
+  top: 50%; /* Zentriert vertikal */
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.65s cubic-bezier(0.65, 0.05, 0, 1), opacity 0.65s cubic-bezier(0.65, 0.05, 0, 1); /* Separate Transitions für smooth Rückwärts-Animation */
+  transform: translate(0%, -50%) rotate(0deg); /* Startposition: versteckt, keine Rotation */
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  will-change: transform; /* Optimiert die Animation */
+}
+
+.price-overlay__close button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #efeeec;
+}
+
+.price-overlay__close .close-icon {
+  width: 100%;
+  height: 100%;
+  color: currentColor;
+  transition: transform 0.3s ease;
+}
+
+/* Show close button when overlay is active - Würfel-Rotation */
+.pricing-card-wrapper.show-overlay .price-overlay__close {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-110%, -50%) rotate(-90deg); /* Rollt nach links wie ein Würfel, näher am Button */
+}
+
+/* Rückwärts-Animation: Wenn Overlay geschlossen wird (egal ob durch Close-Button oder Tag-Button), rollt der Würfel zurück */
+.pricing-card-wrapper:not(.show-overlay) .price-overlay__close {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(0%, -50%) rotate(0deg); /* Rollt zurück in die Startposition */
+}
+
+/* Hover effect for close icon */
+.price-overlay__close:hover .close-icon {
+  transform: rotate(-135deg);
+}
+
+.price-card-tag {
+  transition: transform 0.65s cubic-bezier(0.65, 0.05, 0, 1); /* Langsamere Animation */
+}
+
+/* Die Transition für price-overlay__close ist bereits oben definiert und umfasst transform (translate + rotate) */
+
+/* When overlay is active, move tag */
+.pricing-card-wrapper.show-overlay .price-card-tag {
+  transform: translate(0.9em, 0px) translateX(-50%); /* Etwas mehr Abstand für größeren Close-Button */
+}
+
+/* Wenn Overlay geschlossen wird, Tag-Button zurück zur Mitte */
+.pricing-card-wrapper:not(.show-overlay) .price-card-tag {
+  transform: translateX(-50%); /* Zurück zur zentrierten Position */
+}
+
+/* Verbesserte Ausrichtung - verhindert Kollisionen */
+.price-card-tag__inner .eyebrow {
+  line-height: 1.2; /* Bessere Zeilenhöhe */
+  white-space: nowrap; /* Verhindert Zeilenumbruch */
+}
+
+/* Responsive Anpassungen für kleinere Screens */
+@media (max-width: 768px) {
+  .price-card-tag {
+    top: 1.5em; /* Etwas höher auf Mobile */
+  }
+  
+  .price-card-tag__inner {
+    padding: 0.3em 0.6em; /* Etwas kleiner auf Mobile */
+    font-size: 0.9em; /* Etwas kleinere Schrift */
+  }
+  
+  .price-overlay__close {
+    width: 1.75em;
+    height: 1.75em;
+  }
 }
 
 
