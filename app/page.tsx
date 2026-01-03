@@ -161,7 +161,7 @@ function VideoPlayer() {
       >
         {/* Video Background - Only the container scales on hover, not the video */}
         <div 
-          className="relative w-full max-w-[95%] aspect-video rounded-2xl overflow-hidden bg-white/5 transition-transform duration-500 ease-out"
+          className="relative w-full max-w-[84%] aspect-video rounded-2xl overflow-hidden bg-white/5 transition-transform duration-500 ease-out"
           style={{
             backdropFilter: 'blur(4em)',
             WebkitBackdropFilter: 'blur(4em)',

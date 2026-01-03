@@ -39,7 +39,19 @@ export default function Hero() {
 
     observer.observe(video)
 
-    return () => observer.disconnect()
+    // Ensure seamless looping
+    const handleTimeUpdate = () => {
+      // If video is near the end (within 0.1 seconds), restart it
+      if (video.duration && video.currentTime >= video.duration - 0.1) {
+        video.currentTime = 0
+      }
+    }
+    video.addEventListener('timeupdate', handleTimeUpdate)
+
+    return () => {
+      observer.disconnect()
+      video.removeEventListener('timeupdate', handleTimeUpdate)
+    }
   }, [])
 
   return (
@@ -51,12 +63,12 @@ export default function Hero() {
           loop
           muted
           playsInline
-          preload="none"
+          autoPlay
+          preload="auto"
           className="hero-video"
           style={{ opacity: isLoaded ? 1 : 0 }}
         >
           <source src="/vid/city-1.mp4" type="video/mp4" />
-          <source src="/1208-compressed.mp4" type="video/mp4" />
         </video>
         <div className="hero-overlay" />
         <div className="hero-gradient" />
