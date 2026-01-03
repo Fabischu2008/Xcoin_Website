@@ -1,5 +1,6 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
+import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import Header from "@/components/header"
@@ -81,6 +82,10 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.ico" />
       </head>
       <body className="font-sans antialiased">
+        <Script
+          src="https://cdn.unicorn.studio/v1.3.1/unicornStudio.umd.js"
+          strategy="lazyOnload"
+        />
         <RotatingFavicon />
         <Header />
         <main className="min-h-screen">{children}</main>

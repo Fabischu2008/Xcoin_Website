@@ -1112,6 +1112,41 @@ function CrowdfundingDAOSection() {
     }
   }, [handleScroll])
 
+  // Initialize Unicorn Studio when component mounts
+  useEffect(() => {
+    if (typeof window === 'undefined' || !rockRef.current) return
+
+    const initUnicornStudio = () => {
+      const bgWrapper = rockRef.current?.querySelector('.bg-wrapper')
+      if (!bgWrapper) return
+
+      // Check if Unicorn Studio is available
+      const checkUnicornStudio = () => {
+        if ((window as any).UnicornStudio) {
+          // Unicorn Studio will automatically initialize elements with data-us-* attributes
+          // Force re-initialization if needed
+          const us = (window as any).UnicornStudio
+          if (us.init) {
+            us.init()
+          }
+        } else {
+          // Retry after a short delay
+          setTimeout(checkUnicornStudio, 100)
+        }
+      }
+
+      checkUnicornStudio()
+    }
+
+    // Wait for DOM to be ready
+    if (document.readyState === 'complete') {
+      initUnicornStudio()
+    } else {
+      window.addEventListener('load', initUnicornStudio)
+      return () => window.removeEventListener('load', initUnicornStudio)
+    }
+  }, [])
+
   const tabs = [
     {
       id: 'members',
@@ -1157,8 +1192,15 @@ function CrowdfundingDAOSection() {
           <img 
             src="/img/bg-rocks.avif" 
             alt="Decorative moody background of charcoal" 
-            className="rock-wrap-image opacity-80"
+            className="rock-wrap-image opacity-50"
             loading="lazy"
+          />
+          {/* Unicorn Studio 3D Scene with interactive light */}
+          <div 
+            data-us-alttext="graphic background" 
+            data-us-project-src="https://cdn.jsdelivr.net/gh/ilja-van-eck/osmo/assets/scenes/bg-rocks@1.0.json" 
+            data-us-disablemobile="true" 
+            className="bg-wrapper"
           />
           <div className="rock-wrap-overlay" />
         </div>

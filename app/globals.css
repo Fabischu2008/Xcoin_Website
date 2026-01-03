@@ -1967,6 +1967,63 @@
   pointer-events: none;
 }
 
+/* Unicorn Studio bg-wrapper */
+.bg-wrapper {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.bg-wrapper canvas {
+  position: absolute;
+}
+
+/* Unicorn Studio bg-wrapper */
+.bg-wrapper {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.bg-wrapper canvas {
+  position: absolute;
+}
+
+/* Hide image only when 3D scene canvas is loaded and visible */
+.rock-wrap-image-container:has(.bg-wrapper canvas) .rock-wrap-image {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+/* Show image on mobile where 3D is disabled */
+@media (max-width: 768px) {
+  .bg-wrapper {
+    display: none !important;
+  }
+  
+  .rock-wrap-image-container:has(.bg-wrapper canvas) .rock-wrap-image {
+    opacity: 0.5;
+  }
+}
+
 /* DAO Button Styles - matching XCoin_Basti */
 .dao-button {
   color: var(--foreground);
