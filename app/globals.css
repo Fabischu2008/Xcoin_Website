@@ -510,14 +510,14 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 13em; /* 13em Abstand nach oben zum Header */
+  padding-top: calc(13em - 1cm); /* 13em minus 1cm Abstand nach oben zum Header */
   padding-bottom: 8rem;
 }
 
 /* Mobile: Reduzierter Abstand */
 @media (max-width: 767px) {
   .hero-section {
-    padding-top: 6rem; /* Reduzierter Abstand auf Mobile */
+    padding-top: calc(6rem - 1cm); /* Reduzierter Abstand auf Mobile, minus 1cm */
   }
 }
 
@@ -530,17 +530,23 @@
 .hero-video-container {
   position: absolute;
   inset: 0;
-  transform: scale(1.05);
   pointer-events: none;
   z-index: -1;
+  overflow: hidden; /* Wichtig: Verhindert Overflow */
 }
 
 .hero-video {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Video nimmt immer die volle Breite ODER Höhe ein, je nachdem was größer ist */
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: cover;
+  object-position: center center;
   pointer-events: none;
   transition: opacity 0.5s ease-in;
 }
@@ -619,6 +625,7 @@
   gap: clamp(0.5rem, 0.8vw, 1rem); /* Reduzierter Abstand zwischen Spalten */
   margin-left: 0; /* Fester Abstand - kein negativer Wert */
   margin-right: 0; /* Fester Abstand - kein negativer Wert */
+  margin-top: 0.5em; /* Minimaler Abstand nach oben */
 }
 
 @media (min-width: 768px) {
@@ -647,10 +654,15 @@
   width: clamp(14rem, 16vw, 18rem);
 }
 
+/* Abstand nach rechts für die rechte Spalte (Quantum-Safe Security, etc.) */
+.hero-feature-column:last-child {
+  margin-right: 0.5cm; /* Halber Zentimeter Abstand nach rechts */
+}
+
 .hero-feature-item {
   color: rgb(156, 163, 175);
   margin-bottom: calc(0.125rem + 2mm); /* 2mm mehr Abstand zwischen Zeilen */
-  font-size: clamp(0.95em, 1.1vw, 1.2em);
+  font-size: clamp(1.05em, 1.25vw, 1.35em); /* Etwas größer: von 0.95em-1.2em auf 1.05em-1.35em */
 }
 
 .hero-feature-item:last-child {
@@ -675,6 +687,18 @@
 /* Abstand zwischen Titel und Buttons */
 .hero-buttons-container {
   margin-top: clamp(1.5rem, 2.5vh, 2.5rem) !important; /* Abstand erhöht */
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1vw, 1rem);
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .hero-buttons-container {
+    flex-direction: row;
+    gap: clamp(0.75rem, 1.5vw, 1.5rem);
+  }
 }
 
 .hero-buttons-desktop {
@@ -716,20 +740,23 @@
   }
 }
 
-/* Hero Buttons - XCoin_Basti Style */
+/* Hero Buttons - XCoin_Basti Style - Responsive */
 .hero-button {
   color: var(--foreground);
   background-color: transparent;
   border: 1px solid transparent;
   justify-content: center;
   align-items: center;
-  height: 4.275em; /* 4.5em * 0.95 = 4.275em (5% kleiner) */
-  padding-left: 2.6136em; /* 2.376em * 1.1 = 2.6136em (nochmal 10% breiter) */
-  padding-right: 2.6136em; /* 2.376em * 1.1 = 2.6136em (nochmal 10% breiter) */
+  height: clamp(3.5em, 4.5vw, 4.275em); /* Responsive Höhe */
+  padding-left: clamp(1.5em, 3vw, 2.6136em); /* Responsive Padding */
+  padding-right: clamp(1.5em, 3vw, 2.6136em); /* Responsive Padding */
   display: flex;
   position: relative;
   text-decoration: none;
   cursor: pointer;
+  min-width: fit-content; /* Verhindert zu schmale Buttons */
+  max-width: 100%; /* Verhindert Overflow */
+  white-space: nowrap; /* Verhindert Textumbruch */
 }
 
 .hero-button-primary {
@@ -741,23 +768,57 @@
 }
 
 .button-inner-row {
-  grid-column-gap: 0.5em;
-  grid-row-gap: 0.5em;
-  justify-content: flex-start;
+  grid-column-gap: clamp(0.3em, 0.5vw, 0.5em);
+  grid-row-gap: clamp(0.3em, 0.5vw, 0.5em);
+  justify-content: center; /* Zentriert den Inhalt */
   align-items: center;
   display: flex;
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 
-/* Größere Schrift und Icons für Hero-Buttons */
+/* Größere Schrift und Icons für Hero-Buttons - Responsive */
 .hero-button .p-reg {
-  font-size: 1.2em; /* 20% größer */
+  font-size: clamp(0.9em, 1.2vw, 1.2em); /* Responsive Schriftgröße */
 }
 
 .hero-button svg {
-  width: 1.5em; /* 24px * 1.25 = 30px (w-6 h-6 = 24px, also etwa 25% größer) */
-  height: 1.5em;
+  width: clamp(1.2em, 1.5vw, 1.5em); /* Responsive Icon-Größe */
+  height: clamp(1.2em, 1.5vw, 1.5em);
+}
+
+/* Responsive Anpassungen für verschiedene Bildschirmbreiten */
+@media (max-width: 1024px) {
+  .hero-button {
+    height: clamp(3.2em, 4vw, 4em);
+    padding-left: clamp(1.2em, 2.5vw, 2em);
+    padding-right: clamp(1.2em, 2.5vw, 2em);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-button {
+    height: clamp(3em, 3.5vw, 3.5em);
+    padding-left: clamp(1em, 2vw, 1.5em);
+    padding-right: clamp(1em, 2vw, 1.5em);
+  }
+  
+  .hero-button .p-reg {
+    font-size: clamp(0.9em, 1.1vw, 1.1em); /* Kleinere Schrift auf Mobile */
+  }
+  
+  .hero-button svg {
+    width: clamp(1.2em, 1.3vw, 1.4em);
+    height: clamp(1.2em, 1.3vw, 1.4em);
+  }
+}
+
+/* Für sehr breite Bildschirme: Max-width setzen */
+@media (min-width: 1920px) {
+  .hero-button {
+    max-width: 20em; /* Verhindert zu breite Buttons auf großen Bildschirmen */
+  }
 }
 
 .button-bg {
@@ -793,8 +854,8 @@
   color: white;
   text-align: left;
   line-height: 1.6;
-  margin-top: clamp(1.25rem, 2vh, 2rem);
-  max-width: clamp(18rem, 32vw, 28rem);
+  margin-top: clamp(2rem, 3vh, 3rem); /* Erhöht von 1.25rem-2rem auf 2rem-3rem */
+  max-width: clamp(24rem, 45vw, 42rem); /* Erhöht von 18rem-28rem auf 24rem-42rem für breitere Darstellung */
   font-size: clamp(0.95rem, 1.2vw, 1.4rem);
 }
 
@@ -1414,7 +1475,7 @@
 .f-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 1.8em; /* 1.575em * 1.143 = 1.8em (additional spacing) */
+  grid-gap: 2em; /* Increased from 1.8em to 2em (about 11% larger) */
   width: 100%;
   max-width: 100%; /* Use almost full width of the page */
   margin-left: auto;
@@ -1432,6 +1493,7 @@
   border: 1px solid rgba(239, 238, 236, 0.08); /* #efeeec14 */
   overflow: hidden;
   position: relative;
+  z-index: 1; /* Klare z-index Hierarchie */
   transition: border-color 0.3s;
 }
 
@@ -1474,6 +1536,7 @@
   margin-top: -2em; /* Moved up from -1.5em to -2em */
   display: flex;
   position: relative;
+  z-index: 1; /* Klare z-index Hierarchie */
 }
 
 .f-grid__icons-row {
@@ -1486,6 +1549,25 @@
   display: flex;
   transform: rotateX(30deg) rotateY(-10deg) rotateZ(20deg);
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* 3D-Effekt nur auf Desktop - Mobile deaktivieren für bessere Performance */
+@media (max-width: 768px) {
+  .f-grid__icons-row {
+    transform: none;
+    transform-style: flat;
+  }
+  
+  .f-grid__icons {
+    perspective: none;
+  }
+  
+  .f-grid__icon,
+  .f-grid__icons-col,
+  .dash-icon-card {
+    transform-style: flat;
+  }
 }
 
 .f-grid__icons-col {
@@ -1517,6 +1599,7 @@
   position: relative;
   overflow: hidden;
   transition: background-color 0.325s cubic-bezier(0.65, 0.05, 0, 1);
+  will-change: transform, background-color; /* Performance-Optimierung für Hover */
 }
 
 .dash-icon-card.is--home-features {
@@ -1588,8 +1671,14 @@
   grid-column: span 2;
 }
 
+/* Entferne den Abstand zwischen Text und Bild im Use Cases Feld */
+.f-grid-card.snippets .f-card__text {
+  gap: 0.4em; /* Reduziert von 0.75em auf 0.4em für weniger Abstand */
+  margin-bottom: 0; /* Kein Abstand nach unten */
+}
+
 .f-grid__snippet {
-  max-height: 14.4em; /* 12em * 1.2 = 14.4em (20% increase) */
+  max-height: 16.8em; /* Increased from 14.4em to 16.8em (about 17% larger) */
   flex: 0 0 auto;
   margin-top: auto;
   overflow: hidden;
@@ -1598,7 +1687,7 @@
 .f-grid__snippet img {
   width: 100%;
   height: auto;
-  max-height: 14.4em; /* 12em * 1.2 = 14.4em (20% increase) */
+  max-height: 16.8em; /* Increased from 14.4em to 16.8em (about 17% larger) */
   object-fit: cover;
   object-position: center;
   display: block;
@@ -1623,6 +1712,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   position: relative;
+  z-index: 2; /* Über dem Card-Hintergrund */
   gap: 0.75em;
   overflow: hidden; /* Prevent text from overflowing */
 }
@@ -1726,6 +1816,34 @@
   .f-grid__snippet img {
     max-height: 9.6em; /* 8em * 1.2 = 9.6em (20% increase) */
     height: auto;
+  }
+  
+  /* Icon-Größen auf Mobile reduzieren */
+  .f-grid__icon {
+    width: 5em; /* Reduziert von 7.5em für bessere Mobile-Performance */
+    height: 5em; /* Reduziert von 7.5em für bessere Mobile-Performance */
+  }
+  
+  .dash-icon-card__svg {
+    width: 1.5em; /* Reduziert von 2em */
+    height: 1.5em; /* Reduziert von 2em */
+  }
+  
+  .f-grid__icons-row {
+    gap: 0.5em; /* Reduziert von 0.9em für kompaktere Darstellung */
+  }
+  
+  .f-grid__icons-col {
+    gap: 0.5em; /* Reduziert von 0.9em */
+  }
+  
+  .f-grid__icons {
+    margin-top: -1em; /* Angepasst für Mobile */
+  }
+  
+  /* Use Cases Feld: Etwas Abstand auf Mobile */
+  .f-grid-card.snippets .f-card__text {
+    margin-bottom: 0.5em; /* Etwas Abstand auf Mobile */
   }
   
   /* Responsive font sizes for mobile */
@@ -2600,6 +2718,17 @@ header a.p-reg {
     width: 1.75em;
     height: 1.75em;
   }
+}
+
+/* Hide Next.js Development Indicator (Compiling... message) */
+#__next-build-watcher,
+[data-nextjs-dialog],
+[data-nextjs-dialog-overlay],
+.nextjs-toast-errors-parent {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 

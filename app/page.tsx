@@ -452,9 +452,14 @@ function QuantumIconsRow({ icons, parallaxStart, parallaxEnd, scrub }: { icons: 
 
     // Throttle auf 16ms (60fps) für bessere Performance
     const throttledScroll = throttle(handleScroll, 16)
-    window.addEventListener('scroll', throttledScroll, { passive: true })
+    
+    // Initial call
     handleScroll()
+    
+    // Add event listener
+    window.addEventListener('scroll', throttledScroll, { passive: true })
 
+    // Cleanup: Remove event listener
     return () => {
       window.removeEventListener('scroll', throttledScroll)
     }
