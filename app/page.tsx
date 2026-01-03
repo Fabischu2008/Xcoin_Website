@@ -463,24 +463,24 @@ function QuantumIconsRow({ icons, parallaxStart, parallaxEnd, scrub }: { icons: 
   return (
     <div 
       ref={rowRef}
-      className="flex gap-3"
+      className="f-grid__icons-col"
       style={{ transform: `translateX(${transform}%)` }}
     >
       {icons.map((icon) => (
-        <div key={icon} className="flex flex-col items-center pointer-events-none flex-none relative" style={{ width: '6em', height: '6em', transformStyle: 'preserve-3d' }}>
-          <div className="w-full h-full rounded-lg border border-border/50 bg-[#1a1a1a] flex items-center justify-center relative overflow-hidden">
-            <div className="absolute inset-0" style={{ paddingTop: '100%' }}></div>
-            <div className="absolute inset-0 flex items-center justify-center" style={{ marginBottom: '0.5em' }}>
+        <div key={icon} className="f-grid__icon flex flex-col items-center pointer-events-none">
+          <div className="dash-icon-card is--home-features w-full h-full rounded-lg border border-border/50 bg-[#1a1a1a] flex items-center justify-center relative overflow-hidden">
+            <div className="dash-icon-card__before absolute inset-0" style={{ paddingTop: '100%' }}></div>
+            <div className="dash-icon-card__svg absolute inset-0 flex items-center justify-center" style={{ marginBottom: '0.5em' }}>
               <img 
                 src={`/img/crypto-icons/color/${icon}.svg`} 
                 alt={icon === 'xcoin' ? 'XXX' : icon.toUpperCase()}
-                className="w-6 h-6"
+                className="w-8 h-8"
                 loading="lazy"
               />
             </div>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 flex justify-center items-center" style={{ paddingTop: '0.25em', paddingBottom: '0.75em' }}>
-            <p className="eyebrow small text-muted-foreground uppercase">{icon === 'xcoin' ? 'XXX' : icon.toUpperCase()}</p>
+            <div className="f-grid-icon__info absolute bottom-0 left-0 right-0 flex justify-center items-center" style={{ paddingTop: '0.25em', paddingBottom: '0.75em' }}>
+              <p className="eyebrow small text-muted-foreground uppercase">{icon === 'xcoin' ? 'XXX' : icon.toUpperCase()}</p>
+            </div>
           </div>
         </div>
       ))}
@@ -978,10 +978,10 @@ export default function HomePage() {
             <div className="f-grid-card icons group cursor-pointer relative">
               <Link href="/xcoin_grid/quantum-safe" className="absolute inset-0 z-10" title="Quantum-Resistant" />
               
-              {/* Crypto Icons Grid with Parallax - Top Section */}
-              <div className="f-grid__icons relative mb-6 flex-1 min-h-0" style={{ marginTop: '-1em', display: 'flex', flexFlow: 'column', gap: '1em', justifyContent: 'flex-start', alignItems: 'center', perspective: '1000px' }}>
-                {/* Top Row with Parallax */}
-                <div className="flex justify-center">
+              {/* Crypto Icons Grid with 3D Effect - XCoin_Basti Style */}
+              <div className="f-grid__icons relative mb-6 flex-1 min-h-0">
+                {/* Top Row with 3D Effect */}
+                <div className="f-grid__icons-row">
                   <QuantumIconsRow 
                     icons={['trx', 'bch', 'xcoin', 'doge']} 
                     parallaxStart={25} 
@@ -989,8 +989,8 @@ export default function HomePage() {
                     scrub={1}
                   />
                 </div>
-                {/* Bottom Row with Parallax */}
-                <div className="flex justify-center">
+                {/* Bottom Row with 3D Effect */}
+                <div className="f-grid__icons-row">
                   <QuantumIconsRow 
                     icons={['sol', 'eth', 'btc', 'xmr', 'zec', 'dash']} 
                     parallaxStart={25} 
