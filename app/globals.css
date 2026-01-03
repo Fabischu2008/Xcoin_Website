@@ -514,6 +514,13 @@
   padding-bottom: 8rem;
 }
 
+/* Mobile: Reduzierter Abstand */
+@media (max-width: 767px) {
+  .hero-section {
+    padding-top: 6rem; /* Reduzierter Abstand auf Mobile */
+  }
+}
+
 @media (min-width: 1024px) {
   .hero-section {
     padding-bottom: 10rem;
@@ -578,6 +585,13 @@
   padding-right: 0; /* Padding rechts entfernt */
   padding-top: clamp(3rem, 5vh, 6rem);
   padding-bottom: clamp(3rem, 5vh, 6rem);
+}
+
+/* Mobile: Reduzierter Abstand oben */
+@media (max-width: 767px) {
+  .hero-content {
+    padding-top: clamp(1.5rem, 3vh, 3rem); /* Reduzierter Abstand auf Mobile */
+  }
 }
 
 .hero-inner {
