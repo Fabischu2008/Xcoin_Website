@@ -2731,4 +2731,26 @@ header a.p-reg {
   pointer-events: none !important;
 }
 
+/* Why Xcoin Matters Section - 33% größer */
+section:has(h2.h-medium) .h-medium {
+  font-size: 4.49em !important; /* 3.375em * 1.33 = 4.48875em */
+}
+
+section:has(h2.h-medium) .p-reg {
+  font-size: 1.33em !important; /* 1em * 1.33 = 1.33em */
+  line-height: 1.4;
+}
+
+@media screen and (max-width: 991px) {
+  section:has(h2.h-medium) .h-medium {
+    font-size: 3.72em !important; /* 2.8em * 1.33 = 3.724em */
+  }
+}
+
+@media screen and (max-width: 767px) {
+  section:has(h2.h-medium) .h-medium {
+    font-size: 3.99em !important; /* 3em * 1.33 = 3.99em */
+  }
+}
+
 
