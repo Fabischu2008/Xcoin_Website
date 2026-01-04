@@ -687,15 +687,16 @@
 /* Abstand zwischen Titel und Buttons */
 .hero-buttons-container {
   margin-top: clamp(1.5rem, 2.5vh, 2.5rem) !important; /* Abstand erhöht */
-  display: flex;
+  display: none; /* Standardmäßig versteckt (Mobile) */
   flex-direction: column;
   gap: clamp(0.5rem, 1vw, 1rem);
   width: 100%;
   max-width: 100%;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .hero-buttons-container {
+    display: flex; /* Nur auf Desktop anzeigen */
     flex-direction: row;
     gap: clamp(0.75rem, 1.5vw, 1.5rem);
   }
@@ -1938,6 +1939,8 @@
 /* Dashboard cards should use aspect-video, not fixed height */
 .db-content__card .db-card__visual {
   aspect-ratio: 16 / 9;
+  transform: scale(0.95); /* 5% kleiner */
+  transform-origin: center center;
 }
 
 .dash-res-card__visual-before {
@@ -1956,11 +1959,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 0.5em;
+  margin-top: 0.425em; /* 0.5em * 0.85 = 0.425em (15% kleiner) */
 }
 
 .db-card__info.tiny {
-  font-size: 0.65em;
+  font-size: 0.5525em; /* 0.65em * 0.85 = 0.5525em (15% kleiner) */
 }
 
 .db-card__info-start {
@@ -1974,8 +1977,8 @@
 
 .db-card__arrow {
   position: relative;
-  width: 1.5em;
-  height: 1.5em;
+  width: 1.275em; /* 1.5em * 0.85 = 1.275em (15% kleiner) */
+  height: 1.275em; /* 1.5em * 0.85 = 1.275em (15% kleiner) */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2750,6 +2753,46 @@ section:has(h2.h-medium) .p-reg {
 @media screen and (max-width: 767px) {
   section:has(h2.h-medium) .h-medium {
     font-size: 3.99em !important; /* 3em * 1.33 = 3.99em */
+  }
+}
+
+/* Dashboard Section - 15% kleiner */
+.dashboard-wrapper {
+  font-size: 0.85em; /* 15% kleiner */
+}
+
+.dashboard-wrapper .db-content__card {
+  font-size: 0.85em;
+}
+
+.dashboard-wrapper .db-nav__item {
+  font-size: 0.85em;
+  padding: calc(0.85 * 0.875rem) calc(0.85 * 0.875rem); /* p-3.5 * 0.85 */
+}
+
+.dashboard-wrapper .db-nav__icon {
+  width: calc(0.85 * 3rem); /* h-12 w-12 * 0.85 */
+  height: calc(0.85 * 3rem);
+}
+
+.dashboard-wrapper .dashboard-banner {
+  font-size: 0.85em;
+  padding: calc(0.85 * 0.625rem) calc(0.85 * 2.75rem); /* py-2.5 px-11 * 0.85 */
+}
+
+.dashboard-wrapper .grid {
+  gap: calc(0.85 * 1rem); /* gap-4 * 0.85 */
+}
+
+@media (min-width: 640px) {
+  .dashboard-wrapper .grid {
+    gap: calc(0.85 * 1.25rem); /* gap-5 * 0.85 */
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-wrapper .grid {
+    gap: calc(0.85 * 1.25rem); /* lg:gap-5 * 0.85 */
   }
 }
 

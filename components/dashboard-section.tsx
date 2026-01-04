@@ -227,7 +227,7 @@ export default function DashboardSection() {
   )
 
   return (
-    <section className="relative mt-8 pb-16">
+    <section className="relative mt-8 pb-16 dashboard-wrapper">
       <div className="mx-auto max-w-[110rem] px-[2mm]">
         <div className="relative border border-border rounded-2xl p-[3mm] lg:p-[4mm]">
           <div className="flex flex-row gap-2 lg:gap-3">

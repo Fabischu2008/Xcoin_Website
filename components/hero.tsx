@@ -102,9 +102,9 @@ export default function Hero() {
               The Future of Financial Privacy Starts Here
             </h1>
 
-            {/* Desktop Buttons - XCoin_Basti Style */}
+            {/* Desktop Buttons - XCoin_Basti Style - Between title and text */}
             <div 
-              className="hidden md:flex flex-col sm:flex-row gap-2 hero-buttons-container"
+              className="hidden md:flex flex-col gap-2 hero-buttons-container"
             >
               <Link
                 href="/use"
@@ -134,33 +134,35 @@ export default function Hero() {
             <p className="hero-description">
               Xcoin isn't just another coin. It's a next-generation privacy cryptocurrency designed for total anonymity, quantum resistance, and real-world utility. The Xcoin blockchain is built on a unique foundation of cutting-edge innovations, including quantum-safe cryptography, zero-knowledge proofs, and breakthrough privacy technology. Discover the cryptographic building blocks that make Xcoin unstoppable.
             </p>
-          </div>
-        </div>
 
-        {/* Mobile Buttons - XCoin_Basti Style */}
-        <div className="md:hidden flex flex-col gap-4 mt-6 w-full items-center px-4">
-          <Link
-            href="/use"
-            className="hero-button hero-button-primary w-full max-w-md mx-auto"
-            aria-label="How to use"
-          >
-            <div className="button-inner-row">
-              <p className="p-reg">How to use</p>
-              <Coins className="w-6 h-6" />
+            {/* Mobile Buttons - XCoin_Basti Style - After text */}
+            <div 
+              className="flex flex-col gap-4 mt-6 w-full items-center px-4 md:hidden"
+            >
+              <Link
+                href="/use"
+                className="hero-button hero-button-primary w-full max-w-md mx-auto"
+                aria-label="How to use"
+              >
+                <div className="button-inner-row">
+                  <p className="p-reg">How to use</p>
+                  <Coins className="w-6 h-6" />
+                </div>
+                <div className="button-bg"></div>
+              </Link>
+              <Link
+                href="/overview"
+                className="hero-button hero-button-secondary w-full max-w-md mx-auto"
+                aria-label="Explore Xcoin"
+              >
+                <div className="button-inner-row">
+                  <p className="p-reg">Explore Xcoin</p>
+                  <Rocket className="w-6 h-6" />
+                </div>
+                <div className="button-bg is--secondary"></div>
+              </Link>
             </div>
-            <div className="button-bg"></div>
-          </Link>
-          <Link
-            href="/overview"
-            className="hero-button hero-button-secondary w-full max-w-md mx-auto"
-            aria-label="Explore Xcoin"
-          >
-            <div className="button-inner-row">
-              <p className="p-reg">Explore Xcoin</p>
-              <Rocket className="w-6 h-6" />
-            </div>
-            <div className="button-bg is--secondary"></div>
-          </Link>
+          </div>
         </div>
       </div>
     </section>
