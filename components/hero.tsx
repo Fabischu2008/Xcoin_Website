@@ -93,20 +93,20 @@ export default function Hero() {
               <div className="hero-feature-item">Unlinkable Outputs</div>
               <div className="hero-feature-item">Untraceable Transactions</div>
               <div className="hero-feature-item">AES-512 Cascade Encryption</div>
-            </div>
+      </div>
           </div>
 
           {/* Main Content */}
           <div className="hero-main">
             <h1 className="hero-title">
               The Future of Financial Privacy Starts Here
-            </h1>
+          </h1>
 
             {/* Desktop Buttons - XCoin_Basti Style - Between title and text */}
             <div 
               className="hidden md:flex flex-col gap-2 hero-buttons-container"
             >
-              <Link
+            <Link
                 href="/use"
                 className="hero-button hero-button-primary"
                 aria-label="How to use"
@@ -116,8 +116,8 @@ export default function Hero() {
                   <Coins className="w-6 h-6" />
                 </div>
                 <div className="button-bg"></div>
-              </Link>
-              <Link
+            </Link>
+            <Link
                 href="/overview"
                 className="hero-button hero-button-secondary"
                 aria-label="Explore Xcoin"
@@ -127,8 +127,8 @@ export default function Hero() {
                   <Rocket className="w-6 h-6" />
                 </div>
                 <div className="button-bg is--secondary"></div>
-              </Link>
-            </div>
+            </Link>
+          </div>
 
             {/* Descriptive Text */}
             <p className="hero-description">
@@ -147,7 +147,7 @@ export default function Hero() {
                 <div className="button-inner-row">
                   <p className="p-reg">How to use</p>
                   <Coins className="w-6 h-6" />
-                </div>
+            </div>
                 <div className="button-bg"></div>
               </Link>
               <Link
@@ -158,7 +158,7 @@ export default function Hero() {
                 <div className="button-inner-row">
                   <p className="p-reg">Explore Xcoin</p>
                   <Rocket className="w-6 h-6" />
-                </div>
+            </div>
                 <div className="button-bg is--secondary"></div>
               </Link>
             </div>
