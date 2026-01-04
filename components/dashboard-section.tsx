@@ -224,7 +224,6 @@ export default function DashboardSection() {
   const searchRef = useRef<HTMLDivElement>(null)
   const sideRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
-  const contentsRef = useRef<NodeListOf<Element> | null>(null)
 
   const filteredItems = useMemo(
     () => dashboardItems.filter((item) => item.category === activeFilter).slice(0, 9),
@@ -265,8 +264,6 @@ export default function DashboardSection() {
     const contents = container?.querySelectorAll('[data-db-el]')
 
     if (!container || !wrap || !search || !side || !cards || !contents) return
-
-    contentsRef.current = contents
 
     // Set initial states
     gsap.set(contents, { autoAlpha: 0 })
