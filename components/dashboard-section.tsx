@@ -1,8 +1,12 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+gsap.registerPlugin(ScrollTrigger)
 
 interface DashboardItem {
   id: number
@@ -215,6 +219,12 @@ const getMobileNavButtonClasses = (isActive: boolean) =>
 
 export default function DashboardSection() {
   const [activeFilter, setActiveFilter] = useState("xcoin")
+  const containerRef = useRef<HTMLDivElement>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const searchRef = useRef<HTMLDivElement>(null)
+  const sideRef = useRef<HTMLDivElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
+  const contentsRef = useRef<NodeListOf<Element> | null>(null)
 
   const filteredItems = useMemo(
     () => dashboardItems.filter((item) => item.category === activeFilter).slice(0, 9),
@@ -226,131 +236,196 @@ export default function DashboardSection() {
     [activeFilter]
   )
 
+  // Filter Logic - React State based
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const cards = Array.from(document.querySelectorAll('.db-content__card'))
+    
+    cards.forEach(card => {
+      const category = card.getAttribute('data-category')
+      const shouldShow = category === activeFilter
+      if (shouldShow) {
+        ;(card as HTMLElement).style.display = ''
+      } else {
+        ;(card as HTMLElement).style.display = 'none'
+      }
+    })
+  }, [activeFilter])
+
+  // Scroll Animation - wie bei Basti
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    
+    const container = containerRef.current
+    const wrap = wrapperRef.current
+    const search = searchRef.current
+    const side = sideRef.current
+    const cards = cardsRef.current?.querySelectorAll('.db-content__card')
+    const contents = container?.querySelectorAll('[data-db-el]')
+
+    if (!container || !wrap || !search || !side || !cards || !contents) return
+
+    contentsRef.current = contents
+
+    // Set initial states
+    gsap.set(contents, { autoAlpha: 0 })
+    gsap.set(container, { pointerEvents: 'none' })
+
+    // Scroll Intro Timeline
+    const scrollIntroTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container,
+        start: 'top bottom',
+        end: 'bottom bottom+=15%',
+        scrub: true,
+      },
+      defaults: {
+        ease: 'none',
+      },
+      onComplete: () => {
+        endTl.play(0)
+      },
+    })
+
+    scrollIntroTl
+      .from(wrap, { rotateX: '20deg', z: '-20em' })
+      .from(search, { z: '40em', autoAlpha: 0 }, '<')
+      .from(side, { z: '35em', autoAlpha: 0 }, '<')
+      .from(
+        cards,
+        {
+          z: (i) => `${35 - i * 5}em`,
+          stagger: 0.01,
+        },
+        '<'
+      )
+      .to(contents, { autoAlpha: 0, duration: 0.01 }, 0)
+      .set(container, { pointerEvents: 'none' })
+
+    // End Timeline
+    const endTl = gsap.timeline({
+      paused: true,
+      defaults: {
+        ease: 'power2.out',
+      },
+      onStart: () => {
+        gsap.set(container, { pointerEvents: 'auto' })
+      },
+    })
+
+    endTl.to(contents, { autoAlpha: 1, duration: 0.6, stagger: 0.05 })
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+    }
+  }, [])
+
   return (
-    <section className="relative mt-8 pb-16 dashboard-wrapper">
+    <section className="relative mt-8 pb-16">
       <div className="mx-auto max-w-[110rem] px-[2mm]">
-        <div className="relative border border-border rounded-2xl p-[3mm] lg:p-[4mm]">
-          <div className="flex flex-row gap-2 lg:gap-3">
-            {/* Sidebar Navigation - Left side */}
-            <aside className="w-20 sm:w-24 lg:w-[304px] flex-shrink-0 flex flex-col">
-              {/* Mobile: Current Category Indicator */}
-              <div className="mb-3 lg:hidden">
-                <div className="rounded-lg border border-accent/30 bg-accent/10 px-2.5 py-1.5 text-center">
-                  <p className="text-[10px] font-semibold text-accent capitalize leading-tight">
-                    {activeLabel}
-                  </p>
+        {/* Dashboard Container - wie bei Basti */}
+        <div className="db-container" id="overview" ref={containerRef}>
+          <div className="db-wrapper" ref={wrapperRef}>
+            {/* Background Base */}
+            <div className="db-base"></div>
+            
+            {/* Privacy is Power Button */}
+            <div className="db-search" ref={searchRef}>
+              <Link
+                href="/community"
+                aria-label="Become a member"
+                className="relative inline-flex items-center justify-center gap-2 border-2 border-accent bg-accent px-11 py-2.5 sm:px-12 sm:py-3 p-reg font-semibold text-accent-foreground whitespace-nowrap transition-all hover:scale-105 dashboard-banner"
+              >
+                <span>Privacy is Power</span>
+              </Link>
+            </div>
+
+            {/* Sidebar Navigation */}
+            <div className="db-side" ref={sideRef}>
+              <div className="db-side__inner">
+                <div className="db-side__top">
+                  <nav className="db-side__nav">
+                    {navItems.map((item) => (
+                      <button
+                        key={item.id}
+                        onClick={() => setActiveFilter(item.id)}
+                        data-filter={item.id}
+                        className={getNavButtonClasses(activeFilter === item.id)}
+                      >
+                        <div className="db-nav__icon flex h-12 w-12 items-center justify-center">
+                          <Image
+                            src="/xcoin-logo.png"
+                            alt={item.label}
+                            width={45}
+                            height={45}
+                            className="animate-spin [animation-duration:10000ms] object-contain"
+                            style={{ filter: LOGO_FILTER }}
+                            unoptimized
+                          />
+                        </div>
+                        <p className="text-lg font-semibold transition-colors duration-300 group-hover:text-cyan-400 sm:hidden lg:block">
+                          {item.label}
+                        </p>
+                      </button>
+                    ))}
+                  </nav>
                 </div>
               </div>
-
-              {/* Desktop: Box around navigation */}
-              <div className="hidden lg:flex lg:flex-col border border-border rounded-xl p-4 bg-gray-800/30">
-                <nav className="space-y-2.5">
-                  {navItems.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => setActiveFilter(item.id)}
-                      className={getNavButtonClasses(activeFilter === item.id)}
-                    >
-                      <div className="db-nav__icon flex h-12 w-12 items-center justify-center">
-                        <Image
-                          src="/xcoin-logo.png"
-                          alt={item.label}
-                          width={45}
-                          height={45}
-                          className="animate-spin [animation-duration:10000ms] object-contain"
-                          style={{ filter: LOGO_FILTER }}
-                          unoptimized
-                        />
-                      </div>
-                      <p className="text-lg font-semibold transition-colors duration-300 group-hover:text-cyan-400">
-                        {item.label}
-                      </p>
-                    </button>
-                  ))}
-                </nav>
-              </div>
-
-              {/* Mobile: Navigation without box - vertical */}
-              <nav className="flex flex-col lg:hidden gap-2.5">
-                {navItems.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setActiveFilter(item.id)}
-                    className={getMobileNavButtonClasses(activeFilter === item.id)}
-                  >
-                    <Image
-                      src="/xcoin-logo.png"
-                      alt={item.label}
-                      width={45}
-                      height={45}
-                      className="animate-spin [animation-duration:10000ms] object-contain"
-                      style={{ filter: LOGO_FILTER }}
-                      unoptimized
-                    />
-                  </button>
-                ))}
-              </nav>
-            </aside>
+            </div>
 
             {/* Content Grid */}
-            <div className="flex-1 min-w-0 p-0 sm:p-1 lg:p-4">
-              {/* Privacy is Power Button */}
-              <div className="mb-5 flex justify-end lg:-mt-[2mm]">
-                <Link
-                  href="/community"
-                  className="relative inline-flex items-center justify-center gap-2 border-2 border-accent bg-accent px-11 py-2.5 sm:px-12 sm:py-3 p-reg font-semibold text-accent-foreground whitespace-nowrap transition-all hover:scale-105 w-full lg:w-[calc((100%-2*2rem)/3)] dashboard-banner"
+            <div className="db-content" ref={cardsRef}>
+              {dashboardItems.map((item) => (
+                <div
+                  key={item.id}
+                  data-category={item.category}
+                  data-db-el=""
+                  className="db-content__card group"
+                  style={{ display: item.category === activeFilter ? '' : 'none' }}
                 >
-                  <span>Privacy is Power</span>
-                </Link>
-              </div>
-              <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-3 lg:gap-5 w-full">
-                {filteredItems.map((item) => (
-                  <div
-                    key={item.id}
-                    data-category={item.category}
-                    className="db-content__card group"
-                  >
-                    <Link href={item.href} className="block w-full">
-                      <div className="db-card__visual relative w-full aspect-video overflow-hidden rounded-xl border border-border bg-card">
-                        <div className="dash-res-card__visual-before absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
-                        <div className="relative w-full h-full overflow-hidden">
-                          {item.image ? (
-                            <img
-                              src={item.image}
-                              alt={item.title}
-                              className="w-full h-full object-cover"
-                              loading="lazy"
-                            />
-                          ) : (
-                            <div className="flex h-full items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background">
-                              <div className="text-center">
-                                <div className="mx-auto mb-2 flex h-16 w-16 items-center justify-center rounded-full bg-accent/10">
-                                  <Image
-                                    src="/xcoin-logo.png"
-                                    alt="Xcoin"
-                                    width={32}
-                                    height={32}
-                                    className="object-contain"
-                                  />
-                                </div>
-                                <p className="p-small text-muted-foreground capitalize">
-                                  {item.category}
-                                </p>
-                              </div>
+                  <Link href={item.href} className="block w-full h-full">
+                    <div className="db-card__visual">
+                      <div className="dash-res-card__visual-before"></div>
+                      {item.image ? (
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="dash-res-card__visual-img"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="flex h-full items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background">
+                          <div className="text-center">
+                            <div className="mx-auto mb-2 flex h-16 w-16 items-center justify-center rounded-full bg-accent/10">
+                              <Image
+                                src="/xcoin-logo.png"
+                                alt="Xcoin"
+                                width={32}
+                                height={32}
+                                className="object-contain"
+                              />
                             </div>
-                          )}
+                            <p className="p-small text-muted-foreground capitalize">
+                              {item.category}
+                            </p>
+                          </div>
                         </div>
+                      )}
+                    </div>
+                    <div className="db-card__info">
+                      <div className="db-card__info-start">
+                        <p className="p-small">{item.title}</p>
                       </div>
-                      <div className="db-card__info mt-3 flex items-center justify-between">
-                        <p className="p-reg leading-tight">{item.title}</p>
-                        <div className="db-card__arrow ml-6 flex h-6 w-6 shrink-0 items-center justify-center text-muted-foreground transition-colors group-hover:text-accent">
+                      <div className="db-card__info-end">
+                        <div className="db-card__arrow">
+                          <div className="db-card__arrow-back"></div>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
+                            width="100%"
                             viewBox="0 0 24 24"
                             fill="none"
-                            className="h-full w-full"
+                            className="db-card__arrow-svg"
                           >
                             <path
                               d="M10 17L15 12"
@@ -369,10 +444,10 @@ export default function DashboardSection() {
                           </svg>
                         </div>
                       </div>
-                    </Link>
-                  </div>
-                ))}
-              </div>
+                    </div>
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
         </div>

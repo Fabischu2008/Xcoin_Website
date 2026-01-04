@@ -119,13 +119,13 @@ export default function Header() {
         {/* Mobile/Tablet Actions Row - Right side */}
         <div className="flex items-center gap-2 lg:hidden" style={{ position: 'relative', zIndex: 100 }}>
           {/* Menu Button - Plus Icon */}
-          <button
-            type="button"
+        <button
+          type="button"
             className={`menu-button ${mobileMenuOpen ? 'close' : ''}`}
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileMenuOpen}
-          >
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileMenuOpen}
+        >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               width="100%" 
@@ -141,7 +141,7 @@ export default function Header() {
               <path d="M7.02441 9.625V7.875H5.27441C6.24084 7.875 7.02441 8.65857 7.02441 9.625Z" fill="currentColor"></path>
             </svg>
             <div className="button-bg"></div>
-          </button>
+        </button>
         </div>
       </nav>
 
@@ -158,9 +158,9 @@ export default function Header() {
         </div>
         <div className="nav-menu__links">
           {navigation.map((item, index) => (
-            <Link
-              key={item.name}
-              href={item.href}
+              <Link
+                key={item.name}
+                href={item.href}
               className="link nav-link"
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -193,7 +193,7 @@ export default function Header() {
           >
             <div className="u--clip u--rel">
               <p className="p-reg">Crowdfunding</p>
-            </div>
+          </div>
             <div className="button-bg is--dark-outline"></div>
           </Link>
         </div>

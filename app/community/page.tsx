@@ -73,8 +73,8 @@ export default function CommunityPage() {
               <Image 
                 src="/img/xcoin.svg" 
                 alt="Xcoin Logo" 
-                width={64}
-                height={64}
+                width={64} 
+                height={64} 
                 className="w-12 h-12 sm:w-16 sm:h-16"
               />
             </div>
