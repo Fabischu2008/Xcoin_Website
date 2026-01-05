@@ -231,26 +231,32 @@ export default function DashboardSection() {
 
     if (!container || !wrap || !search || !side || !cards || !contents) return
 
-    // Set initial states - Bilder starten unsichtbar
-    gsap.set(contents, { autoAlpha: 0 })
-    gsap.set(container, { pointerEvents: 'none' })
-
-    // Mobile Detection für frühere Animation
+    // Mobile Detection - auf Mobile sofort sichtbar, keine Animation
     const isMobile = window.innerWidth <= 768
     const isTablet = window.innerWidth <= 1024 && window.innerWidth > 768
+
+    // Mobile: Direkt sichtbar, keine Animation für sofortige Sichtbarkeit
+    if (isMobile) {
+      gsap.set(contents, { autoAlpha: 1 })
+      gsap.set([search, side], { autoAlpha: 1, z: 0 })
+      gsap.set([wrap, cards], { rotateX: 0, z: 0 })
+      gsap.set(container, { pointerEvents: 'auto' })
+      return // Keine ScrollTrigger auf Mobile - Bilder sind sofort sichtbar
+    }
+
+    // Desktop/Tablet: Volle Animation
+    gsap.set(contents, { autoAlpha: 0 })
+    gsap.set(container, { pointerEvents: 'none' })
 
     // Scroll Intro Timeline
     const scrollIntroTl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
         start: 'top bottom',
-        // Mobile: Animation früher beenden (noch höher)
-        // Tablet: Etwas früher beenden
+        // Tablet: Animation früher beenden
         // Desktop: Original
-        end: isMobile 
-          ? 'top top+=30%'  // Animation endet sehr früh - wenn Top des Containers 30% im Viewport ist
-          : isTablet 
-          ? 'top center+=10%'  // Etwas später als Mobile
+        end: isTablet 
+          ? 'top center+=10%'  // Etwas früher als Desktop
           : 'bottom bottom+=15%',  // Original für Desktop
         scrub: true,
         refreshPriority: 1, // Wichtig für Navigation

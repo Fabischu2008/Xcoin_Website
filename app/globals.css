@@ -3765,7 +3765,8 @@ section:has(h2.h-medium) .p-reg {
 
 @media (max-width: 768px) {
   .db-wrapper {
-    min-height: 120em; /* Erhöht für 9 Reihen mit Bild + Text (jede Karte ~13em: 11em Bild + 2em Text) */
+    /* Dynamische Höhe: ~8em pro Karte (Bild + Text + Gap) statt 13em */
+    min-height: calc(9 * 8em + 4em); /* 9 Karten × 8em + Padding = ~76em */
     height: auto; /* Erlaubt Wachstum wenn nötig */
   }
 
@@ -3777,6 +3778,9 @@ section:has(h2.h-medium) .p-reg {
     top: calc(var(--gap-large) * 2);
     bottom: var(--gap-large); /* Wichtig: bottom setzen für vollständige Höhe */
     align-items: start; /* Startet oben, erlaubt unterschiedliche Höhen */
+    /* Reduziere Gaps für kompakteres Layout */
+    grid-column-gap: 0.75em;
+    grid-row-gap: 0.75em;
   }
 
   .db-search {
@@ -3792,16 +3796,18 @@ section:has(h2.h-medium) .p-reg {
     height: auto; /* Passt sich an Inhalt an */
   }
 
-  /* Mobile: Bild behält Aspect Ratio */
+  /* Mobile: Bild behält Aspect Ratio, aber kompakter */
   .db-content__card .db-card__visual {
     width: 100%;
     aspect-ratio: 16 / 9;
+    /* Reduziere Bild-Größe leicht für kompakteres Layout */
+    transform: scale(0.98);
   }
 
-  /* Mobile: Text-Bereich sichtbar */
+  /* Mobile: Kompakterer Text-Bereich */
   .db-card__info {
-    margin-top: 0.75em; /* Mehr Abstand auf Mobile */
-    min-height: 3em; /* Mehr Platz für Text */
+    margin-top: 0.5em; /* Reduziert von 0.75em für kompakteres Layout */
+    min-height: 2.5em; /* Reduziert von 3em */
   }
 
   .db-side {
