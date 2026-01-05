@@ -252,7 +252,7 @@ export default function DashboardSection() {
     })
   }, [activeFilter])
 
-  // Scroll Animation - wie bei Basti
+  // Scroll Animation - Bilder erscheinen WÄHREND des Scrollens
   useEffect(() => {
     if (typeof window === 'undefined') return
     
@@ -265,7 +265,7 @@ export default function DashboardSection() {
 
     if (!container || !wrap || !search || !side || !cards || !contents) return
 
-    // Set initial states
+    // Set initial states - Bilder starten unsichtbar
     gsap.set(contents, { autoAlpha: 0 })
     gsap.set(container, { pointerEvents: 'none' })
 
@@ -281,7 +281,7 @@ export default function DashboardSection() {
         ease: 'none',
       },
       onComplete: () => {
-        endTl.play(0)
+        gsap.set(container, { pointerEvents: 'auto' })
       },
     })
 
@@ -297,21 +297,10 @@ export default function DashboardSection() {
         },
         '<'
       )
-      .to(contents, { autoAlpha: 0, duration: 0.01 }, 0)
-      .set(container, { pointerEvents: 'none' })
-
-    // End Timeline
-    const endTl = gsap.timeline({
-      paused: true,
-      defaults: {
-        ease: 'power2.out',
-      },
-      onStart: () => {
-        gsap.set(container, { pointerEvents: 'auto' })
-      },
-    })
-
-    endTl.to(contents, { autoAlpha: 1, duration: 0.6, stagger: 0.05 })
+      // Bilder erscheinen WÄHREND der Animation, nicht erst danach
+      .to(contents, { autoAlpha: 0, duration: 0.01 }, 0) // Start unsichtbar
+      .to(contents, { autoAlpha: 1, duration: 0.4, stagger: 0.02 }, 0.3) // Erscheinen ab 30% der Animation
+      .set(container, { pointerEvents: 'auto' }, 0.5) // Pointer events aktivieren wenn Bilder sichtbar sind
 
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill())
@@ -389,7 +378,7 @@ export default function DashboardSection() {
                           src={item.image}
                           alt={item.title}
                           className="dash-res-card__visual-img"
-                          loading="lazy"
+                          loading="eager"
                         />
                       ) : (
                         <div className="flex h-full items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background">
