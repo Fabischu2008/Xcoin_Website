@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { gsap } from "gsap"
@@ -210,13 +210,6 @@ const getNavButtonClasses = (isActive: boolean) =>
       : "text-muted-foreground hover:bg-secondary"
   }`
 
-const getMobileNavButtonClasses = (isActive: boolean) =>
-  `db-nav__item group flex items-center justify-center rounded-lg p-3 transition-all ${
-    isActive
-      ? "bg-accent/10 text-accent"
-      : "text-muted-foreground hover:bg-secondary"
-  }`
-
 export default function DashboardSection() {
   const [activeFilter, setActiveFilter] = useState("xcoin")
   const containerRef = useRef<HTMLDivElement>(null)
@@ -225,34 +218,7 @@ export default function DashboardSection() {
   const sideRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
 
-  const filteredItems = useMemo(
-    () => dashboardItems.filter((item) => item.category === activeFilter).slice(0, 9),
-    [activeFilter]
-  )
-
-  const activeLabel = useMemo(
-    () => navItems.find((item) => item.id === activeFilter)?.label || "Xcoin",
-    [activeFilter]
-  )
-
-  // Filter Logic - React State based
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-
-    const cards = Array.from(document.querySelectorAll('.db-content__card'))
-    
-    cards.forEach(card => {
-      const category = card.getAttribute('data-category')
-      const shouldShow = category === activeFilter
-      if (shouldShow) {
-        ;(card as HTMLElement).style.display = ''
-      } else {
-        ;(card as HTMLElement).style.display = 'none'
-      }
-    })
-  }, [activeFilter])
-
-  // Scroll Animation - Bilder erscheinen WÄHREND des Scrollens
+  // Scroll Animation - Optimiert
   useEffect(() => {
     if (typeof window === 'undefined') return
     
@@ -269,19 +235,28 @@ export default function DashboardSection() {
     gsap.set(contents, { autoAlpha: 0 })
     gsap.set(container, { pointerEvents: 'none' })
 
+    // Mobile Detection für frühere Animation
+    const isMobile = window.innerWidth <= 768
+    const isTablet = window.innerWidth <= 1024 && window.innerWidth > 768
+
     // Scroll Intro Timeline
     const scrollIntroTl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
         start: 'top bottom',
-        end: 'bottom bottom+=15%',
+        // Mobile: Animation früher beenden (noch höher)
+        // Tablet: Etwas früher beenden
+        // Desktop: Original
+        end: isMobile 
+          ? 'top top+=30%'  // Animation endet sehr früh - wenn Top des Containers 30% im Viewport ist
+          : isTablet 
+          ? 'top center+=10%'  // Etwas später als Mobile
+          : 'bottom bottom+=15%',  // Original für Desktop
         scrub: true,
+        refreshPriority: 1, // Wichtig für Navigation
       },
       defaults: {
         ease: 'none',
-      },
-      onComplete: () => {
-        gsap.set(container, { pointerEvents: 'auto' })
       },
     })
 
@@ -297,13 +272,17 @@ export default function DashboardSection() {
         },
         '<'
       )
-      // Bilder erscheinen WÄHREND der Animation, nicht erst danach
-      .to(contents, { autoAlpha: 0, duration: 0.01 }, 0) // Start unsichtbar
-      .to(contents, { autoAlpha: 1, duration: 0.4, stagger: 0.02 }, 0.3) // Erscheinen ab 30% der Animation
-      .set(container, { pointerEvents: 'auto' }, 0.5) // Pointer events aktivieren wenn Bilder sichtbar sind
+      // Bilder erscheinen WÄHREND der Animation ab 30%
+      .to(contents, { autoAlpha: 1, duration: 0.4, stagger: 0.02 }, 0.3)
+      .set(container, { pointerEvents: 'auto' }, 0.5)
+
+    // Spezifischer Cleanup - nur diese ScrollTrigger-Instanz
+    const scrollTriggerInstance = scrollIntroTl.scrollTrigger
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      if (scrollTriggerInstance) {
+        scrollTriggerInstance.kill()
+      }
     }
   }, [])
 
