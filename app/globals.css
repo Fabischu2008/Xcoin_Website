@@ -2268,6 +2268,11 @@
   clip-path: none !important;
 }
 
+/* Dashboard-Karten: Pfeil zentriert im Kreis */
+.db-content__card .db-card__arrow-svg {
+  transform: translateX(0) rotate(0.001deg) !important; /* Zentriert statt -75% */
+}
+
 .db-card__arrow-back {
   position: absolute;
   inset: 0;
@@ -3680,9 +3685,10 @@ section:has(h2.h-medium) .p-reg {
 
 .db-search {
   position: absolute;
-  top: var(--gap-large);
+  top: calc(var(--gap-large) * 0.5); /* Höher positioniert - nach oben geschoben */
   right: var(--gap-large);
   z-index: 4;
+  margin-bottom: var(--gap-large); /* Abstand nach unten */
   /* Banner-Breite = eine Karten-Breite (Desktop: 3 Spalten) */
   /* Berechnung: (100% - sidebar - right margin - 2*gap) / 3 */
   width: calc((100% - calc(20em + 0.3em) - var(--gap-large) - 2em) / 3);
@@ -3698,7 +3704,7 @@ section:has(h2.h-medium) .p-reg {
   position: absolute;
   left: calc(20em + 0.3em); /* Zusätzlicher Abstand von ~0.3em (~5mm) zur Sidebar */
   right: var(--gap-large);
-  top: calc(var(--gap-large) * 3);
+  top: calc(var(--gap-large) * 2.5); /* Näher am Button - verringert Abstand zur ersten Bildreihe */
   bottom: var(--gap-large);
   display: grid;
   overflow: hidden; /* Verhindert Overflow beim Hover */
@@ -3714,7 +3720,7 @@ section:has(h2.h-medium) .p-reg {
     grid-template-rows: repeat(4, auto); /* auto statt 1fr - erlaubt Wachstum für Bild + Text */
     left: calc(6.25em + 0.3em); /* Gleicher zusätzlicher Abstand */
     right: 0.75em;
-    top: calc(var(--gap-large) * 3.25);
+    top: calc(var(--gap-large) * 2.75); /* Näher am Button - verringert Abstand */
     bottom: var(--gap-large); /* Wichtig: bottom setzen für vollständige Höhe */
     align-items: start; /* Startet oben, erlaubt unterschiedliche Höhen */
   }
@@ -3724,6 +3730,8 @@ section:has(h2.h-medium) .p-reg {
     /* Berechnung: (100% - sidebar - right margin - 1*gap) / 2 */
     width: calc((100% - calc(6.25em + 0.3em) - 0.75em - 1em) / 2);
     right: 0.75em;
+    top: calc(var(--gap-large) * 0.5); /* Höher auf Tablet - nach oben geschoben */
+    margin-bottom: var(--gap-large); /* Abstand nach unten */
   }
 
   .db-side {
@@ -3775,7 +3783,7 @@ section:has(h2.h-medium) .p-reg {
     grid-template-rows: repeat(9, auto); /* auto statt 1fr - erlaubt Wachstum für Bild + Text */
     left: calc(4em + 0.3em); /* Gleicher zusätzlicher Abstand */
     right: 0.75em;
-    top: calc(var(--gap-large) * 2);
+    top: calc(var(--gap-large) * 1.5); /* Näher am Button - verringert Abstand */
     bottom: var(--gap-large); /* Wichtig: bottom setzen für vollständige Höhe */
     align-items: start; /* Startet oben, erlaubt unterschiedliche Höhen */
     /* Reduziere Gaps für kompakteres Layout */
@@ -3788,6 +3796,8 @@ section:has(h2.h-medium) .p-reg {
     /* Berechnung: 100% - sidebar - right margin */
     width: calc(100% - calc(4em + 0.3em) - 0.75em);
     right: 0.75em;
+    top: calc(var(--gap-large) * 0.5); /* Höher auf Mobile - nach oben geschoben */
+    margin-bottom: var(--gap-large); /* Abstand nach unten */
   }
 
   /* Mobile: Karten haben genug Platz für Bild + Text */
