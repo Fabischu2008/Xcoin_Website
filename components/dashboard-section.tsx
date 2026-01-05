@@ -363,7 +363,8 @@ export default function DashboardSection() {
                           src={item.image}
                           alt={item.title}
                           className="dash-res-card__visual-img"
-                          loading="eager"
+                          loading="lazy"
+                          decoding="async"
                         />
                       ) : (
                         <div className="flex h-full items-center justify-center bg-gradient-to-br from-accent/10 via-background to-background">

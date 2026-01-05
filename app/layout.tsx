@@ -77,6 +77,21 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
+        {/* Font Preloading für bessere Performance */}
+        <link
+          rel="preload"
+          href="/fonts/PPNeueMontreal-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/PPNeueMontreal-Medium.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
