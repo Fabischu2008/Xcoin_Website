@@ -3626,11 +3626,13 @@ section:has(h2.h-medium) .p-reg {
 
 .db-side {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 20em;
-  height: 100%;
+  left: 0.5em; /* Kleiner Außenabstand links */
+  top: 0.5em; /* Kleiner Außenabstand oben */
+  width: calc(20em - 1em); /* Breite anpassen für Abstand */
+  height: calc(100% - 1em); /* Höhe anpassen für Abstand */
   z-index: 2;
+  background-color: rgba(239, 238, 236, 0.08); /* Gräulicher Hintergrund */
+  border-radius: var(--card--radius-reg); /* Abgerundete Ecken */
 }
 
 .db-side__inner {
@@ -3684,7 +3686,10 @@ section:has(h2.h-medium) .p-reg {
   }
 
   .db-side {
-    width: 6.25em;
+    width: calc(6.25em - 1em);
+    left: 0.5em;
+    top: 0.5em;
+    height: calc(100% - 1em);
   }
 }
 
@@ -3702,7 +3707,10 @@ section:has(h2.h-medium) .p-reg {
   }
 
   .db-side {
-    width: 4em;
+    width: calc(4em - 1em);
+    left: 0.5em;
+    top: 0.5em;
+    height: calc(100% - 1em);
   }
 }
 
