@@ -44,8 +44,6 @@
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.96 0 0);
@@ -60,20 +58,7 @@
   --border: oklch(0.9 0 0);
   --input: oklch(0.9 0 0);
   --ring: oklch(0.88 0.12 195);
-  --chart-1: oklch(0.88 0.12 195);
-  --chart-2: oklch(0.75 0.1 195);
-  --chart-3: oklch(0.65 0.08 200);
-  --chart-4: oklch(0.55 0.06 205);
-  --chart-5: oklch(0.45 0.04 210);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.88 0.12 195);
-  --sidebar-primary-foreground: oklch(0.15 0.02 195);
-  --sidebar-accent: oklch(0.96 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.9 0 0);
-  --sidebar-ring: oklch(0.88 0.12 195);
   /* XCoin_Basti variables */
   --gap-tiny: 0.5em;
   --gap-large: 1.5em;
@@ -87,8 +72,6 @@
   --foreground: oklch(0.95 0 0);
   --card: oklch(0.12 0.015 200);
   --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.12 0.015 200);
-  --popover-foreground: oklch(0.95 0 0);
   --primary: oklch(0.95 0 0);
   --primary-foreground: oklch(0.12 0.015 200);
   --secondary: oklch(0.18 0.015 200);
@@ -103,19 +86,6 @@
   --border: oklch(0.22 0.015 200);
   --input: oklch(0.22 0.015 200);
   --ring: oklch(0.88 0.12 195);
-  --chart-1: oklch(0.88 0.12 195);
-  --chart-2: oklch(0.75 0.1 195);
-  --chart-3: oklch(0.65 0.08 200);
-  --chart-4: oklch(0.55 0.06 205);
-  --chart-5: oklch(0.45 0.04 210);
-  --sidebar: oklch(0.1 0.015 200);
-  --sidebar-foreground: oklch(0.95 0 0);
-  --sidebar-primary: oklch(0.88 0.12 195);
-  --sidebar-primary-foreground: oklch(0.12 0.02 195);
-  --sidebar-accent: oklch(0.18 0.015 200);
-  --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(0.22 0.015 200);
-  --sidebar-ring: oklch(0.88 0.12 195);
 }
 
 @theme inline {
@@ -126,8 +96,6 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -141,23 +109,10 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 @keyframes spin-slow {
@@ -213,10 +168,6 @@
   font-size: 0.65em;
 }
 
-.p-tiny {
-  font-size: 0.75em;
-}
-
 .p-small {
   font-size: 0.875em;
   line-height: 1.3;
@@ -229,11 +180,6 @@
 
 .p-med {
   font-size: 1.125em;
-}
-
-.p-large {
-  font-size: 1.5em;
-  line-height: 1.15;
 }
 
 .h-small {
@@ -308,10 +254,6 @@
   }
   
   /* Texte */
-  .p-large {
-    font-size: 1.25em;
-  }
-  
   .p-med {
     font-size: 1em;
   }
@@ -355,11 +297,6 @@
   }
   
   /* Texte - besser lesbar */
-  .p-large {
-    font-size: 1.125rem;
-    line-height: 1.4;
-  }
-  
   .p-med {
     font-size: 0.9375rem;
     line-height: 1.5;
@@ -373,10 +310,6 @@
   .p-small {
     font-size: 0.8125rem !important;
     line-height: 1.5;
-  }
-  
-  .p-tiny {
-    font-size: 0.75rem;
   }
   
   .eyebrow {
@@ -430,10 +363,6 @@
   }
   
   /* Texte */
-  .p-large {
-    font-size: 1rem;
-  }
-  
   .p-med {
     font-size: 0.875rem;
   }
@@ -691,39 +620,6 @@
   50% {
     opacity: 1;
     transform: scale(1.1);
-  }
-}
-
-/* ============================================
-   RESPONSIVE BREAKPOINTS & UTILITIES
-   ============================================ */
-:root {
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
-}
-
-.container-responsive {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: clamp(1rem, 4vw, 2rem);
-  padding-right: clamp(1rem, 4vw, 2rem);
-}
-
-@media (min-width: 640px) {
-  .container-responsive {
-    padding-left: clamp(1.5rem, 5vw, 3rem);
-    padding-right: clamp(1.5rem, 5vw, 3rem);
-  }
-}
-
-@media (min-width: 1024px) {
-  .container-responsive {
-    padding-left: clamp(2rem, 6vw, 4rem);
-    padding-right: clamp(2rem, 6vw, 4rem);
   }
 }
 
@@ -1060,12 +956,6 @@
 /* Spezifische Regel für den primären Hero-Button */
 .hero-button-primary .button-bg {
   background-color: #93c5fd; /* Standard Blau-Farbe */
-}
-
-.button-bg.is--secondary {
-  -webkit-backdrop-filter: blur(1em);
-  backdrop-filter: blur(1em);
-  background-color: #efeeec26;
 }
 
 .hero-button:hover .button-bg {
@@ -1582,10 +1472,6 @@
   font-family: var(--font-sans);
 }
 
-.button.is--dark {
-  color: #efeeec;
-}
-
 .button-bg {
   position: absolute;
   inset: 0;
@@ -1593,42 +1479,6 @@
   border-radius: 0.25em;
   transition: transform 0.3s ease, background-color 0.2s ease-in-out;
   background-color: var(--background);
-}
-
-.button-bg.black {
-  background-color: #131313;
-  z-index: 0;
-}
-
-.button-bg.is--dark-outline {
-  background-color: transparent;
-  border: 1px solid rgba(19, 19, 19, 0.15);
-}
-
-.button-bg.is--secondary {
-  -webkit-backdrop-filter: blur(1em);
-  backdrop-filter: blur(1em);
-  background-color: #efeeec26;
-}
-
-.button .u--clip {
-  position: relative;
-  z-index: 1;
-}
-
-.button .p-reg {
-  font-size: 1em;
-  font-weight: 400;
-  color: inherit;
-  font-family: var(--font-sans);
-}
-
-.button.is--dark .p-reg {
-  color: #efeeec;
-}
-
-.button:not(.is--dark) .p-reg {
-  color: #131313;
 }
 
 /* Dashboard Section - Optimized */
