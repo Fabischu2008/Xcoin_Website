@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
@@ -212,15 +213,19 @@ const getNavButtonClasses = (isActive: boolean) =>
 
 export default function DashboardSection() {
   const [activeFilter, setActiveFilter] = useState("xcoin")
+  const pathname = usePathname()
   const containerRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const searchRef = useRef<HTMLDivElement>(null)
   const sideRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
 
-  // Scroll Animation - Optimiert
+  // Scroll Animation - Optimiert mit Reload bei Navigation zurück
   useEffect(() => {
     if (typeof window === 'undefined') return
+    
+    // Nur auf Startseite initialisieren
+    if (pathname !== '/') return
     
     const container = containerRef.current
     const wrap = wrapperRef.current
@@ -244,53 +249,100 @@ export default function DashboardSection() {
       return // Keine ScrollTrigger auf Mobile - Bilder sind sofort sichtbar
     }
 
-    // Desktop/Tablet: Volle Animation
-    gsap.set(contents, { autoAlpha: 0 })
-    gsap.set(container, { pointerEvents: 'none' })
-
-    // Scroll Intro Timeline
-    const scrollIntroTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        start: 'top bottom',
-        // Tablet: Animation früher beenden
-        // Desktop: Original
-        end: isTablet 
-          ? 'top center+=10%'  // Etwas früher als Desktop
-          : 'bottom bottom+=15%',  // Original für Desktop
-        scrub: true,
-        refreshPriority: 1, // Wichtig für Navigation
-      },
-      defaults: {
-        ease: 'none',
-      },
+    // WICHTIG: Alle bestehenden ScrollTriggers für diesen Container killen
+    ScrollTrigger.getAll().forEach(trigger => {
+      if (trigger.trigger === container) {
+        trigger.kill()
+      }
     })
 
-    scrollIntroTl
-      .from(wrap, { rotateX: '20deg', z: '-20em' })
-      .from(search, { z: '40em', autoAlpha: 0 }, '<')
-      .from(side, { z: '35em', autoAlpha: 0 }, '<')
-      .from(
-        cards,
-        {
-          z: (i) => `${35 - i * 5}em`,
-          stagger: 0.01,
+    // WICHTIG: Alle laufenden GSAP-Animationen stoppen und zurücksetzen
+    gsap.killTweensOf([wrap, search, side, cards, contents])
+    
+    // WICHTIG: Alle Elemente auf Startpositionen zurücksetzen
+    gsap.set(wrap, { rotateX: '20deg', z: '-20em', clearProps: 'all' })
+    gsap.set(search, { z: '40em', autoAlpha: 0, clearProps: 'all' })
+    gsap.set(side, { z: '35em', autoAlpha: 0, clearProps: 'all' })
+    cards.forEach((card, i) => {
+      gsap.set(card, { z: `${35 - i * 5}em`, clearProps: 'all' })
+    })
+    gsap.set(contents, { autoAlpha: 0, clearProps: 'all' })
+    gsap.set(container, { pointerEvents: 'none' })
+
+    // Kurze Verzögerung, damit DOM bereit ist und ScrollTrigger richtig initialisiert wird
+    const initTimer = setTimeout(() => {
+      // Scroll Intro Timeline
+      const scrollIntroTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: 'top bottom',
+          // Tablet: Animation früher beenden
+          // Desktop: Original
+          end: isTablet 
+            ? 'top center+=10%'  // Etwas früher als Desktop
+            : 'bottom bottom+=15%',  // Original für Desktop
+          scrub: true,
+          refreshPriority: 1, // Wichtig für Navigation
+          invalidateOnRefresh: true,
         },
-        '<'
-      )
-      // Bilder erscheinen WÄHREND der Animation ab 30%
-      .to(contents, { autoAlpha: 1, duration: 0.4, stagger: 0.02 }, 0.3)
-      .set(container, { pointerEvents: 'auto' }, 0.5)
+        defaults: {
+          ease: 'none',
+        },
+      })
 
-    // Spezifischer Cleanup - nur diese ScrollTrigger-Instanz
-    const scrollTriggerInstance = scrollIntroTl.scrollTrigger
+      scrollIntroTl
+        .from(wrap, { rotateX: '20deg', z: '-20em' })
+        .from(search, { z: '40em', autoAlpha: 0 }, '<')
+        .from(side, { z: '35em', autoAlpha: 0 }, '<')
+        .from(
+          cards,
+          {
+            z: (i) => `${35 - i * 5}em`,
+            stagger: 0.01,
+          },
+          '<'
+        )
+        // Bilder erscheinen WÄHREND der Animation ab 30%
+        .to(contents, { autoAlpha: 1, duration: 0.4, stagger: 0.02 }, 0.3)
+        .set(container, { pointerEvents: 'auto' }, 0.5)
 
-    return () => {
-      if (scrollTriggerInstance) {
-        scrollTriggerInstance.kill()
+      // Prüfen, ob Container bereits im Viewport ist (nach kurzer Verzögerung)
+      const checkViewport = () => {
+        const rect = container.getBoundingClientRect()
+        const scrollY = window.scrollY
+        const containerTop = container.offsetTop
+        const endOffset = isTablet ? window.innerHeight * 0.6 : window.innerHeight * 1.15
+        
+        // Wenn Container bereits sichtbar ist und Scroll-Position über End-Punkt
+        if (rect.top < window.innerHeight && scrollY + window.innerHeight > containerTop + endOffset) {
+          // Animation ist bereits durchgelaufen - alles sofort sichtbar machen
+          gsap.set(contents, { autoAlpha: 1 })
+          gsap.set([search, side], { autoAlpha: 1, z: 0 })
+          gsap.set([wrap, cards], { rotateX: 0, z: 0 })
+          gsap.set(container, { pointerEvents: 'auto' })
+          scrollIntroTl.progress(1)
+        }
       }
+
+      // Nach ScrollTrigger-Initialisierung prüfen
+      setTimeout(checkViewport, 100)
+
+      // ScrollTrigger refresh nach Initialisierung
+      ScrollTrigger.refresh()
+    }, 100)
+
+    // Cleanup
+    return () => {
+      clearTimeout(initTimer)
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.trigger === container) {
+          trigger.kill()
+        }
+      })
+      // Alle Animationen stoppen
+      gsap.killTweensOf([wrap, search, side, cards, contents])
     }
-  }, [])
+  }, [pathname]) // pathname als Dependency - Animation wird neu initialisiert, wenn man zurückkommt
 
   return (
     <section className="relative mt-8 pb-16">

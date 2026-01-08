@@ -131,287 +131,414 @@ const technologies = [
 
 export default function OverviewPage() {
   return (
-    <div className="relative overflow-hidden pt-32 pb-24">
-      {/* Video Background */}
-      <div className="absolute inset-0 -z-20">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className="h-full w-full object-cover"
-        >
-          <source src="/1212-compressed.mp4" type="video/mp4" />
-        </video>
-        {/* Overlay für bessere Textlesbarkeit */}
-        <div className="absolute inset-0 bg-background/60" />
-      </div>
+    <div className="relative overflow-hidden">
+      {/* Hero Section mit Video - nur obere Hälfte, volle Breite */}
+      <section className="relative overflow-hidden pt-32 pb-12 sm:pb-16 lg:pt-40 lg:pb-20">
+        {/* Video Background */}
+        <div className="absolute inset-0 -z-20">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="h-full w-full object-cover"
+          >
+            <source src="/vid/city-1.mp4" type="video/mp4" />
+          </video>
+          {/* Overlay für bessere Textlesbarkeit - radialer Gradient, heller in der Mitte */}
+          <div className="absolute inset-0 bg-black/50" />
+          <div 
+            className="absolute inset-0" 
+            style={{
+              background: 'radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%)'
+            }}
+          />
+          <div className="hero-gradient" />
+        </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Learning Center Introduction */}
-        <div className="mx-auto max-w-4xl mb-20">
-          <div className="text-center mb-12">
-            <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl mb-6">
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          {/* Hero Content */}
+          <div className="mx-auto max-w-4xl text-center">
+            <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl mb-6 text-white">
               Welcome to the Xcoin Overview
             </h1>
-            <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
+            <p className="text-lg lg:text-xl text-white/90 leading-relaxed">
               Xcoin is more than just a cryptocurrency. It's a fully private, quantum-secure financial protocol designed for a post-surveillance world. This page introduces you to the key concepts, technologies, and principles that make Xcoin unique — and shows you where to learn more. Below you'll find all learning resources grouped into logical categories.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Rest des Inhalts */}
+      <div className="relative pt-24 pb-24">
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Learning Center Introduction */}
+        <div className="mx-auto max-w-4xl mb-20">
 
           {/* Core Concepts */}
           <div className="mb-12">
             <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold mb-6">1. Core Concepts</h2>
-            <div className="space-y-4">
-              <div>
-                <Link href="/what-is-privacy-by-default" className="text-accent hover:text-accent/80 underline font-medium">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <Link 
+                href="/what-is-privacy-by-default" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   What is Privacy by Default?
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Every Xcoin transaction is private by default — no settings, no opt-ins.</p>
-              </div>
-              <div>
-                <Link href="/quantum-safe" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Every Xcoin transaction is private by default — no settings, no opt-ins.</p>
+              </Link>
+              <Link 
+                href="/quantum-safe" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Why Quantum-Safe Cryptography Matters
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Xcoin protects you from future quantum threats using post-quantum cryptography today.</p>
-              </div>
-              <div>
-                <Link href="/what-is-fixed-supply" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Xcoin protects you from future quantum threats using post-quantum cryptography today.</p>
+              </Link>
+              <Link 
+                href="/what-is-fixed-supply" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Fixed Supply, No Inflation: The Xcoin Model
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">With a hard cap of 21 million coins, Xcoin prevents dilution and mimics Bitcoin's deflationary model.</p>
-              </div>
-              <div>
-                <Link href="/how-xcoin-scales-without-mining" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">With a hard cap of 21 million coins, Xcoin prevents dilution and mimics Bitcoin's deflationary model.</p>
+              </Link>
+              <Link 
+                href="/how-xcoin-scales-without-mining" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   How Xcoin Scales Without Mining
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Xcoin removes mining entirely, using validators and a DAG to scale securely and sustainably.</p>
-              </div>
-              <div>
-                <Link href="/philosophy-behind-anonymous-finance" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Xcoin removes mining entirely, using validators and a DAG to scale securely and sustainably.</p>
+              </Link>
+              <Link 
+                href="/philosophy-behind-anonymous-finance" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   The Philosophy Behind Anonymous Finance
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Financial privacy is a human right — Xcoin is designed to defend it against surveillance.</p>
-              </div>
+                </h3>
+                <p className="text-sm text-muted-foreground">Financial privacy is a human right — Xcoin is designed to defend it against surveillance.</p>
+              </Link>
             </div>
           </div>
 
           {/* Cryptographic Foundations */}
           <div className="mb-12">
             <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold mb-6">2. Cryptographic Foundations</h2>
-            <div className="space-y-4">
-              <div>
-                <Link href="/what-is-zk-starks" className="text-accent hover:text-accent/80 underline font-medium">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <Link 
+                href="/what-is-zk-starks" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   zk-STARKs: Zero-Knowledge Proofs Explained
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">A zero-knowledge system that proves something is true without revealing any private data.</p>
-              </div>
-              <div>
-                <Link href="/what-is-ring-signature" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">A zero-knowledge system that proves something is true without revealing any private data.</p>
+              </Link>
+              <Link 
+                href="/what-is-ring-signature" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Ring Signatures: Sender Anonymity Made Real
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Transactions are signed by a group, hiding who the real sender is.</p>
-              </div>
-              <div>
-                <Link href="/what-is-stealth-addresses" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Transactions are signed by a group, hiding who the real sender is.</p>
+              </Link>
+              <Link 
+                href="/what-is-stealth-addresses" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Stealth Addresses 2.0: Hiding the Recipient
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Each payment uses a one-time address, so no one knows who receives funds.</p>
-              </div>
-              <div>
-                <span className="font-medium">SPHINCS+ WOTS+: Quantum-Resistant Signatures</span>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Two proven, post-quantum signature schemes secure Xcoin at the cryptographic level.{" "}
-                  <Link href="/what-is-sphincs-plus" className="text-accent hover:text-accent/80 underline">SPHINCS+</Link>{" "}
-                  and{" "}
-                  <Link href="/what-is-wots-plus" className="text-accent hover:text-accent/80 underline">WOTS+</Link>
-                </p>
-              </div>
-              <div>
-                <Link href="/what-is-halo-2" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Each payment uses a one-time address, so no one knows who receives funds.</p>
+              </Link>
+              <Link 
+                href="/what-is-sphincs-plus" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
+                  SPHINCS+: Quantum-Resistant Signatures
+                </h3>
+                <p className="text-sm text-muted-foreground">A proven, post-quantum signature scheme that secures Xcoin at the cryptographic level.</p>
+              </Link>
+              <Link 
+                href="/what-is-wots-plus" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
+                  WOTS+: Quantum-Resistant Signatures
+                </h3>
+                <p className="text-sm text-muted-foreground">A proven, post-quantum signature scheme that secures Xcoin at the cryptographic level.</p>
+              </Link>
+              <Link 
+                href="/what-is-halo-2" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Halo 2: Obscuring Transaction Amounts
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Xcoin hides how much you send, not just who sends or receives it.</p>
-              </div>
-              <div>
-                <Link href="/what-are-view-keys" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Xcoin hides how much you send, not just who sends or receives it.</p>
+              </Link>
+              <Link 
+                href="/what-are-view-keys" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   View Keys: Optional, Controlled Transparency
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Let auditors or partners view your private transactions without full control.</p>
-              </div>
-              <div>
-                <Link href="/what-is-keccak-512" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Let auditors or partners view your private transactions without full control.</p>
+              </Link>
+              <Link 
+                href="/what-is-keccak-512" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Keccak-512: The ultimate hash algorithm
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">A secure, high-speed hashing algorithm that powers address generation in Xcoin.</p>
-              </div>
-              <div>
-                <Link href="/what-is-poseidon-hash" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">A secure, high-speed hashing algorithm that powers address generation in Xcoin.</p>
+              </Link>
+              <Link 
+                href="/what-is-poseidon-hash" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Poseidon Hash: Tailor-made for zero-knowledge
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">A STARK-friendly hash function optimized for privacy, scalability, and ZK-proof efficiency.</p>
-              </div>
+                </h3>
+                <p className="text-sm text-muted-foreground">A STARK-friendly hash function optimized for privacy, scalability, and ZK-proof efficiency.</p>
+              </Link>
             </div>
           </div>
 
           {/* Technology & Architecture */}
           <div className="mb-12">
             <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold mb-6">3. Technology & Architecture</h2>
-            <div className="space-y-4">
-              <div>
-                <Link href="/what-is-dag-plus" className="text-accent hover:text-accent/80 underline font-medium">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <Link 
+                href="/what-is-dag-plus" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   DAG+: Beyond Blocks, Beyond Chains
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">A Directed Acyclic Graph combined with validator checkpoints replaces slow, linear blockchains.</p>
-              </div>
-              <div>
-                <Link href="/what-is-zk-rollups" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">A Directed Acyclic Graph combined with validator checkpoints replaces slow, linear blockchains.</p>
+              </Link>
+              <Link 
+                href="/what-is-zk-rollups" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   zk-Rollup: Compressing Transactions Efficiently
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Xcoin batches thousands of encrypted transactions into a single proof for high throughput.</p>
-              </div>
-              <div>
-                <Link href="/what-is-sep" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Xcoin batches thousands of encrypted transactions into a single proof for high throughput.</p>
+              </Link>
+              <Link 
+                href="/what-is-sep" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   SEP Nodes: What Validators Do
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Secure Entry Points (SEP nodes) verify encrypted transactions and vote on checkpoints.</p>
-              </div>
-              <div>
-                <Link href="/how-xcoin-handles-10000-tps" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Secure Entry Points (SEP nodes) verify encrypted transactions and vote on checkpoints.</p>
+              </Link>
+              <Link 
+                href="/how-xcoin-handles-10000-tps" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   How Xcoin Handles 10,000+ Transactions Per Second
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">By combining DAG and rollup tech, Xcoin breaks the limits of traditional chains.</p>
-              </div>
-              <div>
-                <Link href="/what-is-aes-512" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">By combining DAG and rollup tech, Xcoin breaks the limits of traditional chains.</p>
+              </Link>
+              <Link 
+                href="/what-is-aes-512" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   AES-512 Cascade Encryption
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Every transaction is wrapped in multiple layers of AES-512 encryption — even metadata is hidden.</p>
-              </div>
-              <div>
-                <Link href="/why-xcoin-uses-no-mining" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Every transaction is wrapped in multiple layers of AES-512 encryption — even metadata is hidden.</p>
+              </Link>
+              <Link 
+                href="/why-xcoin-uses-no-mining" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Why Xcoin Uses No Mining, No Staking, No Block Rewards
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">No wasteful computation or incentives that centralize power — only security and speed.</p>
-              </div>
+                </h3>
+                <p className="text-sm text-muted-foreground">No wasteful computation or incentives that centralize power — only security and speed.</p>
+              </Link>
             </div>
           </div>
 
           {/* Governance & DAO */}
           <div className="mb-12">
             <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold mb-6">4. Governance & DAO</h2>
-            <div className="space-y-4">
-              <div>
-                <Link href="/what-is-xxx-dao" className="text-accent hover:text-accent/80 underline font-medium">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <Link 
+                href="/what-is-xxx-dao" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   What is XXX DAO?
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">A decentralized autonomous organization that governs Xcoin's rules and upgrades.</p>
-              </div>
-              <div>
-                <Link href="/how-voting-and-proposals-work" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">A decentralized autonomous organization that governs Xcoin's rules and upgrades.</p>
+              </Link>
+              <Link 
+                href="/how-voting-and-proposals-work" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   How Voting and Proposals Work
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Every token holder can vote on proposals, upgrades, and treasury decisions.</p>
-              </div>
-              <div>
-                <Link href="/who-holds-power-in-the-ecosystem" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Every token holder can vote on proposals, upgrades, and treasury decisions.</p>
+              </Link>
+              <Link 
+                href="/who-holds-power-in-the-ecosystem" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Who Holds Power in the Ecosystem?
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Power is distributed to participants, not miners or foundations.</p>
-              </div>
-              <div>
-                <Link href="/treasury-delegation-and-validator-licenses" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Power is distributed to participants, not miners or foundations.</p>
+              </Link>
+              <Link 
+                href="/treasury-delegation-and-validator-licenses" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Treasury, Delegation, and Validator Licenses
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Funds are managed transparently, and validators are licensed via token staking.</p>
-              </div>
-              <div>
-                <Link href="/your-role-as-a-token-holder" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Funds are managed transparently, and validators are licensed via token staking.</p>
+              </Link>
+              <Link 
+                href="/your-role-as-a-token-holder" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Your Role as a Token Holder
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Holding XXX tokens gives you real influence over Xcoin's direction.</p>
-              </div>
-              <div>
-                <Link href="/what-are-xxx-tokens" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Holding XXX tokens gives you real influence over Xcoin's direction.</p>
+              </Link>
+              <Link 
+                href="/what-are-xxx-tokens" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   What are XXX Tokens?
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">The native governance and utility tokens that power participation and access in the Xcoin ecosystem.</p>
-              </div>
+                </h3>
+                <p className="text-sm text-muted-foreground">The native governance and utility tokens that power participation and access in the Xcoin ecosystem.</p>
+              </Link>
             </div>
           </div>
 
           {/* Use Cases & Benefits */}
           <div className="mb-12">
             <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold mb-6">5. Use Cases & Benefits</h2>
-            <div className="space-y-4">
-              <div>
-                <Link href="/using-xcoin-for-payments-and-savings" className="text-accent hover:text-accent/80 underline font-medium">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <Link 
+                href="/using-xcoin-for-payments-and-savings" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Using Xcoin for Payments and Savings
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Send, receive, and store value privately — instantly and securely.</p>
-              </div>
-              <div>
-                <Link href="/anonymous-donations-remittances-and-business-transfers" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Send, receive, and store value privately — instantly and securely.</p>
+              </Link>
+              <Link 
+                href="/anonymous-donations-remittances-and-business-transfers" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Anonymous Donations, Remittances, and Business Transfers
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Xcoin is ideal for private, untraceable financial activity, both personal and professional.</p>
-              </div>
-              <div>
-                <Link href="/why-xcoin-is-better" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Xcoin is ideal for private, untraceable financial activity, both personal and professional.</p>
+              </Link>
+              <Link 
+                href="/why-xcoin-is-better" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Why Xcoin is Better Than Monero, Zcash, or Bitcoin
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Xcoin combines more privacy, better speed, post-quantum safety, and no chain bloat.</p>
-              </div>
-              <div>
-                <Link href="/optional-compliance" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Xcoin combines more privacy, better speed, post-quantum safety, and no chain bloat.</p>
+              </Link>
+              <Link 
+                href="/optional-compliance" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Optional Compliance for Audits and Taxes
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Use view keys to prove activity when required — and only when you choose.</p>
-              </div>
-              <div>
-                <Link href="/eco-friendly-infrastructure" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Use view keys to prove activity when required — and only when you choose.</p>
+              </Link>
+              <Link 
+                href="/eco-friendly-infrastructure" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Eco-Friendly Infrastructure and Near-Zero Energy Use
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Xcoin consumes minimal energy, using no mining or proof-of-work.</p>
-              </div>
-              <div>
-                <Link href="/why-xcoin-replaces-bitcoin" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Xcoin consumes minimal energy, using no mining or proof-of-work.</p>
+              </Link>
+              <Link 
+                href="/why-xcoin-replaces-bitcoin" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Why Xcoin Will Replace Bitcoin
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Bitcoin started the revolution — Xcoin is built to finish it.</p>
-              </div>
+                </h3>
+                <p className="text-sm text-muted-foreground">Bitcoin started the revolution — Xcoin is built to finish it.</p>
+              </Link>
             </div>
           </div>
 
           {/* Getting Involved */}
           <div className="mb-12">
             <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold mb-6">6. Getting Involved</h2>
-            <div className="space-y-4">
-              <div>
-                <Link href="/validator-application" className="text-accent hover:text-accent/80 underline font-medium">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <Link 
+                href="/validator-application" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Become a Validator (SEP Node)
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Run a node, verify proofs, and help secure the Xcoin network.</p>
-              </div>
-              <div>
-                <Link href="/participate-in-governance" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Run a node, verify proofs, and help secure the Xcoin network.</p>
+              </Link>
+              <Link 
+                href="/participate-in-governance" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Participate in Governance
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Vote on proposals and shape the protocol's future.</p>
-              </div>
-              <div>
-                <Link href="/fund" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Vote on proposals and shape the protocol's future.</p>
+              </Link>
+              <Link 
+                href="/fund" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Join the Early Access Sale
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Secure your XXX tokens early and support the project's launch phase.</p>
-              </div>
-              <div>
-                <Link href="/stay-updated" className="text-accent hover:text-accent/80 underline font-medium">
+                </h3>
+                <p className="text-sm text-muted-foreground">Secure your XXX tokens early and support the project's launch phase.</p>
+              </Link>
+              <Link 
+                href="/stay-updated" 
+                className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
+              >
+                <h3 className="font-[family-name:var(--font-heading)] font-semibold mb-2 group-hover:text-accent transition-colors">
                   Stay Updated
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">Join our community channels and be the first to hear what's next.</p>
-              </div>
+                </h3>
+                <p className="text-sm text-muted-foreground">Join our community channels and be the first to hear what's next.</p>
+              </Link>
             </div>
           </div>
 
@@ -668,6 +795,7 @@ export default function OverviewPage() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }
