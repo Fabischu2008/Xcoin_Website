@@ -438,7 +438,7 @@ function QuantumIconsRow({ icons, parallaxStart, parallaxEnd, scrub }: { icons: 
 
       // Mobile: Stärkerer Parallax-Effekt
       const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
-      const mobileMultiplier = isMobile ? 1.5 : 1 // 50% stärker auf Mobile
+      const mobileMultiplier = isMobile ? 2 : 1 // Erhöht von 1.5 auf 2 für stärkeren Effekt auf Mobile
       
       // Calculate transform value - using percentage like XCoin_Basti (xPercent)
       const range = parallaxEnd - parallaxStart
