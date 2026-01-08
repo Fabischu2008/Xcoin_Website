@@ -25,10 +25,10 @@ export default function Footer() {
     <footer className="relative overflow-hidden">
       {/* Privacy is Power Banner */}
       <div className="relative border-b border-border/50">
-        <div className="mx-auto max-w-7xl px-6 pt-0 pb-16 lg:px-8 lg:pb-24">
+        <div className="mx-auto max-w-7xl px-6 pt-0 pb-8 lg:px-8 lg:pb-12">
           <div className="flex flex-col items-center justify-center text-center">
             {/* Strich oben */}
-            <div className="w-full max-w-2xl h-px bg-gradient-to-r from-transparent via-border to-transparent mb-12"></div>
+            <div className="w-full max-w-2xl h-px bg-gradient-to-r from-transparent via-border to-transparent mb-16"></div>
             
             {/* Xcoin Logo mit Glow */}
             <div className="mb-8">
@@ -47,7 +47,7 @@ export default function Footer() {
             
             {/* Privacy is Power Text */}
             <h2 
-              className="font-[family-name:var(--font-heading)] text-5xl lg:text-6xl xl:text-7xl font-medium text-foreground uppercase tracking-wide"
+              className="font-[family-name:var(--font-heading)] text-5xl lg:text-6xl xl:text-7xl font-medium text-foreground uppercase"
               style={{
                 textShadow: '0 0 30px rgba(147, 197, 253, 0.5), 0 0 60px rgba(147, 197, 253, 0.3)',
                 filter: 'drop-shadow(0 0 12px rgba(147, 197, 253, 0.6))'
