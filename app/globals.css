@@ -1622,6 +1622,62 @@
 .f-grid-card.components {
   grid-column: span 2;
   padding-bottom: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Development Background - Desktop (Standard) */
+.f-grid-card.components .development-bg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.35;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  border-radius: 1rem;
+}
+
+.f-grid-card.components .development-images-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  width: 100%;
+  height: 100%;
+  padding: 0.25em;
+}
+
+.f-grid-card.components .development-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  flex: 1;
+  width: 100%;
+  height: auto;
+}
+
+.f-grid-card.components .development-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.5em;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.f-grid-card.components .development-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Text über Background */
+.f-grid-card.components .f-card__text {
+  position: relative;
+  z-index: 1;
 }
 
 .f-grid-card.icons {
@@ -1985,26 +2041,27 @@
     flex: 0 1 auto;
   }
   
-  /* Prevent stretching of development images container */
-  .f-grid-card.components .absolute {
-    flex: 0 1 auto;
-    height: auto;
-    max-height: 15em;
-    opacity: 0.1; /* Noch dezenter auf Mobile */
+  /* Development Background - Mobile: Grid Layout mit 3 Spalten */
+  .f-grid-card.components .development-bg-container {
+    opacity: 0.6 !important; /* Höhere Opacity auf Mobile */
   }
   
-  .f-grid-card.components .absolute .flex {
-    height: auto;
-    max-height: 15em;
+  .f-grid-card.components .development-images-container {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    flex-direction: unset !important;
+    gap: 0.5em;
+    min-height: 35em;
+    padding: 0.25em !important;
   }
   
-  /* Development Images Columns - Mobile: weniger Spalten */
-  .f-grid-card.components .absolute .flex {
-    flex-wrap: wrap;
+  .f-grid-card.components .development-column {
+    flex: unset !important;
+    width: 100%;
   }
   
-  .f-grid-card.components .absolute .flex > div {
-    flex: 0 0 calc(50% - 0.25em); /* 2 Spalten statt 4 auf Mobile */
+  .f-grid-card.components .development-image {
+    min-height: 7em;
   }
 }
 

@@ -259,13 +259,7 @@ function DevelopmentImageColumn({ images, parallaxStart, parallaxEnd, scrub }: {
     const element = columnRef.current
     if (!element) return
 
-    // Deaktiviere Parallax auf Mobile für bessere Performance
-    const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
-    if (isMobile) {
-      setTransform(0)
-      return
-    }
-
+    // Parallax auch auf Mobile aktivieren
     const handleScroll = () => {
       if (!element) return
       const rect = element.getBoundingClientRect()
@@ -277,8 +271,12 @@ function DevelopmentImageColumn({ images, parallaxStart, parallaxEnd, scrub }: {
         (windowHeight - elementTop) / (windowHeight + elementHeight)
       ))
 
+      // Mobile: Stärkerer Parallax-Effekt
+      const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+      const mobileMultiplier = isMobile ? 2 : 1 // 100% stärker auf Mobile
+      
       const range = parallaxEnd - parallaxStart
-      const value = parallaxStart + (range * scrollProgress * scrub)
+      const value = parallaxStart + (range * scrollProgress * scrub * mobileMultiplier)
       setTransform(value)
     }
 
@@ -295,11 +293,11 @@ function DevelopmentImageColumn({ images, parallaxStart, parallaxEnd, scrub }: {
   return (
     <div 
       ref={columnRef}
-      className="flex-1 flex flex-col gap-2"
+      className="flex-1 flex flex-col gap-2 development-column"
       style={{ transform: `translateY(${transform}px)` }}
     >
       {images.map((image, index) => (
-        <div key={index} className="relative aspect-square overflow-hidden rounded flex-shrink-0">
+        <div key={index} className="relative aspect-square overflow-hidden rounded flex-shrink-0 development-image">
           <img 
             src={`/img/xcoin_grid/screens/${image}`}
             alt=""
@@ -880,35 +878,35 @@ export default function HomePage() {
                 </div>
               </div>
               {/* Development Images Columns with Parallax */}
-              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl opacity-20">
-                <div className="flex h-full gap-2">
+              <div className="development-bg-container">
+                <div className="development-images-container">
                   {/* Column 1 */}
                   <DevelopmentImageColumn 
                     images={['group-security-dashboard.png', 'SAsP6Lv.webp', 'matrix.webp', 'php.jpg', 'programming-code-abstract-technology-background-of-software-developer-and-computer-script.jpg']}
                     parallaxStart={0}
-                    parallaxEnd={-45}
-                    scrub={1.25}
+                    parallaxEnd={-100}
+                    scrub={1.5}
                   />
                   {/* Column 2 */}
                   <DevelopmentImageColumn 
                     images={['HD-wallpaper-coding-game-development-csharp-unity-technology.jpg', 'HD-wallpaper-programming-coding-language-hi-tech-and-background-den-code-programmer.jpg', 'images-1.jpg', 'images-2.jpg', 'images.jpg']}
                     parallaxStart={0}
-                    parallaxEnd={-40}
-                    scrub={1.5}
+                    parallaxEnd={-80}
+                    scrub={1.75}
                   />
                   {/* Column 3 */}
                   <DevelopmentImageColumn 
                     images={['Is-Python-good-for-software-development.avif', 'IT_Engineer_Salary.avif', 'premium_photo-1720287601920-ee8c503af775.jpg', 'software-development-lifecycle-1024x682-1.webp', 'software-development-specialist.jpg']}
                     parallaxStart={0}
-                    parallaxEnd={-30}
-                    scrub={1.75}
+                    parallaxEnd={-60}
+                    scrub={2}
                   />
                   {/* Column 4 */}
                   <DevelopmentImageColumn 
                     images={['Top-10-Blockchain-Development-Tools-For-Startups.jpg', 'top-12-cryptocurrency-tokens-by-600nw-2300861397.webp', 'Top-6-Software-Development-Methodologies.jpg', 'top-blockchain-development-companies-main.jpg', 'Comparing-10-Different-Blockchain-Development-Platforms.png']}
                     parallaxStart={0}
-                    parallaxEnd={-20}
-                    scrub={2}
+                    parallaxEnd={-40}
+                    scrub={2.25}
                   />
                 </div>
               </div>
