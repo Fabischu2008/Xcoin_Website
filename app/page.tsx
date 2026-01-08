@@ -422,13 +422,7 @@ function QuantumIconsRow({ icons, parallaxStart, parallaxEnd, scrub }: { icons: 
     const element = rowRef.current
     if (!element) return
 
-    // Deaktiviere Parallax auf Mobile für bessere Performance
-    const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
-    if (isMobile) {
-      setTransform(0)
-      return
-    }
-
+    // Parallax auch auf Mobile aktivieren
     const handleScroll = () => {
       if (!rowRef.current) return
       
@@ -442,9 +436,13 @@ function QuantumIconsRow({ icons, parallaxStart, parallaxEnd, scrub }: { icons: 
         (windowHeight - elementTop) / (windowHeight + elementHeight)
       ))
 
+      // Mobile: Stärkerer Parallax-Effekt
+      const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+      const mobileMultiplier = isMobile ? 1.5 : 1 // 50% stärker auf Mobile
+      
       // Calculate transform value - using percentage like XCoin_Basti (xPercent)
       const range = parallaxEnd - parallaxStart
-      const value = parallaxStart + (range * scrollProgress * scrub)
+      const value = parallaxStart + (range * scrollProgress * scrub * mobileMultiplier)
       setTransform(value)
     }
 
@@ -879,6 +877,8 @@ export default function HomePage() {
               </div>
               {/* Development Images Columns with Parallax */}
               <div className="development-bg-container">
+                {/* Dunkles Overlay für bessere Lesbarkeit */}
+                <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none"></div>
                 <div className="development-images-container">
                   {/* Column 1 */}
                   <DevelopmentImageColumn 

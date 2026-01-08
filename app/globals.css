@@ -1635,7 +1635,7 @@
   bottom: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.35;
+  opacity: 0.25; /* Reduziert von 0.35 auf 0.25 für dunkleren Hintergrund */
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
@@ -1713,21 +1713,51 @@
   will-change: transform;
 }
 
-/* 3D-Effekt nur auf Desktop - Mobile deaktivieren für bessere Performance */
+/* 3D-Effekt auch auf Mobile aktivieren */
 @media (max-width: 768px) {
-  .f-grid__icons-row {
-    transform: none;
-    transform-style: flat;
+  .f-grid__icons {
+    perspective: 1000px; /* 3D-Effekt aktivieren */
+    margin-top: -1em; /* Angepasst für Mobile */
   }
   
-  .f-grid__icons {
-    perspective: none;
+  .f-grid__icons-row {
+    flex-flow: row !important; /* Horizontal bleiben auf Mobile */
+    transform: rotateX(15deg) rotateY(-5deg) rotateZ(10deg) !important; /* Reduzierte 3D-Rotation für Mobile */
+    gap: 0.4em !important; /* Kompaktere Abstände */
+    flex-wrap: wrap; /* Erlaube Wrapping wenn nötig */
+    justify-content: center;
+  }
+  
+  .f-grid__icons-col {
+    flex-direction: row !important; /* Horizontal bleiben */
+    gap: 0.4em !important; /* Kompaktere Abstände */
+  }
+  
+  /* Icon-Größen auf Mobile reduzieren */
+  .f-grid__icon {
+    width: 4em !important; /* Noch kleiner für Mobile */
+    height: 4em !important;
+    flex-shrink: 0;
+  }
+  
+  .dash-icon-card {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .dash-icon-card__svg {
+    width: 1.2em !important; /* Noch kleiner */
+    height: 1.2em !important;
+  }
+  
+  .f-grid-icon__info {
+    font-size: 0.7em !important; /* Kleinere Schrift */
   }
   
   .f-grid__icon,
   .f-grid__icons-col,
   .dash-icon-card {
-    transform-style: flat;
+    transform-style: preserve-3d; /* 3D-Effekt aktivieren */
   }
 }
 
@@ -2043,7 +2073,7 @@
   
   /* Development Background - Mobile: Grid Layout mit 3 Spalten */
   .f-grid-card.components .development-bg-container {
-    opacity: 0.6 !important; /* Höhere Opacity auf Mobile */
+    opacity: 0.3 !important; /* Reduziert von 0.6 auf 0.3 für dunkleren Hintergrund auf Mobile */
   }
   
   .f-grid-card.components .development-images-container {
