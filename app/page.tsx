@@ -1030,38 +1030,7 @@ export default function HomePage() {
 
       {/* Pricing Section */}
       <PricingSection />
-
-      {/* Privacy is Power Section */}
-      <PrivacyPowerSection />
     </>
-  )
-}
-
-function PrivacyPowerSection() {
-  return (
-    <section className="relative py-12">
-      <div className="absolute top-0 left-0 right-0">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-60" />
-        </div>
-      </div>
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-12">
-        <div className="flex flex-col items-center gap-8">
-          <div className="relative">
-            <img 
-              src="/img/xcoin.svg" 
-              alt="Xcoin logo" 
-              loading="lazy" 
-              decoding="async" 
-              className="w-32 h-32 animate-spin-slow object-contain"
-              style={{ animationDuration: '10000ms' }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 rounded-lg blur-md opacity-30" aria-hidden="true" />
-          </div>
-          <h2 className="h-medium md:h-large uppercase text-center">Privacy is Power.</h2>
-        </div>
-      </div>
-    </section>
   )
 }
 

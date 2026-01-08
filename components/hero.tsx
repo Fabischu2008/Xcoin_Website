@@ -7,6 +7,7 @@ import { Coins, Rocket } from "lucide-react"
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
+  const handleLoadedMetadataRef = useRef<(() => void) | null>(null)
 
   useEffect(() => {
     // Optimiertes Video-Loading mit Intersection Observer
@@ -29,6 +30,8 @@ export default function Hero() {
               setIsLoaded(true)
               video.play().catch(() => {})
             }
+            // Store handler reference for cleanup
+            handleLoadedMetadataRef.current = handleLoadedMetadata
             video.addEventListener('loadedmetadata', handleLoadedMetadata, { once: true })
             observer.disconnect()
           }
@@ -51,6 +54,11 @@ export default function Hero() {
     return () => {
       observer.disconnect()
       video.removeEventListener('timeupdate', handleTimeUpdate)
+      // Clean up loadedmetadata listener if it was added
+      if (handleLoadedMetadataRef.current) {
+        video.removeEventListener('loadedmetadata', handleLoadedMetadataRef.current)
+        handleLoadedMetadataRef.current = null
+      }
     }
   }, [])
 

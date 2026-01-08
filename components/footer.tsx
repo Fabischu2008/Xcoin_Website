@@ -22,31 +22,68 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border relative overflow-hidden">
-      {/* Background Image - Desktop only - direkt auf Footer-Ebene */}
-      <img 
-        src="/Xcoin_footer.svg" 
-        alt="" 
-        loading="lazy" 
-        decoding="async" 
-        aria-hidden="true" 
-        role="presentation" 
-        className="hidden lg:block absolute opacity-10 pointer-events-none"
-        style={{ 
-          filter: 'grayscale(100%)',
-          top: 'clamp(0.25rem, 1vw, 0.75rem)',
-          left: '0',
-          right: '0',
-          bottom: 'clamp(0.75rem, 2vw, 1.5rem)',
-          width: '100%',
-          height: 'calc(100% - clamp(1rem, 3vw, 2.25rem))',
-          objectFit: 'contain',
-          objectPosition: 'center center',
-          minWidth: '100%',
-          minHeight: 'calc(100% - clamp(1rem, 3vw, 2.25rem))'
-        }}
-      />
+    <footer className="relative overflow-hidden">
+      {/* Privacy is Power Banner */}
+      <div className="relative border-b border-border/50">
+        <div className="mx-auto max-w-7xl px-6 pt-0 pb-16 lg:px-8 lg:pb-24">
+          <div className="flex flex-col items-center justify-center text-center">
+            {/* Strich oben */}
+            <div className="w-full max-w-2xl h-px bg-gradient-to-r from-transparent via-border to-transparent mb-12"></div>
+            
+            {/* Xcoin Logo mit Glow */}
+            <div className="mb-8">
+              <Image 
+                src="/img/xcoin.svg" 
+                alt="Xcoin Logo"
+                width={120}
+                height={120}
+                className="h-24 w-24 lg:h-32 lg:w-32 xl:h-40 xl:w-40 animate-spin-slow"
+                style={{ 
+                  filter: 'brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1234%) hue-rotate(185deg) brightness(101%) contrast(101%) drop-shadow(0 0 15px rgba(147, 197, 253, 0.7)) drop-shadow(0 0 30px rgba(147, 197, 253, 0.5))',
+                  animationDuration: '10000ms'
+                }}
+              />
+            </div>
+            
+            {/* Privacy is Power Text */}
+            <h2 
+              className="font-[family-name:var(--font-heading)] text-5xl lg:text-6xl xl:text-7xl font-medium text-foreground uppercase tracking-wide"
+              style={{
+                textShadow: '0 0 30px rgba(147, 197, 253, 0.5), 0 0 60px rgba(147, 197, 253, 0.3)',
+                filter: 'drop-shadow(0 0 12px rgba(147, 197, 253, 0.6))'
+              }}
+            >
+              Privacy is Power.
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Content with Background Image */}
       <div className="relative mx-auto max-w-7xl px-6 py-32 lg:px-8 lg:py-48">
+        {/* Background Image - Desktop only - nur im Footer-Content-Bereich */}
+        <img 
+          src="/Xcoin_footer.svg" 
+          alt="" 
+          loading="lazy" 
+          decoding="async" 
+          aria-hidden="true" 
+          role="presentation" 
+          className="hidden lg:block absolute opacity-10 pointer-events-none"
+          style={{ 
+            filter: 'grayscale(100%)',
+            top: 'clamp(0.25rem, 1vw, 0.75rem)',
+            left: '0',
+            right: '0',
+            bottom: 'clamp(0.75rem, 2vw, 1.5rem)',
+            width: '100%',
+            height: 'calc(100% - clamp(1rem, 3vw, 2.25rem))',
+            objectFit: 'contain',
+            objectPosition: 'center center',
+            minWidth: '100%',
+            minHeight: 'calc(100% - clamp(1rem, 3vw, 2.25rem))'
+          }}
+        />
         <div className="relative grid grid-cols-2 gap-12 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-4">
