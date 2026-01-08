@@ -231,8 +231,8 @@ export default function TestimonialsSection() {
                   opacity: isSelected ? 1 : 0.45,
                   scrollSnapAlign: 'center',
                   backgroundColor: isSelected ? 'rgba(239, 238, 236, 0.1)' : 'rgba(239, 238, 236, 0.06)',
-                  border: 'none',
-                  borderRadius: '0.5em',
+                  border: '1px solid hsl(var(--border))', // WICHTIG: Border wie bei Community
+                  borderRadius: '16px', // WICHTIG: 1rem = 16px (wie bei Community rounded-2xl)
                   overflow: 'visible',
                   paddingTop: '2rem',
                   paddingBottom: '2rem',
@@ -241,17 +241,17 @@ export default function TestimonialsSection() {
                   minHeight: '20rem'
                 }}
               >
-                {/* Corner Brackets - Only show for selected testimonial */}
+                {/* Corner Brackets - Only show for selected testimonial - wie im Dashboard */}
                 {isSelected && (
                   <>
                     {/* Corner Brackets - Top Left */}
-                    <div className="absolute w-6 h-6 border-t-2 border-l-2 border-[#93c5fd]" style={{ top: '-3mm', left: '-3mm' }} />
+                    <div className="absolute w-4 h-4 border-t-2 border-l-2 border-[#93c5fd]" style={{ top: '-2mm', left: '-2mm', zIndex: 10 }} />
                     {/* Corner Brackets - Bottom Left */}
-                    <div className="absolute w-6 h-6 border-b-2 border-l-2 border-[#93c5fd]" style={{ bottom: '-3mm', left: '-3mm' }} />
+                    <div className="absolute w-4 h-4 border-b-2 border-l-2 border-[#93c5fd]" style={{ bottom: '-2mm', left: '-2mm', zIndex: 10 }} />
                     {/* Corner Brackets - Top Right */}
-                    <div className="absolute w-6 h-6 border-t-2 border-r-2 border-[#93c5fd]" style={{ top: '-3mm', right: '-3mm' }} />
+                    <div className="absolute w-4 h-4 border-t-2 border-r-2 border-[#93c5fd]" style={{ top: '-2mm', right: '-2mm', zIndex: 10 }} />
                     {/* Corner Brackets - Bottom Right */}
-                    <div className="absolute w-6 h-6 border-b-2 border-r-2 border-[#93c5fd]" style={{ bottom: '-3mm', right: '-3mm' }} />
+                    <div className="absolute w-4 h-4 border-b-2 border-r-2 border-[#93c5fd]" style={{ bottom: '-2mm', right: '-2mm', zIndex: 10 }} />
                   </>
                 )}
                 

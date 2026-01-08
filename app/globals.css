@@ -391,8 +391,8 @@
 
 /* Testimonial Cards Styles */
 .testimonial-item {
-  border: 1px solid hsl(var(--border)) !important;
-  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border)) !important; /* WICHTIG: Border wie bei Community */
+  border-radius: 16px !important; /* WICHTIG: 1rem = 16px (wie bei Community rounded-2xl) */
   background-color: hsl(var(--card));
   position: relative;
 }
@@ -404,7 +404,8 @@
     width: 320px !important; /* Statt 420px */
     min-height: 16rem !important; /* Statt 20rem */
     padding: 1.25rem 1.25rem !important; /* Statt 2rem 1.75rem */
-    border: 1px solid rgba(239, 238, 236, 0.2) !important; /* Sichtbare Border auf Mobile */
+    border: 1px solid hsl(var(--border)) !important; /* WICHTIG: Border wie bei Community */
+    border-radius: 16px !important; /* WICHTIG: 1rem = 16px (abgerundete Ecken) */
   }
 
   /* Quote Text kleiner */
@@ -429,11 +430,14 @@
     font-size: 0.6875rem !important;
   }
 
-  /* Corner Brackets kleiner */
-  .testimonial-item .absolute {
-    width: 1rem !important; /* Statt 1.5rem (24px) */
+  /* Corner Brackets - wie im Dashboard (w-4 h-4 = 16px) */
+  .testimonial-item .absolute[style*="top: '-2mm'"],
+  .testimonial-item .absolute[style*="bottom: '-2mm'"],
+  .testimonial-item .absolute[style*="left: '-2mm'"],
+  .testimonial-item .absolute[style*="right: '-2mm'"] {
+    width: 1rem !important; /* w-4 = 16px (wie im Dashboard) */
     height: 1rem !important;
-    border-width: 1.5px !important; /* Statt 2px */
+    border-width: 2px !important; /* border-2 = 2px (wie im Dashboard) */
   }
 
   /* Gap zwischen Cards kleiner */
@@ -464,7 +468,8 @@
     width: 280px !important; /* Noch kleiner */
     min-height: 14rem !important;
     padding: 1rem !important;
-    border: 1px solid rgba(239, 238, 236, 0.2) !important; /* Sichtbare Border auf Mobile */
+    border: 1px solid hsl(var(--border)) !important; /* WICHTIG: Border wie bei Community */
+    border-radius: 16px !important; /* WICHTIG: 1rem = 16px (abgerundete Ecken) */
   }
 
   .testimonial-item p {
