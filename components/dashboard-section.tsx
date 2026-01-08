@@ -399,14 +399,15 @@ export default function DashboardSection() {
 
             {/* Content Grid */}
             <div className="db-content" ref={cardsRef}>
-              {dashboardItems.map((item) => (
-                <div
-                  key={item.id}
-                  data-category={item.category}
-                  data-db-el=""
-                  className="db-content__card group"
-                  style={{ display: item.category === activeFilter ? '' : 'none' }}
-                >
+              {dashboardItems
+                .filter(item => item.category === activeFilter)
+                .map((item) => (
+                  <div
+                    key={item.id}
+                    data-category={item.category}
+                    data-db-el=""
+                    className="db-content__card group"
+                  >
                   <Link href={item.href} className="block w-full h-full">
                     <div className="db-card__visual">
                       <div className="dash-res-card__visual-before"></div>

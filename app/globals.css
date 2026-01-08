@@ -3557,7 +3557,8 @@ section:has(h2.h-medium) .p-reg {
   top: calc(var(--gap-large) * 2.5); /* Näher am Button - verringert Abstand zur ersten Bildreihe */
   bottom: var(--gap-large);
   display: grid;
-  overflow: hidden; /* Verhindert Overflow beim Hover */
+  overflow: hidden; /* WICHTIG: Verhindert, dass 4. Reihe sichtbar wird */
+  max-height: calc(100% - calc(var(--gap-large) * 2.5) - var(--gap-large)); /* Begrenzt Höhe auf 3 Reihen */
 }
 
 @media (max-width: 1024px) {
