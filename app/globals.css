@@ -3088,46 +3088,106 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-/* DAO Tab Container - matching XCoin_Basti */
+/* DAO Tab Container - Kompakt auf Mobile, Responsive */
 .dao-tab-container {
   flex-flow: column;
   justify-content: space-between;
   align-items: flex-start;
   min-height: 100%;
-  padding-top: 2em;
-  padding-bottom: 3em;
-  padding-right: 4em; /* Increased right padding for spacing from image */
+  padding-top: 0.5rem;
+  padding-bottom: 0.75rem;
+  padding-right: 0;
   display: flex;
-  gap: 3em;
+  gap: 0.75rem;
   position: relative;
 }
 
+@media (min-width: 640px) {
+  .dao-tab-container {
+    padding-top: 0.75rem;
+    padding-bottom: 1rem;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .dao-tab-container {
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dao-tab-container {
+    padding-top: 1.5em;
+    padding-bottom: 2em;
+    padding-right: 3em;
+    gap: 2em;
+  }
+}
+
 .dao-tab-container-top {
-  grid-column-gap: 2em;
-  grid-row-gap: 2em;
+  grid-column-gap: 0;
+  grid-row-gap: 0;
   flex-flow: column;
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
+  margin-bottom: 0;
+  width: 100%;
 }
 
 .dao-tab-content-wrap {
   width: 100%;
-  min-width: 24em;
+  min-width: 0;
   position: relative;
-  min-height: 10em;
+  min-height: 6rem;
+}
+
+@media (min-width: 640px) {
+  .dao-tab-content-wrap {
+    min-height: 8rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .dao-tab-content-wrap {
+    min-height: 10rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dao-tab-content-wrap {
+    min-width: 24em;
+    min-height: 10em;
+  }
 }
 
 .dao-tab-content-item {
   z-index: 1;
-  grid-column-gap: 1.25em;
-  grid-row-gap: 1.25em;
+  grid-column-gap: 0.5rem;
+  grid-row-gap: 0.5rem;
   visibility: hidden;
   flex-flow: column;
   display: flex;
   position: absolute;
   inset: auto 0% 0%;
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  .dao-tab-content-item {
+    grid-column-gap: 0.75rem;
+    grid-row-gap: 0.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dao-tab-content-item {
+    grid-column-gap: 1em;
+    grid-row-gap: 0.75em;
+  }
 }
 
 .dao-tab-content-item.active {
@@ -3137,7 +3197,7 @@
 .dao-tab-button-wrap {
   width: 100%;
   position: relative;
-  min-height: 3.125em; /* Mindesthöhe für den Button */
+  min-height: 3.125em; /* Höhe beibehalten */
 }
 
 /* Pricing Section Container - breiter */

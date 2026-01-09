@@ -1230,12 +1230,16 @@ function CrowdfundingDAOSection() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr] gap-12 relative">
           {/* Left Column - Tabs and Content */}
           <div className="flex flex-col lg:max-w-[50%] dao-tab-container">
-            <div className="dao-tab-container-top mb-8">
-              <h3 className="text-[4.5em] font-medium leading-none mb-0.5" style={{ fontFamily: '"PP Neue Montreal", Arial, sans-serif' }}>XXX DAO</h3>
-              <span className="text-xl text-white relative -top-1.5 block">(Decentralized Autonomous Organization)</span>
+            <div className="dao-tab-container-top">
+              <h3 className="text-[2.5rem] sm:text-[3rem] md:text-[3.5rem] lg:text-[4.5em] font-medium leading-none mb-0.5" style={{ fontFamily: '"PP Neue Montreal", Arial, sans-serif' }}>
+                XXX DAO
+              </h3>
+              <span className="text-sm sm:text-base md:text-lg lg:text-xl text-white relative -top-1.5 block">
+                (Decentralized Autonomous Organization)
+              </span>
               
               {/* Tab Buttons - matching XCoin_Basti */}
-              <div className="dao-filter-bar mt-6 mb-8 relative">
+              <div className="dao-filter-bar mt-0 sm:mt-2 md:mt-4 lg:mt-6 mb-0 relative">
                 {/* Sliding background - moves between tabs */}
                 <div 
                   className="dao-tab-sliding-bg"
@@ -1265,7 +1269,7 @@ function CrowdfundingDAOSection() {
             </div>
 
             {/* Tab Content */}
-            <div className="dao-tab-content-wrap flex-1">
+            <div className="dao-tab-content-wrap flex-1 mt-2 sm:mt-3 md:mt-4 lg:mt-8">
               {tabs.map((tab, index) => (
                 <div
                   key={tab.id}
@@ -1273,7 +1277,7 @@ function CrowdfundingDAOSection() {
                     activeTab === index ? 'active' : ''
                   }`}
                 >
-                  <h4 className="h-small mb-4">{tab.title}</h4>
+                  <h4 className="h-small mb-2 sm:mb-3 md:mb-4">{tab.title}</h4>
                   <p className="p-reg opacity-70 whitespace-pre-line">
                     {tab.content}
                   </p>
@@ -1282,7 +1286,7 @@ function CrowdfundingDAOSection() {
             </div>
 
             {/* Tab Buttons */}
-            <div className="dao-tab-button-wrap mt-4">
+            <div className="dao-tab-button-wrap mt-2 sm:mt-3 md:mt-4">
               {tabs.map((tab, index) => {
                 const isActive = activeTab === index
                 return (
@@ -1302,7 +1306,7 @@ function CrowdfundingDAOSection() {
           </div>
 
           {/* Right Column - Video - Extends beyond screen */}
-          <div className="relative h-[750px] lg:h-[800px] lg:absolute lg:left-1/2 lg:right-0 lg:top-0 lg:w-[50vw]">
+          <div className="relative w-full aspect-video lg:h-[800px] lg:absolute lg:left-1/2 lg:right-0 lg:top-0 lg:w-[50vw] lg:aspect-auto">
             {tabs.map((tab, index) => (
               <div
                 key={tab.id}
@@ -1319,7 +1323,7 @@ function CrowdfundingDAOSection() {
                     muted
                     loop
                     playsInline
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain lg:object-cover"
                   />
                 </div>
               </div>
