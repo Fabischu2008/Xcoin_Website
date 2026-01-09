@@ -2823,14 +2823,12 @@
 /* Crowdfunding Section - Responsive Optimierungen */
 @media (max-width: 640px) {
   /* Buttons Container - Kompakter auf Mobile */
-  section:has(.h-large) ~ div .flex.flex-col.items-center,
-  section:has(.h-large) ~ div .flex[class*="flex-row"] {
+  section:has(.h-large) ~ div .flex.items-center {
     gap: 0.75rem !important; /* Kompakterer Abstand zwischen Buttons */
   }
 
   /* Buttons - Gleich groß, größer, mit Außenabstand */
-  section:has(.h-large) ~ div .flex.flex-col a,
-  section:has(.h-large) ~ div .flex[class*="flex-row"] a {
+  section:has(.h-large) ~ div .flex.items-center a {
     width: calc(100% - 1rem) !important;
     min-height: 3.5rem !important;
     padding: 1rem 1.5rem !important;
@@ -2854,13 +2852,13 @@
 
 /* Tablet und größer: Buttons größer */
 @media (min-width: 640px) {
-  section:has(.h-large) ~ div .flex[class*="flex-row"] a {
+  section:has(.h-large) ~ div .flex.items-center a {
     padding: 1.25rem 3rem !important; /* Größer auf Desktop */
     font-size: 1.125rem !important; /* Größere Schrift */
     min-height: 4rem !important; /* Größere Höhe */
   }
   
-  section:has(.h-large) ~ div .flex[class*="flex-row"] a svg {
+  section:has(.h-large) ~ div .flex.items-center a svg {
     width: 1.75rem !important;
     height: 1.75rem !important;
   }
