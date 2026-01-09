@@ -1344,7 +1344,7 @@ function PricingSection() {
         {/* Header */}
         <div className="text-center mb-16 pricing-header">
           <div className="mx-auto max-w-3xl">
-            <h2 className="h-medium mb-6 pricing-header-title">This is your early access opportunity.</h2>
+            <h2 className="h-medium mb-6 mt-8 lg:mt-12 pricing-header-title">This is your early access opportunity.</h2>
             <p className="p-reg text-white opacity-70 pricing-header-text">
               This is not a promo. This is not a presale for whales. This is your direct path to owning a part of the next-generation financial platform, before it launches to the world.
             </p>

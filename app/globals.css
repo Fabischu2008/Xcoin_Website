@@ -2556,8 +2556,8 @@
   }
 
   .dao-filter-bar {
-    padding: 0.25em !important; /* Reduziert von 0.375em */
-    gap: 0.08em !important; /* Reduziert von 0.1em */
+    padding: 0 !important; /* KEIN Padding - Buttons sollen die volle Höhe haben */
+    gap: 0.125rem !important;
     overflow-x: visible !important; /* Kein Scroll, Buttons gleichmäßig verteilt */
     overflow-y: hidden !important;
     width: 100% !important;
@@ -2565,36 +2565,44 @@
     margin-bottom: 1.5rem !important; /* Reduziert von mb-8 */
     max-width: 100% !important;
     display: flex !important;
-    border-radius: 0.375em !important; /* Etwas kleinerer Radius */
+    border-radius: 0.5rem !important;
     justify-content: stretch !important; /* Buttons gleichmäßig verteilen */
+    background-color: rgba(239, 238, 236, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
   }
 
   .dao-filter-button {
-    padding: 0.5em 0.375em !important;
+    height: 3.5rem !important; /* GENAU wie der Button unten */
+    padding: 0 !important; /* KEIN Padding */
     flex: 1 !important;
     min-width: 0 !important;
+    min-height: 0 !important;
     white-space: nowrap !important;
     text-align: center !important;
-    min-height: 2.4em !important; /* Reduziert von 2.75em */
-    max-height: none !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     overflow: visible !important;
     position: relative !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0.375rem !important;
   }
 
   .dao-filter-button .p-med {
-    font-size: 0.8125rem !important;
+    font-size: 0.875rem !important;
     text-align: center !important;
-    width: 100% !important;
-    line-height: 1.25 !important; /* Reduziert von 1.3 */
+    width: auto !important;
+    line-height: 1 !important; /* Reduziert von 1.5 - wichtig für vertikale Zentrierung */
     overflow: visible !important;
     white-space: nowrap !important;
     text-overflow: ellipsis !important;
     z-index: 10 !important;
     position: relative !important;
-    padding: 0 0.25em !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline !important; /* Statt block - damit Flexbox-Zentrierung funktioniert */
+    vertical-align: middle !important;
   }
 
   .dao-tab-sliding-bg {
@@ -2701,27 +2709,31 @@
 /* Sehr kleine Screens - noch kompakter */
 @media (max-width: 480px) {
   .dao-filter-bar {
-    padding: 0.2em !important; /* Noch kleiner */
-    gap: 0.06em !important; /* Noch näher */
-    margin-top: 0.375rem !important; /* Stark reduziert von 0.75rem */
+    padding: 0 !important; /* KEIN Padding */
+    gap: 0.1rem !important;
+    margin-top: 0.375rem !important;
     margin-bottom: 1.25rem !important;
-    border-radius: 0.3em !important;
+    border-radius: 0.5rem !important;
   }
 
   .dao-filter-button {
-    padding: 0.4em 0.25em !important; /* Reduziert */
-    min-height: 2.2em !important; /* Reduziert von 2.5em */
-    max-height: none !important;
+    height: 3.5rem !important; /* Gleiche Höhe wie Button unten */
+    padding: 0 !important; /* KEIN Padding */
+    min-height: 0 !important;
     overflow: visible !important;
   }
 
   .dao-filter-button .p-med {
-    font-size: 0.75rem !important;
-    line-height: 1.15 !important; /* Reduziert von 1.2 */
+    font-size: 0.8125rem !important;
+    line-height: 1 !important; /* Reduziert für bessere Zentrierung */
+    width: auto !important;
     overflow: visible !important;
     white-space: nowrap !important;
     text-overflow: ellipsis !important;
-    padding: 0 0.2em !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline !important; /* Statt block */
+    vertical-align: middle !important;
   }
 
   .dao-tab-sliding-bg {
