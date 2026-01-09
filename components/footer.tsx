@@ -39,7 +39,9 @@ export default function Footer() {
                 height={120}
                 className="h-24 w-24 lg:h-32 lg:w-32 xl:h-40 xl:w-40 animate-spin-slow"
                 style={{ 
-                  filter: 'brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1234%) hue-rotate(185deg) brightness(101%) contrast(101%) drop-shadow(0 0 15px rgba(147, 197, 253, 0.7)) drop-shadow(0 0 30px rgba(147, 197, 253, 0.5))',
+                  // Filter entfernt - SVG hat bereits die blaue Farbe (#93c5fd) eingebaut
+                  // Drop-shadow für Glow-Effekt behalten
+                  filter: 'drop-shadow(0 0 15px rgba(147, 197, 253, 0.7)) drop-shadow(0 0 30px rgba(147, 197, 253, 0.5))',
                   animationDuration: '10000ms'
                 }}
               />
@@ -94,7 +96,7 @@ export default function Footer() {
                 height={64} 
                 className="h-16 w-16 animate-spin-slow"
                 style={{ 
-                  filter: 'brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1234%) hue-rotate(185deg) brightness(101%) contrast(101%)',
+                  // Filter entfernt - SVG hat bereits die blaue Farbe (#93c5fd) eingebaut
                   animationDuration: '10000ms'
                 }}
               />

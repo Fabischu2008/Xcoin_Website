@@ -732,10 +732,10 @@
   padding-bottom: clamp(3rem, 5vh, 6rem);
 }
 
-/* Mobile: Reduzierter Abstand oben */
+/* Mobile: Mehr Abstand oben */
 @media (max-width: 767px) {
   .hero-content {
-    padding-top: clamp(1.5rem, 3vh, 3rem); /* Reduzierter Abstand auf Mobile */
+    padding-top: clamp(3rem, 6vh, 5rem) !important; /* Mehr Abstand nach oben auf Mobile */
     padding-left: clamp(1rem, 1.5vw, 3rem); /* Gleicher Abstand links und rechts */
     padding-right: clamp(1rem, 1.5vw, 3rem); /* Gleicher Abstand links und rechts */
   }
@@ -2513,6 +2513,13 @@
   width: 100%;
 }
 
+/* Text-Zentrierung für dao-button */
+.dao-button .p-reg {
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
 .dao-button-bg {
   z-index: -1;
   background-color: #93c5fd;
@@ -2524,6 +2531,33 @@
 
 .dao-button:hover .dao-button-bg {
   transform: scale(0.95);
+}
+
+/* Mobile: Text-Zentrierung für dao-button */
+@media (max-width: 767px) {
+  .dao-button {
+    padding: 0 !important; /* Padding entfernen für korrekte Zentrierung */
+    height: 3.5rem !important; /* Gleiche Höhe wie Filter-Buttons */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+  }
+  
+  .dao-button .p-reg {
+    font-size: 0.9375rem !important; /* Konsistent mit anderen Buttons */
+    line-height: 1 !important; /* Line-height auf 1 für perfekte Zentrierung */
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: center !important;
+    display: inline !important; /* Inline statt block für Flexbox */
+    width: auto !important;
+    vertical-align: middle !important;
+  }
 }
 
 /* DAO Filter Bar and Buttons - matching XCoin_Basti */
@@ -2786,33 +2820,49 @@
   }
 }
 
-/* Crowdfunding Section - Mobile Optimierungen */
+/* Crowdfunding Section - Responsive Optimierungen */
 @media (max-width: 640px) {
-  /* Buttons Container - Abstand über den Buttons */
-  section:has(.h-large) .flex.flex-col.items-center {
-    gap: 0 !important;
+  /* Buttons Container - Kompakter auf Mobile */
+  section:has(.h-large) ~ div .flex.flex-col.items-center,
+  section:has(.h-large) ~ div .flex[class*="flex-row"] {
+    gap: 0.75rem !important; /* Kompakterer Abstand zwischen Buttons */
   }
 
   /* Buttons - Gleich groß, größer, mit Außenabstand */
-  section:has(.h-large) .flex.flex-col a {
-    width: calc(100% - 1rem) !important; /* Volle Breite minus 0.5rem auf jeder Seite = 0.5cm Außenabstand */
-    min-height: 3.5rem !important; /* Größer */
-    padding: 1rem 1.5rem !important; /* Mehr Padding */
-    margin-left: 0.5rem !important; /* 0.5cm Außenabstand links */
-    margin-right: 0.5rem !important; /* 0.5cm Außenabstand rechts */
+  section:has(.h-large) ~ div .flex.flex-col a,
+  section:has(.h-large) ~ div .flex[class*="flex-row"] a {
+    width: calc(100% - 1rem) !important;
+    min-height: 3.5rem !important;
+    padding: 1rem 1.5rem !important;
+    margin-left: 0.5rem !important;
+    margin-right: 0.5rem !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
   }
 
-  /* Abstand zwischen den Buttons */
-  section:has(.h-large) .flex.flex-col {
-    gap: 0.75rem !important;
+  /* Abstand über den Buttons - Reduziert */
+  section:has(.h-large) ~ div .relative {
+    margin-bottom: 1.5rem !important; /* Reduziert für kompakteren Look */
   }
 
-  /* Mehr Abstand über den Buttons */
-  section:has(.h-large) .relative {
-    margin-bottom: 2rem !important;
+  /* Abstand zum Video (DividerAnimation) - Normalisiert */
+  section:has(.h-large) ~ div .mt-8 {
+    margin-top: 2rem !important; /* Normaler Abstand zum Video */
+  }
+}
+
+/* Tablet und größer: Buttons größer */
+@media (min-width: 640px) {
+  section:has(.h-large) ~ div .flex[class*="flex-row"] a {
+    padding: 1.25rem 3rem !important; /* Größer auf Desktop */
+    font-size: 1.125rem !important; /* Größere Schrift */
+    min-height: 4rem !important; /* Größere Höhe */
+  }
+  
+  section:has(.h-large) ~ div .flex[class*="flex-row"] a svg {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
   }
 }
 

@@ -1188,8 +1188,8 @@ function CrowdfundingDAOSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="mx-auto max-w-4xl text-center">
           <div className="flex flex-col items-center">
-            {/* Heading mit Hover-Effekt - Mehr Abstand nach unten auf Mobile */}
-            <div className="relative mb-8 sm:mb-12 md:mb-16 lg:mb-20" style={{ minHeight: '4rem' }}>
+            {/* Heading mit Hover-Effekt - Angepasste Abstände */}
+            <div className="relative mb-6 sm:mb-8 md:mb-12 lg:mb-16" style={{ minHeight: '4rem' }}>
               <h2 className="h-large transition-opacity duration-500 group-hover:opacity-0">
                 Crowdfunding and how it works
               </h2>
@@ -1198,15 +1198,15 @@ function CrowdfundingDAOSection() {
               </h2>
             </div>
 
-            {/* Buttons - Mobile: gleich groß, größer, mit Außenabstand */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full sm:w-auto">
+            {/* Buttons - Größer auf Desktop, kompakter auf Mobile */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center items-center w-full sm:w-auto">
               <Link 
                 href="/crowdfunding" 
-                className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-6 sm:py-3 rounded-lg transition-all duration-300 text-black w-full sm:w-auto mx-2 sm:mx-0"
+                className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4 lg:px-12 lg:py-5 rounded-lg transition-all duration-300 text-black w-full sm:w-auto mx-2 sm:mx-0"
               >
                 <div className="absolute inset-0 bg-[#93c5fd] rounded-lg -z-10" />
-                <span className="p-reg text-black">Explore Crowdfunding</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-black">
+                <span className="p-reg sm:text-base md:text-lg lg:text-xl text-black">Explore Crowdfunding</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-black w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7">
                   <rect width="7" height="7" x="3" y="3" rx="1"/>
                   <rect width="7" height="7" x="14" y="3" rx="1"/>
                   <rect width="7" height="7" x="14" y="14" rx="1"/>
@@ -1215,10 +1215,10 @@ function CrowdfundingDAOSection() {
               </Link>
               <Link 
                 href="/xcoin_grid/xcoin-better" 
-                className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-6 sm:py-3 rounded-lg backdrop-blur-md bg-white/10 border border-white/20 hover:border-[#93c5fd]/50 transition-all duration-300 text-white w-full sm:w-auto mx-2 sm:mx-0"
+                className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4 lg:px-12 lg:py-5 rounded-lg backdrop-blur-md bg-white/10 border border-white/20 hover:border-[#93c5fd]/50 transition-all duration-300 text-white w-full sm:w-auto mx-2 sm:mx-0"
               >
-                <span className="p-reg text-white">Why is Xcoin better?</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                <span className="p-reg sm:text-base md:text-lg lg:text-xl text-white">Why is Xcoin better?</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7">
                   <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
                 </svg>
               </Link>
@@ -1226,8 +1226,8 @@ function CrowdfundingDAOSection() {
           </div>
         </div>
 
-        {/* Divider with Videos and Logo - Animated */}
-        <div className="mx-auto max-w-4xl mt-12 sm:mt-16 md:mt-20">
+        {/* Divider with Videos and Logo - Animated - Angepasster Abstand */}
+        <div className="mx-auto max-w-4xl mt-8 sm:mt-12 md:mt-16 lg:mt-20">
           <DividerAnimation />
         </div>
       </div>
@@ -1300,12 +1300,12 @@ function CrowdfundingDAOSection() {
                   <Link
                     key={tab.id}
                     href={tab.buttonHref}
-                    className={`dao-button group relative items-center justify-center rounded-lg transition-opacity duration-300 ${
+                    className={`dao-button group relative flex items-center justify-center rounded-lg transition-opacity duration-300 ${
                       isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'
                     }`}
                   >
                     <div className="dao-button-bg absolute inset-0 bg-[#93c5fd] rounded-lg -z-10 transition-transform duration-300" />
-                    <span className="p-reg text-black relative z-10">{tab.buttonText}</span>
+                    <span className="p-reg text-black text-center">{tab.buttonText}</span>
                   </Link>
                 )
               })}
