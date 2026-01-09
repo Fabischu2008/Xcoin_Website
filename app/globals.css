@@ -2593,7 +2593,7 @@
     font-size: 0.875rem !important;
     text-align: center !important;
     width: auto !important;
-    line-height: 1 !important; /* Reduziert von 1.5 - wichtig für vertikale Zentrierung */
+    line-height: 1.2 !important; /* Angepasst für bessere Zentrierung */
     overflow: visible !important;
     white-space: nowrap !important;
     text-overflow: ellipsis !important;
@@ -2601,8 +2601,10 @@
     position: relative !important;
     padding: 0 !important;
     margin: 0 !important;
-    display: inline !important; /* Statt block - damit Flexbox-Zentrierung funktioniert */
-    vertical-align: middle !important;
+    display: flex !important; /* Flex damit align-items funktioniert */
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100% !important; /* Volle Höhe für Zentrierung */
   }
 
   .dao-tab-sliding-bg {
@@ -2725,15 +2727,17 @@
 
   .dao-filter-button .p-med {
     font-size: 0.8125rem !important;
-    line-height: 1 !important; /* Reduziert für bessere Zentrierung */
+    line-height: 1.2 !important;
     width: auto !important;
     overflow: visible !important;
     white-space: nowrap !important;
     text-overflow: ellipsis !important;
     padding: 0 !important;
     margin: 0 !important;
-    display: inline !important; /* Statt block */
-    vertical-align: middle !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100% !important;
   }
 
   .dao-tab-sliding-bg {
