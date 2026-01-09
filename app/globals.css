@@ -678,17 +678,29 @@
   transition: opacity 0.5s ease-in;
 }
 
-/* Mobile: Static background */
+/* Mobile: Video wird jetzt angezeigt, aber optimiert */
 @media (max-width: 767px) {
+  .hero-video {
+    /* Video auf Mobile anzeigen */
+    display: block;
+    /* Leichtes Scale für bessere Abdeckung */
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+  
+  /* Fallback-Hintergrund nur wenn Video nicht geladen */
   .hero-video-container::before {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(to bottom right, #0f172a, #1e3a8a, #0f172a);
+    opacity: 0; /* Versteckt wenn Video läuft */
+    transition: opacity 0.5s;
+    z-index: -2;
   }
   
-  .hero-video {
-    display: none;
+  /* Fallback sichtbar wenn Video nicht geladen (opacity: 0) */
+  .hero-video-container:has(.hero-video[style*="opacity: 0"])::before {
+    opacity: 1;
   }
 }
 
@@ -2774,302 +2786,33 @@
   }
 }
 
-/* Crowdfunding Section Mobile Optimierungen */
-@media (max-width: 768px) {
-  /* Crowdfunding Section Container */
-  section:has(.h-large) {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
+/* Crowdfunding Section - Mobile Optimierungen */
+@media (max-width: 640px) {
+  /* Buttons Container - Abstand über den Buttons */
+  section:has(.h-large) .flex.flex-col.items-center {
+    gap: 0 !important;
   }
 
-  /* Haupt-Container - volle Breite */
-  section:has(.h-large) .mx-auto.max-w-7xl {
-    max-width: 100% !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+  /* Buttons - Gleich groß, größer, mit Außenabstand */
+  section:has(.h-large) .flex.flex-col a {
+    width: calc(100% - 1rem) !important; /* Volle Breite minus 0.5rem auf jeder Seite = 0.5cm Außenabstand */
+    min-height: 3.5rem !important; /* Größer */
+    padding: 1rem 1.5rem !important; /* Mehr Padding */
+    margin-left: 0.5rem !important; /* 0.5cm Außenabstand links */
+    margin-right: 0.5rem !important; /* 0.5cm Außenabstand rechts */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
-  /* Text Container - volle Breite */
-  section:has(.h-large) .text-center {
-    margin-bottom: 1.5rem !important;
-  }
-
-  section:has(.h-large) .mx-auto.max-w-4xl {
-    max-width: 100% !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  /* Heading Container - weniger Abstand nach unten */
-  section:has(.h-large) .relative {
-    min-height: 2.5rem !important;
-    margin-bottom: 1rem !important;
-  }
-
-  /* Buttons Container - volle Breite nutzen */
+  /* Abstand zwischen den Buttons */
   section:has(.h-large) .flex.flex-col {
-    gap: 0.5rem !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    gap: 0.75rem !important;
   }
 
-  /* Buttons - volle Breite */
-  section:has(.h-large) a {
-    padding: 0.875rem 1.5rem !important;
-    font-size: 0.875rem !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: 44px;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem !important;
-  }
-
-  section:has(.h-large) svg {
-    width: 1rem !important;
-    height: 1rem !important;
-    flex-shrink: 0;
-  }
-
-  /* Button Text */
-  section:has(.h-large) .p-reg {
-    font-size: 0.875rem !important;
-    line-height: 1.4;
-    white-space: nowrap;
-  }
-
-  /* DividerAnimation - Videos/Logo responsive */
-  section:has(.h-large) .mx-auto.max-w-4xl:has(div[class*="flex items-center"]) {
-    max-width: 100% !important;
-    padding-top: 1.5rem !important;
-    padding-bottom: 1.5rem !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-  }
-
-  /* Divider Videos kleiner */
-  section:has(.h-large) .flex-none.w-10 {
-    width: 2rem !important;
-    height: 2rem !important;
-  }
-
-  /* Logo kleiner */
-  section:has(.h-large) .flex-none.w-12 {
-    width: 2.5rem !important;
-    height: 2.5rem !important;
-  }
-
-  /* Divider Lines */
-  section:has(.h-large) .h-px {
-    min-width: 1rem !important;
-  }
-
-  /* DAO Tabs Section - Mobile optimiert */
-  section:has(.h-large) ~ div .mx-auto.max-w-\[1920px\] {
-    max-width: 100% !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-    margin-top: 2rem !important;
-  }
-
-  /* DAO Tab Container */
-  .dao-tab-container {
-    padding-right: 0 !important;
-    padding-left: 0 !important;
-    padding-top: 1rem !important;
-    padding-bottom: 1.5rem !important;
-    max-width: 100% !important;
-    width: 100% !important;
-    overflow: hidden !important;
-  }
-
-  /* DAO Tab Content Wrap - FIX für Mobile */
-  .dao-tab-content-wrap {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    min-height: 8rem !important; /* Feste Mindesthöhe - verhindert Verschiebung */
-    height: auto !important; /* Erlaubt Wachstum wenn nötig */
-    position: relative !important;
-    margin-bottom: 1.5rem !important;
-    overflow: hidden !important;
-  }
-
-  /* DAO Tab Content Item - FIX für Mobile */
-  .dao-tab-content-item {
-    position: relative !important;
-    inset: auto !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    display: none !important; /* Statt visibility: hidden - nimmt keinen Platz ein */
-    flex-direction: column !important;
-    gap: 1rem !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    min-height: 8rem !important; /* Gleiche Mindesthöhe wie Container */
-  }
-
-  .dao-tab-content-item.active {
-    display: flex !important; /* Zeige nur aktives Item */
-  }
-
-  .dao-tab-content-item h4 {
-    font-size: 1.5rem !important;
-    line-height: 1.2 !important;
-    margin-bottom: 0.75rem !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    max-width: 100% !important;
-  }
-
-  .dao-tab-content-item p {
-    font-size: 0.9375rem !important;
-    line-height: 1.6 !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    max-width: 100% !important;
-    white-space: normal !important;
-    hyphens: auto !important;
-    overflow: hidden !important;
-  }
-
-  /* DAO Button Wrap - FIX für stabile Position */
-  .dao-tab-button-wrap {
-    width: 100% !important;
-    position: relative !important;
-    height: 3.5rem !important; /* Feste Höhe statt min-height */
-    margin-top: 1rem !important;
-    margin-bottom: 0 !important;
-    flex-shrink: 0 !important;
-  }
-
-  /* DAO Button - FIX für Mobile */
-  .dao-button {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    height: 3.5rem !important;
-    padding: 0 !important;
-    display: none !important; /* Statt opacity-0 - nimmt keinen Platz ein */
-    align-items: center !important;
-    justify-content: center !important;
-    border-radius: 0.5rem !important;
-    pointer-events: none !important;
-  }
-
-  .dao-button.opacity-100 {
-    display: flex !important; /* Zeige nur aktiven Button */
-    pointer-events: auto !important;
-  }
-
-  /* Blauen Hintergrund entfernen */
-  .dao-button-bg {
-    display: none !important;
-  }
-
-  .dao-button .p-reg {
-    font-size: 0.9375rem !important;
-    line-height: 1.4 !important;
-    text-align: center !important;
-    white-space: normal !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    color: #93c5fd !important; /* Text in blau */
-    background-color: rgba(147, 197, 253, 0.15) !important; /* Leichter blauer Hintergrund */
-    padding: 0.875rem 1.5rem !important;
-    border-radius: 0.5rem !important;
-    width: 100% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-
-  /* Video Column - unter Buttons auf Mobile */
-  section:has(.h-large) ~ div .lg\:absolute {
-    position: relative !important;
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    margin-top: 1.5rem !important;
-    overflow: hidden !important;
-  }
-
-  section:has(.h-large) ~ div .h-\[750px\] {
-    height: 300px !important;
-    max-height: 300px !important;
-  }
-
-  section:has(.h-large) ~ div video {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-  }
-}
-
-/* Sehr kleine Screens - Crowdfunding Buttons */
-@media (max-width: 480px) {
+  /* Mehr Abstand über den Buttons */
   section:has(.h-large) .relative {
-    min-height: 2.5rem !important;
-    margin-bottom: 1.5rem !important;
-  }
-
-  section:has(.h-large) a {
-    padding: 0.75rem 1.25rem !important;
-    font-size: 0.8125rem !important;
-    width: 100% !important;
-    min-height: 40px;
-  }
-
-  section:has(.h-large) svg {
-    width: 0.875rem !important;
-    height: 0.875rem !important;
-  }
-
-  section:has(.h-large) .p-reg {
-    font-size: 0.8125rem !important;
-  }
-
-  /* DividerAnimation noch kompakter */
-  section:has(.h-large) .mx-auto.max-w-4xl:has(div[class*="flex items-center"]) {
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
-  }
-
-  section:has(.h-large) .flex-none.w-10 {
-    width: 1.5rem !important;
-    height: 1.5rem !important;
-  }
-
-  section:has(.h-large) .flex-none.w-12 {
-    width: 2rem !important;
-    height: 2rem !important;
-  }
-
-  /* DAO Button noch größer auf sehr kleinen Screens */
-  .dao-button {
-    height: 3.75rem !important;
-    padding: 0 1.25rem !important;
-  }
-
-  .dao-button .p-reg {
-    font-size: 0.875rem !important;
-  }
-
-  /* Video Column noch kleiner */
-  section:has(.h-large) ~ div .h-\[750px\] {
-    height: 250px !important;
-    max-height: 250px !important;
+    margin-bottom: 2rem !important;
   }
 }
 

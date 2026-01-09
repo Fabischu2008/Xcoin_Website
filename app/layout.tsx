@@ -77,7 +77,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        {/* Font Preloading für bessere Performance */}
+        {/* Font Preloading - Nur kritische Fonts für bessere Performance */}
         <link
           rel="preload"
           href="/fonts/PPNeueMontreal-Regular.woff2"
@@ -85,6 +85,7 @@ export default function RootLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        {/* Medium Font lazy load - wird automatisch geladen wenn benötigt */}
         <link
           rel="preload"
           href="/fonts/PPNeueMontreal-Medium.woff2"
@@ -100,6 +101,7 @@ export default function RootLayout({
         <Script
           src="https://cdn.unicorn.studio/v1.3.1/unicornStudio.umd.js"
           strategy="lazyOnload"
+          defer
         />
         <RotatingFavicon />
         <Header />

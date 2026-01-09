@@ -3,7 +3,13 @@
 
 import { useEffect, useRef, useState, lazy, Suspense, useMemo, useCallback } from "react"
 import Link from "next/link"
-import Hero from "@/components/hero"
+import dynamic from "next/dynamic"
+
+// Lazy load Hero (mit SSR für SEO)
+const Hero = dynamic(() => import("@/components/hero"), {
+  ssr: true,
+  loading: () => <div className="min-h-screen" />
+})
 
 // Lazy load heavy components for better mobile performance
 const DashboardSection = lazy(() => import("@/components/dashboard-section"))
@@ -338,11 +344,11 @@ function DividerAnimation() {
   }, [isAnimated])
 
   return (
-    <div ref={containerRef} className="mx-auto max-w-4xl pt-24 pb-24">
-      <div className="flex items-center justify-center" style={{ gap: isAnimated ? '0.5rem' : '0.25rem' }}>
-        {/* Left Video */}
+    <div ref={containerRef} className="mx-auto max-w-4xl pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-12 sm:pb-16 md:pb-20 lg:pb-24 px-4 sm:px-6">
+      <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4">
+        {/* Left Video - Responsive, quadratisch */}
         <div 
-          className="flex-none w-10 h-10 relative rounded-full overflow-hidden transition-all duration-1200 ease-out"
+          className="flex-shrink-0 relative rounded-full overflow-hidden transition-all duration-1200 ease-out w-8 h-8 sm:w-10 sm:h-10"
           style={{ 
             transform: isAnimated ? 'translateX(0)' : 'translateX(20rem)',
             opacity: isAnimated ? 1 : 0,
@@ -358,19 +364,19 @@ function DividerAnimation() {
           />
         </div>
         
-        {/* Left Divider */}
+        {/* Left Divider - Flex für gleiche Breite */}
         <div 
-          className="h-px transition-all duration-1000 ease-out flex-1"
+          className="h-px flex-1 transition-all duration-1000 ease-out"
           style={{ 
             backgroundImage: 'linear-gradient(90deg, transparent, rgba(239, 238, 236, 0.25) 25%, rgba(239, 238, 236, 0.25) 75%, transparent)',
             transformOrigin: 'center right',
             transform: isAnimated ? 'scaleX(1)' : 'scaleX(0.1)',
-            minWidth: '0',
+            minWidth: 0,
           }}
         />
         
-        {/* Logo */}
-        <div className="flex-none w-12 h-12 flex items-center justify-center relative z-10">
+        {/* Logo - Responsive, größer auf md/lg */}
+        <div className="flex-shrink-0 flex items-center justify-center relative z-10 w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 lg:w-16 lg:h-16">
           <img 
             src="/img/xcoin.svg" 
             alt="Xcoin" 
@@ -380,21 +386,21 @@ function DividerAnimation() {
           <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-blue-400 to-blue-500 rounded-lg blur-lg opacity-70 -z-10" />
         </div>
         
-        {/* Right Divider */}
+        {/* Right Divider - Flex für gleiche Breite */}
         <div 
-          className="h-px transition-all duration-1000 ease-out flex-1"
+          className="h-px flex-1 transition-all duration-1000 ease-out"
           style={{ 
             backgroundImage: 'linear-gradient(90deg, transparent, rgba(239, 238, 236, 0.25) 25%, rgba(239, 238, 236, 0.25) 75%, transparent)',
             transformOrigin: 'center left',
             transform: isAnimated ? 'scaleX(1)' : 'scaleX(0.1)',
-            minWidth: '0',
+            minWidth: 0,
           }}
         />
         
-        {/* Right Video */}
+        {/* Right Video - Responsive, quadratisch */}
         <div 
-          className="flex-none w-10 h-10 relative rounded-full overflow-hidden transition-all duration-1200 ease-out"
-      style={{
+          className="flex-shrink-0 relative rounded-full overflow-hidden transition-all duration-1200 ease-out w-8 h-8 sm:w-10 sm:h-10"
+          style={{
             transform: isAnimated ? 'translateX(0)' : 'translateX(-20rem)',
             opacity: isAnimated ? 1 : 0,
           }}
@@ -880,34 +886,34 @@ export default function HomePage() {
                 {/* Dunkles Overlay für bessere Lesbarkeit */}
                 <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none"></div>
                 <div className="development-images-container">
-                  {/* Column 1 */}
-                  <DevelopmentImageColumn 
-                    images={['group-security-dashboard.png', 'SAsP6Lv.webp', 'matrix.webp', 'php.jpg', 'programming-code-abstract-technology-background-of-software-developer-and-computer-script.jpg']}
-                    parallaxStart={0}
-                    parallaxEnd={-100}
-                    scrub={1.5}
-                  />
-                  {/* Column 2 */}
-                  <DevelopmentImageColumn 
-                    images={['HD-wallpaper-coding-game-development-csharp-unity-technology.jpg', 'HD-wallpaper-programming-coding-language-hi-tech-and-background-den-code-programmer.jpg', 'images-1.jpg', 'images-2.jpg', 'images.jpg']}
-                    parallaxStart={0}
-                    parallaxEnd={-80}
-                    scrub={1.75}
-                  />
-                  {/* Column 3 */}
-                  <DevelopmentImageColumn 
-                    images={['Is-Python-good-for-software-development.avif', 'IT_Engineer_Salary.avif', 'premium_photo-1720287601920-ee8c503af775.jpg', 'software-development-lifecycle-1024x682-1.webp', 'software-development-specialist.jpg']}
-                    parallaxStart={0}
-                    parallaxEnd={-60}
-                    scrub={2}
-                  />
-                  {/* Column 4 */}
-                  <DevelopmentImageColumn 
-                    images={['Top-10-Blockchain-Development-Tools-For-Startups.jpg', 'top-12-cryptocurrency-tokens-by-600nw-2300861397.webp', 'Top-6-Software-Development-Methodologies.jpg', 'top-blockchain-development-companies-main.jpg', 'Comparing-10-Different-Blockchain-Development-Platforms.png']}
-                    parallaxStart={0}
-                    parallaxEnd={-40}
-                    scrub={2.25}
-                  />
+                    {/* Column 1 */}
+                    <DevelopmentImageColumn 
+                      images={['group-security-dashboard.png', 'SAsP6Lv.webp', 'matrix.webp', 'php.jpg', 'programming-code-abstract-technology-background-of-software-developer-and-computer-script.jpg']}
+                      parallaxStart={0}
+                      parallaxEnd={-100}
+                      scrub={1.5}
+                    />
+                    {/* Column 2 */}
+                    <DevelopmentImageColumn 
+                      images={['HD-wallpaper-coding-game-development-csharp-unity-technology.jpg', 'HD-wallpaper-programming-coding-language-hi-tech-and-background-den-code-programmer.jpg', 'images-1.jpg', 'images-2.jpg', 'images.jpg']}
+                      parallaxStart={0}
+                      parallaxEnd={-80}
+                      scrub={1.75}
+                    />
+                    {/* Column 3 */}
+                    <DevelopmentImageColumn 
+                      images={['Is-Python-good-for-software-development.avif', 'IT_Engineer_Salary.avif', 'premium_photo-1720287601920-ee8c503af775.jpg', 'software-development-lifecycle-1024x682-1.webp', 'software-development-specialist.jpg']}
+                      parallaxStart={0}
+                      parallaxEnd={-60}
+                      scrub={2}
+                    />
+                    {/* Column 4 */}
+                    <DevelopmentImageColumn 
+                      images={['Top-10-Blockchain-Development-Tools-For-Startups.jpg', 'top-12-cryptocurrency-tokens-by-600nw-2300861397.webp', 'Top-6-Software-Development-Methodologies.jpg', 'top-blockchain-development-companies-main.jpg', 'Comparing-10-Different-Blockchain-Development-Platforms.png']}
+                      parallaxStart={0}
+                      parallaxEnd={-40}
+                      scrub={2.25}
+                    />
                 </div>
               </div>
             </Link>
@@ -1178,26 +1184,25 @@ function CrowdfundingDAOSection() {
         </div>
       </div>
       
-      {/* Crowdfunding Content */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-        {/* Text Container */}
-        <div className="text-center mb-16">
-          <div className="mx-auto max-w-4xl">
-            {/* Heading with proper spacing */}
-            <div className="relative mb-16" style={{ minHeight: '4rem' }}>
+      {/* Crowdfunding Content - Saubere Lösung basierend auf Basti */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="mx-auto max-w-4xl text-center">
+          <div className="flex flex-col items-center">
+            {/* Heading mit Hover-Effekt - Mehr Abstand nach unten auf Mobile */}
+            <div className="relative mb-8 sm:mb-12 md:mb-16 lg:mb-20" style={{ minHeight: '4rem' }}>
               <h2 className="h-large transition-opacity duration-500 group-hover:opacity-0">
                 Crowdfunding and how it works
               </h2>
               <h2 className="h-large absolute top-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                 Explore the perks of joining the community
-            </h2>
-          </div>
+              </h2>
+            </div>
 
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            {/* Buttons - Mobile: gleich groß, größer, mit Außenabstand */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full sm:w-auto">
               <Link 
                 href="/crowdfunding" 
-                className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 text-black"
+                className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-6 sm:py-3 rounded-lg transition-all duration-300 text-black w-full sm:w-auto mx-2 sm:mx-0"
               >
                 <div className="absolute inset-0 bg-[#93c5fd] rounded-lg -z-10" />
                 <span className="p-reg text-black">Explore Crowdfunding</span>
@@ -1210,7 +1215,7 @@ function CrowdfundingDAOSection() {
               </Link>
               <Link 
                 href="/xcoin_grid/xcoin-better" 
-                className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg backdrop-blur-md bg-white/10 border border-white/20 hover:border-[#93c5fd]/50 transition-all duration-300 text-white"
+                className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-6 sm:py-3 rounded-lg backdrop-blur-md bg-white/10 border border-white/20 hover:border-[#93c5fd]/50 transition-all duration-300 text-white w-full sm:w-auto mx-2 sm:mx-0"
               >
                 <span className="p-reg text-white">Why is Xcoin better?</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
@@ -1222,7 +1227,9 @@ function CrowdfundingDAOSection() {
         </div>
 
         {/* Divider with Videos and Logo - Animated */}
-        <DividerAnimation />
+        <div className="mx-auto max-w-4xl mt-12 sm:mt-16 md:mt-20">
+          <DividerAnimation />
+        </div>
       </div>
 
       {/* DAO Tabs Content */}

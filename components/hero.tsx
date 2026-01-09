@@ -10,25 +10,23 @@ export default function Hero() {
   const handleLoadedMetadataRef = useRef<(() => void) | null>(null)
 
   useEffect(() => {
-    // Optimiertes Video-Loading mit Intersection Observer
+    // Optimiertes Video-Loading mit Intersection Observer - Jetzt auch für Mobile
     const video = videoRef.current
     if (!video) return
 
-    // Skip video on mobile (detected via CSS media query)
-    const isMobile = window.matchMedia('(max-width: 767px)').matches
-    if (isMobile) {
-      setIsLoaded(true)
-      return
-    }
-
+    // Intersection Observer für alle Geräte (inkl. Mobile)
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // Video erst laden wenn sichtbar für bessere Performance
             video.load()
             const handleLoadedMetadata = () => {
               setIsLoaded(true)
-              video.play().catch(() => {})
+              video.play().catch(() => {
+                // Fallback wenn autoplay nicht funktioniert
+                setIsLoaded(true)
+              })
             }
             // Store handler reference for cleanup
             handleLoadedMetadataRef.current = handleLoadedMetadata
@@ -37,7 +35,10 @@ export default function Hero() {
           }
         })
       },
-      { rootMargin: '50px' }
+      { 
+        rootMargin: '50px', // Früher laden für smooth experience
+        threshold: 0.1
+      }
     )
 
     observer.observe(video)
@@ -72,7 +73,7 @@ export default function Hero() {
           muted
           playsInline
           autoPlay
-          preload="auto"
+          preload="none"
           className="hero-video"
           style={{ opacity: isLoaded ? 1 : 0 }}
         >

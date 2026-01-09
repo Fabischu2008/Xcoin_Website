@@ -4,10 +4,37 @@ import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-gsap.registerPlugin(ScrollTrigger)
+// GSAP lazy loading für bessere Performance
+let gsapLoaded = false
+let gsapPromise: Promise<{ gsap: any; ScrollTrigger: any }> | null = null
+
+const loadGSAP = async () => {
+  if (gsapLoaded && gsapPromise) {
+    return await gsapPromise
+  }
+  if (gsapPromise) {
+    return await gsapPromise
+  }
+  
+  gsapPromise = Promise.all([
+    import("gsap"),
+    import("gsap/ScrollTrigger")
+  ]).then(([gsapModule, scrollTriggerModule]) => {
+    const gsap = gsapModule.default || gsapModule
+    const ScrollTrigger = scrollTriggerModule.default || scrollTriggerModule
+    
+    // Plugin registrieren
+    if (gsap && ScrollTrigger && typeof gsap.registerPlugin === 'function') {
+      gsap.registerPlugin(ScrollTrigger)
+    }
+    
+    gsapLoaded = true
+    return { gsap, ScrollTrigger }
+  })
+  
+  return await gsapPromise
+}
 
 interface DashboardItem {
   id: number
@@ -221,36 +248,21 @@ export default function DashboardSection() {
   const cardsRef = useRef<HTMLDivElement>(null)
 
   // Scroll Animation - Optimiert mit Reload bei Navigation zurück
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    
-    // Nur auf Startseite initialisieren
-    if (pathname !== '/') return
-    
-    const container = containerRef.current
-    const wrap = wrapperRef.current
-    const search = searchRef.current
-    const side = sideRef.current
-    const cards = cardsRef.current?.querySelectorAll('.db-content__card')
-    const contents = container?.querySelectorAll('[data-db-el]')
-
-    if (!container || !wrap || !search || !side || !cards || !contents) return
-
-    // Mobile Detection - auf Mobile sofort sichtbar, keine Animation
-    const isMobile = window.innerWidth <= 768
-    const isTablet = window.innerWidth <= 1024 && window.innerWidth > 768
-
-    // Mobile: Direkt sichtbar, keine Animation für sofortige Sichtbarkeit
-    if (isMobile) {
-      gsap.set(contents, { autoAlpha: 1 })
-      gsap.set([search, side], { autoAlpha: 1, z: 0 })
-      gsap.set([wrap, cards], { rotateX: 0, z: 0 })
-      gsap.set(container, { pointerEvents: 'auto' })
-      return // Keine ScrollTrigger auf Mobile - Bilder sind sofort sichtbar
-    }
+  const initGSAPAnimation = (
+    gsap: any,
+    ScrollTrigger: any,
+    container: HTMLElement,
+    wrap: HTMLElement,
+    search: HTMLElement,
+    side: HTMLElement,
+    cards: NodeListOf<Element>,
+    contents: NodeListOf<Element>,
+    isTablet: boolean
+  ) => {
+    // GSAP und ScrollTrigger sind bereits geladen und registriert
 
     // WICHTIG: Alle bestehenden ScrollTriggers für diesen Container killen
-    ScrollTrigger.getAll().forEach(trigger => {
+    ScrollTrigger.getAll().forEach((trigger: any) => {
       if (trigger.trigger === container) {
         trigger.kill()
       }
@@ -297,7 +309,7 @@ export default function DashboardSection() {
         .from(
           cards,
           {
-            z: (i) => `${35 - i * 5}em`,
+            z: (i: number) => `${35 - i * 5}em`,
             stagger: 0.01,
           },
           '<'
@@ -331,10 +343,10 @@ export default function DashboardSection() {
       ScrollTrigger.refresh()
     }, 100)
 
-    // Cleanup
+    // Cleanup-Funktion zurückgeben
     return () => {
       clearTimeout(initTimer)
-      ScrollTrigger.getAll().forEach(trigger => {
+      ScrollTrigger.getAll().forEach((trigger: any) => {
         if (trigger.trigger === container) {
           trigger.kill()
         }
@@ -342,7 +354,62 @@ export default function DashboardSection() {
       // Alle Animationen stoppen
       gsap.killTweensOf([wrap, search, side, cards, contents])
     }
-  }, [pathname]) // pathname als Dependency - Animation wird neu initialisiert, wenn man zurückkommt
+  }
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    
+    // Nur auf Startseite initialisieren
+    if (pathname !== '/') return
+    
+    const container = containerRef.current
+    const wrap = wrapperRef.current
+    const search = searchRef.current
+    const side = sideRef.current
+    const cards = cardsRef.current?.querySelectorAll('.db-content__card')
+    const contents = container?.querySelectorAll('[data-db-el]')
+
+    if (!container || !wrap || !search || !side || !cards || !contents) return
+
+    // Mobile Detection - auf Mobile sofort sichtbar, keine Animation
+    const isMobile = window.innerWidth <= 768
+    const isTablet = window.innerWidth <= 1024 && window.innerWidth > 768
+
+    // Mobile: Direkt sichtbar, keine Animation für sofortige Sichtbarkeit
+    if (isMobile) {
+      // GSAP nicht laden auf Mobile
+      if (contents) {
+        Array.from(contents).forEach((el: any) => {
+          if (el) el.style.opacity = '1'
+        })
+      }
+      if (container) (container as HTMLElement).style.pointerEvents = 'auto'
+      return // Keine ScrollTrigger auf Mobile - Bilder sind sofort sichtbar
+    }
+
+    // GSAP lazy loading - nur wenn Komponente sichtbar wird
+    let cleanup: (() => void) | null = null
+    const observer = new IntersectionObserver(
+      async (entries) => {
+        if (entries[0].isIntersecting) {
+          observer.disconnect()
+          // GSAP jetzt laden
+          const { gsap, ScrollTrigger } = await loadGSAP()
+          if (gsap && ScrollTrigger) {
+            cleanup = initGSAPAnimation(gsap, ScrollTrigger, container, wrap, search, side, cards, contents, isTablet)
+          }
+        }
+      },
+      { threshold: 0.1, rootMargin: '100px' }
+    )
+
+    observer.observe(container)
+
+    return () => {
+      observer.disconnect()
+      if (cleanup) cleanup()
+    }
+  }, [pathname])
 
   return (
     <section className="relative mt-8 pb-16">
