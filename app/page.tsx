@@ -1260,7 +1260,7 @@ function CrowdfundingDAOSection() {
                       onMouseEnter={() => setHoveredTab(index)}
                       onMouseLeave={() => setHoveredTab(null)}
                     >
-                      <div className="p-med text-white relative z-10">{tab.label}</div>
+                      <div className="p-med text-white">{tab.label}</div>
                       {showBorderOnly && <div className="dao-tab-button-border-only" />}
                     </button>
                   )
