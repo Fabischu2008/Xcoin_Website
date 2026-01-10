@@ -162,21 +162,21 @@ const dashboardItems: DashboardItem[] = [
     category: "whitepapers",
     title: "Every Revolution Begins with an Idea",
     image: "/img/whitepapers_grid/every_revolution_begins_with_an_idea.jpg",
-    href: "/docs",
+    href: "/every-revolution-begins-with-an-idea",
   },
   {
     id: 29,
     category: "whitepapers",
     title: "The Path to Bitcoin Replacement",
     image: "/img/whitepapers_grid/the_path_to_bitcoin_replacement.jpg",
-    href: "/technology",
+    href: "/the-path-to-bitcoin-replacement",
   },
   {
     id: 30,
     category: "whitepapers",
     title: "XXX DAO Governance Protocol",
     image: "/img/whitepapers_grid/xxx_dao_governance_protocol.jpg",
-    href: "/governance",
+    href: "/xxx-dao-governance-protocol",
   },
   // Learning category - 6 items
   {

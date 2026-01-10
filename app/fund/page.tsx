@@ -84,43 +84,58 @@ const howItWorks = [
 
 export default function FundPage() {
   return (
-    <div className="relative overflow-hidden pt-32 pb-24">
-      {/* Video Background */}
-      <div className="absolute inset-0 -z-20">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className="h-full w-full object-cover"
-        >
-          <source src="/1212-compressed.mp4" type="video/mp4" />
-        </video>
-        {/* Overlay für bessere Textlesbarkeit */}
-        <div className="absolute inset-0 bg-background/60" />
-      </div>
-
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Header */}
-        <div className="mx-auto max-w-4xl text-center">
-          <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
-            Fund
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground">
-            What if you could go back in time and buy Bitcoin before anyone knew its name? What if you had a second chance — but this time, the technology is stronger, the mission is clearer, and the playing field is finally fair?
-          </p>
-          <div className="mt-8 space-y-2">
-            <p className="text-xl font-semibold text-foreground">Welcome to Xcoin.</p>
-            <p className="text-xl font-semibold text-foreground">Welcome to your early access window.</p>
-          </div>
-          <p className="mt-6 text-lg text-muted-foreground">
-            This is not a promo. This is not a presale for whales. This is your direct path to owning the next-generation financial protocol — before it launches to the world.
-          </p>
+    <div className="relative overflow-hidden">
+      {/* Hero Section mit Video - nur oberer Bereich, volle Breite */}
+      <section className="relative overflow-hidden pt-32 pb-12 sm:pb-16 lg:pt-40 lg:pb-20">
+        {/* Video Background */}
+        <div className="absolute inset-0 -z-20">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="h-full w-full object-cover"
+          >
+            <source src="/vid/city-1.mp4" type="video/mp4" />
+          </video>
+          {/* Overlay für bessere Textlesbarkeit - radialer Gradient, heller in der Mitte */}
+          <div className="absolute inset-0 bg-black/50" />
+          <div 
+            className="absolute inset-0" 
+            style={{
+              background: 'radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%)'
+            }}
+          />
+          <div className="hero-gradient" />
         </div>
 
-        {/* Why This Moment Matters */}
-        <div className="mt-16 mx-auto max-w-6xl">
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          {/* Hero Content */}
+          <div className="mx-auto max-w-4xl text-center">
+            <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl mb-6 text-white">
+              Fund
+            </h1>
+            <p className="text-lg lg:text-xl text-white/90 leading-relaxed">
+              What if you could go back in time and buy Bitcoin before anyone knew its name? What if you had a second chance — but this time, the technology is stronger, the mission is clearer, and the playing field is finally fair?
+            </p>
+            <div className="mt-8 space-y-2">
+              <p className="text-xl font-semibold text-white">Welcome to Xcoin.</p>
+              <p className="text-xl font-semibold text-white">Welcome to your early access window.</p>
+            </div>
+            <p className="mt-6 text-lg lg:text-xl text-white/90 leading-relaxed">
+              This is not a promo. This is not a presale for whales. This is your direct path to owning the next-generation financial protocol — before it launches to the world.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Content Section */}
+      <section className="section py-20 bg-background">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+
+          {/* Why This Moment Matters */}
+          <div className="max-w-6xl mx-auto">
           <h2 className="text-center font-[family-name:var(--font-heading)] text-3xl font-bold mb-12">
             Why This Moment Matters
           </h2>
@@ -140,8 +155,8 @@ export default function FundPage() {
           </p>
         </div>
 
-        {/* What Is the Early Access Sale */}
-        <div className="mt-20 mx-auto max-w-4xl">
+          {/* What Is the Early Access Sale */}
+          <div className="mt-20 max-w-4xl mx-auto">
           <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8 lg:p-12">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6">
               What Is the Early Access Sale?
@@ -183,10 +198,10 @@ export default function FundPage() {
               This is the only round. No private sales. No insider allocations. No second chances.
             </p>
           </div>
-        </div>
+          </div>
 
-        {/* How It Works */}
-        <div className="mt-16 mx-auto max-w-4xl">
+          {/* How It Works */}
+          <div className="mt-16 max-w-4xl mx-auto">
           <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-8 text-center">
             How It Works
           </h2>
@@ -204,10 +219,10 @@ export default function FundPage() {
           <p className="mt-6 text-center text-muted-foreground">
             Everything is decentralized. Fully verifiable. Unstoppable.
           </p>
-        </div>
+          </div>
 
-        {/* Why You'll Want to Be First */}
-        <div className="mt-16 mx-auto max-w-4xl">
+          {/* Why You'll Want to Be First */}
+          <div className="mt-16 max-w-4xl mx-auto">
           <div className="rounded-2xl border border-border bg-card p-8 lg:p-12">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6">
               Why You'll Want to Be First
@@ -247,10 +262,10 @@ export default function FundPage() {
               This is your moment to decide again — only now, with a better blueprint.
             </p>
           </div>
-        </div>
+          </div>
 
-        {/* Start Now Section */}
-        <div className="mt-16 mx-auto max-w-4xl">
+          {/* Start Now Section */}
+          <div className="mt-16 max-w-4xl mx-auto">
           <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-8 text-center">
             Start Now — It's This Simple:
           </h2>
@@ -280,10 +295,10 @@ export default function FundPage() {
             No KYC. No account. No name needed.<br />
             Just you, your wallet, and your stake in the future of private finance.
           </p>
-        </div>
+          </div>
 
-        {/* Token Details Section */}
-        <div className="mt-20 mx-auto max-w-7xl">
+          {/* Token Details Section */}
+          <div className="mt-20 max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold">
               Token Details
@@ -342,10 +357,10 @@ export default function FundPage() {
               </div>
             </div>
           </div>
-        </div>
+          </div>
 
-        {/* Ready to Act CTA */}
-        <div className="mt-20 mx-auto max-w-4xl">
+          {/* Ready to Act CTA */}
+          <div className="mt-20 max-w-4xl mx-auto">
           <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8 lg:p-12 text-center">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl font-bold mb-6">
               Ready to Act?
@@ -374,15 +389,16 @@ export default function FundPage() {
               When Xcoin hits exchanges, you'll either be watching… or already holding. The choice is yours.
             </p>
             <Link
-              href="/crowdfunding"
+              href="/pricing"
               className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 font-semibold text-accent-foreground transition-all hover:bg-accent/90 text-lg"
             >
               Get XXX Tokens Now
               <ArrowRight className="h-5 w-5" />
             </Link>
           </div>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }

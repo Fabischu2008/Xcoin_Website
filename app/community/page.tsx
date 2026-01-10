@@ -224,6 +224,28 @@ export default function CommunityPage() {
                   The Xcoin community recognizes two types of participants: Members and Validators.
                 </p>
               </div>
+
+              {/* CTA */}
+              <div className="glare-card bg-blue-400/10 border border-blue-500 rounded-2xl p-8 space-y-4 text-center max-w-4xl mx-auto mt-12">
+                <h3 className="h-small text-blue-300">Ready to Join the Front Line of Financial Freedom?</h3>
+                <p className="p-large">Get involved with the Xcoin community and help shape the future of private finance.</p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+                  <Link
+                    href="/pricing"
+                    className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 text-black"
+                  >
+                    <div className="absolute inset-0 bg-blue-300 rounded-lg -z-10 transition-transform duration-300 group-hover:scale-105" />
+                    <span className="p-reg text-black relative z-10 font-semibold">Become a member</span>
+                  </Link>
+                  <Link
+                    href="/validator-application"
+                    className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 text-black"
+                  >
+                    <div className="absolute inset-0 bg-blue-300 rounded-lg -z-10 transition-transform duration-300 group-hover:scale-105" />
+                    <span className="p-reg text-black relative z-10 font-semibold">Apply to Run a SEP Node</span>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -292,15 +314,13 @@ export default function CommunityPage() {
               </div>
 
               {/* CTA */}
-              <div className="col-span-12 text-center mt-14">
-                <p className="h-medium mx-auto max-w-7xl mb-10">
-                  This is your chance to claim your place in the future of private finance.
-                </p>
+              <div className="glare-card bg-blue-400/10 border border-blue-500 rounded-2xl p-8 space-y-4 text-center col-span-12">
+                <h3 className="h-small text-blue-300">This is your chance to claim your place in the future of private finance.</h3>
                 <Link
-                  href="/tokenomics"
-                  className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full transition-all duration-300 overflow-hidden"
+                  href="/pricing"
+                  className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 text-black mt-4"
                 >
-                  <div className="absolute inset-0 bg-blue-300 rounded-full transition-transform duration-300 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-blue-300 rounded-lg -z-10 transition-transform duration-300 group-hover:scale-105" />
                   <span className="p-reg text-black relative z-10 font-semibold">Become a member</span>
                 </Link>
               </div>
@@ -434,8 +454,8 @@ export default function CommunityPage() {
                   href="/validator-application"
                   className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg transition-all duration-300 text-black mt-4"
                 >
-                  <div className="absolute inset-0 bg-blue-300 rounded-lg -z-10" />
-                  <span className="p-reg text-black relative z-10">Apply to Run a SEP Node</span>
+                  <div className="absolute inset-0 bg-blue-300 rounded-lg -z-10 transition-transform duration-300 group-hover:scale-105" />
+                  <span className="p-reg text-black relative z-10 font-semibold">Apply to Run a SEP Node</span>
                 </Link>
               </div>
             </div>

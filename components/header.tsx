@@ -6,13 +6,13 @@ import { Menu, X } from "lucide-react"
 import Image from "next/image"
 
 const navigation = [
-  { name: "Overview", href: "/overview", hasDivider: true },
-  { name: "Use", href: "/use" },
-  { name: "Develop", href: "/develop", hasDivider: true },
-  { name: "Docs", href: "/docs", hasDivider: true },
-  { name: "Community", href: "/community", hasDivider: true },
-  { name: "FAQ", href: "/faq" },
   { name: "Learning", href: "/learning", hasDivider: true },
+  { name: "Develop", href: "/develop", hasDivider: true },
+  { name: "Fund", href: "/fund" },
+  { name: "Use", href: "/use", hasDivider: true },
+  { name: "Docs", href: "/docs", hasDivider: true },
+  { name: "FAQ", href: "/faq" },
+  { name: "Community", href: "/community", hasDivider: true },
 ]
 
 export default function Header() {

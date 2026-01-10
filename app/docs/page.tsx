@@ -1,12 +1,10 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { FileText, Book, Code, Download, ExternalLink } from "lucide-react"
-import XcoinLogo from "@/components/xcoin-logo"
+import { FileText, ArrowRight } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Documentation",
-  description:
-    "Everything you need to understand, build on, and participate in the Xcoin network. Complete technical documentation, validator guides, and developer resources.",
+  description: "Xcoin Whitepapers - Every Revolution Begins with an Idea, The Path to Bitcoin Replacement, XXX DAO Governance Protocol",
   openGraph: {
     title: "Documentation",
     description: "Complete technical documentation covering the Xcoin protocol, architecture, and vision.",
@@ -19,35 +17,22 @@ export const metadata: Metadata = {
   },
 }
 
-const documents = [
+const whitepapers = [
   {
-    icon: FileText,
-    title: "Whitepaper",
-    description: "Complete technical documentation covering the Xcoin protocol, architecture, and vision.",
-    href: "/XCoin_Whitepaper.pdf",
-    version: "v3.4",
+    title: "Every Revolution Begins with an Idea",
+    subtitle: "Xcoin Whitepaper 1",
+    href: "/every-revolution-begins-with-an-idea",
   },
   {
-    icon: Book,
-    title: "Technical Specification",
-    description: "Detailed specifications for developers including cryptographic primitives and protocols.",
-    href: "#",
-    version: "v2.1",
+    title: "The Path to Bitcoin Replacement",
+    subtitle: "Xcoin Whitepaper 2",
+    href: "/the-path-to-bitcoin-replacement",
   },
   {
-    icon: Code,
-    title: "Validator Guide",
-    description: "Step-by-step instructions for setting up and running a validator node.",
-    href: "#",
-    version: "v1.0",
+    title: "XXX DAO Governance Protocol",
+    subtitle: "Xcoin Whitepaper 3",
+    href: "/xxx-dao-governance-protocol",
   },
-]
-
-const resources = [
-  { title: "GitHub Repository", href: "#", external: true },
-  { title: "API Documentation", href: "#", external: true },
-  { title: "SDK Reference", href: "#", external: true },
-  { title: "Block Explorer", href: "#", external: true },
 ]
 
 export default function DocsPage() {
@@ -80,56 +65,38 @@ export default function DocsPage() {
           </p>
         </div>
 
-        {/* Main Documents */}
-        <div className="mt-12 sm:mt-16 grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {documents.map((doc) => (
-            <div
-              key={doc.title}
-              className="group rounded-2xl border border-border bg-card p-6 sm:p-8 transition-all hover:border-accent/50"
+        {/* Whitepaper Cards */}
+        <div className="mt-12 sm:mt-16 grid gap-4 sm:gap-6 md:grid-cols-3">
+          {whitepapers.map((whitepaper) => (
+            <Link
+              key={whitepaper.title}
+              href={whitepaper.href}
+              className="group rounded-2xl border border-border bg-card p-6 sm:p-8 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 flex flex-col"
             >
-              <div className="flex items-start justify-between">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10">
-                  <doc.icon className="h-6 w-6 text-accent" />
-                </div>
-                <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground">
-                  {doc.version}
-                </span>
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 mb-4">
+                <FileText className="h-6 w-6 text-accent" />
               </div>
-              <h3 className="mt-4 sm:mt-6 font-[family-name:var(--font-heading)] text-lg sm:text-xl font-semibold">{doc.title}</h3>
-              <p className="mt-2 sm:mt-3 text-sm sm:text-base text-muted-foreground">{doc.description}</p>
-              <Link
-                href={doc.href}
-                className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
-              >
-                <Download className="h-4 w-4" />
-                Download PDF
-              </Link>
-            </div>
+              <h3 className="font-[family-name:var(--font-heading)] text-lg sm:text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
+                {whitepaper.title}
+              </h3>
+              <p className="text-sm sm:text-base text-muted-foreground mb-4 flex-grow">
+                {whitepaper.subtitle}
+              </p>
+              <div className="flex items-center gap-2 text-sm font-medium text-accent group-hover:gap-3 transition-all mt-auto">
+                <span>Click here</span>
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
           ))}
         </div>
 
-        {/* Quick Links */}
-        <div className="mt-16 sm:mt-20 lg:mt-24">
-          <h2 className="font-[family-name:var(--font-heading)] text-xl sm:text-2xl font-bold">Developer Resources</h2>
-          <div className="mt-6 sm:mt-8 grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {resources.map((resource) => (
-              <Link
-                key={resource.title}
-                href={resource.href}
-                className="flex items-center justify-between rounded-xl border border-border bg-card p-3 sm:p-4 transition-all hover:border-accent/50"
-              >
-                <span className="font-medium">{resource.title}</span>
-                {resource.external && <ExternalLink className="h-4 w-4 text-muted-foreground" />}
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Getting Started */}
-        <div className="mt-12 sm:mt-16 rounded-2xl border border-border bg-card p-4 sm:p-6 md:p-8 lg:p-12">
+        {/* Getting Started Section */}
+        <div className="mt-12 sm:mt-16 md:mt-20 lg:mt-24 rounded-2xl border border-border bg-card p-4 sm:p-6 md:p-8 lg:p-12">
           <div className="grid gap-6 sm:gap-8 lg:grid-cols-2 lg:items-center">
             <div className="order-2 lg:order-1">
-              <h2 className="font-[family-name:var(--font-heading)] text-xl sm:text-2xl md:text-3xl font-bold">Ready to Get Started?</h2>
+              <h2 className="font-[family-name:var(--font-heading)] text-xl sm:text-2xl md:text-3xl font-bold text-white">
+                Ready to Get Started?
+              </h2>
               <p className="mt-3 sm:mt-4 text-sm sm:text-base text-muted-foreground">
                 Join our developer community and start building on the Xcoin network. Our comprehensive documentation
                 and active community are here to help.
@@ -137,9 +104,10 @@ export default function DocsPage() {
               <div className="mt-5 sm:mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link
                   href="/community"
-                  className="w-full sm:w-auto rounded-full bg-accent px-5 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-semibold text-accent-foreground transition-all hover:bg-accent/90 text-center"
+                  className="w-full sm:w-auto rounded-full bg-accent px-5 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-semibold text-accent-foreground transition-all hover:bg-accent/90 text-center flex items-center justify-center gap-2"
                 >
                   Join Community
+                  <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="#"
