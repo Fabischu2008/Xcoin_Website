@@ -3698,12 +3698,34 @@ section:has(h2.h-medium) .p-reg {
   .db-side__nav p {
     display: none !important;
   }
+}
 
-  /* Navigation Buttons kompakter */
-  .db-side__nav button {
-    padding: 0.5rem !important;
-    justify-content: center !important;
-  }
+/* Section Styles */
+.section {
+  padding: 5rem 0;
+}
+
+/* Glare Card Effect for Develop Page */
+.glare-card {
+  transition: transform 0.25s ease;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.glare-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(600px circle at var(--g-x, 50%) var(--g-y, 50%), rgba(255, 255, 255, 0.15), transparent 60%);
+  opacity: var(--g-opacity, 0);
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Optional: Add hover effect for glare */
+.glare-card:hover::after {
+  opacity: 1;
 }
 
 /* Dashboard Mobile Optimierungen - bereits in den db-* Styles abgedeckt */
