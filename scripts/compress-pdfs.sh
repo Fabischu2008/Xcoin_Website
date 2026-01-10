@@ -62,7 +62,20 @@ compress_pdf() {
     echo ""
 }
 
-# Compress PDFs
+# Compress PDFs in downloads directory
+if [ -f "public/downloads/Xcoin Whitepaper 1.pdf" ]; then
+    compress_pdf "public/downloads/Xcoin Whitepaper 1.pdf"
+fi
+
+if [ -f "public/downloads/Xcoin Whitepaper 2.pdf" ]; then
+    compress_pdf "public/downloads/Xcoin Whitepaper 2.pdf"
+fi
+
+if [ -f "public/downloads/Xcoin Whitepaper 3.pdf" ]; then
+    compress_pdf "public/downloads/Xcoin Whitepaper 3.pdf"
+fi
+
+# Legacy PDFs in root
 if [ -f "public/XCoin_Whitepaper.pdf" ]; then
     compress_pdf "public/XCoin_Whitepaper.pdf"
 fi

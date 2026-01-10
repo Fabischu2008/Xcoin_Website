@@ -73,11 +73,7 @@ optimize_video() {
 # Optimize videos in public directory
 echo "Optimizing videos in public/ directory..."
 
-# Main videos
-if [ -f "public/1208-compressed.mp4" ]; then
-    optimize_video "public/1208-compressed.mp4" "public/1208-compressed-opt.mp4" 2
-fi
-
+# Main videos (1208-compressed.mp4 was removed as unused)
 if [ -f "public/1211-compressed.mp4" ]; then
     optimize_video "public/1211-compressed.mp4" "public/1211-compressed-opt.mp4" 3
 fi

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { logger } from "@/lib/logger"
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -34,7 +35,7 @@ export default function ContactPage() {
         setSubmitStatus("error")
       }
     } catch (error) {
-      console.error("Error submitting form:", error)
+      logger.error("Error submitting form", error)
       setSubmitStatus("error")
     } finally {
       setIsSubmitting(false)

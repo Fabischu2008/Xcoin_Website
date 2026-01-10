@@ -6,7 +6,12 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
-    "start": "next start"
+    "start": "next start",
+    "optimize": "bash scripts/optimize-all.sh",
+    "optimize:videos": "bash scripts/optimize-videos-aggressive.sh",
+    "optimize:images": "bash scripts/optimize-images.sh",
+    "optimize:pdfs": "bash scripts/compress-pdfs.sh",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@vercel/analytics": "latest",

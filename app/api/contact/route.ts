@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { logger } from "@/lib/logger"
 
 // TODO: Später mit Datenbank verbinden
 // - E-Mails in Datenbank speichern
@@ -63,14 +64,14 @@ export async function POST(request: NextRequest) {
     //    }
 
     // Logging für jetzt (später durch Datenbank ersetzen)
-    console.log("Contact form submission:", { name, email, message, timestamp: new Date().toISOString() })
+    logger.info("Contact form submission", { name, email, message })
 
     return NextResponse.json(
       { message: "Message received successfully" },
       { status: 200 }
     )
   } catch (error) {
-    console.error("Error processing contact form:", error)
+    logger.error("Error processing contact form", error)
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

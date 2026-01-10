@@ -5,11 +5,20 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 
+// GSAP Types
+type GSAP = typeof import("gsap").default | typeof import("gsap")
+type ScrollTriggerType = typeof import("gsap/ScrollTrigger").default | typeof import("gsap/ScrollTrigger")
+
+interface GSAPModules {
+  gsap: GSAP
+  ScrollTrigger: ScrollTriggerType
+}
+
 // GSAP lazy loading für bessere Performance
 let gsapLoaded = false
-let gsapPromise: Promise<{ gsap: any; ScrollTrigger: any }> | null = null
+let gsapPromise: Promise<GSAPModules> | null = null
 
-const loadGSAP = async () => {
+const loadGSAP = async (): Promise<GSAPModules> => {
   if (gsapLoaded && gsapPromise) {
     return await gsapPromise
   }
@@ -25,12 +34,12 @@ const loadGSAP = async () => {
     const ScrollTrigger = scrollTriggerModule.default || scrollTriggerModule
     
     // Plugin registrieren
-    if (gsap && ScrollTrigger && typeof gsap.registerPlugin === 'function') {
-      gsap.registerPlugin(ScrollTrigger)
+    if (gsap && ScrollTrigger && typeof (gsap as { registerPlugin?: (plugin: unknown) => void }).registerPlugin === 'function') {
+      (gsap as { registerPlugin: (plugin: unknown) => void }).registerPlugin(ScrollTrigger)
     }
     
     gsapLoaded = true
-    return { gsap, ScrollTrigger }
+    return { gsap, ScrollTrigger } as GSAPModules
   })
   
   return await gsapPromise
@@ -249,8 +258,8 @@ export default function DashboardSection() {
 
   // Scroll Animation - Optimiert mit Reload bei Navigation zurück
   const initGSAPAnimation = (
-    gsap: any,
-    ScrollTrigger: any,
+    gsap: GSAP,
+    ScrollTrigger: ScrollTriggerType,
     container: HTMLElement,
     wrap: HTMLElement,
     search: HTMLElement,
@@ -262,11 +271,13 @@ export default function DashboardSection() {
     // GSAP und ScrollTrigger sind bereits geladen und registriert
 
     // WICHTIG: Alle bestehenden ScrollTriggers für diesen Container killen
-    ScrollTrigger.getAll().forEach((trigger: any) => {
-      if (trigger.trigger === container) {
-        trigger.kill()
-      }
-    })
+    if (ScrollTrigger && typeof (ScrollTrigger as { getAll?: () => Array<{ kill: () => void; trigger?: HTMLElement }> }).getAll === 'function') {
+      (ScrollTrigger as { getAll: () => Array<{ kill: () => void; trigger?: HTMLElement }> }).getAll().forEach((trigger) => {
+        if (trigger.trigger === container) {
+          trigger.kill()
+        }
+      })
+    }
 
     // WICHTIG: Alle laufenden GSAP-Animationen stoppen und zurücksetzen
     gsap.killTweensOf([wrap, search, side, cards, contents])
@@ -340,19 +351,25 @@ export default function DashboardSection() {
       setTimeout(checkViewport, 100)
 
       // ScrollTrigger refresh nach Initialisierung
-      ScrollTrigger.refresh()
+      if (ScrollTrigger && typeof (ScrollTrigger as { refresh?: () => void }).refresh === 'function') {
+        (ScrollTrigger as { refresh: () => void }).refresh()
+      }
     }, 100)
 
     // Cleanup-Funktion zurückgeben
     return () => {
       clearTimeout(initTimer)
-      ScrollTrigger.getAll().forEach((trigger: any) => {
-        if (trigger.trigger === container) {
-          trigger.kill()
-        }
-      })
+      if (ScrollTrigger && typeof (ScrollTrigger as { getAll?: () => Array<{ kill: () => void; trigger?: HTMLElement }> }).getAll === 'function') {
+        (ScrollTrigger as { getAll: () => Array<{ kill: () => void; trigger?: HTMLElement }> }).getAll().forEach((trigger) => {
+          if (trigger.trigger === container) {
+            trigger.kill()
+          }
+        })
+      }
       // Alle Animationen stoppen
-      gsap.killTweensOf([wrap, search, side, cards, contents])
+      if (gsap && typeof (gsap as { killTweensOf?: (targets: unknown) => void }).killTweensOf === 'function') {
+        (gsap as { killTweensOf: (targets: unknown) => void }).killTweensOf([wrap, search, side, cards, contents])
+      }
     }
   }
 
@@ -379,11 +396,13 @@ export default function DashboardSection() {
     if (isMobile) {
       // GSAP nicht laden auf Mobile
       if (contents) {
-        Array.from(contents).forEach((el: any) => {
-          if (el) el.style.opacity = '1'
+        Array.from(contents).forEach((el: Element) => {
+          if (el instanceof HTMLElement) {
+            el.style.opacity = '1'
+          }
         })
       }
-      if (container) (container as HTMLElement).style.pointerEvents = 'auto'
+      if (container) container.style.pointerEvents = 'auto'
       return // Keine ScrollTrigger auf Mobile - Bilder sind sofort sichtbar
     }
 
