@@ -139,7 +139,7 @@ function VideoPlayer() {
       })
       // Prevent body scroll when modal is open
       document.body.style.overflow = 'hidden'
-          } else {
+    } else {
       document.body.style.overflow = ''
     }
 

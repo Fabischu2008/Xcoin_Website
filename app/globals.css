@@ -171,15 +171,24 @@
 .p-small {
   font-size: 0.875em;
   line-height: 1.3;
+  font-family: "PP Neue Montreal", Arial, sans-serif;
 }
 
 .p-reg {
   font-size: 1em;
   line-height: 1.4;
+  font-family: "PP Neue Montreal", Arial, sans-serif;
 }
 
 .p-med {
   font-size: 1.125em;
+  font-family: "PP Neue Montreal", Arial, sans-serif;
+}
+
+.p-large {
+  font-size: 1.25em;
+  line-height: 1.4;
+  font-family: "PP Neue Montreal", Arial, sans-serif;
 }
 
 .h-small {
@@ -3703,6 +3712,9 @@ section:has(h2.h-medium) .p-reg {
 /* Section Styles */
 .section {
   padding: 5rem 0;
+  /* Ensure section doesn't block scrolling of child elements */
+  overflow: visible;
+  position: relative;
 }
 
 /* Glare Card Effect for Develop Page */
@@ -3730,4 +3742,77 @@ section:has(h2.h-medium) .p-reg {
 
 /* Dashboard Mobile Optimierungen - bereits in den db-* Styles abgedeckt */
 
+/* FAQ Answer Styles */
+.faq-answer {
+  color: rgb(163 163 163); /* neutral-400 */
+}
+
+.faq-answer p {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.faq-answer p:first-child {
+  margin-top: 0;
+}
+
+.faq-answer p:last-child {
+  margin-bottom: 0;
+}
+
+.faq-answer ul {
+  list-style-type: disc;
+  list-style-position: inside;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0;
+}
+
+.faq-answer li {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  line-height: 1.6;
+}
+
+.faq-answer a {
+  color: rgb(96 165 250); /* blue-400 */
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.faq-answer a:hover {
+  color: rgb(147 197 253); /* blue-300 */
+}
+
+.faq-answer strong {
+  font-weight: 600;
+  color: rgb(229 229 229); /* neutral-200 */
+}
+
+.faq-answer em {
+  font-style: italic;
+}
+
+/* Support for Tailwind classes in FAQ answers (they won't work but these styles will) */
+.faq-answer ul.ml-4,
+.faq-answer ul[class*="ml-"] {
+  margin-left: 1rem;
+}
+
+.faq-answer ul.mt-2,
+.faq-answer ul[class*="mt-2"] {
+  margin-top: 0.5rem;
+}
+
+.faq-answer p.mt-2,
+.faq-answer p[class*="mt-2"] {
+  margin-top: 0.5rem;
+}
+
+.faq-answer p.mt-4,
+.faq-answer p[class*="mt-4"] {
+  margin-top: 1rem;
+}
 

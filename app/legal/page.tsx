@@ -64,7 +64,7 @@ export default function LegalPage() {
           <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
             Legal
           </h1>
-          <p className="mt-6 text-lg text-muted-foreground">
+          <p className="p-reg mt-6 text-lg text-muted-foreground">
             Important legal information about using Xcoin services and website.
           </p>
         </div>
@@ -75,7 +75,7 @@ export default function LegalPage() {
             <Link
               key={section.id}
               href={`#${section.id}`}
-              className="rounded-full border border-border bg-card px-6 py-2 text-sm font-medium transition-all hover:border-accent/50"
+              className="p-reg rounded-full border border-border bg-card px-6 py-2 text-sm font-medium transition-all hover:border-accent/50"
             >
               {section.title}
             </Link>
@@ -89,7 +89,7 @@ export default function LegalPage() {
               <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold">{section.title}</h2>
               <div className="mt-6 space-y-4">
                 {section.content.split("\n\n").map((paragraph, index) => (
-                  <p key={index} className="text-muted-foreground">
+                  <p key={index} className="p-reg text-muted-foreground">
                     {paragraph}
                   </p>
                 ))}

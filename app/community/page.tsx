@@ -50,22 +50,6 @@ export default function CommunityPage() {
   // Tab Button Click Handler - wechselt einfach den Tab
   const handleTabClick = (tab: 'community' | 'members' | 'validators') => {
     setActiveTab(tab)
-    
-    // Scroll zum Tab-Container für bessere UX
-    requestAnimationFrame(() => {
-      const tabNav = document.querySelector('[class*="sticky"]')
-      if (tabNav) {
-        const rect = tabNav.getBoundingClientRect()
-        const scrollY = window.scrollY
-        const navHeight = 80
-        const targetY = rect.top + scrollY - navHeight
-        
-        window.scrollTo({
-          top: Math.max(0, targetY),
-          behavior: 'smooth'
-        })
-      }
-    })
   }
 
 
@@ -113,7 +97,7 @@ export default function CommunityPage() {
             </h1>
 
             {/* Subheadline */}
-            <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground lg:text-xl px-4">
+            <p className="p-reg mt-4 sm:mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground lg:text-xl px-4">
               Connect with builders, validators, and supporters from around the world who are shaping the future of
               private finance.
             </p>
@@ -121,13 +105,13 @@ export default function CommunityPage() {
         </div>
       </section>
 
-      {/* Sticky Tab Navigation */}
-      <div className="sticky top-0 z-30 bg-black/80 backdrop-blur-lg border-b border-white/10">
+      {/* Tab Navigation */}
+      <div className="bg-black/80 backdrop-blur-lg border-b border-white/10 mb-8">
         <div className="container mx-auto px-4">
           <div className="flex gap-4 overflow-x-auto">
             <button
               onClick={() => handleTabClick('community')}
-              className={`px-6 py-4 font-medium transition-colors whitespace-nowrap ${
+              className={`p-reg px-6 py-4 font-medium transition-colors whitespace-nowrap ${
                 activeTab === 'community'
                   ? 'text-blue-300 border-b-2 border-blue-300'
                   : 'text-white/60 hover:text-white'
@@ -137,7 +121,7 @@ export default function CommunityPage() {
             </button>
             <button
               onClick={() => handleTabClick('members')}
-              className={`px-6 py-4 font-medium transition-colors whitespace-nowrap ${
+              className={`p-reg px-6 py-4 font-medium transition-colors whitespace-nowrap ${
                 activeTab === 'members'
                   ? 'text-blue-300 border-b-2 border-blue-300'
                   : 'text-white/60 hover:text-white'
@@ -147,7 +131,7 @@ export default function CommunityPage() {
             </button>
             <button
               onClick={() => handleTabClick('validators')}
-              className={`px-6 py-4 font-medium transition-colors whitespace-nowrap ${
+              className={`p-reg px-6 py-4 font-medium transition-colors whitespace-nowrap ${
                 activeTab === 'validators'
                   ? 'text-blue-300 border-b-2 border-blue-300'
                   : 'text-white/60 hover:text-white'
@@ -337,14 +321,14 @@ export default function CommunityPage() {
               <div className="glare-card bg-white/5 rounded-3xl overflow-hidden border border-border col-span-12">
                 <div className="grid lg:grid-cols-2">
                   <div className="p-6 sm:p-8 lg:p-12">
-                    <div className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent mb-6">
+                    <div className="p-reg inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent mb-6">
                       <Users className="h-4 w-4" />
                       Become a Validator
                     </div>
                     <h2 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold mb-4">
                       Help Secure the Network
                     </h2>
-                    <p className="text-sm sm:text-base text-muted-foreground mb-6">
+                    <p className="p-reg text-sm sm:text-base text-muted-foreground mb-6">
                       Run a validator node to earn transaction fees while contributing to the decentralization and security of
                       the Xcoin network.
                     </p>
@@ -355,7 +339,7 @@ export default function CommunityPage() {
                         "Support network decentralization",
                         "Join a global community",
                       ].map((item) => (
-                        <li key={item} className="flex items-center gap-3 text-sm sm:text-base text-muted-foreground">
+                        <li key={item} className="p-reg flex items-center gap-3 text-sm sm:text-base text-muted-foreground">
                           <div className="h-2 w-2 rounded-full bg-accent shrink-0" />
                           {item}
                         </li>
@@ -363,7 +347,7 @@ export default function CommunityPage() {
                     </ul>
                     <Link
                       href="/validator-application"
-                      className="inline-flex rounded-full bg-accent px-6 py-3 sm:px-8 sm:py-3.5 text-sm sm:text-base font-semibold text-accent-foreground transition-all hover:bg-accent/90"
+                      className="p-reg inline-flex rounded-full bg-accent px-6 py-3 sm:px-8 sm:py-3.5 text-sm sm:text-base font-semibold text-accent-foreground transition-all hover:bg-accent/90"
                     >
                       Apply to Run a SEP Node
                     </Link>
@@ -402,7 +386,7 @@ export default function CommunityPage() {
                         <path d="M5 13l4 4L19 7"/>
                       </svg>
                       <div>
-                        <span className="text-white font-medium block mb-1">{task.title}</span>
+                        <span className="p-reg text-white font-medium block mb-1">{task.title}</span>
                         <span className="p-small opacity-70 leading-relaxed">{task.description}</span>
                       </div>
                     </li>

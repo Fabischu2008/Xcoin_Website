@@ -80,7 +80,7 @@ export default function UsePage() {
             <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl mb-6 text-white">
               Use Xcoin
             </h1>
-            <p className="text-lg lg:text-xl text-white/90 leading-relaxed">
+            <p className="p-reg text-lg lg:text-xl text-white/90 leading-relaxed">
               Xcoin is more than just a cryptocurrency. It's a fully private, quantum-secure financial protocol designed for a post-surveillance world.
             </p>
           </div>
@@ -105,11 +105,11 @@ export default function UsePage() {
                       <div className="w-full lg:w-2/5 px-4">
                         <div className="text-left lg:max-w-2xl">
                           <div className="relative inline-block">
-                            <span className="block text-xs px-2 py-1 border border-white/20 bg-blue-300 rounded uppercase text-black font-semibold">
+                            <span className="p-reg block text-xs px-2 py-1 border border-white/20 bg-blue-300 rounded uppercase text-black font-semibold">
                               {card.badge}
                             </span>
                           </div>
-                          <h2 className="mt-3 mb-3 text-5xl lg:leading-tight font-medium">
+                          <h2 className="font-[family-name:var(--font-heading)] mt-3 mb-3 text-5xl lg:leading-tight font-medium">
                             {card.title}
                           </h2>
                           {card.list && (
@@ -175,11 +175,11 @@ export default function UsePage() {
                       <div className="w-full lg:w-2/5 px-4">
                         <div className="text-left lg:max-w-2xl lg:ml-auto">
                           <div className="relative inline-block">
-                            <span className="block text-xs px-2 py-1 border border-white/20 bg-blue-300 rounded uppercase text-black font-semibold">
+                            <span className="p-reg block text-xs px-2 py-1 border border-white/20 bg-blue-300 rounded uppercase text-black font-semibold">
                               {card.badge}
                             </span>
                           </div>
-                          <h2 className="mt-3 mb-3 text-5xl lg:leading-tight font-medium">
+                          <h2 className="font-[family-name:var(--font-heading)] mt-3 mb-3 text-5xl lg:leading-tight font-medium">
                             {card.title}
                           </h2>
                           {card.list && (

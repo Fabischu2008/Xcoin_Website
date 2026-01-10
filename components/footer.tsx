@@ -4,14 +4,14 @@ import Image from "next/image"
 const footerLinks = {
   Product: [
     { name: "Overview", href: "/overview" },
+    { name: "Use", href: "/use" },
     { name: "Develop", href: "/develop" },
-    { name: "Fund", href: "/fund" },
   ],
   Resources: [
-    { name: "Learning Center", href: "/learning" },
-    { name: "Documentation", href: "/docs" },
-    { name: "FAQ", href: "/faq" },
+    { name: "Docs", href: "/docs" },
     { name: "Community", href: "/community" },
+    { name: "FAQ", href: "/faq" },
+    { name: "Learning", href: "/learning" },
   ],
   Legal: [
     { name: "Terms of Service", href: "/legal" },
@@ -102,18 +102,18 @@ export default function Footer() {
               />
               <span className="text-[2.475rem] lg:text-[3.3rem] font-bold tracking-tight text-[#93c5fd]">Xcoin</span>
             </Link>
-            <p className="mt-6 text-[1.1rem] lg:text-[1.21rem] text-muted-foreground">The future of private, quantum-secure finance.</p>
+            <p className="p-reg mt-6 text-[1.1rem] lg:text-[1.21rem] text-muted-foreground">The future of private, quantum-secure finance.</p>
           </div>
 
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h3 className="text-[1.1rem] lg:text-[1.21rem] font-semibold text-foreground">{category}</h3>
+              <h3 className="font-[family-name:var(--font-heading)] text-[1.1rem] lg:text-[1.21rem] font-semibold text-foreground">{category}</h3>
               <ul className="mt-6 space-y-4">
                 {links.map((link) => (
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-[1.1rem] lg:text-[1.21rem] text-muted-foreground transition-colors hover:text-foreground"
+                      className="p-reg text-[1.1rem] lg:text-[1.21rem] text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {link.name}
                     </Link>
