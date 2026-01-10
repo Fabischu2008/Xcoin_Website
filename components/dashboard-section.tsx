@@ -468,6 +468,9 @@ export default function DashboardSection() {
                         onClick={() => setActiveFilter(item.id)}
                         data-filter={item.id}
                         className={getNavButtonClasses(activeFilter === item.id)}
+                        aria-label={item.label}
+                        title={item.label}
+                        type="button"
                       >
                         <div className="db-nav__icon flex h-12 w-12 items-center justify-center">
                           <Image

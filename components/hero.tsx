@@ -7,14 +7,54 @@ import { Coins, Rocket } from "lucide-react"
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const handleLoadedMetadataRef = useRef<(() => void) | null>(null)
 
+  // Mobile Detection
   useEffect(() => {
-    // Optimiertes Video-Loading mit Intersection Observer - Jetzt auch für Mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  useEffect(() => {
     const video = videoRef.current
     if (!video) return
 
-    // Intersection Observer für alle Geräte (inkl. Mobile)
+    // Mobile: Video sofort laden und starten für schnellere Ladezeiten
+    if (isMobile) {
+      video.load()
+      const handleLoadedMetadata = () => {
+        setIsLoaded(true)
+        video.play().catch(() => {
+          // Fallback wenn autoplay nicht funktioniert
+          setIsLoaded(true)
+        })
+      }
+      handleLoadedMetadataRef.current = handleLoadedMetadata
+      video.addEventListener('loadedmetadata', handleLoadedMetadata, { once: true })
+
+      // Ensure seamless looping
+      const handleTimeUpdate = () => {
+        if (video.duration && video.currentTime >= video.duration - 0.1) {
+          video.currentTime = 0
+        }
+      }
+      video.addEventListener('timeupdate', handleTimeUpdate)
+
+      return () => {
+        video.removeEventListener('timeupdate', handleTimeUpdate)
+        if (handleLoadedMetadataRef.current) {
+          video.removeEventListener('loadedmetadata', handleLoadedMetadataRef.current)
+          handleLoadedMetadataRef.current = null
+        }
+      }
+    }
+
+    // Desktop: Intersection Observer für optimale Performance
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -61,7 +101,7 @@ export default function Hero() {
         handleLoadedMetadataRef.current = null
       }
     }
-  }, [])
+  }, [isMobile])
 
   return (
     <section className="hero-section">
@@ -73,7 +113,7 @@ export default function Hero() {
           muted
           playsInline
           autoPlay
-          preload="none"
+          preload={isMobile ? "auto" : "none"}
           className="hero-video"
           style={{ opacity: isLoaded ? 1 : 0 }}
         >

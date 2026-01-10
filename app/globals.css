@@ -3690,22 +3690,73 @@ section:has(h2.h-medium) .p-reg {
   }
 
   .db-side__nav {
-    gap: 0.375rem; /* Noch kleinerer Gap */
+    gap: 0.5rem; /* Größerer Gap für bessere Touch-Targets */
+  }
+
+  /* Größere Touch-Targets für Mobile Navigation */
+  .db-nav__item {
+    min-height: 2.75rem !important; /* Mindestens 44px für Touch-Targets */
+    padding: 0.5rem !important; /* Mehr Padding für bessere Klickbarkeit */
+    justify-content: center !important; /* Icons zentrieren */
   }
 
   .db-nav__icon {
-    width: 2rem !important; /* Noch kleinere Icons */
-    height: 2rem !important;
+    width: 2.5rem !important; /* Größere Icons für bessere Sichtbarkeit */
+    height: 2.5rem !important;
+    min-width: 2.5rem !important; /* Verhindert Schrumpfen */
+    min-height: 2.5rem !important;
   }
 
   .db-nav__icon img {
-    width: 1.25rem !important;
-    height: 1.25rem !important;
+    width: 1.75rem !important; /* Größere Logos */
+    height: 1.75rem !important;
   }
 
   /* Text definitiv versteckt auf Mobile */
   .db-side__nav p {
     display: none !important;
+  }
+
+  /* Besseres visuelles Feedback für aktive Buttons auf Mobile */
+  .db-nav__item[data-filter] {
+    transition: all 0.2s ease;
+  }
+
+  .db-nav__item:hover,
+  .db-nav__item:active {
+    transform: scale(1.05); /* Leichtes Scale-Feedback beim Klicken */
+  }
+}
+
+/* Sehr kleine Screens (< 480px) - Navigation noch optimierter */
+@media (max-width: 480px) {
+  .db-side {
+    width: calc(5em - 1em); /* Etwas breiter auf sehr kleinen Screens */
+  }
+
+  .db-content {
+    left: calc(5em + 0.3em); /* Angepasst an breitere Sidebar */
+  }
+
+  .db-search {
+    width: calc(100% - calc(5em + 0.3em) - 0.75em); /* Angepasst */
+  }
+
+  .db-nav__item {
+    min-height: 3rem !important; /* Noch größere Touch-Targets */
+    padding: 0.625rem !important;
+  }
+
+  .db-nav__icon {
+    width: 2.75rem !important; /* Noch größere Icons */
+    height: 2.75rem !important;
+    min-width: 2.75rem !important;
+    min-height: 2.75rem !important;
+  }
+
+  .db-nav__icon img {
+    width: 2rem !important; /* Größere Logos */
+    height: 2rem !important;
   }
 }
 
