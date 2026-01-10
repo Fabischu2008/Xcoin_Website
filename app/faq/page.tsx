@@ -339,10 +339,10 @@ export default function FAQPage() {
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl mb-4">
+            <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl mb-6 text-white">
               FAQ
             </h1>
-            <p className="p-reg text-base sm:text-lg font-semibold text-white">
+            <p className="text-lg lg:text-xl text-white/90 leading-relaxed">
               Questions we think you might like answers to
             </p>
           </div>

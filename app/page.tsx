@@ -1214,7 +1214,7 @@ function CrowdfundingDAOSection() {
                 </svg>
               </Link>
               <Link 
-                href="/xcoin_grid/xcoin-better" 
+                href="/why-xcoin-is-better" 
                 className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4 lg:px-12 lg:py-5 rounded-lg backdrop-blur-md bg-white/10 border border-white/20 hover:border-[#93c5fd]/50 transition-all duration-300 text-white w-full sm:w-auto mx-2 sm:mx-0"
               >
                 <span className="p-reg sm:text-base md:text-lg lg:text-xl text-white">Why is Xcoin better?</span>

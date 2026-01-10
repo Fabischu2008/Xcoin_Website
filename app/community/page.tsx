@@ -92,12 +92,12 @@ export default function CommunityPage() {
             </div>
 
             {/* Headline */}
-            <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
+            <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl mb-6 text-white">
               Join the <span className="text-accent">Community</span>
             </h1>
 
             {/* Subheadline */}
-            <p className="p-reg mt-4 sm:mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground lg:text-xl px-4">
+            <p className="text-lg lg:text-xl text-white/90 leading-relaxed">
               Connect with builders, validators, and supporters from around the world who are shaping the future of
               private finance.
             </p>

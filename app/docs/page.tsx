@@ -71,11 +71,11 @@ export default function DocsPage() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mx-auto max-w-2xl text-center">
-          <h1 className="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold tracking-tight lg:text-5xl">
+        <div className="mx-auto max-w-4xl text-center">
+          <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl mb-6 text-white">
             Documentation
           </h1>
-          <p className="mt-4 sm:mt-6 text-base sm:text-lg text-muted-foreground">
+          <p className="text-lg lg:text-xl text-white/90 leading-relaxed">
             Everything you need to understand, build on, and participate in the Xcoin network.
           </p>
         </div>

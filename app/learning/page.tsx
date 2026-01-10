@@ -698,11 +698,11 @@ export default function LearningPage() {
         {/* Desktop Layout */}
         <div className="hidden lg:block">
           {/* Header */}
-          <div className="mx-auto max-w-3xl text-center mb-12">
-            <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl">
+          <div className="mx-auto max-w-4xl text-center mb-12">
+            <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl mb-6 text-white">
               Learning Center
             </h1>
-            <p className="mt-6 text-lg text-muted-foreground">
+            <p className="text-lg lg:text-xl text-white/90 leading-relaxed">
               Comprehensive glossary of all Xcoin terms and concepts. Learn everything from basics to advanced topics.
             </p>
           </div>
@@ -932,11 +932,11 @@ export default function LearningPage() {
             // Mobile: Show terms list (default view)
             <>
               {/* Header */}
-              <div className="mx-auto max-w-3xl text-center mb-8">
-                <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight">
+              <div className="mx-auto max-w-4xl text-center mb-8">
+                <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl mb-6 text-white">
                   Learning Center
                 </h1>
-                <p className="mt-4 text-base text-muted-foreground">
+                <p className="text-lg lg:text-xl text-white/90 leading-relaxed">
                   Comprehensive glossary of all Xcoin terms and concepts.
                 </p>
               </div>

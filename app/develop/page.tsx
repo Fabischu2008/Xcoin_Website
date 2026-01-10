@@ -89,7 +89,7 @@ export default function DevelopPage() {
             <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl mb-6 text-white">
               Development
             </h1>
-            <p className="p-reg text-lg lg:text-xl text-white/90 leading-relaxed">
+            <p className="text-lg lg:text-xl text-white/90 leading-relaxed">
               The development of Xcoin and its supporting infrastructure is underway. Much of it is pioneering work — we are building an entirely new, privacy-first, censorship-resistant, quantum-proof financial ecosystem — the future standard for anonymous value transfer. Below is an overview of the key components currently in development.
             </p>
           </div>

@@ -80,7 +80,7 @@ export default function UsePage() {
             <h1 className="font-[family-name:var(--font-heading)] text-4xl font-bold tracking-tight lg:text-5xl mb-6 text-white">
               Use Xcoin
             </h1>
-            <p className="p-reg text-lg lg:text-xl text-white/90 leading-relaxed">
+            <p className="text-lg lg:text-xl text-white/90 leading-relaxed">
               Xcoin is more than just a cryptocurrency. It's a fully private, quantum-secure financial protocol designed for a post-surveillance world.
             </p>
           </div>
