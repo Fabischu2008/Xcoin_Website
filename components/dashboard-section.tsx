@@ -5,13 +5,10 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 
-// GSAP Types
-type GSAP = typeof import("gsap").default | typeof import("gsap")
-type ScrollTriggerType = typeof import("gsap/ScrollTrigger").default | typeof import("gsap/ScrollTrigger")
-
+// GSAP Types - Using any for dynamic imports to avoid complex type issues
 interface GSAPModules {
-  gsap: GSAP
-  ScrollTrigger: ScrollTriggerType
+  gsap: any
+  ScrollTrigger: any
 }
 
 // GSAP lazy loading für bessere Performance
@@ -34,12 +31,12 @@ const loadGSAP = async (): Promise<GSAPModules> => {
     const ScrollTrigger = scrollTriggerModule.default || scrollTriggerModule
     
     // Plugin registrieren
-    if (gsap && ScrollTrigger && typeof (gsap as { registerPlugin?: (plugin: unknown) => void }).registerPlugin === 'function') {
-      (gsap as { registerPlugin: (plugin: unknown) => void }).registerPlugin(ScrollTrigger)
+    if (gsap && ScrollTrigger && typeof gsap.registerPlugin === 'function') {
+      gsap.registerPlugin(ScrollTrigger)
     }
     
     gsapLoaded = true
-    return { gsap, ScrollTrigger } as GSAPModules
+    return { gsap, ScrollTrigger }
   })
   
   return await gsapPromise
@@ -258,8 +255,8 @@ export default function DashboardSection() {
 
   // Scroll Animation - Optimiert mit Reload bei Navigation zurück
   const initGSAPAnimation = (
-    gsap: GSAP,
-    ScrollTrigger: ScrollTriggerType,
+    gsap: any, // GSAP als any, da dynamische Imports komplexe Types haben
+    ScrollTrigger: any,
     container: HTMLElement,
     wrap: HTMLElement,
     search: HTMLElement,
@@ -271,8 +268,8 @@ export default function DashboardSection() {
     // GSAP und ScrollTrigger sind bereits geladen und registriert
 
     // WICHTIG: Alle bestehenden ScrollTriggers für diesen Container killen
-    if (ScrollTrigger && typeof (ScrollTrigger as { getAll?: () => Array<{ kill: () => void; trigger?: HTMLElement }> }).getAll === 'function') {
-      (ScrollTrigger as { getAll: () => Array<{ kill: () => void; trigger?: HTMLElement }> }).getAll().forEach((trigger) => {
+    if (ScrollTrigger && typeof ScrollTrigger.getAll === 'function') {
+      ScrollTrigger.getAll().forEach((trigger: any) => {
         if (trigger.trigger === container) {
           trigger.kill()
         }
@@ -280,20 +277,26 @@ export default function DashboardSection() {
     }
 
     // WICHTIG: Alle laufenden GSAP-Animationen stoppen und zurücksetzen
-    gsap.killTweensOf([wrap, search, side, cards, contents])
+    if (gsap && typeof gsap.killTweensOf === 'function') {
+      gsap.killTweensOf([wrap, search, side, cards, contents])
+    }
     
     // WICHTIG: Alle Elemente auf Startpositionen zurücksetzen
-    gsap.set(wrap, { rotateX: '20deg', z: '-20em', clearProps: 'all' })
-    gsap.set(search, { z: '40em', autoAlpha: 0, clearProps: 'all' })
-    gsap.set(side, { z: '35em', autoAlpha: 0, clearProps: 'all' })
-    cards.forEach((card, i) => {
-      gsap.set(card, { z: `${35 - i * 5}em`, clearProps: 'all' })
-    })
-    gsap.set(contents, { autoAlpha: 0, clearProps: 'all' })
-    gsap.set(container, { pointerEvents: 'none' })
+    if (gsap && typeof gsap.set === 'function') {
+      gsap.set(wrap, { rotateX: '20deg', z: '-20em', clearProps: 'all' })
+      gsap.set(search, { z: '40em', autoAlpha: 0, clearProps: 'all' })
+      gsap.set(side, { z: '35em', autoAlpha: 0, clearProps: 'all' })
+      cards.forEach((card, i) => {
+        gsap.set(card, { z: `${35 - i * 5}em`, clearProps: 'all' })
+      })
+      gsap.set(contents, { autoAlpha: 0, clearProps: 'all' })
+      gsap.set(container, { pointerEvents: 'none' })
+    }
 
     // Kurze Verzögerung, damit DOM bereit ist und ScrollTrigger richtig initialisiert wird
     const initTimer = setTimeout(() => {
+      if (!gsap || typeof gsap.timeline !== 'function') return
+      
       // Scroll Intro Timeline
       const scrollIntroTl = gsap.timeline({
         scrollTrigger: {
@@ -331,6 +334,8 @@ export default function DashboardSection() {
 
       // Prüfen, ob Container bereits im Viewport ist (nach kurzer Verzögerung)
       const checkViewport = () => {
+        if (!gsap || typeof gsap.set !== 'function') return
+        
         const rect = container.getBoundingClientRect()
         const scrollY = window.scrollY
         const containerTop = container.offsetTop
@@ -343,7 +348,9 @@ export default function DashboardSection() {
           gsap.set([search, side], { autoAlpha: 1, z: 0 })
           gsap.set([wrap, cards], { rotateX: 0, z: 0 })
           gsap.set(container, { pointerEvents: 'auto' })
-          scrollIntroTl.progress(1)
+          if (scrollIntroTl && typeof scrollIntroTl.progress === 'function') {
+            scrollIntroTl.progress(1)
+          }
         }
       }
 
@@ -351,24 +358,24 @@ export default function DashboardSection() {
       setTimeout(checkViewport, 100)
 
       // ScrollTrigger refresh nach Initialisierung
-      if (ScrollTrigger && typeof (ScrollTrigger as { refresh?: () => void }).refresh === 'function') {
-        (ScrollTrigger as { refresh: () => void }).refresh()
+      if (ScrollTrigger && typeof ScrollTrigger.refresh === 'function') {
+        ScrollTrigger.refresh()
       }
     }, 100)
 
     // Cleanup-Funktion zurückgeben
     return () => {
       clearTimeout(initTimer)
-      if (ScrollTrigger && typeof (ScrollTrigger as { getAll?: () => Array<{ kill: () => void; trigger?: HTMLElement }> }).getAll === 'function') {
-        (ScrollTrigger as { getAll: () => Array<{ kill: () => void; trigger?: HTMLElement }> }).getAll().forEach((trigger) => {
+      if (ScrollTrigger && typeof ScrollTrigger.getAll === 'function') {
+        ScrollTrigger.getAll().forEach((trigger: any) => {
           if (trigger.trigger === container) {
             trigger.kill()
           }
         })
       }
       // Alle Animationen stoppen
-      if (gsap && typeof (gsap as { killTweensOf?: (targets: unknown) => void }).killTweensOf === 'function') {
-        (gsap as { killTweensOf: (targets: unknown) => void }).killTweensOf([wrap, search, side, cards, contents])
+      if (gsap && typeof gsap.killTweensOf === 'function') {
+        gsap.killTweensOf([wrap, search, side, cards, contents])
       }
     }
   }
